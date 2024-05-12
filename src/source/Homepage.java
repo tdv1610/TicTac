@@ -4,6 +4,8 @@
  */
 package source;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -743,9 +745,19 @@ public class Homepage extends javax.swing.JFrame {
 
         btn_DoiMatkhau_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_DoiMatkhau_TK.setText("Đổi mật khẩu");
+        btn_DoiMatkhau_TK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_DoiMatkhau_TKMouseClicked(evt);
+            }
+        });
 
         btn_XoaTaiKhoan_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_XoaTaiKhoan_TK.setText("Xóa tài khoản");
+        btn_XoaTaiKhoan_TK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XoaTaiKhoan_TKMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_TKLayout = new javax.swing.GroupLayout(panel_TK);
         panel_TK.setLayout(panel_TKLayout);
@@ -917,6 +929,19 @@ public class Homepage extends javax.swing.JFrame {
         dn.show();
         dispose();
     }//GEN-LAST:event_btn_DX_TicTacMouseClicked
+
+    private void btn_DoiMatkhau_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiMatkhau_TKMouseClicked
+        NhapEmail ne = new NhapEmail();
+        ne.show();
+        dispose();
+    }//GEN-LAST:event_btn_DoiMatkhau_TKMouseClicked
+
+    private void btn_XoaTaiKhoan_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTaiKhoan_TKMouseClicked
+        JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa tài khoản vĩnh viễn?");
+        DangKi dk = new DangKi();
+        dk.show();
+        dispose();
+    }//GEN-LAST:event_btn_XoaTaiKhoan_TKMouseClicked
 
     /**
      * @param args the command line arguments
