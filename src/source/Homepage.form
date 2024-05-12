@@ -195,6 +195,9 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="actionCommand" type="java.lang.String" value=""/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_DX_TicTacMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -892,10 +895,12 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="label_ThemEmail_ThemNhom" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tf_Email_ThemNhom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="btn_ThemEmail_ThemNhom" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="label_ThemEmail_ThemNhom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tf_Email_ThemNhom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace pref="36" max="32767" attributes="0"/>
                                       <Component id="Scrpane_danhsachthanhvien_ThemNhom" min="-2" pref="287" max="-2" attributes="0"/>

@@ -134,6 +134,11 @@ public class Homepage extends javax.swing.JFrame {
         btn_DX_TicTac.setText("Đăng xuất");
         btn_DX_TicTac.setToolTipText("");
         btn_DX_TicTac.setActionCommand("");
+        btn_DX_TicTac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_DX_TicTacMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout TicTacLayout = new javax.swing.GroupLayout(TicTac);
         TicTac.setLayout(TicTacLayout);
@@ -665,10 +670,11 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(panel_ThemNhom_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_ThemNhom_NCTLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(panel_ThemNhom_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label_ThemEmail_ThemNhom)
-                            .addComponent(tf_Email_ThemNhom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_ThemEmail_ThemNhom))
+                        .addGroup(panel_ThemNhom_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_ThemEmail_ThemNhom, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panel_ThemNhom_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(label_ThemEmail_ThemNhom)
+                                .addComponent(tf_Email_ThemNhom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(Scrpane_danhsachthanhvien_ThemNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_ThemNhom_NCTLayout.createSequentialGroup()
@@ -905,6 +911,12 @@ public class Homepage extends javax.swing.JFrame {
         panel_ThemNhom_NCT.setVisible(false);
         Scrtable_TaoNhom_NCT.setVisible(true);
     }//GEN-LAST:event_btn_Xong_ThemNhomMouseClicked
+
+    private void btn_DX_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DX_TicTacMouseClicked
+        DangNhap dn = new DangNhap();
+        dn.show();
+        dispose();
+    }//GEN-LAST:event_btn_DX_TicTacMouseClicked
 
     /**
      * @param args the command line arguments
