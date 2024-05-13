@@ -677,19 +677,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="69" max="32767" attributes="0"/>
-                                  <Component id="scrpane_DanhSachNhom_NCT" min="-2" pref="666" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="btn_TaoNhom_NCT" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="tf_TimNhom_NCT" min="-2" pref="250" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace pref="75" max="32767" attributes="0"/>
+                                  <Component id="scrpane_DanhSachNhom_NCT" min="-2" pref="666" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btn_TimNhom_NCt" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_TimNhom_NCt" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -699,11 +699,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="tf_TimNhom_NCT" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="btn_TimNhom_NCt" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btn_TimNhom_NCt" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="btn_TaoNhom_NCT" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="tf_TimNhom_NCT" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="scrpane_DanhSachNhom_NCT" min="-2" pref="510" max="-2" attributes="0"/>
