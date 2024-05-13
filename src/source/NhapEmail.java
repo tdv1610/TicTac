@@ -26,19 +26,19 @@ public class NhapEmail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panel_OTP = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        label_Email_OTP = new javax.swing.JLabel();
+        tf_Email_OTP = new javax.swing.JTextField();
+        btn_NhanEmail_OTP = new javax.swing.JButton();
+        label_OTP_OTP = new javax.swing.JLabel();
+        tf_OTP_OTP = new javax.swing.JTextField();
+        btn_Xong_OTP = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        panel_OTP.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -47,82 +47,87 @@ public class NhapEmail extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Email");
+        label_Email_OTP.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        label_Email_OTP.setForeground(new java.awt.Color(255, 255, 255));
+        label_Email_OTP.setText("Email");
 
-        jTextField1.setBackground(new java.awt.Color(0, 102, 102));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("Nhập email để nhận OTP");
-        jTextField1.setToolTipText("");
+        tf_Email_OTP.setBackground(new java.awt.Color(0, 102, 102));
+        tf_Email_OTP.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        tf_Email_OTP.setForeground(new java.awt.Color(255, 255, 255));
+        tf_Email_OTP.setText("Nhập email để nhận OTP");
+        tf_Email_OTP.setToolTipText("");
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Nhận");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("OTP");
-
-        jTextField2.setBackground(new java.awt.Color(0, 102, 102));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-
-        jButton2.setBackground(new java.awt.Color(0, 102, 102));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Xong");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+        btn_NhanEmail_OTP.setBackground(new java.awt.Color(0, 102, 102));
+        btn_NhanEmail_OTP.setForeground(new java.awt.Color(255, 255, 255));
+        btn_NhanEmail_OTP.setText("Nhận");
+        btn_NhanEmail_OTP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NhanEmail_OTPActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        label_OTP_OTP.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        label_OTP_OTP.setForeground(new java.awt.Color(255, 255, 255));
+        label_OTP_OTP.setText("OTP");
+
+        tf_OTP_OTP.setBackground(new java.awt.Color(0, 102, 102));
+        tf_OTP_OTP.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+
+        btn_Xong_OTP.setBackground(new java.awt.Color(0, 102, 102));
+        btn_Xong_OTP.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Xong_OTP.setText("Xong");
+        btn_Xong_OTP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_Xong_OTPMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_OTPLayout = new javax.swing.GroupLayout(panel_OTP);
+        panel_OTP.setLayout(panel_OTPLayout);
+        panel_OTPLayout.setHorizontalGroup(
+            panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_OTPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panel_OTPLayout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(jLabel2)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(panel_OTPLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_Email_OTP)
+                    .addComponent(label_OTP_OTP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_OTPLayout.createSequentialGroup()
+                        .addComponent(tf_Email_OTP, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_NhanEmail_OTP))
+                    .addGroup(panel_OTPLayout.createSequentialGroup()
+                        .addComponent(tf_OTP_OTP, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(jButton2)))
+                        .addComponent(btn_Xong_OTP)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panel_OTPLayout.setVerticalGroup(
+            panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_OTPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addGroup(panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_Email_OTP)
+                    .addComponent(tf_Email_OTP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_NhanEmail_OTP))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                .addGroup(panel_OTPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_OTP_OTP)
+                    .addComponent(tf_OTP_OTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Xong_OTP))
                 .addGap(44, 44, 44))
         );
 
@@ -130,21 +135,25 @@ public class NhapEmail extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_OTP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_OTP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btn_Xong_OTPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Xong_OTPMouseClicked
         TaoMKMoi tmkm = new TaoMKMoi();
         tmkm.show();
         dispose();
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btn_Xong_OTPMouseClicked
+
+    private void btn_NhanEmail_OTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhanEmail_OTPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_NhanEmail_OTPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,14 +191,14 @@ public class NhapEmail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_NhanEmail_OTP;
+    private javax.swing.JButton btn_Xong_OTP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel label_Email_OTP;
+    private javax.swing.JLabel label_OTP_OTP;
+    private javax.swing.JPanel panel_OTP;
+    private javax.swing.JTextField tf_Email_OTP;
+    private javax.swing.JTextField tf_OTP_OTP;
     // End of variables declaration//GEN-END:variables
 }

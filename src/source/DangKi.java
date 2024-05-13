@@ -27,103 +27,103 @@ public class DangKi extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        panel_DangKi = new javax.swing.JPanel();
+        label_Welcome_DangKi = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        label_Email_DangKi = new javax.swing.JLabel();
+        label_TenNgDung_DangKi = new javax.swing.JLabel();
+        label_MatKhau_DangKi = new javax.swing.JLabel();
+        tf_Email_DangKi = new javax.swing.JTextField();
+        tf_TenNgDung_Đangki = new javax.swing.JTextField();
+        pwf_MatKhau_DangKi = new javax.swing.JPasswordField();
+        btn_DangKi_DangKI = new javax.swing.JButton();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        panel_DangKi.setBackground(new java.awt.Color(0, 102, 102));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome to TicTac");
+        label_Welcome_DangKi.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        label_Welcome_DangKi.setForeground(new java.awt.Color(255, 255, 255));
+        label_Welcome_DangKi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_Welcome_DangKi.setText("Welcome to TicTac");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Email");
+        label_Email_DangKi.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        label_Email_DangKi.setForeground(new java.awt.Color(255, 255, 255));
+        label_Email_DangKi.setText("Email");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Tên người dùng");
+        label_TenNgDung_DangKi.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        label_TenNgDung_DangKi.setForeground(new java.awt.Color(255, 255, 255));
+        label_TenNgDung_DangKi.setText("Tên người dùng");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Mật khẩu");
+        label_MatKhau_DangKi.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        label_MatKhau_DangKi.setForeground(new java.awt.Color(255, 255, 255));
+        label_MatKhau_DangKi.setText("Mật khẩu");
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Đăng kí");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_DangKi_DangKI.setBackground(new java.awt.Color(0, 102, 102));
+        btn_DangKi_DangKI.setForeground(new java.awt.Color(255, 255, 255));
+        btn_DangKi_DangKI.setText("Đăng kí");
+        btn_DangKi_DangKI.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btn_DangKi_DangKIMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_DangKiLayout = new javax.swing.GroupLayout(panel_DangKi);
+        panel_DangKi.setLayout(panel_DangKiLayout);
+        panel_DangKiLayout.setHorizontalGroup(
+            panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_DangKiLayout.createSequentialGroup()
+                .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_DangKiLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_Welcome_DangKi, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
+                    .addGroup(panel_DangKiLayout.createSequentialGroup()
                         .addGap(185, 185, 185)
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(panel_DangKiLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_TenNgDung_DangKi)
+                    .addComponent(label_MatKhau_DangKi)
+                    .addComponent(label_Email_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tf_TenNgDung_Đangki, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pwf_MatKhau_DangKi, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_Email_DangKi, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(54, 54, 54))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DangKiLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btn_DangKi_DangKI)
                 .addGap(142, 142, 142))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panel_DangKiLayout.setVerticalGroup(
+            panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_DangKiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(label_Welcome_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_Email_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_Email_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_TenNgDung_DangKi)
+                    .addComponent(tf_TenNgDung_Đangki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_MatKhau_DangKi)
+                    .addComponent(pwf_MatKhau_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btn_DangKi_DangKI)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -131,21 +131,21 @@ public class DangKi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_DangKi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_DangKi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btn_DangKi_DangKIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DangKi_DangKIMouseClicked
         DangNhap dn = new DangNhap();
         dn.show();
         dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btn_DangKi_DangKIMouseClicked
 
     /**
      * @param args the command line arguments
@@ -183,16 +183,16 @@ public class DangKi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btn_DangKi_DangKI;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel label_Email_DangKi;
+    private javax.swing.JLabel label_MatKhau_DangKi;
+    private javax.swing.JLabel label_TenNgDung_DangKi;
+    private javax.swing.JLabel label_Welcome_DangKi;
+    private javax.swing.JPanel panel_DangKi;
+    private javax.swing.JPasswordField pwf_MatKhau_DangKi;
+    private javax.swing.JTextField tf_Email_DangKi;
+    private javax.swing.JTextField tf_TenNgDung_Đangki;
     // End of variables declaration//GEN-END:variables
 }

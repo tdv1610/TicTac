@@ -26,166 +26,172 @@ public class TaoCongViec extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        panel_TaoCV = new javax.swing.JPanel();
+        label_TaoCV = new javax.swing.JLabel();
+        label_TenCV_TaoCV = new javax.swing.JLabel();
+        label_LinhVuc_TaCV = new javax.swing.JLabel();
+        label_MoTa_TaoCV = new javax.swing.JLabel();
+        label_MDUT_TaoCV = new javax.swing.JLabel();
+        label_NgayBD_TaoCV = new javax.swing.JLabel();
+        label_NgayKT_TaoCV = new javax.swing.JLabel();
+        tf_TenCV_TaoCV = new javax.swing.JTextField();
+        tf_LinhVuc_TaoCV = new javax.swing.JTextField();
+        scrpane_MoTa_TaoCV = new javax.swing.JScrollPane();
+        textarea_MoTa_TaoCV = new javax.swing.JTextArea();
+        combobox_MDUT_TaoCV = new javax.swing.JComboBox<>();
+        label_NguoiPT_TaoCV = new javax.swing.JLabel();
+        scrpane_NguoiPT_TaoCV = new javax.swing.JScrollPane();
+        list_NguoiPT_TaoCV = new javax.swing.JList<>();
+        btn_HoanThanh_TaoCV = new javax.swing.JButton();
+        date_NgayBD_TaoCV = new com.toedter.calendar.JDateChooser();
+        date_NgayKT_TaoCV = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        panel_TaoCV.setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Tạo công việc mới");
+        label_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        label_TaoCV.setText("Tạo công việc mới");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Tên công việc");
+        label_TenCV_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_TenCV_TaoCV.setText("Tên công việc");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Lĩnh vực");
+        label_LinhVuc_TaCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_LinhVuc_TaCV.setText("Lĩnh vực");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Mô tả");
+        label_MoTa_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_MoTa_TaoCV.setText("Mô tả");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Mức độ ưu tiên");
+        label_MDUT_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_MDUT_TaoCV.setText("Mức độ ưu tiên");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel6.setText("Ngày bắt đầu");
+        label_NgayBD_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_NgayBD_TaoCV.setText("Ngày bắt đầu");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("Ngày kết thúc");
+        label_NgayKT_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_NgayKT_TaoCV.setText("Ngày kết thúc");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1. Cần gấp", "2. Quan trọng", "3. Thường" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        tf_TenCV_TaoCV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                tf_TenCV_TaoCVActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setText("Chọn người phụ trách");
+        textarea_MoTa_TaoCV.setColumns(20);
+        textarea_MoTa_TaoCV.setRows(5);
+        scrpane_MoTa_TaoCV.setViewportView(textarea_MoTa_TaoCV);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        combobox_MDUT_TaoCV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1. Cần gấp", "2. Quan trọng", "3. Thường" }));
+        combobox_MDUT_TaoCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combobox_MDUT_TaoCVActionPerformed(evt);
+            }
+        });
+
+        label_NguoiPT_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        label_NguoiPT_TaoCV.setText("Chọn người phụ trách");
+
+        list_NguoiPT_TaoCV.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        scrpane_NguoiPT_TaoCV.setViewportView(list_NguoiPT_TaoCV);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Hoàn thành");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_HoanThanh_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_HoanThanh_TaoCV.setText("Hoàn thành");
+        btn_HoanThanh_TaoCV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btn_HoanThanh_TaoCVMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_TaoCVLayout = new javax.swing.GroupLayout(panel_TaoCV);
+        panel_TaoCV.setLayout(panel_TaoCVLayout);
+        panel_TaoCVLayout.setHorizontalGroup(
+            panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
                         .addGap(203, 203, 203)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_TaoCV))
+                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                        .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_TenCV_TaoCV)
+                                    .addComponent(label_LinhVuc_TaCV)
+                                    .addComponent(label_MoTa_TaoCV))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(76, 76, 76)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
+                                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tf_TenCV_TaoCV)
+                                    .addComponent(tf_LinhVuc_TaoCV)
+                                    .addComponent(scrpane_MoTa_TaoCV, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)))
+                            .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_MDUT_TaoCV)
+                                    .addComponent(label_NgayBD_TaoCV))
+                                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                                        .addGap(81, 81, 81)
+                                        .addComponent(combobox_MDUT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(date_NgayBD_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(64, 64, 64)
+                                        .addComponent(label_NgayKT_TaoCV)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(date_NgayKT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                                .addComponent(label_NguoiPT_TaoCV)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(scrpane_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
                         .addGap(321, 321, 321)
-                        .addComponent(jButton1)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                        .addComponent(btn_HoanThanh_TaoCV)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panel_TaoCVLayout.setVerticalGroup(
+            panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_TaoCVLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel1)
+                .addComponent(label_TaoCV)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_TenCV_TaoCV)
+                    .addComponent(tf_TenCV_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label_LinhVuc_TaCV)
+                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                        .addComponent(tf_LinhVuc_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_MoTa_TaoCV)
+                    .addComponent(scrpane_MoTa_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                        .addComponent(combobox_MDUT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1))
-                    .addComponent(jLabel5))
+                    .addComponent(label_MDUT_TaoCV))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_TaoCVLayout.createSequentialGroup()
+                        .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label_NgayBD_TaoCV)
+                            .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(label_NgayKT_TaoCV)
+                                .addComponent(date_NgayBD_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_NguoiPT_TaoCV)
+                            .addComponent(scrpane_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_HoanThanh_TaoCV))
+                    .addComponent(date_NgayKT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -193,25 +199,29 @@ public class TaoCongViec extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_TaoCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel_TaoCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void combobox_MDUT_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_MDUT_TaoCVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_combobox_MDUT_TaoCVActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btn_HoanThanh_TaoCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_HoanThanh_TaoCVMouseClicked
         Homepage hp = new Homepage();
         hp.show();
         dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btn_HoanThanh_TaoCVMouseClicked
+
+    private void tf_TenCV_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TenCV_TaoCVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_TenCV_TaoCVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,24 +259,24 @@ public class TaoCongViec extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton btn_HoanThanh_TaoCV;
+    private javax.swing.JComboBox<String> combobox_MDUT_TaoCV;
+    private com.toedter.calendar.JDateChooser date_NgayBD_TaoCV;
+    private com.toedter.calendar.JDateChooser date_NgayKT_TaoCV;
+    private javax.swing.JLabel label_LinhVuc_TaCV;
+    private javax.swing.JLabel label_MDUT_TaoCV;
+    private javax.swing.JLabel label_MoTa_TaoCV;
+    private javax.swing.JLabel label_NgayBD_TaoCV;
+    private javax.swing.JLabel label_NgayKT_TaoCV;
+    private javax.swing.JLabel label_NguoiPT_TaoCV;
+    private javax.swing.JLabel label_TaoCV;
+    private javax.swing.JLabel label_TenCV_TaoCV;
+    private javax.swing.JList<String> list_NguoiPT_TaoCV;
+    private javax.swing.JPanel panel_TaoCV;
+    private javax.swing.JScrollPane scrpane_MoTa_TaoCV;
+    private javax.swing.JScrollPane scrpane_NguoiPT_TaoCV;
+    private javax.swing.JTextArea textarea_MoTa_TaoCV;
+    private javax.swing.JTextField tf_LinhVuc_TaoCV;
+    private javax.swing.JTextField tf_TenCV_TaoCV;
     // End of variables declaration//GEN-END:variables
 }
