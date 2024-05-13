@@ -694,7 +694,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_NCT_TicTacActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-       
+       TaoNhom tn = new TaoNhom();
+       tn.show();
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
