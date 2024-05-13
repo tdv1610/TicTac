@@ -4,6 +4,8 @@
  */
 package source;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -127,6 +129,11 @@ public class Homepage extends javax.swing.JFrame {
         btn_DX_TicTac.setText("Đăng xuất");
         btn_DX_TicTac.setToolTipText("");
         btn_DX_TicTac.setActionCommand("");
+        btn_DX_TicTac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_DX_TicTacMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout TicTacLayout = new javax.swing.GroupLayout(TicTac);
         TicTac.setLayout(TicTacLayout);
@@ -490,6 +497,11 @@ public class Homepage extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/create.png"))); // NOI18N
         jButton2.setText("Tạo nhóm");
         jButton2.setBorder(null);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_NCTLayout = new javax.swing.GroupLayout(panel_NCT);
         panel_NCT.setLayout(panel_NCTLayout);
@@ -541,9 +553,19 @@ public class Homepage extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton3.setText("Đổi mật khẩu");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton4.setText("Xóa tài khoản");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_TKLayout = new javax.swing.GroupLayout(panel_TK);
         panel_TK.setLayout(panel_TKLayout);
@@ -670,6 +692,29 @@ public class Homepage extends javax.swing.JFrame {
     private void btn_NCT_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NCT_TicTacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_NCT_TicTacActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+       
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        NhapEmail ne = new NhapEmail();
+        ne.show();
+        dispose();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa tài khoản vĩnh viễn?");
+        DangKi dk = new DangKi();
+        dk.show();
+        dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void btn_DX_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DX_TicTacMouseClicked
+        DangNhap dn = new DangNhap();
+        dn.show();
+        dispose();
+    }//GEN-LAST:event_btn_DX_TicTacMouseClicked
 
     /**
      * @param args the command line arguments
