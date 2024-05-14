@@ -378,7 +378,8 @@
                                   <Font name="Segoe UI" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="6" rowCount="30">
+                                  <Table columnCount="7" rowCount="30">
+                                    <Column editable="true" title="T&#xea;n nh&#xf3;m" type="java.lang.Object"/>
                                     <Column editable="false" title="T&#xea;n c&#xf4;ng vi&#x1ec7;c" type="java.lang.Object"/>
                                     <Column editable="false" title="L&#x129;nh v&#x1ef1;c" type="java.lang.Object"/>
                                     <Column editable="false" title="M&#xf4; t&#x1ea3;" type="java.lang.Object"/>
@@ -389,6 +390,11 @@
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title/>
                                       <Editor/>
@@ -483,7 +489,8 @@
                                   <Font name="Segoe UI" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="6" rowCount="30">
+                                  <Table columnCount="7" rowCount="30">
+                                    <Column editable="false" title="T&#xea;n nh&#xf3;m" type="java.lang.Object"/>
                                     <Column editable="false" title="T&#xea;n c&#xf4;ng vi&#x1ec7;c" type="java.lang.Object"/>
                                     <Column editable="false" title="L&#x129;nh v&#x1ef1;c" type="java.lang.Object"/>
                                     <Column editable="false" title="M&#xf4; t&#x1ea3;" type="java.lang.Object"/>
@@ -494,6 +501,11 @@
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title/>
                                       <Editor/>
@@ -585,7 +597,8 @@
                                   <Font name="Segoe UI" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="6" rowCount="30">
+                                  <Table columnCount="7" rowCount="30">
+                                    <Column editable="false" title="T&#xea;n nh&#xf3;m" type="java.lang.Object"/>
                                     <Column editable="false" title="T&#xea;n c&#xf4;ng vi&#x1ec7;c" type="java.lang.Object"/>
                                     <Column editable="false" title="L&#x129;nh v&#x1ef1;c" type="java.lang.Object"/>
                                     <Column editable="false" title="M&#xf4; t&#x1ea3;" type="java.lang.Object"/>
@@ -596,6 +609,11 @@
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title/>
                                       <Editor/>
