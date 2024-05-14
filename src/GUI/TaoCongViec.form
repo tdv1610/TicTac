@@ -77,11 +77,11 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                          <Component id="date_NgayBD_TaoCV" min="-2" pref="123" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                          <Component id="date_NgayBD_TaoCV" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="label_NgayKT_TaoCV" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="date_NgayKT_TaoCV" min="-2" pref="112" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="date_NgayKT_TaoCV" min="-2" pref="146" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
