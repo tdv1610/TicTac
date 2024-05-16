@@ -67,6 +67,7 @@ public class Homepage extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         panel_TK = new javax.swing.JPanel();
         label_TenNgDung_TK = new javax.swing.JLabel();
         label_MaNgDung_TK = new javax.swing.JLabel();
@@ -593,8 +594,25 @@ public class Homepage extends javax.swing.JFrame {
         jButton6.setText("Xóa");
 
         jButton7.setText("Hoàn tác");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Rời nhóm");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Thêm công việc");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_NCTLayout = new javax.swing.GroupLayout(panel_NCT);
         panel_NCT.setLayout(panel_NCTLayout);
@@ -623,12 +641,19 @@ public class Homepage extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton7)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(panel_NCTLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3))
+                                    .addGroup(panel_NCTLayout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton2)
+                                            .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jButton7)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_TimNhom_NCt)
                 .addGap(23, 23, 23))
@@ -644,9 +669,9 @@ public class Homepage extends javax.swing.JFrame {
                     .addComponent(btn_TaoNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(scrpane_DanhSachNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
                 .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_NCTLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -656,21 +681,22 @@ public class Homepage extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panel_NCTLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_NCTLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addGap(9, 9, 9)
                         .addComponent(jButton5)
                         .addGap(9, 9, 9)
                         .addComponent(jButton6)
-                        .addGap(9, 9, 9)
-                        .addComponent(jButton7)))
+                        .addGap(3, 3, 3)))
                 .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_NCTLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_NCTLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jButton7)
                         .addGap(9, 9, 9)
                         .addComponent(jButton2)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         panel_TK.setBackground(new java.awt.Color(204, 255, 204));
@@ -805,7 +831,7 @@ public class Homepage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_VCT_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VCT_TicTacActionPerformed
-        panel_VCT.setVisible(true);
+
     }//GEN-LAST:event_btn_VCT_TicTacActionPerformed
 
     private void btn_TK_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TK_TicTacActionPerformed
@@ -816,11 +842,12 @@ public class Homepage extends javax.swing.JFrame {
         panel_VCT.setVisible(true);
         panel_NCT.setVisible(false);
         panel_TK.setVisible(false);
+        
     }//GEN-LAST:event_btn_VCT_TicTacMouseClicked
 
     private void btn_NCT_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_NCT_TicTacMouseClicked
-        panel_VCT.setVisible(false);
         panel_NCT.setVisible(true);
+        panel_VCT.setVisible(false);
         panel_TK.setVisible(false);
 
     }//GEN-LAST:event_btn_NCT_TicTacMouseClicked
@@ -834,9 +861,9 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TimNhom_NCtActionPerformed
 
     private void btn_TK_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TK_TicTacMouseClicked
+        panel_TK.setVisible(true);
         panel_VCT.setVisible(false);
         panel_NCT.setVisible(false);
-        panel_TK.setVisible(true);
     }//GEN-LAST:event_btn_TK_TicTacMouseClicked
 
     private void btn_NCT_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NCT_TicTacActionPerformed
@@ -891,6 +918,19 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        TaoCongViec tcv = new TaoCongViec();
+        tcv.show();
+    }//GEN-LAST:event_jButton3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -939,6 +979,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton btn_XoaTK_TK;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
