@@ -805,7 +805,7 @@ public class Homepage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_VCT_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VCT_TicTacActionPerformed
-        panel_VCT.setVisible(true);
+
     }//GEN-LAST:event_btn_VCT_TicTacActionPerformed
 
     private void btn_TK_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TK_TicTacActionPerformed
@@ -816,11 +816,12 @@ public class Homepage extends javax.swing.JFrame {
         panel_VCT.setVisible(true);
         panel_NCT.setVisible(false);
         panel_TK.setVisible(false);
+        
     }//GEN-LAST:event_btn_VCT_TicTacMouseClicked
 
     private void btn_NCT_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_NCT_TicTacMouseClicked
-        panel_VCT.setVisible(false);
         panel_NCT.setVisible(true);
+        panel_VCT.setVisible(false);
         panel_TK.setVisible(false);
 
     }//GEN-LAST:event_btn_NCT_TicTacMouseClicked
@@ -834,9 +835,10 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TimNhom_NCtActionPerformed
 
     private void btn_TK_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TK_TicTacMouseClicked
+        panel_TK.setVisible(true);
         panel_VCT.setVisible(false);
         panel_NCT.setVisible(false);
-        panel_TK.setVisible(true);
+
     }//GEN-LAST:event_btn_TK_TicTacMouseClicked
 
     private void btn_NCT_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NCT_TicTacActionPerformed
