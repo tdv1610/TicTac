@@ -45,6 +45,7 @@ public class TaoCongViec extends javax.swing.JFrame {
         btn_HoanThanh_TaoCV = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,14 @@ public class TaoCongViec extends javax.swing.JFrame {
 
         jDateChooser2.setDateFormatString("dd MMM yyyy");
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setText("Tạo thêm");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_TaoCVLayout = new javax.swing.GroupLayout(panel_TaoCV);
         panel_TaoCV.setLayout(panel_TaoCVLayout);
         panel_TaoCVLayout.setHorizontalGroup(
@@ -151,8 +160,10 @@ public class TaoCongViec extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(scrpane_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_TaoCVLayout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addComponent(btn_HoanThanh_TaoCV)))
+                        .addGap(240, 240, 240)
+                        .addComponent(btn_HoanThanh_TaoCV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         panel_TaoCVLayout.setVerticalGroup(
@@ -191,7 +202,9 @@ public class TaoCongViec extends javax.swing.JFrame {
                     .addComponent(label_NguoiPT_TaoCV)
                     .addComponent(scrpane_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_HoanThanh_TaoCV)
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_HoanThanh_TaoCV)
+                    .addComponent(jButton1))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -222,6 +235,11 @@ public class TaoCongViec extends javax.swing.JFrame {
     private void tf_TenCV_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TenCV_TaoCVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_TenCV_TaoCVActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        TaoCongViec tcv = new TaoCongViec();
+        tcv.show();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -261,6 +279,7 @@ public class TaoCongViec extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_HoanThanh_TaoCV;
     private javax.swing.JComboBox<String> combobox_MDUT_TaoCV;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel label_LinhVuc_TaCV;
