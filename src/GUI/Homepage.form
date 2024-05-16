@@ -262,9 +262,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="tf_timcongviec_VCT" min="-2" pref="250" max="-2" attributes="0"/>
+                          <Component id="tf_timcongviec_VCT" min="-2" pref="270" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_TimKiem_VCT" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="btn_TimKiem_VCT" min="-2" pref="72" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -279,12 +279,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btn_TimKiem_VCT" pref="32" max="32767" attributes="0"/>
-                              <Component id="tf_timcongviec_VCT" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="tf_timcongviec_VCT" pref="30" max="32767" attributes="0"/>
+                              <Component id="btn_TimKiem_VCT" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="tabbedpane_BangCV_VCT" min="-2" pref="542" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="38" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
