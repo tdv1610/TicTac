@@ -139,16 +139,16 @@ public class AdminHomepage extends javax.swing.JFrame {
                 .addGap(124, 124, 124))
         );
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 204));
+        jTextField1.setBackground(new java.awt.Color(0, 153, 153));
 
-        jButton4.setBackground(new java.awt.Color(204, 255, 204));
+        jButton4.setBackground(new java.awt.Color(0, 153, 153));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
 
-        jTable1.setBackground(new java.awt.Color(204, 255, 204));
+        jTable1.setBackground(new java.awt.Color(0, 153, 153));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -163,23 +163,31 @@ public class AdminHomepage extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Email");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tên người dùng");
 
-        jTextField2.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField2.setBackground(new java.awt.Color(0, 153, 153));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextField2.setText("jTextField2");
 
-        jTextField3.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField3.setBackground(new java.awt.Color(0, 153, 153));
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextField3.setText("jTextField3");
 
+        jButton5.setBackground(new java.awt.Color(0, 51, 51));
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Sửa");
 
+        jButton6.setBackground(new java.awt.Color(0, 51, 51));
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Xóa");
 
+        jButton7.setBackground(new java.awt.Color(0, 51, 51));
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Hoàn tác");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -240,15 +248,17 @@ public class AdminHomepage extends javax.swing.JFrame {
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Tên admin");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Email admin");
 
-        jTextField4.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField4.setBackground(new java.awt.Color(0, 153, 153));
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextField4.setText("jTextField4");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
@@ -257,11 +267,13 @@ public class AdminHomepage extends javax.swing.JFrame {
             }
         });
 
-        jTextField5.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField5.setBackground(new java.awt.Color(0, 153, 153));
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextField5.setText("jTextField5");
 
+        btn_DoiPass_TK.setBackground(new java.awt.Color(0, 51, 51));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_DoiPass_TK.setForeground(new java.awt.Color(255, 255, 255));
         btn_DoiPass_TK.setText("Đổi mật khẩu");
         btn_DoiPass_TK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

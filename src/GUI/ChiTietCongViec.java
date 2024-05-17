@@ -53,53 +53,59 @@ public class ChiTietCongViec extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tên công việc");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mô tả");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Lĩnh vực");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Mức độ ưu tiên");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Ngày bắt đầu");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Ngày kết thúc");
 
-        jTextField2.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField2.setBackground(new java.awt.Color(0, 153, 153));
         jTextField2.setText("jTextField2");
         jTextField2.setBorder(null);
 
-        jTextArea1.setBackground(new java.awt.Color(204, 255, 204));
+        jTextArea1.setBackground(new java.awt.Color(0, 153, 153));
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setBorder(null);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField3.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField3.setBackground(new java.awt.Color(0, 153, 153));
         jTextField3.setText("jTextField3");
         jTextField3.setBorder(null);
 
-        jTextField4.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField4.setBackground(new java.awt.Color(0, 153, 153));
         jTextField4.setText("jTextField4");
         jTextField4.setBorder(null);
 
-        jTextField5.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField5.setBackground(new java.awt.Color(0, 153, 153));
         jTextField5.setText("jTextField5");
         jTextField5.setBorder(null);
 
-        jTextField6.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField6.setBackground(new java.awt.Color(0, 153, 153));
         jTextField6.setText("jTextField6");
         jTextField6.setBorder(null);
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/attached.png"))); // NOI18N
         jButton1.setText("Đính kèm");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,17 +119,19 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             }
         });
 
-        jList1.setBackground(new java.awt.Color(255, 255, 204));
+        jList1.setBackground(new java.awt.Color(0, 153, 153));
         jScrollPane2.setViewportView(jList1);
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 204));
+        jButton2.setBackground(new java.awt.Color(0, 51, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Hoàn thành");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Trạng thái công việc");
 
-        jComboBox1.setBackground(new java.awt.Color(204, 255, 204));
+        jComboBox1.setBackground(new java.awt.Color(0, 153, 153));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cần làm", "đang làm", "đã hoàn thành" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
