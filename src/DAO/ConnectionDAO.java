@@ -3,16 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Oracle
  */
-public class connection {
+public class ConnectionDAO { 
     private  static Connection conn=null;
     
     public static Connection getConnect(){
@@ -29,5 +31,4 @@ public class connection {
         }
         return conn;
     }
-    
 }

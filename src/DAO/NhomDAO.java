@@ -8,6 +8,6 @@ package DAO;
  *
  * @author Oracle
  */
-public class ThucHienDTO {
+public class NhomDAO {
     
 }

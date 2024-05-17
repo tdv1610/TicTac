@@ -4,11 +4,29 @@
  */
 package GUI;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import DTO.DangNhapDTO;
+import DAO.ADMINDAO;
+import DTO.ADMINDTO;
+import GUI.AdminHomepage;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
  */
 public class DangNhap extends javax.swing.JFrame {
+    
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    public static String pEmail;
+    public static String pTen;
+    public static String pmatkhau;
 
     /**
      * Creates new form DN_DK
@@ -68,6 +86,11 @@ public class DangNhap extends javax.swing.JFrame {
         btn_DangNhap_DangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_DangNhap_DangNhapMouseClicked(evt);
+            }
+        });
+        btn_DangNhap_DangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangNhap_DangNhapActionPerformed(evt);
             }
         });
 
@@ -185,16 +208,87 @@ public class DangNhap extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
 
+    
     private void btn_DangNhap_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapMouseClicked
-        NhapEmail ne = new NhapEmail();
-        ne.show();
-        dispose();
+        try{
+            NhapEmail ne = new NhapEmail();
+            ne.show();
+            dispose();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_btn_DangNhap_DangNhapMouseClicked
 
     private void btn_QuenMatKhau_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_QuenMatKhau_DangNhapActionPerformed
 
+    private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
+        // TODO add your handling code here:
+      try {
+        // Kết nối đến cơ sở dữ liệu
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "c##sinhvien07", "123");
+
+        // Kiểm tra trong bảng admin
+        String sqlAdmin = "SELECT * FROM admin WHERE EmailAd = ? AND matKhauAd = ?";
+        ps = conn.prepareStatement(sqlAdmin);
+        ps.setString(1, tf_TenNgDung_DangNhap.getText());
+        ps.setString(2, new String(pwf_MatKhau_DangNhap.getPassword())); // Sử dụng getPassword() cho JPasswordField
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
+            pTen = rs.getString("tenAd");
+            pmatkhau = rs.getString("matKhauAd");
+            AdminHomepage _homepageAdmin = new AdminHomepage();
+            _homepageAdmin.show();
+            dispose();
+            return;
+        }
+
+        // Đóng ResultSet và PreparedStatement trước khi sử dụng lại
+        rs.close();
+        ps.close();
+
+        // Kiểm tra trong bảng NguoiDung
+        String sqlNguoiDung = "SELECT * FROM NguoiDung WHERE emailND = ? AND matKhauND = ?";
+        ps = conn.prepareStatement(sqlNguoiDung);
+        ps.setString(1, tf_TenNgDung_DangNhap.getText());
+        ps.setString(2, new String(pwf_MatKhau_DangNhap.getPassword())); // Sử dụng getPassword() cho JPasswordField
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
+            pTen = rs.getString("tenND");
+            pmatkhau = rs.getString("matKhauND");
+            Homepage _homePage = new Homepage();
+            _homePage.show();
+            dispose();
+            return;
+        }
+
+        // Nếu không tìm thấy trong cả hai bảng
+        JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không chính xác!");
+        tf_TenNgDung_DangNhap.setText("");
+        pwf_MatKhau_DangNhap.setText("");
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, ex);
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_btn_DangNhap_DangNhapActionPerformed
+
+        
+        
+        
     /**
      * @param args the command line arguments
      */
@@ -222,6 +316,23 @@ public class DangNhap extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
