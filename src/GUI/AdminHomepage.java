@@ -4,17 +4,48 @@
  */
 package GUI;
 
+import DTO.ADMINDTO;
+import GUI.DangNhap;
+import BUS.ADMINBUS;
+import static GUI.DangNhap.pEmail;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+
+
 /**
  *
  * @author ASUS
  */
 public class AdminHomepage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminHomepage
-     */
-    public AdminHomepage() {
+    public static String kindSelectedPublic = "";
+    
+    public AdminHomepage() throws Exception {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/image/teamwork (2).png")).getImage());
+        jPanel3.setVisible(true);
+        jPanel4.setVisible(false);
+        loadAdminInfo();
+    }
+
+    private void loadAdminInfo() throws Exception {
+        ADMINBUS ADMIN = new ADMINBUS();
+        ADMINDTO ad = ADMIN.getInforEmail(pEmail);
+        //txtEmailAdmin.setText(ad.getEmailAd());
+        //txtTenAdmin.setText(ad.getTenAd());
     }
 
     /**
@@ -86,6 +117,11 @@ public class AdminHomepage extends javax.swing.JFrame {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -383,6 +419,10 @@ public class AdminHomepage extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_DX_TicTacMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,9 +451,15 @@ public class AdminHomepage extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminHomepage().setVisible(true);
+                try {
+                    new AdminHomepage().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(AdminHomepage.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
