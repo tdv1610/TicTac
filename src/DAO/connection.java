@@ -10,41 +10,30 @@ package DAO;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class connection {
-    public static void main(String[] args) {
+    // Thay đổi các thông số kết nối tương ứng với cơ sở dữ liệu Oracle của bạn
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String USERNAME = "c##sinhvien05";
+    private static final String PASSWORD = "1610";
+
+    // Phương thức để thiết lập và trả về kết nối cơ sở dữ liệu
+    public Connection getConnection() throws SQLException {
         Connection connection = null;
         try {
-            // Đăng ký driver
-            Class.forName("oracle.jdbc.OracleDriver");
-
+            // Đăng ký Driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
             // Tạo kết nối
-            connection = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521:orcl", // URL của cơ sở dữ liệu
-                "c##sinhvien05", // Tên người dùng Oracle
-                "1610"  // Mật khẩu của bạn
-            );
-
-            if (connection != null) {
-                System.out.println("Kết nối thành công!");
-            } else {
-                System.out.println("Kết nối thất bại!");
-            }
+            connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException e) {
-            System.out.println("Driver không tìm thấy!");
             e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Kết nối thất bại!");
-            e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
+        return connection;
     }
+
+   
+
+    
 }
