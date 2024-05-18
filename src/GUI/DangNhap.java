@@ -246,6 +246,7 @@ public class DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "chao nguoi dung, ban da dang nhap thanh cong");
             Homepage show = new Homepage();
             show.setVisible(true);
+            dispose();
         }
         else if(nd1==null&&ad1!=null)
         {
