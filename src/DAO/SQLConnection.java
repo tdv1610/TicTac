@@ -49,7 +49,7 @@ public class SQLConnection {
             driveTest();    
             
 //            Tạo url để kết nối tới Database
-            String url = "jdbc:oracle:thin:@localhost:1521:" + this.Sid;
+            String url = "jdbc:oracle:thin:@lvlykatie:1521:" + this.Sid;
             try{
 //                tạo connet thông qua url
                 this.connect = DriverManager.getConnection(url, this.Username, this.Password);
