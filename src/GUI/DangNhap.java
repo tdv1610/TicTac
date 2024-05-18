@@ -232,7 +232,7 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
     
-         NguoiDungDAO nd = new NguoiDungDAO();
+        NguoiDungDAO nd = new NguoiDungDAO();
         NguoiDungDTO nd1=nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         ADMINDAO ad= new ADMINDAO();
         ADMINDTO ad1=ad.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
@@ -255,7 +255,7 @@ public class DangNhap extends javax.swing.JFrame {
                 return;
         }
         
-    //GEN-LAST:event_btn_DangNhap_DangNhapActionPerformed
+                                                         
 
     }//GEN-LAST:event_btn_DangNhap_DangNhapActionPerformed
 
