@@ -197,7 +197,7 @@ END;
 ----------------------------------------------------------------------------------------------------
 -- PROCEDURE
 -- THEM NGUOI DUNG
-CREATE OR REPLACE PROCEDURE THEM_USER (
+CREATE OR REPLACE PROCEDURE THEM_NGUOIDUNG (
     I_EMAIL IN NGUOIDUNG.EMAILND%TYPE, 
     I_TENUSER IN NGUOIDUNG.TENND%TYPE, 
     I_MATKHAU IN NGUOIDUNG.MATKHAU%TYPE
@@ -212,28 +212,41 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Email da ton tai');
 END;
 
+set serveroutput on;
+execute THEM_NGUOIDUNG('thuytrang004@gmail.com', 'Thùy Trang', '12345');
+
 -----------------------------------------------------------------------------------------------------
 -- CAP NHAT NGUOI DUNG
 create or replace PROCEDURE CAPNHAT_NGUOIDUNG (
     I_EMAIL IN NGUOIDUNG.EMAILND%TYPE, 
-    I_TENUSER IN NGUOIDUNG.TENND%TYPE, 
-    I_MATKHAU IN NGUOIDUNG.MATKHAU%TYPE, 
-    I_MANHOM IN NGUOIDUNG_NHOM.MANHOM%TYPE
+    I_TENND IN NGUOIDUNG.TENND%TYPE, 
+    I_MATKHAU IN NGUOIDUNG.MATKHAU%TYPE
 )
 IS
+    L_EMAIL NGUOIDUNG.EMAILND%TYPE;
 BEGIN
-    UPDATE NGUOIDUNG
-    SET TENND = I_TENUSER, MATKHAU = I_MATKHAU
+    SELECT EMAILND INTO L_EMAIL
+    FROM NGUOIDUNG
     WHERE EMAILND = I_EMAIL;
-    IF SQL%NOTFOUND THEN
-        DBMS_OUTPUT.PUT_LINE('User khong ton tai');
+    IF L_EMAIL IS NULL THEN
+        DBMS_OUTPUT.PUT_LINE('Người dùng không tồn tại');
     ELSE
+        UPDATE NGUOIDUNG
+        SET TENND = I_TENND, MATKHAU = I_MATKHAU
+        WHERE EMAILND = I_EMAIL;
         DBMS_OUTPUT.PUT_LINE('Cap nhat user thanh cong');
     END IF;
+    EXCEPTION WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Người dùng không tồn tại');
 END;
+
+set serveroutput on;
+execute CAPNHAT_NGUOIDUNG('22521366@gm.uit.edu.vn', 'Thanh Tr?n','1366thanh');
 
 ---------------------------------------------------------------------------------------------------------
 --XOA NGUOI DUNG
+SET SERVEROUTPUT ON;
+
 CREATE OR REPLACE PROCEDURE XOA_NGUOIDUNG (
     I_EMAIL IN NGUOIDUNG.EMAILND%TYPE
 )
@@ -243,117 +256,120 @@ BEGIN
     SELECT EMAILND INTO L_EMAIL
     FROM NGUOIDUNG
     WHERE EMAILND = I_EMAIL;
-
+    
     IF L_EMAIL IS NULL THEN
-        DBMS_OUTPUT.PUT_LINE('User khong ton tai');
-    ELSE
-        -- Xóa tất cả các bản ghi liên quan đến người dùng này trước
-        XOA_THUCHIEN_THEO_EMAIL(I_EMAIL);
-        XOA_NHOM_THEO_EMAIL(I_EMAIL);
-        XOA_NHOM_THEO_EMAIL(I_EMAIL);
+        DBMS_OUTPUT.PUT_LINE('EMAILND không tồn tại');
+    ELSE    
+    -- Delete from THUCHIEN where the user is involved
+        DELETE FROM THUCHIEN
+        WHERE EMAIL_TV = I_EMAIL;
 
-        -- Sau đó, tiến hành xóa người dùng
+    -- Delete from THUCHIEN where the task is in groups the user leads
+        DELETE FROM THUCHIEN
+        WHERE MANHOM IN (SELECT MANHOM FROM NHOM WHERE EMAIL_TRUONGNHOM = I_EMAIL);
+
+    -- Delete from CONGVIEC where the task is in groups the user leads
+        DELETE FROM CONGVIEC
+        WHERE MANHOM IN (SELECT MANHOM FROM NHOM WHERE EMAIL_TRUONGNHOM = I_EMAIL);
+
+    -- Delete from NGUOIDUNG_NHOM where the user is related
+        DELETE FROM NGUOIDUNG_NHOM
+        WHERE EMAILND = I_EMAIL;
+
+    -- Delete from NGUOIDUNG_NHOM where the user leads the group
+        DELETE FROM NGUOIDUNG_NHOM
+        WHERE MANHOM IN (SELECT MANHOM FROM NHOM WHERE EMAIL_TRUONGNHOM = I_EMAIL);
+
+    -- Delete from NHOM where the user is the leader
+        DELETE FROM NHOM
+        WHERE EMAIL_TRUONGNHOM = I_EMAIL;
+
+    -- Finally, delete the user from NGUOIDUNG
         DELETE FROM NGUOIDUNG
         WHERE EMAILND = I_EMAIL;
-        DBMS_OUTPUT.PUT_LINE('Xoa user thanh cong');
+
+    -- Output success message
+        DBMS_OUTPUT.PUT_LINE('Xóa người dùng thành công');
     END IF;
-
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('User khong ton tai');
-
-END;
-
--- XOA CAC BANG GHI LIEN QUAN
--- XOA EMAIL TRONG BANG GHI LIEN QUAN
-CREATE OR REPLACE PROCEDURE XOA_NHOM_THEO_EMAIL (
-    I_EMAIL IN NGUOIDUNG.EMAILND%TYPE
-)
-IS
-BEGIN
-    -- Xóa các công việc thuộc nhóm
-    DELETE FROM CONGVIEC
-    WHERE MANHOM = (SELECT MANHOM FROM NGUOIDUNG_NHOM WHERE EMAILND = I_EMAIL);
-    -- Xóa các bản ghi trong bảng THUCHIEN liên kết với nhóm
-    DELETE FROM THUCHIEN
-    WHERE MANHOM = (SELECT MANHOM FROM NGUOIDUNG_NHOM WHERE EMAILND = I_EMAIL);
-
-    DELETE FROM NHOM
-    WHERE EMAIL_TRUONGNHOM = I_EMAIL;
-
-    DELETE FROM NGUOIDUNG_NHOM
-    WHERE EMAILND = I_EMAIL;
-    DBMS_OUTPUT.PUT_LINE('Xoa tat ca cac ban ghi trong bang NHOM lien quan den nguoi dung co email ' || I_EMAIL || ' thanh cong');
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('User khong ton tai');
-END;
-
--- XOA EMAIL TRONG BANG THUC HIEN
-CREATE OR REPLACE PROCEDURE XOA_THUCHIEN_THEO_EMAIL (
-    I_EMAIL IN NGUOIDUNG.EMAILND%TYPE
-)
-IS
-BEGIN
-    DELETE FROM THUCHIEN
-    WHERE EMAIL_TV = I_EMAIL;
-    DBMS_OUTPUT.PUT_LINE('');
-EXCEPTION
+        DBMS_OUTPUT.PUT_LINE('Người dùng không tồn tại');
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('');
+        DBMS_OUTPUT.PUT_LINE('Có lỗi xảy ra trong quá trình xóa người dùng');
 END;
+/
+
+set serveroutput on;
+execute XOA_NGUOIDUNG('baonhanxyz@gmail.com');
+
+
+set serveroutput on;
+execute XOA_NGUOIDUNG('thuytrang004@gmail.com');
+
 
 -------------------------------------------------------------------------------------------------------------
 -- THEM CONG VIEC
 create or replace PROCEDURE THEM_CONGVIEC (
-    I_MACV IN CONGVIEC.MACV%TYPE,
-    I_TENCV IN CONGVIEC.TENCV%TYPE,
-    I_MANHOM IN CONGVIEC.MANHOM%TYPE,
-    I_LINHVUC IN CONGVIEC.LINHVUC%TYPE,
-    I_MOTACV IN CONGVIEC.MOTACV%TYPE,
-    I_MUC_UUTIEN IN CONGVIEC.MUC_UUTIEN%TYPE,
-    I_NGAYBD IN CONGVIEC.NGAYBD%TYPE,
-    I_NGAYKT IN CONGVIEC.NGAYKT%TYPE
+    I_MACV CONGVIEC.MACV%TYPE,
+    I_MANHOM NHOM.MANHOM%TYPE,
+    I_TENCV CONGVIEC.TENCV%TYPE,
+    I_LINHVUC CONGVIEC.LINHVUC%TYPE,
+    I_MOTACV CONGVIEC.MOTACV%TYPE,
+    I_MUC_UUTIEN CONGVIEC.MUC_UUTIEN%TYPE,
+    I_NGAYBD CONGVIEC.NGAYBD%TYPE,
+    I_NGAYKT CONGVIEC.NGAYKT%TYPE
 )
 IS
 BEGIN
-    INSERT INTO CONGVIEC (MACV, MANHOM, TENCV, LINHVUC, MOTACV, MUC_UUTIEN, NGAYBD, NGAYKT) 
-    VALUES (I_MACV, I_MANHOM, I_TENCV, I_LINHVUC, I_MOTACV, I_MUC_UUTIEN, I_NGAYBD, I_NGAYKT);
+    INSERT INTO CONGVIEC VALUES (I_MACV, I_MANHOM, I_TENCV, I_LINHVUC, I_MOTACV, I_MUC_UUTIEN, I_NGAYBD, I_NGAYKT);
     DBMS_OUTPUT.PUT_LINE('Them cong viec thanh cong');
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN
         DBMS_OUTPUT.PUT_LINE('Ma cong viec da ton tai');
 END;
 
+set serveroutput on;
+execute THEM_CONGVIEC('7', '2', 'D?N ÁN CNTT', 'CNTT', 'BÁO CÁO', '1', '19-MAY-24', '20-MAY-24');
+
 -----------------------------------------------------------------------------------------------------------------
 --CAP NHAT CONG VIEC
-create or replace PROCEDURE CAPNHAT_CONGVIEC (
-    P_MACV IN CONGVIEC.MACV%TYPE,
-    P_TENCV IN CONGVIEC.TENCV%TYPE,
-    P_MANHOM IN CONGVIEC.MANHOM%TYPE,
-    P_LINHVUC IN CONGVIEC.LINHVUC%TYPE,
-    P_MOTACV IN CONGVIEC.MOTACV%TYPE,
-    P_MUC_UUTIEN IN CONGVIEC.MUC_UUTIEN%TYPE,
-    P_NGAYBD IN CONGVIEC.NGAYBD%TYPE,
-    P_NGAYKT IN CONGVIEC.NGAYKT%TYPE
+CREATE OR REPLACE PROCEDURE CAPNHAT_CONGVIEC (
+    p_MACV  CONGVIEC.MACV%TYPE,
+    p_TENCV CONGVIEC.TENCV%TYPE,
+    p_LINHVUC CONGVIEC.LINHVUC%TYPE,
+    p_MOTA CONGVIEC.MOTACV%TYPE,
+    p_MDUT CONGVIEC.MUC_UUTIEN%TYPE,
+    p_NGAYBD CONGVIEC.NGAYBD%TYPE,
+    p_DEADLINE CONGVIEC.NGAYKT%TYPE
 )
-AS
+IS
+    L_MACV CONGVIEC.MACV%TYPE; 
 BEGIN
-    UPDATE CONGVIEC
-    SET TENCV = P_TENCV,
-        MANHOM = P_MANHOM,
-        LINHVUC = P_LINHVUC,
-        MOTACV = P_MOTACV,
-        MUC_UUTIEN = P_MUC_UUTIEN,
-        NGAYBD = P_NGAYBD,
-        NGAYKT = P_NGAYKT
+    SELECT MACV INTO L_MACV
+    FROM CONGVIEC
     WHERE MACV = P_MACV;
-    IF SQL%NOTFOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Cong viec khong ton tai');
+    
+    IF L_MACV IS NULL THEN
+        DBMS_OUTPUT.PUT_LINE('MACV không t?n t?i');
     ELSE
-        DBMS_OUTPUT.PUT_LINE('Cap nhat cong viec thanh cong');
+        UPDATE CONGVIEC
+        SET TENCV = p_TENCV,
+            MUC_UUTIEN = p_MDUT,
+            MOTACV = p_MOTA,
+            LINHVUC = p_LINHVUC,
+            NGAYBD = p_NGAYBD,
+            NGAYKT = p_DEADLINE
+        WHERE MACV = p_MACV;
+        DBMS_OUTPUT.PUT_LINE('C?p nh?t công vi?c thành công');
+        
     END IF;
+    EXCEPTION WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Cong viec khong ton tai');
 END;
+/
+
+set serveroutput on;
+execute CAPNHAT_CONGVIEC('7', 'T?o giao di?n ', 'CNTT', 'java Swing', 1, '20-MAY-24', '22-MAY-24');
 
 ------------------------------------------------------------------------------------------------------
 --CAP NHAT TRANG  THAI CONG VIEC
@@ -379,22 +395,48 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Cong viec khong ton tai');
 END;
 
+set serveroutput on;
+execute CAPNHAT_TRANGTHAI_CONGVIEC(1, '?ã làm')
+
 ------------------------------------------------------------------------------------------------------
 -- XEM CONG VIEC CO TRANG THAI DA LAM
 create or replace PROCEDURE XEM_CONGVIEC_DA_LAM 
-AS
+IS
 BEGIN
-    FOR rec IN (
-        SELECT CV.MACV, CV.TENCV, CV.LINHVUC
-        FROM CONGVIEC CV
-        JOIN THUCHIEN TH ON CV.MACV = TH.MACV_PC
-        WHERE TH.TRANGTHAI = 'Da lam'
-        )
+    FOR cv_danglam IN (SELECT nh.TENNHOM, cv.TENCV, cv.LINHVUC, cv.MOTACV, cv.NGAYBD, cv.NGAYKT, cv.MUC_UUTIEN
+                        FROM CONGVIEC cv
+                        JOIN NHOM nh ON cv.MANHOM = nh.MANHOM
+                        JOIN THUCHIEN th ON cv.MACV = th.MACV_PC AND cv.MANHOM = th.MANHOM
+                        WHERE th.TRANGTHAI = '?ã làm') 
     LOOP
-        DBMS_OUTPUT.PUT_LINE('Ma cong viec: ' || rec.MACV || ', Ten cong viec: ' || rec.TENCV || ', Linh vuc: ' || rec.LINHVUC);
+        -- Xu ly in ra muc do uu tiên
+        DECLARE 
+            muc_uutien_str VARCHAR2(20);
+        BEGIN
+            IF cv_danglam.MUC_UUTIEN = 1 THEN
+                muc_uutien_str := 'C?n g?p';
+            ELSIF cv_danglam.MUC_UUTIEN = 2 THEN
+                muc_uutien_str := 'Quan tr?ng';
+            ELSE
+                muc_uutien_str := 'Th??ng';
+            END IF;
+            
+            -- In ra thong tin cv 
+            DBMS_OUTPUT.PUT_LINE('Tên nhóm: ' || cv_danglam.TENNHOM);
+            DBMS_OUTPUT.PUT_LINE('Tên công vi?c: ' || cv_danglam.TENCV);
+            DBMS_OUTPUT.PUT_LINE('L?nh v?c: ' || cv_danglam.LINHVUC);
+            DBMS_OUTPUT.PUT_LINE('Mô t?: ' || cv_danglam.MOTACV);
+            DBMS_OUTPUT.PUT_LINE('Ngày b?t ??u: ' || TO_CHAR(cv_danglam.NGAYBD, 'DD-MON-YY'));
+            DBMS_OUTPUT.PUT_LINE('Ngày k?t thúc: ' || TO_CHAR(cv_danglam.NGAYKT, 'DD-MON-YY'));
+            DBMS_OUTPUT.PUT_LINE('M?c ?? ?u tiên: ' || muc_uutien_str);
+            DBMS_OUTPUT.PUT_LINE('-------------------------');
+        END;
     END LOOP;
 END;
 
+set serveroutput on;
+execute  XEM_CONGVIEC_DA_LAM 
+-------------------------------------------------------------------------------------------------------
 -- XEM CONG VIEC CO TRANG THAI DANG LAM
 CREATE OR REPLACE PROCEDURE pc_xemcvdanglam IS
 BEGIN
