@@ -6,8 +6,8 @@ package DAO;
 
 /**
  *
- * @author Oracle
+ * @author VICTUS
  */
-public class NhomDTO {
+public class ThucHienDAO {
     
 }
