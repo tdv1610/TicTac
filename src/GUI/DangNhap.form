@@ -72,8 +72,8 @@
                   <Component id="btn_DangKi_DangNhap" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace pref="73" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_DangNhap_DangNhap" max="32767" attributes="0"/>
                       <Component id="btn_QuenMatKhau_DangNhap" max="32767" attributes="0"/>
+                      <Component id="btn_DangNhap_DangNhap" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
               </Group>
@@ -96,11 +96,11 @@
                       <Component id="pwf_MatKhau_DangNhap" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btn_QuenMatKhau_DangNhap" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_DangNhap_DangNhap" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="btn_DangNhap_DangNhap" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_QuenMatKhau_DangNhap" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -171,7 +171,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_DangNhap_DangNhap">
+        <Component class="javax.swing.JButton" name="btn_QuenMatKhau_DangNhap">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
@@ -185,10 +185,10 @@
             <Property name="text" type="java.lang.String" value="Qu&#xea;n m&#x1ead;t kh&#x1ea9;u"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_DangNhap_DangNhapMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_QuenMatKhau_DangNhapMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_QuenMatKhau_DangNhap">
+        <Component class="javax.swing.JButton" name="btn_DangNhap_DangNhap">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
@@ -202,9 +202,12 @@
             <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng nh&#x1ead;p"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_QuenMatKhau_DangNhapMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_QuenMatKhau_DangNhapActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_DangNhap_DangNhapMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DangNhap_DangNhapActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="label_ChuaCoTaiKhoan_DangNhap">
           <Properties>

@@ -3,7 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-
+import DAO.ADMINDAO;
+import DAO.connection;
+import DAO.NguoiDungDAO;
+import DTO.ADMINDTO;
+import DTO.NguoiDungDTO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.*;
 /**
  *
  * @author ASUS
@@ -33,8 +47,8 @@ public class DangNhap extends javax.swing.JFrame {
         label_MatKhau_DangNhap = new javax.swing.JLabel();
         tf_TenNgDung_DangNhap = new javax.swing.JTextField();
         pwf_MatKhau_DangNhap = new javax.swing.JPasswordField();
-        btn_DangNhap_DangNhap = new javax.swing.JButton();
         btn_QuenMatKhau_DangNhap = new javax.swing.JButton();
+        btn_DangNhap_DangNhap = new javax.swing.JButton();
         label_ChuaCoTaiKhoan_DangNhap = new javax.swing.JLabel();
         btn_DangKi_DangNhap = new javax.swing.JLabel();
 
@@ -61,28 +75,28 @@ public class DangNhap extends javax.swing.JFrame {
 
         pwf_MatKhau_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
 
-        btn_DangNhap_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
-        btn_DangNhap_DangNhap.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        btn_DangNhap_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
-        btn_DangNhap_DangNhap.setText("Quên mật khẩu");
-        btn_DangNhap_DangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_DangNhap_DangNhapMouseClicked(evt);
-            }
-        });
-
         btn_QuenMatKhau_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
         btn_QuenMatKhau_DangNhap.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         btn_QuenMatKhau_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
-        btn_QuenMatKhau_DangNhap.setText("Đăng nhập");
+        btn_QuenMatKhau_DangNhap.setText("Quên mật khẩu");
         btn_QuenMatKhau_DangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuenMatKhau_DangNhapMouseClicked(evt);
             }
         });
-        btn_QuenMatKhau_DangNhap.addActionListener(new java.awt.event.ActionListener() {
+
+        btn_DangNhap_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
+        btn_DangNhap_DangNhap.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        btn_DangNhap_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        btn_DangNhap_DangNhap.setText("Đăng nhập");
+        btn_DangNhap_DangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_DangNhap_DangNhapMouseClicked(evt);
+            }
+        });
+        btn_DangNhap_DangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_QuenMatKhau_DangNhapActionPerformed(evt);
+                btn_DangNhap_DangNhapActionPerformed(evt);
             }
         });
 
@@ -127,8 +141,8 @@ public class DangNhap extends javax.swing.JFrame {
                 .addComponent(btn_DangKi_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(panel_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_DangNhap_DangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_QuenMatKhau_DangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_QuenMatKhau_DangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_DangNhap_DangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(132, 132, 132))
         );
         panel_DangNhapLayout.setVerticalGroup(
@@ -146,11 +160,11 @@ public class DangNhap extends javax.swing.JFrame {
                     .addComponent(label_MatKhau_DangNhap)
                     .addComponent(pwf_MatKhau_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_QuenMatKhau_DangNhap)
+                .addComponent(btn_DangNhap_DangNhap)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DangNhapLayout.createSequentialGroup()
-                        .addComponent(btn_DangNhap_DangNhap)
+                        .addComponent(btn_QuenMatKhau_DangNhap)
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DangNhapLayout.createSequentialGroup()
                         .addGroup(panel_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -179,21 +193,44 @@ public class DangNhap extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_DangKi_DangNhapMouseClicked
 
-    private void btn_QuenMatKhau_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapMouseClicked
-        Homepage hp = new Homepage();
-        hp.show();
-        dispose();
-    }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
-
     private void btn_DangNhap_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapMouseClicked
         NhapEmail ne = new NhapEmail();
         ne.show();
         dispose();
     }//GEN-LAST:event_btn_DangNhap_DangNhapMouseClicked
 
-    private void btn_QuenMatKhau_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapActionPerformed
+    private void btn_QuenMatKhau_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapMouseClicked
+        Homepage hp = new Homepage();
+        hp.show();
+        dispose();
+    }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
+
+    private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_QuenMatKhau_DangNhapActionPerformed
+         NguoiDungDAO nd = new NguoiDungDAO();
+        NguoiDungDTO nd1=nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
+        ADMINDAO ad= new ADMINDAO();
+        ADMINDTO ad1=ad.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
+        if (nd1==null&&ad1==null)
+        {
+            JOptionPane.showMessageDialog(null, "dang nhap that bai");
+
+        }
+        else if(nd1!=null&&ad1==null)
+        {
+            JOptionPane.showMessageDialog(null, "chao nguoi dung, ban da dang nhap thanh cong");
+            Homepage show = new Homepage();
+            show.setVisible(true);
+            dispose();
+        }
+        else if(nd1==null&&ad1!=null)
+        {
+            JOptionPane.showMessageDialog(null, "chao admin, ban da dang nhap thanh cong");
+             new AdminHomepage().setVisible(true);
+                dispose();
+                return;
+        }
+    }//GEN-LAST:event_btn_DangNhap_DangNhapActionPerformed
 
     /**
      * @param args the command line arguments

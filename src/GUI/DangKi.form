@@ -75,7 +75,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="tf_TenNgDung_Đangki" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tf_TenNgDung_Dangki" alignment="0" max="32767" attributes="0"/>
                       <Component id="pwf_MatKhau_DangKi" alignment="0" max="32767" attributes="0"/>
                       <Component id="tf_Email_DangKi" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -103,7 +103,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label_TenNgDung_DangKi" min="-2" max="-2" attributes="0"/>
-                      <Component id="tf_TenNgDung_Đangki" min="-2" max="-2" attributes="0"/>
+                      <Component id="tf_TenNgDung_Dangki" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -172,7 +172,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tf_Email_DangKi">
         </Component>
-        <Component class="javax.swing.JTextField" name="tf_TenNgDung_&#x110;angki">
+        <Component class="javax.swing.JTextField" name="tf_TenNgDung_Dangki">
         </Component>
         <Component class="javax.swing.JPasswordField" name="pwf_MatKhau_DangKi">
         </Component>

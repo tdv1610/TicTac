@@ -18,21 +18,23 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class connection {
-    private  static connection conn =null;
-    
-    public static connection getConnect(){
-        final String url = "jdbc:oracle:thin:@laptop-n4ku63sd:1521:orcl";
-        final String username = "C##TICTAC";
-        final String password = "123";
+      // Thay đổi các thông số kết nối tương ứng với cơ sở dữ liệu Oracle của bạn
+    private static final String DB_URL = "jdbc:oracle:thin:@laptop-n4ku63sd:1521:orcl";
+    private static final String USERNAME = "C##TICTAC";
+    private static final String PASSWORD = "123";
+
+    // Phương thức để thiết lập và trả về kết nối cơ sở dữ liệu
+    public Connection getConnection() throws SQLException {
+        Connection connection = null;
         try {
+            // Đăng ký Driver
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = (connection) DriverManager.getConnection(url, username, password);
-            //JOptionPane.showMessageDialog(null,"Ket noi co so du lieu thanh cong ");
-            
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null,"Ket noi co so du lieu khong thanh cong ");
+            // Tạo kết nối
+            connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        return conn;
+        return connection;
     }
 
     boolean isClosed() {
@@ -40,6 +42,10 @@ public class connection {
     }
 
     void close() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Object prepareStatement(String toString) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
