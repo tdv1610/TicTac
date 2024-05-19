@@ -53,8 +53,6 @@
                           <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
-=======
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="label_TenCV_TaoCV" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="label_LinhVuc_TaCV" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -87,45 +85,9 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
->>>>>>> origin/master
                                   <Component id="label_NguoiPT_TaoCV" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="scrpane_NguoiPT_TaoCV" min="-2" pref="302" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="label_MDUT_TaoCV" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="label_NgayBD_TaoCV" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                              <Component id="combobox_MDUT_TaoCV" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                              <Component id="jDateChooser1" min="-2" pref="110" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="label_NgayKT_TaoCV" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="41" max="32767" attributes="0"/>
-                                              <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="label_TenCV_TaoCV" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="label_LinhVuc_TaCV" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="label_MoTa_TaoCV" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tf_TenCV_TaoCV" max="32767" attributes="0"/>
-                                          <Component id="tf_LinhVuc_TaoCV" max="32767" attributes="0"/>
-                                          <Component id="scrpane_MoTa_TaoCV" pref="408" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -136,11 +98,7 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-<<<<<<< HEAD
-                  <EmptySpace pref="127" max="32767" attributes="0"/>
-=======
                   <EmptySpace pref="100" max="32767" attributes="0"/>
->>>>>>> origin/master
               </Group>
           </Group>
         </DimensionLayout>
@@ -181,8 +139,6 @@
                       <Component id="label_NgayKT_TaoCV" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                       <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
-=======
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -193,15 +149,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btn_HoanThanh_TaoCV" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
->>>>>>> origin/master
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label_NguoiPT_TaoCV" min="-2" max="-2" attributes="0"/>
-                      <Component id="scrpane_NguoiPT_TaoCV" min="-2" pref="92" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_HoanThanh_TaoCV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -394,19 +342,14 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
-<<<<<<< HEAD
-=======
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="dateFormatString" type="java.lang.String" value="dd MMM yyyy"/>
           </Properties>
->>>>>>> origin/master
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
-<<<<<<< HEAD
-=======
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="0" type="rgb"/>
@@ -427,7 +370,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
           </Events>
->>>>>>> origin/master
         </Component>
       </SubComponents>
     </Container>

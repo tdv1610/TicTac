@@ -19,7 +19,7 @@ import java.sql.ResultSet;
  */
 public class ADMINDAO extends connection{
       SQLConnectUnit connect;
-      public static SQLConnection connection = new SQLConnection("c##sinhvien07", "123", "orcl");
+      public static SQLConnection connection = new SQLConnection("c##sinhvien05", "1610", "orcl");
     ;
     
     public ADMINDTO dangnhap(String TENAD, String MATKHAUAD) {

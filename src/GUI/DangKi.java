@@ -6,13 +6,21 @@ package GUI;
 
 import DAO.NguoiDungDAO;
 import DTO.NguoiDungDTO;
+import GUI.DangNhap;
+import com.sun.jdi.connect.spi.Connection;
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
 
 /**
  *
  * @author ASUS
  */
 public class DangKi extends javax.swing.JFrame {
+ Connection conn = null;
+    PreparedStatement ps = null, ps1 = null, ps2 = null;
+    ResultSet rs = null, rs1 = null, rs2 = null;
 
     /**
      * Creates new form DangKi
@@ -157,18 +165,29 @@ public class DangKi extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DangKi_DangKIMouseClicked
 
     private void btn_DangKi_DangKIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKi_DangKIActionPerformed
-         NguoiDungDAO nd = new NguoiDungDAO();
-        NguoiDungDTO nd1=nd.dangki(tf_Email_DangKi.getText(),tf_TenNgDung_Dangki.getText(),pwf_MatKhau_DangKi.getText());
+
+        NguoiDungDAO nd = new NguoiDungDAO();
+        
+NguoiDungDTO nd1=nd.dangki(tf_Email_DangKi.getText(),tf_TenNgDung_Dangki.getText(),pwf_MatKhau_DangKi.getText());
+         
         if(tf_Email_DangKi.getText().equals("")||tf_TenNgDung_Dangki.getText().equals("")||pwf_MatKhau_DangKi.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "khong de thong tin trong");
         }
-        else{
+        
+        else if(nd1==null)
+        {
+            JOptionPane.showMessageDialog(null, "tai khoan da ton tai");
+        }
+        else {
+            if(tf_Email_DangKi.getText()!=nd1.getEMAILND()){
             JOptionPane.showMessageDialog(null,"ban da dang ki tai khoan thanh cong");
             new DangNhap().setVisible(true);
                 dispose();
-                return;
+                return;}
         }
+         
+        
     }//GEN-LAST:event_btn_DangKi_DangKIActionPerformed
 
     /**

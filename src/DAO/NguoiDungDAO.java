@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +18,9 @@ import java.util.ArrayList;
  */
 public class NguoiDungDAO extends connection{
      SQLConnectUnit connect;
-      public static SQLConnection connection = new SQLConnection("c##sinhvien05", "1610", "orcl");
+      public static SQLConnection connection = new SQLConnection("c##TicTac", "tictac", "orcl");
     ;
-    public NguoiDungDTO dangnhap(String TENND, String MATKHAU) {
+    public NguoiDungDTO dangnhap(String EMAILND, String MATKHAU) {
         NguoiDungDTO nd = null;
         Connection con = null;
         PreparedStatement pre = null;
@@ -29,9 +30,9 @@ public class NguoiDungDAO extends connection{
             con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
 
-            String sql = "SELECT * FROM NGUOIDUNG WHERE TENND = ? AND MATKHAU = ?";
+            String sql = "SELECT * FROM NGUOIDUNG WHERE EMAILND = ? AND MATKHAU = ?";
             pre = con.prepareStatement(sql);
-            pre.setString(1, TENND);
+            pre.setString(1, EMAILND);
             pre.setString(2, MATKHAU);
             System.out.println("Executing query: " + sql);
 
@@ -71,11 +72,58 @@ public class NguoiDungDAO extends connection{
             con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
 
+            
             String sql = "insert into NGUOIDUNG values(?,?,?)";
             pre = con.prepareStatement(sql);
             pre.setString(1, EMAIL);
             pre.setString(2, TENND);
             pre.setString(3, MATKHAU);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                nd = new NguoiDungDTO();
+                nd.setTENND(rs.getString("EMAIL"));
+                nd.setEMAILND(rs.getString("TENND"));
+                nd.setMATKHAU(rs.getString("MATKHAU"));
+               
+               
+            } else {
+                System.out.println("No user found with the provided credentials.");
+            
+            
+             }
+          
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return nd;
+    }
+    public NguoiDungDTO xoataikhoan(String TENND,String EMAIL)
+    { NguoiDungDTO nd = null;
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();  // Get the database connection
+            System.out.println("Connection established successfully.");
+
+            String sql = "delete * from NGUOIDUNG where TENND = ? AND EMAIL = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, TENND);
+            pre.setString(2, EMAIL);
+            
             System.out.println("Executing query: " + sql);
 
             rs = pre.executeQuery();
@@ -102,8 +150,9 @@ public class NguoiDungDAO extends connection{
             }
         }
 
-        return nd;
-    }
+        return nd;   
+}
+    
 }
 
 

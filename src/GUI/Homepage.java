@@ -4,7 +4,10 @@
  */
 package GUI;
 
+import DAO.NguoiDungDAO;
+import DTO.NguoiDungDTO;
 import javax.swing.JOptionPane;
+import GUI.DangKi;
 
 /**
  *
@@ -72,7 +75,7 @@ public class Homepage extends javax.swing.JFrame {
         label_TenNgDung_TK = new javax.swing.JLabel();
         label_MaNgDung_TK = new javax.swing.JLabel();
         tf_TenNgDung_TK = new javax.swing.JTextField();
-        tf_MaNgDung_TK = new javax.swing.JTextField();
+        tf_Email_TK = new javax.swing.JTextField();
         btn_DoiPass_TK = new javax.swing.JButton();
         btn_XoaTK_TK = new javax.swing.JButton();
 
@@ -721,25 +724,28 @@ public class Homepage extends javax.swing.JFrame {
         label_TenNgDung_TK.setText("Tên người dùng");
 
         label_MaNgDung_TK.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        label_MaNgDung_TK.setText("Mã người dùng");
+        label_MaNgDung_TK.setText("Email");
 
         tf_TenNgDung_TK.setBackground(new java.awt.Color(0, 153, 153));
         tf_TenNgDung_TK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tf_TenNgDung_TK.setText("Tên người dùng");
         tf_TenNgDung_TK.setBorder(null);
+        tf_TenNgDung_TK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_TenNgDung_TKMouseClicked(evt);
+            }
+        });
         tf_TenNgDung_TK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_TenNgDung_TKActionPerformed(evt);
             }
         });
 
-        tf_MaNgDung_TK.setBackground(new java.awt.Color(0, 153, 153));
-        tf_MaNgDung_TK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tf_MaNgDung_TK.setText("Mã người dùng");
-        tf_MaNgDung_TK.setBorder(null);
-        tf_MaNgDung_TK.addActionListener(new java.awt.event.ActionListener() {
+        tf_Email_TK.setBackground(new java.awt.Color(0, 153, 153));
+        tf_Email_TK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tf_Email_TK.setBorder(null);
+        tf_Email_TK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_MaNgDung_TKActionPerformed(evt);
+                tf_Email_TKActionPerformed(evt);
             }
         });
 
@@ -758,6 +764,11 @@ public class Homepage extends javax.swing.JFrame {
         btn_XoaTK_TK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_XoaTK_TKMouseClicked(evt);
+            }
+        });
+        btn_XoaTK_TK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaTK_TKActionPerformed(evt);
             }
         });
 
@@ -779,7 +790,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_TenNgDung_TK)
-                    .addComponent(tf_MaNgDung_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_Email_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         panel_TKLayout.setVerticalGroup(
@@ -792,7 +803,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(label_MaNgDung_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_MaNgDung_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_Email_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addComponent(btn_DoiPass_TK)
                 .addGap(18, 18, 18)
@@ -920,12 +931,13 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_TaoNhom_NCTActionPerformed
 
-    private void tf_MaNgDung_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_MaNgDung_TKActionPerformed
+    private void tf_Email_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_Email_TKActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_MaNgDung_TKActionPerformed
+    }//GEN-LAST:event_tf_Email_TKActionPerformed
 
     private void tf_TenNgDung_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TenNgDung_TKActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_tf_TenNgDung_TKActionPerformed
 
     private void table_CanLam_BangCV_VCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_CanLam_BangCV_VCTMouseClicked
@@ -948,6 +960,28 @@ public class Homepage extends javax.swing.JFrame {
         TaoCongViec tcv = new TaoCongViec();
         tcv.show();
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void btn_XoaTK_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTK_TKActionPerformed
+ NguoiDungDAO nd = new NguoiDungDAO();
+        NguoiDungDTO nd1=nd.xoataikhoan(tf_TenNgDung_TK.getText(),tf_Email_TK.getText());
+         if (nd1==null)
+        {
+            JOptionPane.showMessageDialog(null, "tai khoan khong ton tai");
+
+        }
+        else {
+             
+            JOptionPane.showMessageDialog(null, " ban da xoa tai khoan tren thanh cong");
+            DangNhap show = new DangNhap();
+            show.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_btn_XoaTK_TKActionPerformed
+
+    private void tf_TenNgDung_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_TenNgDung_TKMouseClicked
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_tf_TenNgDung_TKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1028,7 +1062,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTable table_DaHoanThanh_BangCV_VCT;
     private javax.swing.JTable table_DangLam_BangCV_VCT;
     private javax.swing.JTable table_ThongTinNhom_NCT;
-    private javax.swing.JTextField tf_MaNgDung_TK;
+    private javax.swing.JTextField tf_Email_TK;
     private javax.swing.JTextField tf_TenNgDung_TK;
     private javax.swing.JTextField tf_TimNhom_NCT;
     private javax.swing.JTextField tf_timcongviec_VCT;

@@ -15,9 +15,9 @@ import java.sql.SQLException;
 
 public class connection {
     // Thay đổi các thông số kết nối tương ứng với cơ sở dữ liệu Oracle của bạn
-    private static final String DB_URL = "jdbc:oracle:thin:@lvlykatie:1521:orcl";
-    private static final String USERNAME = "c##sinhvien07";
-    private static final String PASSWORD = "123";
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String USERNAME = "c##TicTac";
+    private static final String PASSWORD = "tictac";
 
     // Phương thức để thiết lập và trả về kết nối cơ sở dữ liệu
     public Connection getConnection() throws SQLException {
