@@ -4,10 +4,7 @@
  */
 package DAO;
 
-/**
- *
- * @author Oracle
- */
+
 public class ThucHienDAO {
     
 }

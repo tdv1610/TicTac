@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import DAO.NguoiDungDAO;
+import DTO.NguoiDungDTO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -34,7 +38,7 @@ public class DangKi extends javax.swing.JFrame {
         label_TenNgDung_DangKi = new javax.swing.JLabel();
         label_MatKhau_DangKi = new javax.swing.JLabel();
         tf_Email_DangKi = new javax.swing.JTextField();
-        tf_TenNgDung_Đangki = new javax.swing.JTextField();
+        tf_TenNgDung_Dangki = new javax.swing.JTextField();
         pwf_MatKhau_DangKi = new javax.swing.JPasswordField();
         btn_DangKi_DangKI = new javax.swing.JButton();
 
@@ -71,6 +75,11 @@ public class DangKi extends javax.swing.JFrame {
                 btn_DangKi_DangKIMouseClicked(evt);
             }
         });
+        btn_DangKi_DangKI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangKi_DangKIActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_DangKiLayout = new javax.swing.GroupLayout(panel_DangKi);
         panel_DangKi.setLayout(panel_DangKiLayout);
@@ -94,7 +103,7 @@ public class DangKi extends javax.swing.JFrame {
                     .addComponent(label_Email_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tf_TenNgDung_Đangki, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_TenNgDung_Dangki, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pwf_MatKhau_DangKi, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_Email_DangKi, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(54, 54, 54))
@@ -117,7 +126,7 @@ public class DangKi extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_TenNgDung_DangKi)
-                    .addComponent(tf_TenNgDung_Đangki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_TenNgDung_Dangki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_MatKhau_DangKi)
@@ -146,6 +155,26 @@ public class DangKi extends javax.swing.JFrame {
         dn.show();
         dispose();
     }//GEN-LAST:event_btn_DangKi_DangKIMouseClicked
+
+    private void btn_DangKi_DangKIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKi_DangKIActionPerformed
+        NguoiDungDAO nd = new NguoiDungDAO();
+        NguoiDungDTO nd1=nd.dangki(tf_Email_DangKi.getText(),tf_TenNgDung_Dangki.getText(),pwf_MatKhau_DangKi.getText());
+        if(tf_Email_DangKi.getText().equals("")||tf_TenNgDung_Dangki.getText().equals("")||pwf_MatKhau_DangKi.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Không để thông tin trống");
+        }
+        else{
+            if(nd1==null){
+                JOptionPane.showMessageDialog(null, "Email đã tồn tại");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Bạn đã đăng kí tài khoản thành công");
+                new DangNhap().setVisible(true);
+                dispose();
+                return;
+            }
+        }
+    }//GEN-LAST:event_btn_DangKi_DangKIActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,6 +222,6 @@ public class DangKi extends javax.swing.JFrame {
     private javax.swing.JPanel panel_DangKi;
     private javax.swing.JPasswordField pwf_MatKhau_DangKi;
     private javax.swing.JTextField tf_Email_DangKi;
-    private javax.swing.JTextField tf_TenNgDung_Đangki;
+    private javax.swing.JTextField tf_TenNgDung_Dangki;
     // End of variables declaration//GEN-END:variables
 }

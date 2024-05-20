@@ -5,8 +5,6 @@
 package GUI;
 
 import DTO.ADMINDTO;
-import GUI.DangNhap;
-import BUS.ADMINBUS;
 import static GUI.DangNhap.pEmail;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,21 +29,11 @@ import javax.swing.JPanel;
  */
 public class AdminHomepage extends javax.swing.JFrame {
 
-    public static String kindSelectedPublic = "";
-    
-    public AdminHomepage() throws Exception {
+    /**
+     * Creates new form AdminHomepage
+     */
+    public AdminHomepage() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/image/teamwork (2).png")).getImage());
-        jPanel3.setVisible(true);
-        jPanel4.setVisible(false);
-        loadAdminInfo();
-    }
-
-    private void loadAdminInfo() throws Exception {
-        ADMINBUS ADMIN = new ADMINBUS();
-        ADMINDTO ad = ADMIN.getInforEmail(pEmail);
-        //txtEmailAdmin.setText(ad.getEmailAd());
-        //txtTenAdmin.setText(ad.getTenAd());
     }
 
     /**
@@ -85,7 +73,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,7 +81,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Quản lí người dùng");
@@ -109,7 +97,7 @@ public class AdminHomepage extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Tài khoản");

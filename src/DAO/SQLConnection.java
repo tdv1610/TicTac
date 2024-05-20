@@ -5,54 +5,81 @@
 package DAO;
 
 import java.sql.DriverManager;
-import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Statement;
+import java.util.TimeZone;
+import java.sql.Connection;
 
+/**
+ *
+ * @author Oracle
+ */
 public class SQLConnection {
 
-    String Username;
-    String Password;
-    String Sid;
+    String Username = "";
+    String Password = "";
+    String Sid = "";
+    
     Connection connect = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
 
     public SQLConnection(String Username, String Password, String Sid) {
         this.Username = Username;
         this.Password = Password;
         this.Sid = Sid;
     }
-
-    protected void driveTest() throws SQLException {
+    
+    
+    protected void driveTest () throws Exception {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("SQL Developer driver not found", e);
+        }
+        catch (ClassNotFoundException e) {
+            throw new Exception("SQl Developer not found driveTest");
         }
     }
-
-    public Connection getConnect() throws SQLException {
+    
+    public Connection getConnect() throws Exception {
+//        nếu connection null thì khởi tạo mới
         if (this.connect == null) {
-            try {
-                driveTest();
-                String url = "jdbc:oracle:thin:@localhost:1521:" + this.Sid;
+            driveTest();    
+            
+//            Tạo url để kết nối tới Database
+            String url = "jdbc:oracle:thin:@localhost:1521:" + this.Sid;
+            try{
+//                tạo connet thông qua url
                 this.connect = DriverManager.getConnection(url, this.Username, this.Password);
-            } catch (SQLException e) {
-                throw new SQLException("Unable to connect to Database", e);
+            }        
+            catch (SQLException e) {
+                throw new Exception("không thể kết nối tới Database" + url +e.getMessage());
             }
         }
+        
         return this.connect;
     }
-
-    public void Close() throws SQLException {
-        try {
-            if (this.connect != null && !this.connect.isClosed()) {
-                this.connect.close();
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Error closing connection", e);
-        } finally {
+    
+    //hàm đóng kết nối
+    public void Close() throws Exception {
+        if (this.resultSet != null && this.resultSet.isClosed()) {
+            this.resultSet.close();
+            this.resultSet = null;
+        }
+        if (this.statement != null && this.statement.isClosed()) {
+            this.statement.close();
+            this.statement = null;
+        }
+        if (this.connect != null && this.connect.isClosed()) {
+            this.connect.close();
             this.connect = null;
         }
     }
+
+    Object prepareStatement(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }

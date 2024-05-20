@@ -4,35 +4,67 @@
  */
 package DAO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import DTO.ADMINDTO;
+import java.util.ArrayList;
+import DAO.connection;
+import GUI.AdminHomepage;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
-public class ADMINDAO {
-    private SQLConnectUnit connectUnit;
+/**
+ *
+ * @author Oracle
+ */
+public class ADMINDAO extends connection{
+      SQLConnectUnit connect;
+      public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
+    ;
+    
+    public ADMINDTO dangnhap(String EmailAD, String MATKHAUAD) {
+        ADMINDTO ad = null;
+        Connection con = null;
+        PreparedStatement p = null;
+        ResultSet rs = null;
+ try {
+              // Kết nối đến cơ sở dữ liệu
+             con = getConnection();  // Get the database connection
+            System.out.println("Connection established successfully.");
 
-    public ADMINDAO() {
-        connectUnit = new SQLConnectUnit();
-    }
+            // Kiểm tra trong bảng admin
+            String sqlAdmin = "SELECT * FROM AD WHERE EmailAd = ? AND matKhau = ?";
+            p= con.prepareStatement(sqlAdmin);
+            p.setString(1, EmailAD);
+            p.setString(2, MATKHAUAD);
+            rs = p.executeQuery();
 
-    public List<ADMINDTO> docDB() throws SQLException, Exception {
-        List<ADMINDTO> admins = new ArrayList<>();
-        try {
-            ResultSet rs = connectUnit.Select("AD"); // Tên bảng là "AD"
-            while (rs.next()) {
-                ADMINDTO admin = new ADMINDTO();
-                admin.setEmailAd(rs.getString("EMAILAD"));
-                admin.setTenAd(rs.getString("TENAD"));
-                admin.setMatKhau(rs.getString("MATKHAU"));
-                admins.add(admin);
+            if (rs.next()) {
+                ad = new ADMINDTO();
+               
+                ad.setEmailAd(rs.getString("EMAILAD"));
+                ad.setMatKhau(rs.getString("MATKHAU"));
+                ad.setTenAd(rs.getString("TENAD"));
+                System.out.println("User found: " + ad.toString());
+            } else {
+                System.out.println("No user found with the provided credentials.");
             }
-        } catch (SQLException e) {
-            throw new SQLException("Error while reading ADMIN database: " + e.getMessage());
+ }
+
+         
+            catch (Exception ex) {
+          ex.printStackTrace();
         } finally {
-            connectUnit.Close();
-        }
-        return admins;
+            try {
+                // Đóng tất cả các tài nguyên
+                if (rs != null) rs.close();
+                if (p != null) p.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+    return ad;
     }
 }
+

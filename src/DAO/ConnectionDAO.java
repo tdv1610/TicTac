@@ -19,8 +19,8 @@ public class ConnectionDAO {
     
     public static Connection getConnect(){
         final String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-        final String username = "c##sinhvien07";
-        final String password = "123";
+        final String username = "c##tictac";
+        final String password = "tictac";
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(url, username, password);
