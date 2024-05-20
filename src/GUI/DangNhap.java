@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import GUI.AdminHomepage;
 import DAO.ADMINDAO;
 import DAO.connection;
 import DAO.NguoiDungDAO;
@@ -213,19 +214,20 @@ public class DangNhap extends javax.swing.JFrame {
         ADMINDTO ad1=ad.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         if (nd1==null&&ad1==null)
         {
-            JOptionPane.showMessageDialog(null, "dang nhap that bai");
+            JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
 
         }
         else if(nd1!=null&&ad1==null)
         {
-            JOptionPane.showMessageDialog(null, "chao nguoi dung, ban da dang nhap thanh cong");
+            JOptionPane.showMessageDialog(null, "Chào người dùng, bạn đã đăng nhập thành công");
             Homepage show = new Homepage();
             show.setVisible(true);
             dispose();
         }
         else if(nd1==null&&ad1!=null)
         {
-            JOptionPane.showMessageDialog(null, "chao admin, ban da dang nhap thanh cong");
+            JOptionPane.showMessageDialog(null, "Chào Admin, bạn đã đăng nhập thành công");
+            
              new AdminHomepage().setVisible(true);
                 dispose();
                 return;

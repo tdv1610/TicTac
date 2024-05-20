@@ -9,7 +9,9 @@ package DTO;
  * @author VICTUS
  */
 public class NhomDTO {
-    private String maNhom, tenNhom, emailTruongNhom;
+
+    private String maNhom;
+    private String tenNhom, emailTruongNhom;
 
     public NhomDTO() {
     }

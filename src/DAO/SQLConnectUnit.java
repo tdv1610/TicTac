@@ -96,6 +96,26 @@ public class SQLConnectUnit {
         }
         return list;
     }
+    
+    // Hàm gọi procedure
+    public void callProcedure(String procedureName, String... parameters) throws SQLException {
+    StringBuilder call = new StringBuilder("{call ");
+    call.append(procedureName).append("(");
+    for (int i = 0; i < parameters.length; i++) {
+        call.append(i == 0 ? "?" : ", ?");
+    }
+    call.append(")}");
+
+    try (CallableStatement cs = this.connect.getConnect().prepareCall(call.toString())) {
+        for (int i = 0; i < parameters.length; i++) {
+            cs.setString(i + 1, parameters[i]);
+        }
+        cs.execute();
+    } catch (Exception ex) {
+        Logger.getLogger(SQLConnectUnit.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
 
     // Hàm đóng kết nối
     public void Close() throws SQLException, Exception {

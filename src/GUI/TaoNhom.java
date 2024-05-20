@@ -3,18 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author ASUS
  */
 public class TaoNhom extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form TaoNhom
      */
     public TaoNhom() {
         initComponents();
+
     }
 
     /**
@@ -36,6 +37,7 @@ public class TaoNhom extends javax.swing.JFrame {
         scrpane_ThanhVien_TaoNhom = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btn_Xong_TaoNhom = new javax.swing.JButton();
+        btn_Taonhom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +124,15 @@ public class TaoNhom extends javax.swing.JFrame {
             }
         });
 
+        btn_Taonhom.setBackground(new java.awt.Color(0, 153, 153));
+        btn_Taonhom.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Taonhom.setText("Tạo");
+        btn_Taonhom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TaonhomActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_TaoNhomLayout = new javax.swing.GroupLayout(panel_TaoNhom);
         panel_TaoNhom.setLayout(panel_TaoNhomLayout);
         panel_TaoNhomLayout.setHorizontalGroup(
@@ -137,15 +148,17 @@ public class TaoNhom extends javax.swing.JFrame {
                             .addGroup(panel_TaoNhomLayout.createSequentialGroup()
                                 .addComponent(label_TenNhom_TaoNhom)
                                 .addGap(18, 18, 18)
-                                .addComponent(tf_TenNhom_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tf_TenNhom_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btn_Taonhom, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel_TaoNhomLayout.createSequentialGroup()
                                 .addComponent(label_ThanhVien_taoNhom)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel_TaoNhomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                                    .addComponent(tf_ThanhVien_TaoNhom))
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_ThanhVien_TaoNhom)))))
+                                    .addComponent(tf_ThanhVien_TaoNhom))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_ThanhVien_TaoNhom)))
                 .addContainerGap(127, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_TaoNhomLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -160,7 +173,9 @@ public class TaoNhom extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(panel_TaoNhomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_TenNhom_TaoNhom)
-                    .addComponent(tf_TenNhom_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_TaoNhomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tf_TenNhom_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Taonhom)))
                 .addGap(18, 18, 18)
                 .addGroup(panel_TaoNhomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_ThanhVien_TaoNhom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -193,12 +208,30 @@ public class TaoNhom extends javax.swing.JFrame {
 
     private void btn_Xong_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomActionPerformed
         // TODO add your handling code here:
+        //CongViecDAO cv1DAO= new CongViecDAO();
+        
     }//GEN-LAST:event_btn_Xong_TaoNhomActionPerformed
 
     private void btn_Xong_TaoNhomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomMouseClicked
+        
+        
         TaoCongViec tcv = new TaoCongViec();
         tcv.show();
     }//GEN-LAST:event_btn_Xong_TaoNhomMouseClicked
+
+    private void btn_TaonhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TaonhomActionPerformed
+        // TODO add your handling code here:
+      
+        
+         if(tf_TenNhom_TaoNhom.getText().equals("") )
+              {
+            JOptionPane.showMessageDialog(null, "Không được để trống thông tin");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Bạn đã tạo nhóm thành công");
+         }
+    
+    }//GEN-LAST:event_btn_TaonhomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +269,7 @@ public class TaoNhom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Taonhom;
     private javax.swing.JButton btn_ThanhVien_TaoNhom;
     private javax.swing.JButton btn_Xong_TaoNhom;
     private javax.swing.JTable jTable1;

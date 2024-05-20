@@ -73,6 +73,11 @@ public class DangKi extends javax.swing.JFrame {
                 btn_DangKi_DangKIMouseClicked(evt);
             }
         });
+        btn_DangKi_DangKI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangKi_DangKIActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_DangKiLayout = new javax.swing.GroupLayout(panel_DangKi);
         panel_DangKi.setLayout(panel_DangKiLayout);
@@ -148,12 +153,17 @@ public class DangKi extends javax.swing.JFrame {
         dn.show();
         dispose();
     }//GEN-LAST:event_btn_DangKi_DangKIMouseClicked
+
     private void btn_DangKi_DangKIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKi_DangKIActionPerformed
+        // TODO add your handling code here:
          NguoiDungDAO nd = new NguoiDungDAO();
         NguoiDungDTO nd1=nd.dangki(tf_Email_DangKi.getText(),tf_TenNgDung_Dangki.getText(),pwf_MatKhau_DangKi.getText());
         if(tf_Email_DangKi.getText().equals("")||tf_TenNgDung_Dangki.getText().equals("")||pwf_MatKhau_DangKi.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "Không được để trống thông tin");
+        }else {
+            if(nd1==null){
+                JOptionPane.showMessageDialog(null, "Email đã tồn tại");
         }
         else{
             JOptionPane.showMessageDialog(null,"Bạn đã đăng kí tài khoản thành công");
@@ -161,7 +171,9 @@ public class DangKi extends javax.swing.JFrame {
                 dispose();
                 return;
         }
-    }
+        }
+    }//GEN-LAST:event_btn_DangKi_DangKIActionPerformed
+
     /**
      * @param args the command line arguments
      */
