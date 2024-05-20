@@ -6,19 +6,56 @@ package GUI;
 
 import DTO.NhomDTO;
 import DAO.CongViecDAO;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author ASUS
  */
 public class TaoCongViec extends javax.swing.JFrame {
-
+    private Connection connection;
     /**
      * Creates new form TaoCongViec
      */
     public TaoCongViec() {
         initComponents();
+        connectToDatabase();
+
     }
+    private void connectToDatabase(){
+         // Kết nối đến cơ sở dữ liệu
+            try{
+               Class.forName("oracle.jdbc.driver.OracleDriver");
+               connection= DriverManager.getConnection("jdbc:oracle:thin:@lvlykatie:1521:orcl", "c##TICTAC", "tictac");
+            } catch (ClassNotFoundException | SQLException e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "khong the ket noi");
+                
+            }        
+    }
+     private void insertCongViec(String tenCV, String linhVuc, String moTa, String mucDoUuTien, String ngayBD, String ngayKT, String nguoiPT) {
+        String sql = "INSERT INTO CongViec (TenCV, LinhVuc, MoTa, MucDoUuTien, NgayBD, NgayKT, NguoiPT) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, tenCV);
+            ps.setString(2, linhVuc);
+            ps.setString(3, moTa);
+            ps.setString(4, mucDoUuTien);
+            ps.setString(5, ngayBD);
+            ps.setString(6, ngayKT);
+            ps.setString(7, nguoiPT);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Thêm công việc thành công");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm công việc");
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

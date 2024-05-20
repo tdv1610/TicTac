@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class NguoiDungDAO extends connection{
      SQLConnectUnit connect;
-      public static SQLConnection connection = new SQLConnection("c##sTICTAC", "123", "orcl");
+      public static SQLConnection connection = new SQLConnection("c##TICTAC", "tictac", "orcl");
     ;
     public NguoiDungDTO dangnhap(String TENND, String MATKHAU) {
         NguoiDungDTO nd = null;

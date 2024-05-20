@@ -14,12 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Types;
 import java.sql.CallableStatement; 
-/**
- *
- * @author VICTUS
- */
-public class CongViecDAO extends connection{
-    
 
-      
+
+public class CongViecDAO extends connection{
+  
 }
