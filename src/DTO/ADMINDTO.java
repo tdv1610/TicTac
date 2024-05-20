@@ -11,20 +11,20 @@ package DTO;
 public class ADMINDTO {
     private String emailAd;
     private String tenAd;
-    private String matKhauAd;
+    private String matKhau;
 
     public ADMINDTO() {
     }
 
-    public ADMINDTO(String emailAd, String tenAd, String matKhauAd) {
+    public ADMINDTO(String emailAd, String tenAd, String matKhau) {
         this.emailAd = emailAd;
         this.tenAd = tenAd;
-        this.matKhauAd = matKhauAd;
+        this.matKhau = matKhau;
     }
 
     @Override
     public String toString() {
-        return "ADMINDTO{" + "emailAd=" + emailAd + ", tenAd=" + tenAd + ", matKhauAd=" + matKhauAd + '}';
+        return "ADMINDTO{" + "emailAd=" + emailAd + ", tenAd=" + tenAd + ", matKhau=" + matKhau + '}';
     }
 
     public void setEmailAd(String emailAd) {
@@ -35,8 +35,8 @@ public class ADMINDTO {
         this.tenAd = tenAd;
     }
 
-    public void setMatKhauAd(String matKhauAd) {
-        this.matKhauAd = matKhauAd;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public String getEmailAd() {
@@ -47,9 +47,8 @@ public class ADMINDTO {
         return tenAd;
     }
 
-    public String getMatKhauAd() {
-        return matKhauAd;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-   
 }

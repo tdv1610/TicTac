@@ -9,45 +9,54 @@ package DTO;
  * @author VICTUS
  */
 public class NguoiDungDTO {
-    private String emailND, tenND, matKhauND;
+    private String EMAILND, TENND, MATKHAU;
 
-    public NguoiDungDTO(String emailND, String tenND, String matKhauND) {
-        this.emailND = emailND;
-        this.tenND = tenND;
-        this.matKhauND = matKhauND;
+    public NguoiDungDTO(String EMAILND, String TENND, String MATKHAU) {
+        this.EMAILND = EMAILND;
+        this.TENND = TENND;
+        this.MATKHAU = MATKHAU;
+       
     }
 
     public NguoiDungDTO() {
     }
 
-    @Override
-    public String toString() {
-        return "NguoiDungDTO{" + "emailND=" + emailND + ", tenND=" + tenND + ", matKhauND=" + matKhauND + '}';
-    }
-
-    public String getEmailND() {
-        return emailND;
-    }
-
-    public void setEmailND(String emailND) {
-        this.emailND = emailND;
-    }
-
-    public String getTenND() {
-        return tenND;
-    }
-
-    public void setTenND(String tenND) {
-        this.tenND = tenND;
-    }
-
-    public String getMatKhauND() {
-        return matKhauND;
-    }
-
-    public void setMatKhauND(String matKhauND) {
-        this.matKhauND = matKhauND;
-    }
+   
     
+
+    
+
+    public String getEMAILND() {
+        return EMAILND;
+    }
+
+    public void setEMAILND(String EMAILND) {
+        this.EMAILND = EMAILND;
+    }
+
+    public String getTENND() {
+        return TENND;
+    }
+
+    public void setTENND(String TENND) {
+        this.TENND = TENND;
+    }
+
+    public String getMATKHAU() {
+        return MATKHAU;
+    }
+
+    public void setMATKHAU(String MATKHAU) {
+        this.MATKHAU = MATKHAU;
+    }
+
+ 
+    
+ @Override
+    public String toString() {
+        return "NguoiDungDTO{" +  ", strEmail=" + EMAILND + ", strMatKhau=" + MATKHAU + ", strHoTen=" + TENND +   '}';
+    }
+
+ 
     
 }

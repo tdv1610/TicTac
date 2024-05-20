@@ -435,7 +435,7 @@ BEGIN
 END;
 
 set serveroutput on;
-execute  XEM_CONGVIEC_DA_LAM; 
+execute  XEM_CONGVIEC_DA_LAM 
 -------------------------------------------------------------------------------------------------------
 -- XEM CONG VIEC CO TRANG THAI DANG LAM
 CREATE OR REPLACE PROCEDURE pc_xemcvdanglam IS

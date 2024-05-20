@@ -4,6 +4,12 @@
  */
 package GUI;
 
+import DAO.NhomDAO;
+import DTO.NhomDTO;
+import javax.swing.JOptionPane;
+import static javax.swing.UIManager.getString;
+
+
 /**
  *
  * @author ASUS
@@ -16,7 +22,7 @@ public class TaoNhom extends javax.swing.JFrame {
     public TaoNhom() {
         initComponents();
     }
-
+public static String pMaNhom;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,11 +199,29 @@ public class TaoNhom extends javax.swing.JFrame {
 
     private void btn_Xong_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomActionPerformed
         // TODO add your handling code here:
+        if (tf_TenNhom_TaoNhom.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Chưa nhập tên nhóm");
+    } else {
+        // Create an instance of NhomDAO and attempt to add the group
+        NhomDAO nhomthem = new NhomDAO();
+        NhomDTO nhom = nhomthem.themnhom(tf_TenNhom_TaoNhom.getText(), DangNhap.pEmail);
+        
+        // Check the result and update the UI accordingly
+        if (nhom != null) {
+            JOptionPane.showMessageDialog(this, "Nhóm đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            // Open TaoCongViec window and close the current window
+            TaoCongViec tcv = new TaoCongViec();
+            tcv.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+       
     }//GEN-LAST:event_btn_Xong_TaoNhomActionPerformed
 
     private void btn_Xong_TaoNhomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomMouseClicked
-        TaoCongViec tcv = new TaoCongViec();
-        tcv.show();
+
     }//GEN-LAST:event_btn_Xong_TaoNhomMouseClicked
 
     /**
