@@ -4,10 +4,7 @@
  */
 package DAO;
 
-/**
- *
- * @author VICTUS
- */
+
 public class ThucHienDAO {
     
 }

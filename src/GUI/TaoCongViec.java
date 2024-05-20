@@ -3,59 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-
+import static javax.swing.UIManager.getString;
 import DTO.NhomDTO;
 import DAO.CongViecDAO;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import DAO.NhomDAO;
+import DTO.CongViecDTO;
+import java.util.Date;
 import javax.swing.JOptionPane;
-import java.sql.PreparedStatement;
 
 /**
  *
  * @author ASUS
  */
 public class TaoCongViec extends javax.swing.JFrame {
-    private Connection connection;
+
     /**
      * Creates new form TaoCongViec
      */
     public TaoCongViec() {
         initComponents();
-        connectToDatabase();
-
     }
-    private void connectToDatabase(){
-         // Kết nối đến cơ sở dữ liệu
-            try{
-               Class.forName("oracle.jdbc.driver.OracleDriver");
-               connection= DriverManager.getConnection("jdbc:oracle:thin:@lvlykatie:1521:orcl", "c##TICTAC", "tictac");
-            } catch (ClassNotFoundException | SQLException e){
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "khong the ket noi");
-                
-            }        
-    }
-     private void insertCongViec(String tenCV, String linhVuc, String moTa, String mucDoUuTien, String ngayBD, String ngayKT, String nguoiPT) {
-        String sql = "INSERT INTO CongViec (TenCV, LinhVuc, MoTa, MucDoUuTien, NgayBD, NgayKT, NguoiPT) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, tenCV);
-            ps.setString(2, linhVuc);
-            ps.setString(3, moTa);
-            ps.setString(4, mucDoUuTien);
-            ps.setString(5, ngayBD);
-            ps.setString(6, ngayKT);
-            ps.setString(7, nguoiPT);
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Thêm công việc thành công");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi thêm công việc");
-        }
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,6 +126,11 @@ public class TaoCongViec extends javax.swing.JFrame {
         btn_HoanThanh_TaoCV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_HoanThanh_TaoCVMouseClicked(evt);
+            }
+        });
+        btn_HoanThanh_TaoCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HoanThanh_TaoCVActionPerformed(evt);
             }
         });
 
@@ -294,6 +266,27 @@ public class TaoCongViec extends javax.swing.JFrame {
         TaoCongViec tcv = new TaoCongViec();
         tcv.show();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btn_HoanThanh_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_TaoCVActionPerformed
+        if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||combobox_MDUT_TaoCV.getSelectedItem() == null|| textarea_MoTa_TaoCV.getText().isEmpty()|| jDateChooser1.getDate() == null ||jDateChooser2.getDate() == null) {
+        JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin cần thiết");
+    } else {
+        // Create an instance of NhomDAO and attempt to add the group
+        CongViecDAO Themcv = new CongViecDAO();
+        CongViecDTO cv = Themcv.ThemCV(tf_TenCV_TaoCV.getText(), TaoNhom.pMaNhom, tf_LinhVuc_TaoCV.getText(), textarea_MoTa_TaoCV.getText(), (String) combobox_MDUT_TaoCV.getSelectedItem(), jDateChooser1.getDateFormatString(), jDateChooser2.getDateFormatString());
+        
+        // Check the result and update the UI accordingly
+        if (cv != null) {
+            JOptionPane.showMessageDialog(this, "Công việc đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            // Open TaoCongViec window and close the current window
+            TaoCongViec tcv = new TaoCongViec();
+            tcv.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tạo công viêc thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btn_HoanThanh_TaoCVActionPerformed
 
     /**
      * @param args the command line arguments

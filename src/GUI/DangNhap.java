@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-import GUI.AdminHomepage;
+
 import DAO.ADMINDAO;
 import DAO.connection;
 import DAO.NguoiDungDAO;
@@ -19,18 +19,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.*;
+
+
 /**
  *
  * @author ASUS
  */
 public class DangNhap extends javax.swing.JFrame {
-
+     Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    public static String pEmail;
+    public static String pTen;
+    public static String pmatkhau;
+    
+    public static String Email;
+    public static String HoTen;
+    public static String Matkhau;
     /**
      * Creates new form DN_DK
      */
     public DangNhap() {
-        initComponents();
-    }
+    initComponents();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,8 +84,23 @@ public class DangNhap extends javax.swing.JFrame {
         label_MatKhau_DangNhap.setText("Mật khẩu");
 
         tf_TenNgDung_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
+        tf_TenNgDung_DangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_TenNgDung_DangNhapActionPerformed(evt);
+            }
+        });
 
         pwf_MatKhau_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
+        pwf_MatKhau_DangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwf_MatKhau_DangNhapActionPerformed(evt);
+            }
+        });
+        btn_DangNhap_DangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DangNhap_DangNhapActionPerformed(evt);
+            }
+        });
 
         btn_QuenMatKhau_DangNhap.setBackground(new java.awt.Color(0, 102, 102));
         btn_QuenMatKhau_DangNhap.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -83,6 +109,11 @@ public class DangNhap extends javax.swing.JFrame {
         btn_QuenMatKhau_DangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QuenMatKhau_DangNhapMouseClicked(evt);
+            }
+        });
+        btn_QuenMatKhau_DangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_QuenMatKhau_DangNhapActionPerformed(evt);
             }
         });
 
@@ -156,7 +187,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(panel_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_TenNgDung_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_TenNgDung_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_MatKhau_DangNhap)
                     .addComponent(pwf_MatKhau_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,44 +226,57 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DangKi_DangNhapMouseClicked
 
     private void btn_DangNhap_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapMouseClicked
-        NhapEmail ne = new NhapEmail();
-        ne.show();
+        Homepage hp = new Homepage();
+        hp.show();
         dispose();
     }//GEN-LAST:event_btn_DangNhap_DangNhapMouseClicked
 
     private void btn_QuenMatKhau_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapMouseClicked
-        Homepage hp = new Homepage();
-        hp.show();
+        NhapEmail ne = new NhapEmail();
+        ne.show();
         dispose();
     }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
 
     private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
-        // TODO add your handling code here:
-         NguoiDungDAO nd = new NguoiDungDAO();
+    
+        pEmail = tf_TenNgDung_DangNhap.getText();
+        NguoiDungDAO nd = new NguoiDungDAO();
         NguoiDungDTO nd1=nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         ADMINDAO ad= new ADMINDAO();
         ADMINDTO ad1=ad.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         if (nd1==null&&ad1==null)
         {
-            JOptionPane.showMessageDialog(null, "Đăng nhập thất bại");
+            JOptionPane.showMessageDialog(null, "Email hoặc mật khẩu không đúng.");
 
         }
         else if(nd1!=null&&ad1==null)
         {
-            JOptionPane.showMessageDialog(null, "Chào người dùng, bạn đã đăng nhập thành công");
+            JOptionPane.showMessageDialog(null, "Chào người dùng, bạn đã đăng nhập thành công.");
             Homepage show = new Homepage();
             show.setVisible(true);
             dispose();
         }
         else if(nd1==null&&ad1!=null)
         {
-            JOptionPane.showMessageDialog(null, "Chào Admin, bạn đã đăng nhập thành công");
-            
+            JOptionPane.showMessageDialog(null, "Chào admin, bạn đã đăng nhập thành công.");
              new AdminHomepage().setVisible(true);
                 dispose();
                 return;
-        }
+        }                                                  
     }//GEN-LAST:event_btn_DangNhap_DangNhapActionPerformed
+
+    
+    private void pwf_MatKhau_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwf_MatKhau_DangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwf_MatKhau_DangNhapActionPerformed
+
+    private void btn_QuenMatKhau_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_QuenMatKhau_DangNhapActionPerformed
+
+    private void tf_TenNgDung_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TenNgDung_DangNhapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_TenNgDung_DangNhapActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,7 +305,6 @@ public class DangNhap extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -283,4 +326,8 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JPasswordField pwf_MatKhau_DangNhap;
     private javax.swing.JTextField tf_TenNgDung_DangNhap;
     // End of variables declaration//GEN-END:variables
+
+    private String getHashPassword(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+
 import DAO.NguoiDungDAO;
 import DTO.NguoiDungDTO;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -155,22 +157,22 @@ public class DangKi extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DangKi_DangKIMouseClicked
 
     private void btn_DangKi_DangKIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKi_DangKIActionPerformed
-        // TODO add your handling code here:
-         NguoiDungDAO nd = new NguoiDungDAO();
+        NguoiDungDAO nd = new NguoiDungDAO();
         NguoiDungDTO nd1=nd.dangki(tf_Email_DangKi.getText(),tf_TenNgDung_Dangki.getText(),pwf_MatKhau_DangKi.getText());
         if(tf_Email_DangKi.getText().equals("")||tf_TenNgDung_Dangki.getText().equals("")||pwf_MatKhau_DangKi.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(null, "Không được để trống thông tin");
-        }else {
-            if(nd1==null){
-                JOptionPane.showMessageDialog(null, "Email đã tồn tại");
+            JOptionPane.showMessageDialog(null, "Không để thông tin trống");
         }
         else{
-            JOptionPane.showMessageDialog(null,"Bạn đã đăng kí tài khoản thành công");
-            new DangNhap().setVisible(true);
+            if(nd1==null){
+                JOptionPane.showMessageDialog(null, "Email đã tồn tại");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Bạn đã đăng kí tài khoản thành công");
+                new DangNhap().setVisible(true);
                 dispose();
                 return;
-        }
+            }
         }
     }//GEN-LAST:event_btn_DangKi_DangKIActionPerformed
 

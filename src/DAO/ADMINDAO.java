@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
+
 import DTO.ADMINDTO;
+import java.util.ArrayList;
 import DAO.connection;
 import GUI.AdminHomepage;
 import java.sql.Connection;
@@ -11,16 +13,21 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
+/**
+ *
+ * @author Oracle
+ */
 public class ADMINDAO extends connection{
       SQLConnectUnit connect;
-      public static SQLConnection connection = new SQLConnection("c##TICTAC", "123", "orcl");
+      public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
+    ;
     
-       public ADMINDTO dangnhap(String TENAD, String MATKHAUAD) {
+    public ADMINDTO dangnhap(String EmailAD, String MATKHAUAD) {
         ADMINDTO ad = null;
         Connection con = null;
         PreparedStatement p = null;
         ResultSet rs = null;
-     try {
+ try {
               // Kết nối đến cơ sở dữ liệu
              con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
@@ -28,7 +35,7 @@ public class ADMINDAO extends connection{
             // Kiểm tra trong bảng admin
             String sqlAdmin = "SELECT * FROM AD WHERE EmailAd = ? AND matKhau = ?";
             p= con.prepareStatement(sqlAdmin);
-            p.setString(1, TENAD);
+            p.setString(1, EmailAD);
             p.setString(2, MATKHAUAD);
             rs = p.executeQuery();
 
@@ -36,7 +43,7 @@ public class ADMINDAO extends connection{
                 ad = new ADMINDTO();
                
                 ad.setEmailAd(rs.getString("EMAILAD"));
-                ad.setMatKhauAd(rs.getString("MATKHAU"));
+                ad.setMatKhau(rs.getString("MATKHAU"));
                 ad.setTenAd(rs.getString("TENAD"));
                 System.out.println("User found: " + ad.toString());
             } else {
@@ -60,3 +67,4 @@ public class ADMINDAO extends connection{
     return ad;
     }
 }
+
