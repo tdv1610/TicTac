@@ -20,7 +20,8 @@ import java.sql.CallableStatement;
  */
 public class AdminHomepage extends javax.swing.JFrame {
 private Connection connection;
-
+private String originalEmail;
+private String originalTenND;
     /**
      * Creates new form AdminHomepage
      */
@@ -103,17 +104,16 @@ private Connection connection;
         TF_tenND = new javax.swing.JTextField();
         btn_suaND = new javax.swing.JButton();
         btn_xoaND = new javax.swing.JButton();
-        btn_hoantac = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         label_tenAD = new javax.swing.JLabel();
         label_emailAD = new javax.swing.JLabel();
-        TF_tenAD = new javax.swing.JTextField();
-        TF_emaiAD = new javax.swing.JTextField();
         btn_DoiPass_TK = new javax.swing.JButton();
+        lb_gettenAD = new javax.swing.JLabel();
+        label_getEmailAD = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,7 +121,7 @@ private Connection connection;
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Quản lí người dùng");
@@ -137,7 +137,7 @@ private Connection connection;
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Tài khoản");
@@ -145,6 +145,11 @@ private Connection connection;
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -271,11 +276,9 @@ private Connection connection;
 
         TF_emailND.setBackground(new java.awt.Color(0, 153, 153));
         TF_emailND.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TF_emailND.setText("jTextField2");
 
         TF_tenND.setBackground(new java.awt.Color(0, 153, 153));
         TF_tenND.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TF_tenND.setText("jTextField3");
 
         btn_suaND.setBackground(new java.awt.Color(0, 51, 51));
         btn_suaND.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,10 +297,6 @@ private Connection connection;
                 btn_xoaNDActionPerformed(evt);
             }
         });
-
-        btn_hoantac.setBackground(new java.awt.Color(0, 51, 51));
-        btn_hoantac.setForeground(new java.awt.Color(255, 255, 255));
-        btn_hoantac.setText("Hoàn tác");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -321,9 +320,8 @@ private Connection connection;
                             .addComponent(TF_tenND))
                         .addGap(53, 53, 53)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_hoantac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_xoaND, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_suaND, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btn_suaND, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -338,7 +336,7 @@ private Connection connection;
                     .addComponent(tf_nhaptenNDcantim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -350,10 +348,9 @@ private Connection connection;
                             .addComponent(TF_tenND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btn_suaND)
-                        .addGap(9, 9, 9)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_xoaND)
-                        .addGap(9, 9, 9)
-                        .addComponent(btn_hoantac)))
+                        .addGap(9, 9, 9)))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
@@ -367,19 +364,6 @@ private Connection connection;
         label_emailAD.setForeground(new java.awt.Color(255, 255, 255));
         label_emailAD.setText("Email admin");
 
-        TF_tenAD.setBackground(new java.awt.Color(0, 153, 153));
-        TF_tenAD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TF_tenAD.setText("jTextField4");
-        TF_tenAD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TF_tenADActionPerformed(evt);
-            }
-        });
-
-        TF_emaiAD.setBackground(new java.awt.Color(0, 153, 153));
-        TF_emaiAD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TF_emaiAD.setText("jTextField5");
-
         btn_DoiPass_TK.setBackground(new java.awt.Color(0, 51, 51));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_DoiPass_TK.setForeground(new java.awt.Color(255, 255, 255));
@@ -389,6 +373,14 @@ private Connection connection;
                 btn_DoiPass_TKMouseClicked(evt);
             }
         });
+
+        lb_gettenAD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lb_gettenAD.setForeground(new java.awt.Color(255, 255, 255));
+        lb_gettenAD.setText("jLabel3");
+
+        label_getEmailAD.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        label_getEmailAD.setForeground(new java.awt.Color(255, 255, 255));
+        label_getEmailAD.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -401,9 +393,9 @@ private Connection connection;
                     .addComponent(label_tenAD))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TF_emaiAD, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(TF_tenAD))
-                .addGap(193, 193, 193))
+                    .addComponent(lb_gettenAD, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(label_getEmailAD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(327, 327, 327)
@@ -414,14 +406,14 @@ private Connection connection;
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label_tenAD)
-                    .addComponent(TF_tenAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(label_tenAD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_gettenAD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(42, 42, 42)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_emailAD)
-                    .addComponent(TF_emaiAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(label_emailAD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_getEmailAD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(459, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(307, 307, 307)
@@ -476,10 +468,6 @@ private Connection connection;
         jPanel4.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void TF_tenADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_tenADActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TF_tenADActionPerformed
-
     private void btn_DoiPass_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiPass_TKMouseClicked
         NhapEmail ne = new NhapEmail();
         ne.show();
@@ -503,6 +491,9 @@ private Connection connection;
         JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         return;
     }
+    // Lưu trữ thông tin ban đầu
+    originalEmail = email;
+    originalTenND = tenND;
 
     // Kết nối tới cơ sở dữ liệu
     connectToDatabase();
@@ -538,7 +529,7 @@ private Connection connection;
         JOptionPane.showMessageDialog(this, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btn_suaNDActionPerformed
-
+    
     private void btn_searchNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchNDActionPerformed
         // TODO add your handling code here:
         String email = tf_nhaptenNDcantim.getText();
@@ -609,6 +600,7 @@ private Connection connection;
     // Lấy email từ dòng được chọn
     DefaultTableModel model = (DefaultTableModel) table_dsND.getModel();
     String email = (String) model.getValueAt(selectedRow, 0); // Giả sử cột email là cột đầu tiên
+ 
 
     // Kết nối tới cơ sở dữ liệu
     connectToDatabase();
@@ -641,6 +633,10 @@ private Connection connection;
         JOptionPane.showMessageDialog(this, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btn_xoaNDActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -678,13 +674,10 @@ private Connection connection;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TF_emaiAD;
     private javax.swing.JTextField TF_emailND;
-    private javax.swing.JTextField TF_tenAD;
     private javax.swing.JTextField TF_tenND;
     private javax.swing.JButton btn_DX_TicTac;
     private javax.swing.JButton btn_DoiPass_TK;
-    private javax.swing.JButton btn_hoantac;
     private javax.swing.JButton btn_searchND;
     private javax.swing.JButton btn_suaND;
     private javax.swing.JButton btn_xoaND;
@@ -698,8 +691,10 @@ private Connection connection;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_emailAD;
+    private javax.swing.JLabel label_getEmailAD;
     private javax.swing.JLabel label_tenAD;
     private javax.swing.JLabel lb_emailND;
+    private javax.swing.JLabel lb_gettenAD;
     private javax.swing.JLabel lb_tenND;
     private javax.swing.JTable table_dsND;
     private javax.swing.JTextField tf_nhaptenNDcantim;
