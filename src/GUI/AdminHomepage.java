@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.CallableStatement; 
 
 /**
  *
@@ -214,6 +215,41 @@ private Connection connection;
         table_dsND.setBackground(new java.awt.Color(0, 153, 153));
         table_dsND.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null},
                 {null, null},
                 {null, null},
@@ -579,19 +615,16 @@ private Connection connection;
 
     if (connection != null) {
         try {
-            // Tạo câu lệnh SQL để xóa người dùng
-            String sql = "DELETE FROM NGUOIDUNG WHERE EMAILND = ?";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, email);
+            // Gọi procedure để xóa người dùng và các thông tin liên quan
+            String sql = "{call pc_xoaND(?)}";
+            CallableStatement cstmt = connection.prepareCall(sql);
+            cstmt.setString(1, email);
 
-            // Thực thi câu lệnh xóa
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa người dùng thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-                model.removeRow(selectedRow); // Xóa dòng khỏi bảng
-            } else {
-                JOptionPane.showMessageDialog(this, "Không tìm thấy người dùng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
+            // Thực thi procedure
+            cstmt.execute();
+
+            JOptionPane.showMessageDialog(this, "Xóa người dùng thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            model.removeRow(selectedRow); // Xóa dòng khỏi bảng
 
         } catch (SQLException ex) {
             ex.printStackTrace();
