@@ -56,8 +56,8 @@ public class Homepage extends javax.swing.JFrame {
             int row = table_ThongTinNhom_NCT.getSelectedRow();
             if (row >= 0) {
                 String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
-                ChiTietNhom nhom = new ChiTietNhom();
-                nhom.show();
+                ChiTietNhom Chitiet = new ChiTietNhom();
+                Chitiet.show();
                 dispose();
                 
             }
@@ -964,6 +964,26 @@ public class Homepage extends javax.swing.JFrame {
 
     private void btn_TimNhom_NCtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimNhom_NCtActionPerformed
         // TODO add your handling code here:
+        String tennhomcantim = tf_TimNhom_NCT.getText();
+        // Kiểm tra nếu email không rỗng
+        if (tennhomcantim.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập email để tìm kiếm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
+        model.setRowCount(0);
+        
+        NhomDAO tim = new NhomDAO();
+        String tennhomcan = tim.timnhom(tennhomcantim);
+        
+        if(tennhomcan != null){
+            model.addRow(new Object[]{tennhomcan, tim.layemailtruongnhom(tennhomcan)});
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_TimNhom_NCtActionPerformed
 
     private void btn_TK_TicTacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TK_TicTacMouseClicked
@@ -1022,9 +1042,9 @@ public class Homepage extends javax.swing.JFrame {
 
     private void btn_sua_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_NCTActionPerformed
         // TODO add your handling code here:
-        String tennhom = tf_tennhom_homepage.getText();
+        String tennhommoi = tf_tennhom_homepage.getText();
         NhomDAO nhomDAO = new NhomDAO();
-    if (tennhom.isEmpty()) {
+        if (tennhommoi.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         return;
     }
@@ -1035,12 +1055,12 @@ public class Homepage extends javax.swing.JFrame {
     }
 
     // Kiểm tra tên nhóm trùng
-    if (nhomDAO.kiemTraTenNhomTrung(tennhom)) {
+    if (nhomDAO.kiemTraTenNhomTrung(tennhommoi)) {
         JOptionPane.showMessageDialog(this, "Tên nhóm đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    boolean suaThanhCong = nhomDAO.suaNhom(manhom, tennhom);
+    boolean suaThanhCong = nhomDAO.suaNhom(manhom, tennhommoi);
 
     if (suaThanhCong) {
         JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
@@ -1048,7 +1068,7 @@ public class Homepage extends javax.swing.JFrame {
         int selectedRow = table_ThongTinNhom_NCT.getSelectedRow();
         if (selectedRow >= 0) {
             DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-            model.setValueAt(tennhom, selectedRow, 0); // Cập nhật giá trị trong mô hình bảng
+            model.setValueAt(tennhommoi, selectedRow, 0); // Cập nhật giá trị trong mô hình bảng
         }
     } else {
         JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -1061,6 +1081,30 @@ public class Homepage extends javax.swing.JFrame {
 
     private void btn_roinhom_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_roinhom_NCTActionPerformed
         // TODO add your handling code here:
+        int selectedRow = table_ThongTinNhom_NCT.getSelectedRow();
+
+        // Kiểm tra nếu không có dòng nào được chọn
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một người dùng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lấy email từ dòng được chọn
+        DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
+        String ten = (String) model.getValueAt(selectedRow, 0);
+        String emailtv = (String) model.getValueAt(selectedRow, 1);
+            NhomDAO xoaTV = new NhomDAO();
+            String MA = xoaTV.laymanhom(ten);
+            NguoiDung_NhomDAO nd = new NguoiDung_NhomDAO();
+            boolean dung = nd.xoathanhvien(DangNhap.pEmail, MA);
+
+            if (dung) {
+                model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(this, "Rời hóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            }   
+            else {
+                JOptionPane.showMessageDialog(this, "Không thể rời nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_btn_roinhom_NCTActionPerformed
 
     private void btn_themcongviec_NCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTMouseClicked
@@ -1076,8 +1120,8 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) table_themtv.getModel();
     String email = tf_thanhvien_homepage.getText();
-    NhomDAO nhomDAO = new NhomDAO();
-    String manhom = nhomDAO.laymanhom(tf_tennhom_homepage.getText());
+    NhomDAO laymanh = new NhomDAO();
+    String ma = laymanh.laymanhom(tf_tennhom_homepage.getText());
     model.setRowCount(0);
 
     if (email.isEmpty()) {
@@ -1090,7 +1134,7 @@ public class Homepage extends javax.swing.JFrame {
             return;
         }
 
-        NguoiDung_NhomDTO themtv = tv.themthanhvien(email, manhom);
+        NguoiDung_NhomDTO themtv = tv.themthanhvien(email, ma);
 
         if (themtv != null) {
             // Kiểm tra xem thành viên đã tồn tại trong bảng chưa
@@ -1119,7 +1163,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_thanhvien_homepageActionPerformed
 
     private void btn_Xoanhom_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoanhom_NCTActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
         int selectedRow = table_ThongTinNhom_NCT.getSelectedRow();
 
         // Kiểm tra nếu không có dòng nào được chọn
@@ -1130,16 +1174,16 @@ public class Homepage extends javax.swing.JFrame {
 
         // Lấy email từ dòng được chọn
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-        String tennhom = (String) model.getValueAt(selectedRow, 0);
-        String email = (String) model.getValueAt(selectedRow, 1);
-        if (email != null && email.equals(DangNhap.pEmail)) {
+        String ten = (String) model.getValueAt(selectedRow, 0);
+        String emailtv = (String) model.getValueAt(selectedRow, 1);
+        if (emailtv != null && emailtv.equals(DangNhap.pEmail)) {
             NhomDAO xoa = new NhomDAO();
-            String MANHOM = xoa.laymanhom(tennhom);
-            boolean success = xoa.xoanhom(MANHOM); // Thử xóa nhóm
+            String MA = xoa.laymanhom(ten);
+            boolean success = xoa.xoanhom(MA); // Thử xóa nhóm
 
             if (success) {
-                JOptionPane.showMessageDialog(this, "Xóa nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                 model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(this, "Xóa nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             }   
             else {
                 JOptionPane.showMessageDialog(this, "Không thể xóa nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);

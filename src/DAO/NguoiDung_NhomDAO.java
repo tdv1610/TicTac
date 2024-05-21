@@ -94,4 +94,22 @@ public class NguoiDung_NhomDAO extends connection{
         return danhSachNhom;
     }
 
+    public boolean xoathanhvien(String EMAILND, String MANHOM) {
+    try (Connection con = getConnection();
+         CallableStatement cstmt = con.prepareCall("{CALL pc_xoatvvkhoinhom(?, ?, ?)}")) {
+        
+        cstmt.setString(1, EMAILND);
+        cstmt.setString(2, MANHOM);
+        cstmt.registerOutParameter(3, java.sql.Types.VARCHAR);
+        cstmt.execute();
+
+        String result = cstmt.getString(3);
+
+        return "SUCCESS".equals(result); // So sánh kết quả trả về với "SUCCESS"
+    }
+    catch (SQLException ex) {
+        ex.printStackTrace();
+        return false;
+    }
+}
 }

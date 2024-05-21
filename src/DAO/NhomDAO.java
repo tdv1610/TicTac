@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.lang.model.util.Types;
+import javax.swing.JOptionPane;
 
 /**
  * @author Oracle
@@ -245,6 +246,49 @@ public class NhomDAO extends connection {
             if (con != null) con.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+}
+
+    public String timnhom(String tennhom) {
+    Connection con = null;
+    PreparedStatement pre = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        // Tạo câu lệnh SQL để tìm kiếm nhóm theo tên nhóm
+        String sql = "SELECT * FROM NHOM WHERE TENNHOM = ?";
+        pre = con.prepareStatement(sql);
+        pre.setString(1, tennhom);
+
+        // Thực thi câu lệnh truy vấn
+        rs = pre.executeQuery();
+
+        // Nếu tìm thấy nhóm, trả về tên nhóm
+        if (rs.next()) {
+            String tenNhomTimThay = rs.getString("TENNHOM");
+            return tenNhomTimThay;
+        } else {
+            return null;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Lỗi khi tìm kiếm nhóm! Chi tiết: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    } finally {
+        // Đóng kết nối sau khi thao tác xong
+        try {
+            if (rs != null) rs.close();
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 }
