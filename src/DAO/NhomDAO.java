@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.lang.model.util.Types;
 
 /**
  * @author Oracle
@@ -125,30 +126,65 @@ public class NhomDAO extends connection {
         return nhom;
    }
     
-    public boolean suaNhom(String maNhom, String tenNhom) {
-        Connection con = null;
-        PreparedStatement pre = null;
+    public boolean suaNhom(String maNhom, String tenNhomMoi) {
+    Connection con = null;
+    PreparedStatement pre = null;
 
-        try {
-            con = getConnection();
-            String sql = "UPDATE NHOM SET TENNHOM = ? WHERE MANHOM = ?";
-            pre = con.prepareStatement(sql);
-            pre.setString(1, tenNhom);
-            pre.setString(2, maNhom);
+    try {
+        con = getConnection();
+        String sql = "UPDATE NHOM SET TENNHOM = ? WHERE MANHOM = ?";
+        pre = con.prepareStatement(sql);
+        pre.setString(1, tenNhomMoi);
+        pre.setString(2, maNhom);
 
-            int rowsUpdated = pre.executeUpdate();
-            return rowsUpdated > 0;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (pre != null) pre.close();
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        System.out.println("Executing query: " + sql);
+        System.out.println("With parameters: TENNHOM = " + tenNhomMoi + ", MANHOM = " + maNhom);
+
+        int rowsUpdated = pre.executeUpdate();
+        System.out.println("Rows updated: " + rowsUpdated);
+        return rowsUpdated > 0; // Trả về true nếu có dòng được cập nhật
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
         return false;
+    } finally {
+        try {
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+}
+
     
+    public boolean kiemTraTenNhomTrung(String tenNhom) {
+    Connection con = null;
+    PreparedStatement pre = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();
+        String sql = "SELECT COUNT(*) FROM NHOM WHERE TENNHOM = ?";
+        pre = con.prepareStatement(sql);
+        pre.setString(1, tenNhom);
+        rs = pre.executeQuery();
+
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            return count > 0;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return false;
+}
 }

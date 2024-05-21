@@ -146,6 +146,36 @@ public class NguoiDungDAO extends connection{
         return nd;
     }
     
+    public boolean kiemTraNguoiDung(String email) {
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String sql = "SELECT COUNT(*) FROM NGUOIDUNG WHERE EMAILND = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, email);
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
 }
 
 

@@ -24,13 +24,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Homepage extends javax.swing.JFrame {
 
+    private String selectedMaNhom;
     /**
      * Creates new form Homepage
      */
     public Homepage() {
         initComponents();
         thongtinnhom();
-        addTableClickListener();
+        addTableClick2Listener();
+        addTableClick1Listener();
     }
     
     private void thongtinnhom() {
@@ -44,9 +46,10 @@ public class Homepage extends javax.swing.JFrame {
             model.addRow(new Object[]{nhom.getTenNhom()});
         }
     }
-    private void addTableClickListener() {
+    private void addTableClick2Listener() {
     table_ThongTinNhom_NCT.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_ThongTinNhom_NCT.getSelectedRow();
             if (row >= 0) {
                 String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
@@ -56,8 +59,35 @@ public class Homepage extends javax.swing.JFrame {
                 
             }
         }
+        }
     });
 }
+    
+    private void addTableClick1Listener() {
+        table_ThongTinNhom_NCT.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) { // Kiểm tra xem có phải click một lần không
+                    int row = table_ThongTinNhom_NCT.getSelectedRow();
+                    if (row >= 0) {
+                        String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                        tf_tennhom_homepage.setText(tennhom);
+
+                        // Lấy mã nhóm dựa trên tên nhóm đã chọn
+                        NhomDAO nhomDAO = new NhomDAO();
+                        List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
+                        for (NhomDTO nhom : danhSachNhom) {
+                            if (nhom.getTenNhom().equals(tennhom)) {
+                                selectedMaNhom = nhom.getMaNhom();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
 
 
 
@@ -545,10 +575,17 @@ public class Homepage extends javax.swing.JFrame {
             new String [] {
                 "Tên nhóm"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table_ThongTinNhom_NCT.setColumnSelectionAllowed(true);
         table_ThongTinNhom_NCT.setShowGrid(false);
-        table_ThongTinNhom_NCT.setShowVerticalLines(false);
         scrpane_DanhSachNhom_NCT.setViewportView(table_ThongTinNhom_NCT);
         table_ThongTinNhom_NCT.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -986,12 +1023,19 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String tennhom = tf_tennhom_homepage.getText();
-    
+
     if (tennhom.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         return;
     } else {
         NhomDAO nhomDAO = new NhomDAO();
+        
+        // Kiểm tra tên nhóm trùng
+        if (nhomDAO.kiemTraTenNhomTrung(tennhom)) {
+            JOptionPane.showMessageDialog(this, "Tên nhóm đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
 
         if (!danhSachNhom.isEmpty()) {
@@ -1038,39 +1082,43 @@ public class Homepage extends javax.swing.JFrame {
     private void btn_themthanhvien_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themthanhvien_NCTActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) table_themtv.getModel();
-        String email = tf_thanhvien_homepage.getText();
-        NhomDAO nhom = new NhomDAO();
-        String manhom = nhom.laymanhom(tf_tennhom_homepage.getText());
+    String email = tf_thanhvien_homepage.getText();
+    NhomDAO nhomDAO = new NhomDAO();
+    String manhom = nhomDAO.laymanhom(tf_tennhom_homepage.getText());
+    model.setRowCount(0);
 
-        if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Chưa nhập tên thành viên nhóm");
+    if (email.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Chưa nhập tên thành viên nhóm");
+    } else {
+        NguoiDungDAO kiemtra = new NguoiDungDAO();
+        NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
+        if (!kiemtra.kiemTraNguoiDung(email)) {
+            JOptionPane.showMessageDialog(this, "Người dùng không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        else {
-            NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
-            NguoiDung_NhomDTO themtv = tv.themthanhvien(email,manhom );
 
-            if (themtv != null) {
-                // Kiểm tra xem thành viên đã tồn tại trong bảng chưa
-                boolean isExist = false;
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    Object value = model.getValueAt(i, 0); // Lấy giá trị của cột đầu tiên
-                    if (value != null && value.toString().equals(themtv.getEmailND())) {
-                        isExist = true;
-                        break;
-                    }
-                }
-                if (!isExist) {
-                    model.insertRow(0, new Object[]{themtv.getEmailND(), '2'});
+        NguoiDung_NhomDTO themtv = tv.themthanhvien(email, manhom);
 
-                }
-                else {
-                    JOptionPane.showMessageDialog(this, "Thành viên đã tồn tại trong nhóm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        if (themtv != null) {
+            // Kiểm tra xem thành viên đã tồn tại trong bảng chưa
+            boolean isExist = false;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object value = model.getValueAt(i, 0); // Lấy giá trị của cột đầu tiên
+                if (value != null && value.toString().equals(email)) {
+                    isExist = true;
+                    break;
                 }
             }
-            else {
-                JOptionPane.showMessageDialog(this, "Người dùng không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            if (!isExist) {
+                model.insertRow(0, new Object[]{email});
+                JOptionPane.showMessageDialog(this, "Thêm thành viên thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Thành viên đã tồn tại trong nhóm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thành viên thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+    }
     }//GEN-LAST:event_btn_themthanhvien_NCTActionPerformed
 
     private void tf_thanhvien_homepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_thanhvien_homepageActionPerformed
