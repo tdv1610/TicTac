@@ -119,7 +119,7 @@ public class NguoiDungDAO extends connection{
             con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
 
-            String sql = "delete * from NGUOIDUNG where TENND = ? AND EMAIL = ?";
+            String sql = "delete * from NGUOIDUNG where TENND = ? AND EMAILND = ?";
             pre = con.prepareStatement(sql);
             pre.setString(1, TENND);
             pre.setString(2, EMAIL);
@@ -151,7 +151,58 @@ public class NguoiDungDAO extends connection{
         }
 
         return nd;   
+}public NguoiDungDTO getUserByEmail(String EMAIL) {
+        
+    NguoiDungDTO nd = null;
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();  // Get the database connection
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT * from NGUOIDUNG where EMAILND = ?";
+            pre = con.prepareStatement(sql);
+          
+            pre.setString(1, EMAIL);
+            
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                nd = new NguoiDungDTO();
+                nd.setTENND(rs.getString("EMAIL"));
+                nd.setEMAILND(rs.getString("TENND"));
+                nd.setMATKHAU(rs.getString("MATKHAU"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+return nd;
 }
+    public void updatePassword( String Email) {
+        String query = "UPDATE NGUOIDUNG SET MATKHAU= ? WHERE EMAILND = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, Email);
+         
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
 
