@@ -241,9 +241,9 @@ public class DangNhap extends javax.swing.JFrame {
     
         pEmail = tf_TenNgDung_DangNhap.getText();
         NguoiDungDAO nd = new NguoiDungDAO();
-        NguoiDungDTO nd1=nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
-        ADMINDAO ad= new ADMINDAO();
-        ADMINDTO ad1=ad.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
+        NguoiDungDTO nd1 = nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
+        ADMINDAO ad = new ADMINDAO();
+        ADMINDTO ad1 = ad.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         if (nd1==null&&ad1==null)
         {
             JOptionPane.showMessageDialog(null, "Email hoặc mật khẩu không đúng.");

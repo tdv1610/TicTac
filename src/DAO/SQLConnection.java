@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import java.sql.CallableStatement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,15 +16,14 @@ import java.sql.Connection;
 
 /**
  *
- * @author Oracle
+ * @author VICTUS
  */
 public class SQLConnection {
-
     String Username = "";
     String Password = "";
     String Sid = "";
     
-    Connection connect = null;
+    connection connect = null;
     Statement statement = null;
     ResultSet resultSet = null;
 
@@ -43,7 +43,7 @@ public class SQLConnection {
         }
     }
     
-    public Connection getConnect() throws Exception {
+    public connection getConnect() throws Exception {
 //        nếu connection null thì khởi tạo mới
         if (this.connect == null) {
             driveTest();    
@@ -54,14 +54,14 @@ public class SQLConnection {
 
             try{
 //                tạo connet thông qua url
-                this.connect = DriverManager.getConnection(url, this.Username, this.Password);
+                this.connect = (connection) DriverManager.getConnection(url, this.Username, this.Password);
             }        
             catch (SQLException e) {
                 throw new Exception("không thể kết nối tới Database" + url +e.getMessage());
             }
         }
         
-        return this.connect;
+        return (connection) this.connect;
     }
     
     //hàm đóng kết nối
@@ -83,5 +83,8 @@ public class SQLConnection {
     Object prepareStatement(String toString) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    CallableStatement prepareCall(String call_THEM_CONGVIEC______) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
