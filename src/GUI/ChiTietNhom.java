@@ -4,6 +4,16 @@
  */
 package GUI;
 
+import DAO.NhomDAO;
+import DAO.ThucHienDAO;
+import DTO.PhanCongDTO;
+import DTO.ThucHienDTO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ASUS
@@ -15,7 +25,22 @@ public class ChiTietNhom extends javax.swing.JFrame {
      */
     public ChiTietNhom() {
         initComponents();
+        thongTinPhanCong();
     }
+    
+    private void thongTinPhanCong() {
+    ThucHienDAO thuchien = new ThucHienDAO();
+    NhomDAO nhom = new NhomDAO();
+    String manhom = nhom.laymanhom(tf_tennhom_ChiTietNhom.getText());
+    List<PhanCongDTO> danhSachPhanCong = thuchien.layDanhSachPhanCongTrongNhom(manhom);
+
+    DefaultTableModel model = (DefaultTableModel) table_DanhSachPhanCong.getModel();
+    model.setRowCount(0); // Clear all existing rows in the table
+
+    for(PhanCongDTO phanCong : danhSachPhanCong) {
+        model.addRow(new Object[]{phanCong.getTenCV(), phanCong.getEmailThanhVien(), phanCong.getTrangThai()});
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,10 +53,10 @@ public class ChiTietNhom extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_tennhom_ChiTietNhom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         scrpane_ThanhVien_TaoNhom = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_DanhSachPhanCong = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,12 +67,12 @@ public class ChiTietNhom extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tên nhóm");
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 153));
-        jTextField1.setText("Tên nhóm");
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tf_tennhom_ChiTietNhom.setBackground(new java.awt.Color(0, 153, 153));
+        tf_tennhom_ChiTietNhom.setText("Ch?y ?? án sml");
+        tf_tennhom_ChiTietNhom.setBorder(null);
+        tf_tennhom_ChiTietNhom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tf_tennhom_ChiTietNhomActionPerformed(evt);
             }
         });
 
@@ -55,8 +80,8 @@ public class ChiTietNhom extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Danh sách phân công");
 
-        jTable1.setBackground(new java.awt.Color(0, 153, 153));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_DanhSachPhanCong.setBackground(new java.awt.Color(0, 153, 153));
+        table_DanhSachPhanCong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -93,7 +118,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
                 "Tên công việc", "Tên người phụ trách", "Trạng thái"
             }
         ));
-        scrpane_ThanhVien_TaoNhom.setViewportView(jTable1);
+        scrpane_ThanhVien_TaoNhom.setViewportView(table_DanhSachPhanCong);
 
         jButton1.setBackground(new java.awt.Color(0, 51, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -113,7 +138,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tf_tennhom_ChiTietNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,7 +152,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_tennhom_ChiTietNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -151,9 +176,9 @@ public class ChiTietNhom extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tf_tennhom_ChiTietNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tennhom_ChiTietNhomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tf_tennhom_ChiTietNhomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,8 +220,8 @@ public class ChiTietNhom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JScrollPane scrpane_ThanhVien_TaoNhom;
+    private javax.swing.JTable table_DanhSachPhanCong;
+    private javax.swing.JTextField tf_tennhom_ChiTietNhom;
     // End of variables declaration//GEN-END:variables
 }

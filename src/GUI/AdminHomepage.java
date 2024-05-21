@@ -4,23 +4,18 @@
  */
 package GUI;
 
-import DTO.ADMINDTO;
-import static GUI.DangNhap.pEmail;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.net.URL;
+import java.sql.Connection;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.CallableStatement; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 
 
 /**
@@ -28,12 +23,62 @@ import javax.swing.JPanel;
  * @author ASUS
  */
 public class AdminHomepage extends javax.swing.JFrame {
+    private Connection connection;
 
     /**
      * Creates new form AdminHomepage
      */
     public AdminHomepage() {
         initComponents();
+        connectToDatabase();
+        loadUserData();
+        addTableClickListener();
+    }
+    
+    private void connectToDatabase(){
+         // Kết nối đến cơ sở dữ liệu
+            try{
+               Class.forName("oracle.jdbc.driver.OracleDriver");
+               connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "c##tictac", "tictac");
+            } catch (ClassNotFoundException | SQLException e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "ko the ket noi dc");
+                
+            }    
+    }
+    
+    private void loadUserData(){
+         try {
+            String sql = "SELECT EMAILND, TENND FROM NGUOIDUNG";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) table_dsND.getModel();
+            model.setRowCount(0);
+
+            while (resultSet.next()) {
+                String email = resultSet.getString("EMAILND");
+                String tenND = resultSet.getString("TENND");
+                model.addRow(new Object[]{email, tenND});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi lấy dữ liệu người dùng!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void addTableClickListener() {
+        table_dsND.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = table_dsND.getSelectedRow();
+                if (row >= 0) {
+                    String email = (String) table_dsND.getValueAt(row, 0);
+                    String tenND = (String) table_dsND.getValueAt(row, 1);
+                    TF_emailND.setText(email);
+                    TF_tenND.setText(tenND);
+                }
+            }
+        });
     }
 
     /**
@@ -53,17 +98,16 @@ public class AdminHomepage extends javax.swing.JFrame {
         btn_DX_TicTac = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        tf_nhaptenNDcantim = new javax.swing.JTextField();
+        btn_searchND = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_dsND = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        TF_emailND = new javax.swing.JTextField();
+        TF_tenND = new javax.swing.JTextField();
+        btn_suaND = new javax.swing.JButton();
+        btn_xoaND = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -167,13 +211,18 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
-        jTextField1.setBackground(new java.awt.Color(0, 153, 153));
+        tf_nhaptenNDcantim.setBackground(new java.awt.Color(0, 153, 153));
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 153));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
+        btn_searchND.setBackground(new java.awt.Color(0, 153, 153));
+        btn_searchND.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
+        btn_searchND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchNDActionPerformed(evt);
+            }
+        });
 
-        jTable1.setBackground(new java.awt.Color(0, 153, 153));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_dsND.setBackground(new java.awt.Color(0, 153, 153));
+        table_dsND.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -184,7 +233,7 @@ public class AdminHomepage extends javax.swing.JFrame {
                 "Email", "Tên người dùng"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_dsND);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,25 +243,31 @@ public class AdminHomepage extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tên người dùng");
 
-        jTextField2.setBackground(new java.awt.Color(0, 153, 153));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setText("jTextField2");
+        TF_emailND.setBackground(new java.awt.Color(0, 153, 153));
+        TF_emailND.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        TF_emailND.setText("jTextField2");
 
-        jTextField3.setBackground(new java.awt.Color(0, 153, 153));
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField3.setText("jTextField3");
+        TF_tenND.setBackground(new java.awt.Color(0, 153, 153));
+        TF_tenND.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        TF_tenND.setText("jTextField3");
 
-        jButton5.setBackground(new java.awt.Color(0, 51, 51));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Sửa");
+        btn_suaND.setBackground(new java.awt.Color(0, 51, 51));
+        btn_suaND.setForeground(new java.awt.Color(255, 255, 255));
+        btn_suaND.setText("Sửa");
+        btn_suaND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaNDActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(0, 51, 51));
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Xóa");
-
-        jButton7.setBackground(new java.awt.Color(0, 51, 51));
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Hoàn tác");
+        btn_xoaND.setBackground(new java.awt.Color(0, 51, 51));
+        btn_xoaND.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoaND.setText("Xóa");
+        btn_xoaND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaNDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -222,9 +277,9 @@ public class AdminHomepage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(140, 140, 140)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_nhaptenNDcantim, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_searchND, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,13 +290,14 @@ public class AdminHomepage extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                            .addComponent(jTextField3))
+                            .addComponent(TF_emailND, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(TF_tenND)
+                                .addGap(84, 84, 84)))
                         .addGap(53, 53, 53)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_suaND, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_xoaND, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -249,26 +305,24 @@ public class AdminHomepage extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_searchND)
+                    .addComponent(tf_nhaptenNDcantim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(9, 9, 9)
-                        .addComponent(jButton6)
-                        .addGap(9, 9, 9)
-                        .addComponent(jButton7)))
+                            .addComponent(TF_emailND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_suaND)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(TF_tenND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xoaND))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
@@ -411,6 +465,156 @@ public class AdminHomepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btn_suaNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaNDActionPerformed
+        // TODO add your handling code here:
+        String email = TF_emailND.getText();
+        String tenND = TF_tenND.getText();
+
+    // Kiểm tra nếu các JTextField không rỗng
+        if (email.isEmpty() || tenND.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Kết nối tới cơ sở dữ liệu
+    connectToDatabase();
+
+    if (connection != null) {
+        try {
+            // Tạo câu lệnh SQL để cập nhật tên người dùng
+            String sql = "UPDATE NGUOIDUNG SET TENND = ? WHERE EMAILND = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, tenND);
+            pstmt.setString(2, email);
+
+            // Thực thi câu lệnh cập nhật
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                loadUserData(); // Refresh dữ liệu trên table_dsND
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy người dùng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật thông tin! Chi tiết: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                // Đóng kết nối sau khi thao tác xong
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btn_suaNDActionPerformed
+
+    private void btn_searchNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchNDActionPerformed
+        // TODO add your handling code here:
+        String email = tf_nhaptenNDcantim.getText();
+
+    // Kiểm tra nếu email không rỗng
+    if (email.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập email để tìm kiếm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Kết nối tới cơ sở dữ liệu
+    connectToDatabase();
+
+    if (connection != null) {
+        try {
+            // Tạo câu lệnh SQL để tìm kiếm người dùng theo email
+            String sql = "SELECT * FROM NGUOIDUNG WHERE EMAILND = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, email);
+
+            // Thực thi câu lệnh truy vấn
+            ResultSet rs = pstmt.executeQuery();
+
+            // Xóa dữ liệu cũ trên bảng
+            DefaultTableModel model = (DefaultTableModel) table_dsND.getModel();
+            model.setRowCount(0);
+
+            // Nếu tìm thấy người dùng, thêm vào bảng
+            if (rs.next()) {
+                Object[] row = {
+                    rs.getString("EMAILND"),
+                    rs.getString("TENND"),
+                    // Thêm các cột khác nếu cần
+                };
+                model.addRow(row);
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy người dùng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi tìm kiếm người dùng! Chi tiết: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                // Đóng kết nối sau khi thao tác xong
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    } 
+    else {
+        JOptionPane.showMessageDialog(this, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    
+    }//GEN-LAST:event_btn_searchNDActionPerformed
+
+}
+    private void btn_xoaNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaNDActionPerformed
+        // TODO add your handling code hereint
+        // Lấy dòng được chọn trong bảng
+    int selectedRow = table_dsND.getSelectedRow();
+
+    // Kiểm tra nếu không có dòng nào được chọn
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một người dùng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Lấy email từ dòng được chọn
+    DefaultTableModel model = (DefaultTableModel) table_dsND.getModel();
+    String email = (String) model.getValueAt(selectedRow, 0); // Giả sử cột email là cột đầu tiên
+
+    // Kết nối tới cơ sở dữ liệu
+    connectToDatabase();
+
+    if (connection != null) {
+        try {
+            // Gọi procedure để xóa người dùng và các thông tin liên quan
+            String sql = "{call XOA_NGUOIDUNG (?)}";
+            CallableStatement cstmt = connection.prepareCall(sql);
+            cstmt.setString(1, email);
+
+            // Thực thi procedure
+            cstmt.execute();
+
+            JOptionPane.showMessageDialog(this, "Xóa người dùng thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            model.removeRow(selectedRow); // Xóa dòng khỏi bảng
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi xóa người dùng! Chi tiết: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                // Đóng kết nối sau khi thao tác xong
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btn_xoaNDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -438,10 +642,8 @@ public class AdminHomepage extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        
-
         java.awt.EventQueue.invokeLater(new Runnable() {
+            
             public void run() {
                 try {
                     new AdminHomepage().setVisible(true);
@@ -453,14 +655,15 @@ public class AdminHomepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TF_emailND;
+    private javax.swing.JTextField TF_tenND;
     private javax.swing.JButton btn_DX_TicTac;
     private javax.swing.JButton btn_DoiPass_TK;
+    private javax.swing.JButton btn_searchND;
+    private javax.swing.JButton btn_suaND;
+    private javax.swing.JButton btn_xoaND;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -472,11 +675,9 @@ public class AdminHomepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable table_dsND;
+    private javax.swing.JTextField tf_nhaptenNDcantim;
     // End of variables declaration//GEN-END:variables
 }

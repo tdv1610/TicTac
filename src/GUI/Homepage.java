@@ -4,6 +4,17 @@
  */
 package GUI;
 
+import DAO.NguoiDungDAO;
+import DAO.NguoiDung_NhomDAO;
+import DAO.NhomDAO;
+import DTO.NguoiDungDTO;
+import DTO.NguoiDung_NhomDTO;
+import DTO.NhomDTO;
+import GUI.DangNhap;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +29,37 @@ public class Homepage extends javax.swing.JFrame {
      */
     public Homepage() {
         initComponents();
+        thongtinnhom();
+        addTableClickListener();
     }
+    
+    private void thongtinnhom() {
+        NhomDAO nhomDAO = new NhomDAO();
+        List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
+
+        DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (NhomDTO nhom : danhSachNhom) {
+            model.addRow(new Object[]{nhom.getTenNhom()});
+        }
+    }
+    private void addTableClickListener() {
+    table_ThongTinNhom_NCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            int row = table_ThongTinNhom_NCT.getSelectedRow();
+            if (row >= 0) {
+                String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                ChiTietNhom nhom = new ChiTietNhom();
+                nhom.show();
+                dispose();
+                
+            }
+        }
+    });
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +104,7 @@ public class Homepage extends javax.swing.JFrame {
         tf_thanhvien_homepage = new javax.swing.JTextField();
         btn_themthanhvien_NCT = new javax.swing.JButton();
         scrpane_ThanhVien_TaoNhom = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_themtv = new javax.swing.JTable();
         btn_sua_NCT = new javax.swing.JButton();
         btn_Xoathanhvien_NCT = new javax.swing.JButton();
         btn_hoantac_NCT = new javax.swing.JButton();
@@ -504,17 +545,12 @@ public class Homepage extends javax.swing.JFrame {
             new String [] {
                 "Tên nhóm"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        table_ThongTinNhom_NCT.setEnabled(false);
+        ));
+        table_ThongTinNhom_NCT.setColumnSelectionAllowed(true);
+        table_ThongTinNhom_NCT.setShowGrid(false);
+        table_ThongTinNhom_NCT.setShowVerticalLines(false);
         scrpane_DanhSachNhom_NCT.setViewportView(table_ThongTinNhom_NCT);
+        table_ThongTinNhom_NCT.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btn_TaoNhom_NCT.setBackground(new java.awt.Color(0, 102, 102));
         btn_TaoNhom_NCT.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -550,13 +586,23 @@ public class Homepage extends javax.swing.JFrame {
 
         tf_thanhvien_homepage.setBackground(new java.awt.Color(0, 153, 153));
         tf_thanhvien_homepage.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tf_thanhvien_homepage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_thanhvien_homepageActionPerformed(evt);
+            }
+        });
 
         btn_themthanhvien_NCT.setBackground(new java.awt.Color(0, 102, 102));
         btn_themthanhvien_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_themthanhvien_NCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/plus_4315609 (1).png"))); // NOI18N
+        btn_themthanhvien_NCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themthanhvien_NCTActionPerformed(evt);
+            }
+        });
 
-        jTable1.setBackground(new java.awt.Color(0, 153, 153));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_themtv.setBackground(new java.awt.Color(0, 153, 153));
+        table_themtv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -593,7 +639,7 @@ public class Homepage extends javax.swing.JFrame {
                 "Email", "Tên người dùng"
             }
         ));
-        scrpane_ThanhVien_TaoNhom.setViewportView(jTable1);
+        scrpane_ThanhVien_TaoNhom.setViewportView(table_themtv);
 
         btn_sua_NCT.setBackground(new java.awt.Color(0, 0, 0));
         btn_sua_NCT.setForeground(new java.awt.Color(255, 255, 255));
@@ -938,6 +984,38 @@ public class Homepage extends javax.swing.JFrame {
 
     private void btn_sua_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_NCTActionPerformed
         // TODO add your handling code here:
+        
+        String tennhom = tf_tennhom_homepage.getText();
+    
+    if (tennhom.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    } else {
+        NhomDAO nhomDAO = new NhomDAO();
+        List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
+
+        if (!danhSachNhom.isEmpty()) {
+            String maNhom = danhSachNhom.get(0).getMaNhom(); // Lấy mã nhóm từ danh sách nhóm
+            boolean suaThanhCong = nhomDAO.suaNhom(maNhom, tennhom);
+
+            if (suaThanhCong) {
+                JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+                // Cập nhật lại danh sách nhóm hiển thị trên JTable
+                danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
+                DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
+                model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+                for (NhomDTO nhom : danhSachNhom) {
+                    model.addRow(new Object[]{nhom.getTenNhom()});
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy nhóm nào để cập nhật!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_btn_sua_NCTActionPerformed
 
     private void btn_hoantac_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoantac_NCTActionPerformed
@@ -956,6 +1034,48 @@ public class Homepage extends javax.swing.JFrame {
     private void tf_tennhom_homepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tennhom_homepageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_tennhom_homepageActionPerformed
+
+    private void btn_themthanhvien_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themthanhvien_NCTActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) table_themtv.getModel();
+        String email = tf_thanhvien_homepage.getText();
+        NhomDAO nhom = new NhomDAO();
+        String manhom = nhom.laymanhom(tf_tennhom_homepage.getText());
+
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Chưa nhập tên thành viên nhóm");
+        }
+        else {
+            NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
+            NguoiDung_NhomDTO themtv = tv.themthanhvien(email,manhom );
+
+            if (themtv != null) {
+                // Kiểm tra xem thành viên đã tồn tại trong bảng chưa
+                boolean isExist = false;
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    Object value = model.getValueAt(i, 0); // Lấy giá trị của cột đầu tiên
+                    if (value != null && value.toString().equals(themtv.getEmailND())) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (!isExist) {
+                    model.insertRow(0, new Object[]{themtv.getEmailND(), '2'});
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Thành viên đã tồn tại trong nhóm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Người dùng không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btn_themthanhvien_NCTActionPerformed
+
+    private void tf_thanhvien_homepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_thanhvien_homepageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_thanhvien_homepageActionPerformed
 
     public void ViewTable(){
         DefaultTableModel model = (DefaultTableModel) this.table_ThongTinNhom_NCT.getModel();
@@ -1018,7 +1138,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_MaNgDung_TK;
     private javax.swing.JLabel label_TenNgDung_TK;
     private javax.swing.JLabel label_tennhom;
@@ -1039,6 +1158,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTable table_DaHoanThanh_BangCV_VCT;
     private javax.swing.JTable table_DangLam_BangCV_VCT;
     private javax.swing.JTable table_ThongTinNhom_NCT;
+    private javax.swing.JTable table_themtv;
     private javax.swing.JTextField tf_MaNgDung_TK;
     private javax.swing.JTextField tf_TenNgDung_TK;
     private javax.swing.JTextField tf_TimNhom_NCT;

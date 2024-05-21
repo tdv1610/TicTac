@@ -4,10 +4,15 @@
  */
 package GUI;
 
+import DAO.NguoiDungDAO;
+import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
+import DTO.NguoiDungDTO;
+import DTO.NguoiDung_NhomDTO;
 import DTO.NhomDTO;
 import javax.swing.JOptionPane;
 import static javax.swing.UIManager.getString;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -23,6 +28,7 @@ public class TaoNhom extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +46,7 @@ public class TaoNhom extends javax.swing.JFrame {
         tf_ThanhVien_TaoNhom = new javax.swing.JTextField();
         btn_ThanhVien_TaoNhom = new javax.swing.JButton();
         scrpane_ThanhVien_TaoNhom = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_dsTV = new javax.swing.JTable();
         btn_Xong_TaoNhom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,9 +79,14 @@ public class TaoNhom extends javax.swing.JFrame {
 
         btn_ThanhVien_TaoNhom.setBackground(new java.awt.Color(0, 102, 102));
         btn_ThanhVien_TaoNhom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/plus_4315609 (1).png"))); // NOI18N
+        btn_ThanhVien_TaoNhom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThanhVien_TaoNhomActionPerformed(evt);
+            }
+        });
 
-        jTable1.setBackground(new java.awt.Color(0, 153, 153));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_dsTV.setBackground(new java.awt.Color(0, 153, 153));
+        table_dsTV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -112,7 +123,7 @@ public class TaoNhom extends javax.swing.JFrame {
                 "Email", "Tên người dùng"
             }
         ));
-        scrpane_ThanhVien_TaoNhom.setViewportView(jTable1);
+        scrpane_ThanhVien_TaoNhom.setViewportView(table_dsTV);
 
         btn_Xong_TaoNhom.setBackground(new java.awt.Color(0, 153, 153));
         btn_Xong_TaoNhom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -199,31 +210,117 @@ public class TaoNhom extends javax.swing.JFrame {
 
     private void btn_Xong_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomActionPerformed
         // TODO add your handling code here:
+      
         if (tf_TenNhom_TaoNhom.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Chưa nhập tên nhóm");
     } else {
         // Create an instance of NhomDAO and attempt to add the group
         NhomDAO nhomthem = new NhomDAO();
-        NhomDTO nhom = nhomthem.themnhom(tf_TenNhom_TaoNhom.getText(), DangNhap.pEmail);
-        
+        NhomDTO nhom = null;
+        try {
+            nhom = nhomthem.themnhom(tf_TenNhom_TaoNhom.getText(), DangNhap.pEmail);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi tạo nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return;
+        }
+
         // Check the result and update the UI accordingly
         if (nhom != null) {
             JOptionPane.showMessageDialog(this, "Nhóm đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-            // Open TaoCongViec window and close the current window
+            // Lấy mã nhóm của nhóm vừa được tạo
+            String maNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
+
+            // Thêm thành viên vào nhóm mới tạo
+            NguoiDung_NhomDAO themtv = new NguoiDung_NhomDAO();
+            NguoiDung_NhomDTO ndNhom = null;
+
+            // Thêm chủ nhóm vào trước
+            try {
+                ndNhom = themtv.themthanhvien(DangNhap.pEmail, maNhom);
+                if (ndNhom == null) {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi thêm chủ nhóm vào nhóm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi thêm chủ nhóm vào nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) table_dsTV.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String email = model.getValueAt(i, 0).toString();
+                try {
+                    ndNhom = themtv.themthanhvien(email, maNhom);
+                    if (ndNhom == null) {
+                        JOptionPane.showMessageDialog(this, "Lỗi khi thêm thành viên " + email + " vào nhóm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi thêm thành viên " + email + " vào nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                    return;
+                }
+            }
+
+            // Mở cửa sổ TaoCongViec và đóng cửa sổ hiện tại
             TaoCongViec tcv = new TaoCongViec();
             tcv.setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Tên nhóm đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
        
     }//GEN-LAST:event_btn_Xong_TaoNhomActionPerformed
 
+    
     private void btn_Xong_TaoNhomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomMouseClicked
 
     }//GEN-LAST:event_btn_Xong_TaoNhomMouseClicked
 
+    private void btn_ThanhVien_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThanhVien_TaoNhomActionPerformed
+        // TODO add your handling code here:        
+        // Lấy email được nhập
+        DefaultTableModel model = (DefaultTableModel) table_dsTV.getModel();
+        String email = tf_ThanhVien_TaoNhom.getText();
+
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Chưa nhập tên thành viên nhóm");
+        } 
+        else {
+            NguoiDungDAO nd = new NguoiDungDAO();
+            NguoiDungDTO themnd = nd.them(email);
+
+    
+            if (themnd != null) {
+            // Kiểm tra xem thành viên đã tồn tại trong bảng chưa
+                boolean isExist = false;
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    Object value = model.getValueAt(i, 0); // Lấy giá trị của cột đầu tiên
+                    if (value != null && value.toString().equals(themnd.getEMAILND())) {
+                    isExist = true;
+                    break;
+                    }
+                }
+                if (!isExist) {
+                    model.insertRow(0, new Object[]{themnd.getEMAILND(), themnd.getTENND()});
+                    
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Thành viên đã tồn tại trong nhóm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Người dùng không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_btn_ThanhVien_TaoNhomActionPerformed
+
+    public void ViewTable(){
+        DefaultTableModel model = (DefaultTableModel) table_dsTV.getModel();
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -262,12 +359,12 @@ public class TaoNhom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ThanhVien_TaoNhom;
     private javax.swing.JButton btn_Xong_TaoNhom;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel label_TaoNhom_TaoNhom;
     private javax.swing.JLabel label_TenNhom_TaoNhom;
     private javax.swing.JLabel label_ThanhVien_taoNhom;
     private javax.swing.JPanel panel_TaoNhom;
     private javax.swing.JScrollPane scrpane_ThanhVien_TaoNhom;
+    private javax.swing.JTable table_dsTV;
     private javax.swing.JTextField tf_TenNhom_TaoNhom;
     private javax.swing.JTextField tf_ThanhVien_TaoNhom;
     // End of variables declaration//GEN-END:variables
