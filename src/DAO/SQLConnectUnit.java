@@ -11,7 +11,7 @@ public class SQLConnectUnit {
 
     // Hàm khởi tạo kết nối mặc định
     public SQLConnectUnit() {
-        connect = new SQLConnection("C##tictac", "tictac", "orcl");
+        connect = new SQLConnection("C##TICTAC", "123", "orcl");
     }
 
     // Hàm khởi tạo cơ bản

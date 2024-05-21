@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class connection {
       // Thay đổi các thông số kết nối tương ứng với cơ sở dữ liệu Oracle của bạn
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USERNAME = "C##tictac";
-    private static final String PASSWORD = "tictac";
+    private static final String DB_URL = "jdbc:oracle:thin:@laptop-n4ku63sd:1521:orcl";
+    private static final String USERNAME = "C##TICTAC";
+    private static final String PASSWORD = "123";
 
     // Phương thức để thiết lập và trả về kết nối cơ sở dữ liệu
     public Connection getConnection() throws SQLException {

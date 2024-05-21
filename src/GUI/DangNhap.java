@@ -258,6 +258,7 @@ public class DangNhap extends javax.swing.JFrame {
         }
         else if(nd1==null&&ad1!=null)
         {
+            pEmail = tf_TenNgDung_DangNhap.getText();
             JOptionPane.showMessageDialog(null, "Chào admin, bạn đã đăng nhập thành công.");
              new AdminHomepage().setVisible(true);
                 dispose();
