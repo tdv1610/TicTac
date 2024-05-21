@@ -50,7 +50,7 @@ public class SQLConnection {
             
 //            Tạo url để kết nối tới Database
 
-            String url = "jdbc:oracle:thin:lvlykatie:1521:orcl" + this.Sid;
+            String url = "jdbc:oracle:thin:lvlykatie:1521:" + this.Sid;
 
             try{
 //                tạo connet thông qua url

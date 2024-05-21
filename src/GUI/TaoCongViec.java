@@ -249,7 +249,7 @@ public class TaoCongViec extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_TenCV_TaoCVActionPerformed
 
     private void btn_HoanThanh_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_TaoCVActionPerformed
-        if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||combobox_MDUT_TaoCV.getSelectedItem() == null|| textarea_MoTa_TaoCV.getText().isEmpty()|| jDateChooser1.getDate() == null ||jDateChooser2.getDate() == null) {
+        if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||combobox_MDUT_TaoCV.getSelectedItem() == null|| textarea_MoTa_TaoCV.getText().isEmpty()|| jDateChooser1.getDate() == null ||jDateChooser2.getDate() == null || list_NguoiPT_TaoCV.getSelectedValuesList().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin cần thiết");
     } else {
         // Create an instance of NhomDAO and attempt to add the group
