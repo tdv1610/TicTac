@@ -1093,18 +1093,24 @@ public class Homepage extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
         String ten = (String) model.getValueAt(selectedRow, 0);
         String emailtv = (String) model.getValueAt(selectedRow, 1);
-            NhomDAO xoaTV = new NhomDAO();
-            String MA = xoaTV.laymanhom(ten);
-            NguoiDung_NhomDAO nd = new NguoiDung_NhomDAO();
-            boolean dung = nd.xoathanhvien(DangNhap.pEmail, MA);
 
-            if (dung) {
-                model.removeRow(selectedRow);
-                JOptionPane.showMessageDialog(this, "Rời hóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-            }   
-            else {
-                JOptionPane.showMessageDialog(this, "Không thể rời nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
+        if (emailtv.equals(DangNhap.pEmail)) {
+            JOptionPane.showMessageDialog(this, "Bạn là trưởng nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        NhomDAO xoaTV = new NhomDAO();
+        String MA = xoaTV.timnhom(ten); // Giả sử phương thức này trả về mã nhóm theo tên nhóm
+        NguoiDung_NhomDAO nd = new NguoiDung_NhomDAO();
+        boolean dung = nd.xoathanhvien(emailtv, MA);
+
+        if (!dung) {
+            model.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Rời nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể rời nhóm. Vui lòng thử lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            model.removeRow(selectedRow);
+        }
     }//GEN-LAST:event_btn_roinhom_NCTActionPerformed
 
     private void btn_themcongviec_NCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTMouseClicked
