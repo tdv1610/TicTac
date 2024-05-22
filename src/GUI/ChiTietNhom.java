@@ -8,6 +8,7 @@ import DAO.NhomDAO;
 import DAO.ThucHienDAO;
 import DTO.PhanCongDTO;
 import DTO.ThucHienDTO;
+import GUI.Homepage;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -20,18 +21,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ChiTietNhom extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form ChiTietNhom
      */
     public ChiTietNhom() {
         initComponents();
         thongTinPhanCong();
+        xemtennhom();
     }
     
     private void thongTinPhanCong() {
+    jlable_tennhom.setText(Homepage.tennhom);
     ThucHienDAO thuchien = new ThucHienDAO();
     NhomDAO nhom = new NhomDAO();
-    String manhom = nhom.laymanhom(tf_tennhom_ChiTietNhom.getText());
+    String manhom = nhom.laymanhom(Homepage.tennhom);
     List<PhanCongDTO> danhSachPhanCong = thuchien.layDanhSachPhanCongTrongNhom(manhom);
 
     DefaultTableModel model = (DefaultTableModel) table_DanhSachPhanCong.getModel();
@@ -40,6 +44,10 @@ public class ChiTietNhom extends javax.swing.JFrame {
     for(PhanCongDTO phanCong : danhSachPhanCong) {
         model.addRow(new Object[]{phanCong.getTenCV(), phanCong.getEmailThanhVien(), phanCong.getTrangThai()});
     }
+}
+    private void xemtennhom(){
+    Homepage homepage = new Homepage();
+    jlable_tennhom.setText(homepage.tennhom);
 }
 
     /**
@@ -53,11 +61,11 @@ public class ChiTietNhom extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        tf_tennhom_ChiTietNhom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         scrpane_ThanhVien_TaoNhom = new javax.swing.JScrollPane();
         table_DanhSachPhanCong = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jlable_tennhom = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,15 +74,6 @@ public class ChiTietNhom extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tên nhóm");
-
-        tf_tennhom_ChiTietNhom.setBackground(new java.awt.Color(0, 153, 153));
-        tf_tennhom_ChiTietNhom.setText("Ch?y ?? án sml");
-        tf_tennhom_ChiTietNhom.setBorder(null);
-        tf_tennhom_ChiTietNhom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_tennhom_ChiTietNhomActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,6 +124,11 @@ public class ChiTietNhom extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Thống kê");
 
+        jlable_tennhom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlable_tennhom.setForeground(new java.awt.Color(255, 255, 153));
+        jlable_tennhom.setText("jlabel");
+        jlable_tennhom.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,22 +141,22 @@ public class ChiTietNhom extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_tennhom_ChiTietNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(50, 50, 50)
+                                .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
                             .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(tf_tennhom_ChiTietNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -175,10 +179,6 @@ public class ChiTietNhom extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tf_tennhom_ChiTietNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tennhom_ChiTietNhomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_tennhom_ChiTietNhomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,8 +220,8 @@ public class ChiTietNhom extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlable_tennhom;
     private javax.swing.JScrollPane scrpane_ThanhVien_TaoNhom;
     private javax.swing.JTable table_DanhSachPhanCong;
-    private javax.swing.JTextField tf_tennhom_ChiTietNhom;
     // End of variables declaration//GEN-END:variables
 }
