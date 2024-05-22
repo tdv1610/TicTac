@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.lang.model.util.Types;
+import javax.swing.JOptionPane;
 
 /**
  * @author Oracle
@@ -93,9 +94,82 @@ public class NhomDAO extends connection {
             e.printStackTrace();
         }
     }
+    return maNhom;
+    }
+    
+    public String laytennhom(String MANHOM){
+    String tennhom = null; // Khai báo biến để lưu mã nhóm
+    Connection con = null;
+    PreparedStatement pre = null;
+    ResultSet rs = null;
 
-    return maNhom; // Trả về mã nhóm
-}
+    try {
+        con = getConnection();  // Lấy kết nối tới cơ sở dữ liệu
+        System.out.println("KẾT NỐI THÀNH CÔNG.");
+
+        String sql = "SELECT TENNHOM FROM NHOM WHERE MANHOM = ? "; // Chỉ lấy cột MANHOM
+        pre = con.prepareStatement(sql);
+        pre.setString(1, MANHOM);
+        System.out.println("Executing query: " + sql);
+
+        rs = pre.executeQuery();
+
+        if (rs.next()) {
+            tennhom = rs.getString("TENNHOM"); // Lưu mã nhóm từ cột MANHOM
+            System.out.println("TÊN NHÓM: " + tennhom);
+        } else {
+            System.out.println("NHÓM KHÔNG TỒN TẠI");
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    return tennhom; // Trả về tên nhóm
+    }
+    
+    public String layemailtruongnhom(String manhom) {
+        String emailTruongNhom = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+        Connection conn = null;
+
+        try {
+            conn = getConnection(); // Establish the database connection
+
+            if (conn != null) {
+                String sql = "SELECT EMAIL_TRUONGNHOM FROM NHOM WHERE MANHOM = ?";
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, manhom);
+                rs = pre.executeQuery();
+
+                if (rs.next()) {
+                    emailTruongNhom = rs.getString("EMAIL_TRUONGNHOM");
+                }
+            } else {
+                System.err.println("Failed to establish a connection.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return emailTruongNhom;
+    }
 
 
     public NhomDTO themnhom(String TENNHOM, String EMAIL_TRUONGNHOM) {
@@ -126,6 +200,25 @@ public class NhomDAO extends connection {
         return nhom;
    }
     
+    public boolean xoanhom(String MANHOM) {
+    try (Connection con = getConnection();
+         CallableStatement cstmt = con.prepareCall("{CALL XOANHOM(?, ?)}")) { // Sử dụng tên stored procedure đúng
+        cstmt.setString(1, MANHOM); // Giả sử tham số đầu tiên là tên nhóm
+        cstmt.registerOutParameter(2, java.sql.Types.VARCHAR); // Giả sử tham số thứ hai là thông báo kết quả
+
+        cstmt.execute();
+
+        String result = cstmt.getString(2); // Lấy thông báo kết quả
+
+        return true; // Trả về true nếu xóa thành công, ngược lại trả về false
+    } catch (SQLException ex) {
+        // Log lỗi hoặc xử lý nếu cần thiết
+        ex.printStackTrace();
+        return false; // Trả về false nếu có lỗi xảy ra
+    }
+}
+    
+    
     public boolean suaNhom(String maNhom, String tenNhomMoi) {
     Connection con = null;
     PreparedStatement pre = null;
@@ -153,6 +246,49 @@ public class NhomDAO extends connection {
             if (con != null) con.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+}
+
+    public String timnhom(String tennhom) {
+    Connection con = null;
+    PreparedStatement pre = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Kết nối cơ sở dữ liệu thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        // Tạo câu lệnh SQL để tìm kiếm nhóm theo tên nhóm
+        String sql = "SELECT * FROM NHOM WHERE TENNHOM = ?";
+        pre = con.prepareStatement(sql);
+        pre.setString(1, tennhom);
+
+        // Thực thi câu lệnh truy vấn
+        rs = pre.executeQuery();
+
+        // Nếu tìm thấy nhóm, trả về tên nhóm
+        if (rs.next()) {
+            String tenNhomTimThay = rs.getString("TENNHOM");
+            return tenNhomTimThay;
+        } else {
+            return null;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Lỗi khi tìm kiếm nhóm! Chi tiết: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    } finally {
+        // Đóng kết nối sau khi thao tác xong
+        try {
+            if (rs != null) rs.close();
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 }
