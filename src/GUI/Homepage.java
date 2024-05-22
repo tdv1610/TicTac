@@ -7,7 +7,8 @@ package GUI;
 import DAO.NguoiDungDAO;
 import DTO.NguoiDungDTO;
 import javax.swing.JOptionPane;
-import GUI.DangKi;
+import GUI.DangNhap;
+import javax.swing.JLabel;
 
 /**
  *
@@ -20,6 +21,15 @@ public class Homepage extends javax.swing.JFrame {
      */
     public Homepage() {
         initComponents();
+        xem();
+    }
+    
+    private void xem(){
+        DangNhap dangnhap = new DangNhap();
+        NguoiDungDAO nd= new NguoiDungDAO();
+       NguoiDungDTO nd1= nd.getUserByEmail(dangnhap.pEmail);
+        jlable_emailnd.setText(dangnhap.pEmail);
+       jlabel_tennd.setText(nd.getTenNguoiDungByEmail(dangnhap.pEmail));
     }
 
     /**
@@ -74,10 +84,10 @@ public class Homepage extends javax.swing.JFrame {
         panel_TK = new javax.swing.JPanel();
         label_TenNgDung_TK = new javax.swing.JLabel();
         label_MaNgDung_TK = new javax.swing.JLabel();
-        tf_TenNgDung_TK = new javax.swing.JTextField();
-        tf_Email_TK = new javax.swing.JTextField();
         btn_DoiPass_TK = new javax.swing.JButton();
         btn_XoaTK_TK = new javax.swing.JButton();
+        jlabel_tennd = new javax.swing.JLabel();
+        jlable_emailnd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -724,35 +734,13 @@ public class Homepage extends javax.swing.JFrame {
         );
 
         panel_TK.setBackground(new java.awt.Color(0, 102, 102));
+        panel_TK.setInheritsPopupMenu(true);
 
         label_TenNgDung_TK.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         label_TenNgDung_TK.setText("Tên người dùng");
 
         label_MaNgDung_TK.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         label_MaNgDung_TK.setText("Email");
-
-        tf_TenNgDung_TK.setBackground(new java.awt.Color(0, 153, 153));
-        tf_TenNgDung_TK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tf_TenNgDung_TK.setBorder(null);
-        tf_TenNgDung_TK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tf_TenNgDung_TKMouseClicked(evt);
-            }
-        });
-        tf_TenNgDung_TK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_TenNgDung_TKActionPerformed(evt);
-            }
-        });
-
-        tf_Email_TK.setBackground(new java.awt.Color(0, 153, 153));
-        tf_Email_TK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tf_Email_TK.setBorder(null);
-        tf_Email_TK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_Email_TKActionPerformed(evt);
-            }
-        });
 
         btn_DoiPass_TK.setBackground(new java.awt.Color(0, 102, 102));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -777,43 +765,57 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        jlabel_tennd.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_tennd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlabel_tennd.setText("jLabel5");
+        jlabel_tennd.setOpaque(true);
+
+        jlable_emailnd.setBackground(new java.awt.Color(255, 255, 204));
+        jlable_emailnd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jlable_emailnd.setText("jLabel5");
+        jlable_emailnd.setOpaque(true);
+
         javax.swing.GroupLayout panel_TKLayout = new javax.swing.GroupLayout(panel_TK);
         panel_TK.setLayout(panel_TKLayout);
         panel_TKLayout.setHorizontalGroup(
             panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_TKLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_XoaTK_TK)
-                    .addComponent(btn_DoiPass_TK))
-                .addGap(339, 339, 339))
-            .addGroup(panel_TKLayout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_TenNgDung_TK)
-                    .addComponent(label_MaNgDung_TK))
-                .addGap(36, 36, 36)
-                .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_TenNgDung_TK)
-                    .addComponent(tf_Email_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addGroup(panel_TKLayout.createSequentialGroup()
+                        .addComponent(label_MaNgDung_TK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel_TKLayout.createSequentialGroup()
+                        .addComponent(label_TenNgDung_TK)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(31, 31, 31)
+                .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlable_emailnd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlabel_tennd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(151, 151, 151))
+            .addGroup(panel_TKLayout.createSequentialGroup()
+                .addGap(295, 295, 295)
+                .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_DoiPass_TK)
+                    .addComponent(btn_XoaTK_TK))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         panel_TKLayout.setVerticalGroup(
             panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_TKLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(99, 99, 99)
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(label_TenNgDung_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_TenNgDung_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(label_MaNgDung_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_Email_TK, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                    .addComponent(jlabel_tennd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_MaNgDung_TK)
+                    .addComponent(jlable_emailnd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
                 .addComponent(btn_DoiPass_TK)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(btn_XoaTK_TK)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -936,15 +938,6 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_TaoNhom_NCTActionPerformed
 
-    private void tf_Email_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_Email_TKActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_Email_TKActionPerformed
-
-    private void tf_TenNgDung_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TenNgDung_TKActionPerformed
-
-
-    }//GEN-LAST:event_tf_TenNgDung_TKActionPerformed
-
     private void table_CanLam_BangCV_VCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_CanLam_BangCV_VCTMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_table_CanLam_BangCV_VCTMouseClicked
@@ -969,28 +962,20 @@ public class Homepage extends javax.swing.JFrame {
     private void btn_XoaTK_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTK_TKActionPerformed
 
         NguoiDungDAO nd = new NguoiDungDAO();
-        NguoiDungDTO nd1=nd.getUserByEmail(tf_Email_TK.getText());
-       
-         if (nd1==null)
-        {
-            JOptionPane.showMessageDialog(null, "tai khoan khong ton tai");
-
-        }
-        else {
-             nd.xoataikhoan(tf_TenNgDung_TK.getText(), tf_Email_TK.getText());
-            JOptionPane.showMessageDialog(null, " ban da xoa tai khoan tren thanh cong");
+        DangNhap dangnhap = new DangNhap();
+        jlable_emailnd.setText(dangnhap.pEmail);
+        
+        nd.xoataikhoan( jlable_emailnd.getText());
+            JOptionPane.showMessageDialog(null, "Xoa Tai khoan thanh cong");
             
             DangNhap show = new DangNhap();
             show.setVisible(true);
             dispose();
-        }
+        
     }//GEN-LAST:event_btn_XoaTK_TKActionPerformed
-
-    private void tf_TenNgDung_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_TenNgDung_TKMouseClicked
-        // TODO add your handling code here:
      
-    }//GEN-LAST:event_tf_TenNgDung_TKMouseClicked
-
+       
+          
     private void btn_DX_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DX_TicTacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_DX_TicTacActionPerformed
@@ -1056,6 +1041,8 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jlabel_tennd;
+    private javax.swing.JLabel jlable_emailnd;
     private javax.swing.JLabel label_MaNgDung_TK;
     private javax.swing.JLabel label_TenNgDung_TK;
     private javax.swing.JPanel panel_CanLam_BangCV_VCT;
@@ -1074,8 +1061,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JTable table_DaHoanThanh_BangCV_VCT;
     private javax.swing.JTable table_DangLam_BangCV_VCT;
     private javax.swing.JTable table_ThongTinNhom_NCT;
-    private javax.swing.JTextField tf_Email_TK;
-    private javax.swing.JTextField tf_TenNgDung_TK;
     private javax.swing.JTextField tf_TimNhom_NCT;
     private javax.swing.JTextField tf_timcongviec_VCT;
     // End of variables declaration//GEN-END:variables

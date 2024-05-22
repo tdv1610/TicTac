@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -109,7 +111,7 @@ public class NguoiDungDAO extends connection{
 
         return nd;
     }
-    public void xoataikhoan(String TENND,String EMAIL)
+    public void xoataikhoan(String EMAIL)
     { NguoiDungDTO nd = null;
         Connection con = null;
         PreparedStatement pre = null;
@@ -119,10 +121,10 @@ public class NguoiDungDAO extends connection{
             con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
 
-            String sql = "delete from NGUOIDUNG where TENND = ? AND EMAILND = ?";
+            String sql = "delete from NGUOIDUNG where EMAILND = ?";
             pre = con.prepareStatement(sql);
-            pre.setString(1, TENND);
-            pre.setString(2, EMAIL);
+         
+            pre.setString(1, EMAIL);
             
             System.out.println("Executing query: " + sql);
 
@@ -134,9 +136,7 @@ public class NguoiDungDAO extends connection{
                 nd.setEMAILND(rs.getString("TENND"));
                 nd.setMATKHAU(rs.getString("MATKHAU"));
                
-                System.out.println("User found: " + nd.toString());
-            } else {
-                System.out.println("No user found with the provided credentials.");
+               
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -190,31 +190,73 @@ public class NguoiDungDAO extends connection{
         }
 return nd;
 }
-    public NguoiDungDTO updatePassword( String EMAIL) {
-       
+    public NguoiDungDTO updatePassword(String EMAIL, String matkhaumoi) {
     NguoiDungDTO nd = null;
+    Connection con = null;
+    PreparedStatement pre = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();  // Get the database connection
+        System.out.println("Connection established successfully.");
+
+        String sql = "UPDATE NGUOIDUNG SET MATKHAU=? WHERE EMAILND = ?";
+        pre = con.prepareStatement(sql);
+        
+        // Đặt tham số đúng thứ tự
+        pre.setString(1, matkhaumoi);
+        pre.setString(2, EMAIL);
+        
+        System.out.println("Executing query: " + sql);
+
+        int rowsUpdated = pre.executeUpdate();  // Sử dụng executeUpdate cho câu lệnh UPDATE
+
+        if (rowsUpdated > 0) {
+            // Truy vấn lại để lấy thông tin đã cập nhật (nếu cần)
+            String selectSql = "SELECT EMAILND, TENND, MATKHAU FROM NGUOIDUNG WHERE EMAILND = ?";
+            pre = con.prepareStatement(selectSql);
+            pre.setString(1, EMAIL);
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                nd = new NguoiDungDTO();
+                nd.setEMAILND(rs.getString("EMAILND"));
+                nd.setTENND(rs.getString("TENND"));
+                nd.setMATKHAU(rs.getString("MATKHAU"));
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return nd;
+}
+    
+
+
+
+ public String getTenNguoiDungByEmail(String email) {
+        String tenNguoiDung = null;
         Connection con = null;
         PreparedStatement pre = null;
         ResultSet rs = null;
 
         try {
-            con = getConnection();  // Get the database connection
-            System.out.println("Connection established successfully.");
-
-            String sql = "UPDATE NGUOIDUNG SET MATKHAU=? where EMAILND = ?";
+            con = getConnection();  // Lấy kết nối đến cơ sở dữ liệu
+            String sql = "SELECT TENND FROM NGUOIDUNG WHERE EMAILND = ?";
             pre = con.prepareStatement(sql);
-          
-            pre.setString(1, EMAIL);
-            
-            System.out.println("Executing query: " + sql);
-
+            pre.setString(1, email);
             rs = pre.executeQuery();
 
             if (rs.next()) {
-                nd = new NguoiDungDTO();
-                nd.setTENND(rs.getString("EMAIL"));
-                nd.setEMAILND(rs.getString("TENND"));
-                nd.setMATKHAU(rs.getString("MATKHAU"));
+                tenNguoiDung = rs.getString("TENND");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -226,8 +268,7 @@ return nd;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-           
-} return nd;
-    }}
-
-
+        }
+        return tenNguoiDung;
+    }
+}

@@ -231,7 +231,8 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
 
     private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
-    
+        pEmail = tf_TenNgDung_DangNhap.getText();
+       
         NguoiDungDAO nd = new NguoiDungDAO();
         NguoiDungDTO nd1=nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         ADMINDAO ad= new ADMINDAO();

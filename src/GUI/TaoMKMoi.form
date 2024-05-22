@@ -163,6 +163,9 @@
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwf_XacNhanPass_XNMKActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Xong_TaoMKM">
           <Properties>

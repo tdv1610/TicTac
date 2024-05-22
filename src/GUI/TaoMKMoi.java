@@ -6,13 +6,15 @@ package GUI;
 
 import DAO.NguoiDungDAO;
 import DTO.NguoiDungDTO;
-import javax.swing.JOptionPane;
+import GUI.DangNhap;
 import GUI.NhapEmail;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ASUS
  */
 public class TaoMKMoi extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form TaoMKMoi
@@ -65,6 +67,11 @@ public class TaoMKMoi extends javax.swing.JFrame {
         pwf_PassMoi_TMKM.setBackground(new java.awt.Color(0, 102, 102));
 
         pwf_XacNhanPass_XNMK.setBackground(new java.awt.Color(0, 102, 102));
+        pwf_XacNhanPass_XNMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwf_XacNhanPass_XNMKActionPerformed(evt);
+            }
+        });
 
         btn_Xong_TaoMKM.setBackground(new java.awt.Color(0, 102, 102));
         btn_Xong_TaoMKM.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,8 +162,9 @@ public class TaoMKMoi extends javax.swing.JFrame {
     private void btn_Xong_TaoMKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoMKMActionPerformed
        String newPassword = new String(pwf_PassMoi_TMKM.getPassword());
                 String confirmPassword = new String(pwf_XacNhanPass_XNMK.getPassword());
+                String emailnd = NhapEmail.pEmail;
+                String matkhaumoi = pwf_PassMoi_TMKM.getText();
                 NguoiDungDAO nd = new NguoiDungDAO();
-               NguoiDungDTO user=nd.updatePassword(NhapEmail.pEmail);
                 if(newPassword.equals("")||confirmPassword.equals(""))
                 {
                     JOptionPane.showMessageDialog(null, "Bạn chưa nhập mật khẩu hoặc xác nhận mật khẩu.");
@@ -164,11 +172,17 @@ public class TaoMKMoi extends javax.swing.JFrame {
                 else if (!newPassword.equals(confirmPassword)) {
                     JOptionPane.showMessageDialog(null, "Mật khẩu xác nhận không khớp.");
                 } else {
-                    nd.updatePassword(NhapEmail.pEmail );
+                    NguoiDungDTO user = nd.updatePassword(emailnd, matkhaumoi);
                     JOptionPane.showMessageDialog(null, "Mật khẩu đã được thay đổi thành công.");
                     dispose();
+}
+
     }//GEN-LAST:event_btn_Xong_TaoMKMActionPerformed
-    }
+
+    private void pwf_XacNhanPass_XNMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwf_XacNhanPass_XNMKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwf_XacNhanPass_XNMKActionPerformed
+
     /**
      * @param args the command line arguments
      */

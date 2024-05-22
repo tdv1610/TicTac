@@ -164,11 +164,11 @@ private String OTP;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_NhanEmail_OTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhanEmail_OTPActionPerformed
-        pEmail=tf_Email_OTP.getText();
+                pEmail = tf_Email_OTP.getText();
                 String EMAIL = tf_Email_OTP.getText();
                 NguoiDungDAO userDAO = new NguoiDungDAO();
                 NguoiDungDTO user = userDAO.getUserByEmail(EMAIL);
-
+    
                 if(user!=null){
                      // Generate 4-digit OTP
                     mailsender.sendEmail(EMAIL,  "OTP của bạn là" + "", OTP);
