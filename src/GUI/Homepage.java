@@ -973,12 +973,12 @@ public class Homepage extends javax.swing.JFrame {
         }
         
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-        model.setRowCount(0);
         
         NhomDAO tim = new NhomDAO();
         String tennhomcan = tim.timnhom(tennhomcantim);
         
         if(tennhomcan != null){
+            model.setRowCount(0);
             model.addRow(new Object[]{tennhomcan, tim.layemailtruongnhom(tennhomcan)});
         }
         
@@ -1043,37 +1043,45 @@ public class Homepage extends javax.swing.JFrame {
 
     private void btn_sua_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_NCTActionPerformed
         // TODO add your handling code here:
+        int selectedRow = table_ThongTinNhom_NCT.getSelectedRow();
         String tennhommoi = tf_tennhom_homepage.getText();
         NhomDAO nhomDAO = new NhomDAO();
         if (tennhommoi.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    if (manhom == null || manhom.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Không tìm thấy nhóm nào để cập nhật!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Kiểm tra tên nhóm trùng
-    if (nhomDAO.kiemTraTenNhomTrung(tennhommoi)) {
-        JOptionPane.showMessageDialog(this, "Tên nhóm đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    boolean suaThanhCong = nhomDAO.suaNhom(manhom, tennhommoi);
-
-    if (suaThanhCong) {
-        JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-        // Cập nhật tên nhóm trong JTable
-        int selectedRow = table_ThongTinNhom_NCT.getSelectedRow();
-        if (selectedRow >= 0) {
-            DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-            model.setValueAt(tennhommoi, selectedRow, 0); // Cập nhật giá trị trong mô hình bảng
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
+
+        if (manhom == null || manhom.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy nhóm nào để cập nhật!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Kiểm tra tên nhóm trùng
+        if (nhomDAO.kiemTraTenNhomTrung(tennhommoi)) {
+            JOptionPane.showMessageDialog(this, "Tên nhóm đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
+        String ten = (String) model.getValueAt(selectedRow, 0);
+        String emailtv = (String) model.getValueAt(selectedRow, 1);
+        if (emailtv != null && emailtv.equals(DangNhap.pEmail)){
+            boolean suaThanhCong = nhomDAO.suaNhom(manhom, tennhommoi);
+            if (suaThanhCong) {
+                JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            // Cập nhật tên nhóm trong JTable
+                if (selectedRow >= 0) {
+                    model.setValueAt(tennhommoi, selectedRow, 0); // Cập nhật giá trị trong mô hình bảng
+                }
+            } 
+            else {
+                JOptionPane.showMessageDialog(this, "Cập nhật tên nhóm thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Chỉ trưởng nhóm được sửa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_btn_sua_NCTActionPerformed
 
     private void btn_hoantac_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoantac_NCTActionPerformed
@@ -1086,7 +1094,7 @@ public class Homepage extends javax.swing.JFrame {
 
         // Kiểm tra nếu không có dòng nào được chọn
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một người dùng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
