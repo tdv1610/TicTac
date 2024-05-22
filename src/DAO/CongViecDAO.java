@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Types;
 import java.sql.CallableStatement; 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 public class CongViecDAO extends connection{
@@ -21,11 +23,12 @@ public class CongViecDAO extends connection{
     
     public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
     
-    public CongViecDTO TimCV(String TENCV){
+    public CongViecDTO TimCV(String TENCV) throws ParseException{
         CongViecDTO cv = null;
         Connection con = null;
         PreparedStatement pre = null;
         ResultSet rs = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         try{
             con = getConnection();  // Get the database connection
@@ -41,13 +44,13 @@ public class CongViecDAO extends connection{
             if(rs.next()){
                 cv = new CongViecDTO();
                 cv.setMaCV(rs.getString("MACV"));
-                cv.setTenCV(rs.getString("TENCV"));
-                cv.setMaNhom("MANHOM");
-                cv.setLinhVuc("LINHVUC");
-                cv.setMoTa("MOTA");
-                cv.setMuc_uutien("MUC_UUTIEN");
-                cv.setNgayBD("NGAYBD");
-                cv.setNgayKT("NGAYKT");
+                cv.setTenCV(TENCV);
+                cv.setMaNhom(rs.getString("MANHOM"));
+                cv.setLinhVuc(rs.getString("LINHVUC"));
+                cv.setMoTa(rs.getString("MOTACV"));
+                cv.setMuc_uutien(rs.getInt("MUC_UUTIEN"));
+                cv.setNgayBD(sdf.parse("NGAYBD"));
+                cv.setNgayKT(sdf.parse("NGAYKT"));
                 
                 System.out.println("User found: " + cv.toString());
             }
@@ -72,44 +75,46 @@ public class CongViecDAO extends connection{
         }
         return cv;
     }
-    public CongViecDTO ThemCV(String TENCV, String MANHOM, String LINHVUC, String MOTA, String MUC_UUTIEN, String NGAYBD, String NGAYKT){
+    
+public CongViecDTO ThemCV(String TENCV, String MANHOM, String LINHVUC, String MOTACV, String MUC_UUTIEN, String NGAYBD, String NGAYKT) {
     CongViecDTO cviec = null;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     try (Connection con = getConnection();
-         CallableStatement cstmt = con.prepareCall("{CALL TAOCONGVIEC(?, ?, ?, ?, ?, ?, ?, ?)}")) {
-        
+         CallableStatement cstmt = con.prepareCall("{CALL THEM_CONGVIEC(?, ?, ?, ?, ?, ?, ?, ?)}")) {
+
         cstmt.setString(1, TENCV);
         cstmt.setString(2, MANHOM);
         cstmt.setString(3, LINHVUC);
-        cstmt.setString(4, MOTA);
-        cstmt.setString(5, MUC_UUTIEN);
-        cstmt.setString(6, NGAYBD);
-        cstmt.setString(7, NGAYKT);
+        cstmt.setString(4, MOTACV);
+        cstmt.setInt(5, Integer.parseInt(MUC_UUTIEN));
+        cstmt.setDate(6, new java.sql.Date(sdf.parse(NGAYBD).getTime()));
+        cstmt.setDate(7, new java.sql.Date(sdf.parse(NGAYKT).getTime()));
         cstmt.registerOutParameter(8, java.sql.Types.VARCHAR);
-        
+
         cstmt.execute();
-        
-        String result = cstmt.getString(3);
+
+        String result = cstmt.getString(8); // Corrected the index to match the output parameter
         if ("Thêm công việc thành công.".equals(result)) {
             cviec = new CongViecDTO();
-            cviec.setTenCV("TENCV");
-            cviec.setMaCV("MACV");
-            cviec.setMaNhom("MANHOM");
-            cviec.setLinhVuc("LINHVUC");
-            cviec.setMoTa("MOTA");
-            cviec.setMuc_uutien("MUC_UUTIEN");
-            cviec.setNgayBD("NGAYBD");
-            cviec.setNgayKT("NGAYKT");
+            cviec.setTenCV(TENCV);
+            cviec.setMaNhom(MANHOM);
+            cviec.setLinhVuc(LINHVUC);
+            cviec.setMoTa(MOTACV);
+            cviec.setMuc_uutien(Integer.parseInt(MUC_UUTIEN));
+            cviec.setNgayBD(sdf.parse(NGAYBD));
+            cviec.setNgayKT(sdf.parse(NGAYKT));
         } else {
             System.err.println(result);
         }
-        
+
     } catch (SQLException ex) {
-        // Log the exception with more context
-        System.err.println("Error while executing stored procedure TAO: " + ex.getMessage());
+        System.err.println("Error while executing stored procedure THEM_CONGVIEC: " + ex.getMessage());
+        ex.printStackTrace();
+    } catch (ParseException ex) {
+        System.err.println("Error while parsing date: " + ex.getMessage());
         ex.printStackTrace();
     }
     return cviec;
 }
-
     
 }

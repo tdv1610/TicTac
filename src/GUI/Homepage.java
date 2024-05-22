@@ -7,15 +7,21 @@ package GUI;
 import DAO.NguoiDungDAO;
 import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
+import DAO.ThucHienDAO;
 import DTO.NguoiDungDTO;
 import DTO.NguoiDung_NhomDTO;
 import DTO.NhomDTO;
+import DTO.ThucHienDTO;
 import GUI.DangNhap;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Homepage extends javax.swing.JFrame {
 
-    private String selectedMaNhom;
+public static String mn;
     /**
      * Creates new form Homepage
      */
@@ -34,7 +40,7 @@ public class Homepage extends javax.swing.JFrame {
         addTableClick2Listener();
         addTableClick1Listener();
     }
-    
+
     private void thongtinnhom() {
         NhomDAO nhomDAO = new NhomDAO();
         List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
@@ -44,6 +50,23 @@ public class Homepage extends javax.swing.JFrame {
 
         for (NhomDTO nhom : danhSachNhom) {
             model.addRow(new Object[]{nhom.getTenNhom()});
+        }
+    }
+    private void dsCV() {
+        ThucHienDAO th = new ThucHienDAO();
+        List<Map<String, Object>> danhSachCV = th.layDanhSachCVTheoEmail(DangNhap.pEmail);
+
+        DefaultTableModel model = (DefaultTableModel) table_CanLam_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (Map<String, Object> thien : danhSachCV) {
+        String tenCV = (String) thien.get("TENCV");
+        String linhVuc = (String) thien.get("LINHVUC");
+        String moTa = (String) thien.get("MOTACV");
+        int mucUuTien = (int) thien.get("MUC_UUTIEN");
+        Date ngayBD = (Date) thien.get("NGAYBD");
+        Date ngayKT = (Date) thien.get("NGAYKT");
+         model.addRow(new Object[]{tenCV, linhVuc, moTa, mucUuTien, ngayBD, ngayKT, mucUuTien});
         }
     }
     private void addTableClick2Listener() {
@@ -61,6 +84,52 @@ public class Homepage extends javax.swing.JFrame {
         }
         }
     });
+    table_CanLam_BangCV_VCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+            int row = table_CanLam_BangCV_VCT.getSelectedRow();
+            if (row >= 0) {
+                String tencvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
+                ChiTietCongViec ctcv = new ChiTietCongViec();
+                ctcv.show();
+                dispose();
+                
+            }
+        }
+        }
+    }
+    );
+    table_DangLam_BangCV_VCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+            int row = table_DangLam_BangCV_VCT.getSelectedRow();
+            if (row >= 0) {
+                String tencvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 0);
+                ChiTietCongViec ctcv = new ChiTietCongViec();
+                ctcv.show();
+                dispose();
+                
+            }
+        }
+        }
+    }
+    );
+    table_DaHoanThanh_BangCV_VCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+            int row = table_DaHoanThanh_BangCV_VCT.getSelectedRow();
+            if (row >= 0) {
+                String tenncvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 0);
+                ChiTietCongViec ctcv = new ChiTietCongViec();
+                ctcv.show();
+                dispose();
+                
+            }
+        }
+        }
+    }
+    );
+    
 }
     
     private void addTableClick1Listener() {
@@ -78,7 +147,7 @@ public class Homepage extends javax.swing.JFrame {
                         List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
                         for (NhomDTO nhom : danhSachNhom) {
                             if (nhom.getTenNhom().equals(tennhom)) {
-                                selectedMaNhom = nhom.getMaNhom();
+                                mn = nhom.getMaNhom();
                                 break;
                             }
                         }
@@ -289,43 +358,43 @@ public class Homepage extends javax.swing.JFrame {
         table_CanLam_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_CanLam_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên nhóm", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -361,43 +430,43 @@ public class Homepage extends javax.swing.JFrame {
         table_DangLam_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_DangLam_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên nhóm", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -428,43 +497,43 @@ public class Homepage extends javax.swing.JFrame {
         table_DaHoanThanh_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_DaHoanThanh_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên nhóm", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -715,6 +784,11 @@ public class Homepage extends javax.swing.JFrame {
         btn_themcongviec_NCT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_themcongviec_NCTMouseClicked(evt);
+            }
+        });
+        btn_themcongviec_NCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themcongviec_NCTActionPerformed(evt);
             }
         });
 
@@ -1040,6 +1114,7 @@ public class Homepage extends javax.swing.JFrame {
 
         if (!danhSachNhom.isEmpty()) {
             String maNhom = danhSachNhom.get(0).getMaNhom(); // Lấy mã nhóm từ danh sách nhóm
+            mn = maNhom;
             boolean suaThanhCong = nhomDAO.suaNhom(maNhom, tennhom);
 
             if (suaThanhCong) {
@@ -1071,8 +1146,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_roinhom_NCTActionPerformed
 
     private void btn_themcongviec_NCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTMouseClicked
-        TaoCongViec tcv = new TaoCongViec();
-        tcv.show();
+       
+
     }//GEN-LAST:event_btn_themcongviec_NCTMouseClicked
 
     private void tf_tennhom_homepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tennhom_homepageActionPerformed
@@ -1124,6 +1199,14 @@ public class Homepage extends javax.swing.JFrame {
     private void tf_thanhvien_homepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_thanhvien_homepageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_thanhvien_homepageActionPerformed
+
+    private void btn_themcongviec_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTActionPerformed
+        String email = tf_thanhvien_homepage.getText();
+    NhomDAO nhomDAO = new NhomDAO();
+    mn = nhomDAO.laymanhom(tf_tennhom_homepage.getText());
+            TaoCongViec tcv = new TaoCongViec();
+        tcv.show();
+    }//GEN-LAST:event_btn_themcongviec_NCTActionPerformed
 
     public void ViewTable(){
         DefaultTableModel model = (DefaultTableModel) this.table_ThongTinNhom_NCT.getModel();

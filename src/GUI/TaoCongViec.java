@@ -13,6 +13,7 @@ import DTO.CongViecDTO;
 import DTO.NguoiDung_NhomDTO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,23 +26,37 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TaoCongViec extends javax.swing.JFrame {
 
+
     /**
      * Creates new form TaoCongViec
      */
     public TaoCongViec() {
         initComponents();
         thongtinNPT();
+        addTableClickListener();
 
     }
     private void thongtinNPT() {
         NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
-        List<NguoiDung_NhomDTO> danhSachTV = tv.layDanhSachTVTheoMaNhom(TaoNhom.pMaNhom);
+        List<NguoiDung_NhomDTO> danhSachTV = tv.layDanhSachTVTheoMaNhom(Homepage.mn);
         DefaultTableModel model = (DefaultTableModel) table_NguoiPT.getModel();
         model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
 
         for (NguoiDung_NhomDTO tvien : danhSachTV) {
             model.addRow(new Object[]{tvien.getEmailND()});
         }
+    }
+    
+    private void addTableClickListener() {
+        table_NguoiPT.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = table_NguoiPT.getSelectedRow();
+                if (row >= 0) {
+                    String email = (String) table_NguoiPT.getValueAt(row, 0);
+                    tf_NguoiPT_TaoCV.setText(email);
+                }
+            }
+        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -300,39 +315,46 @@ public class TaoCongViec extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_TenCV_TaoCVActionPerformed
 
     private void btn_HoanThanh_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_TaoCVActionPerformed
-        if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||combobox_MDUT_TaoCV.getSelectedItem() == null|| textarea_MoTa_TaoCV.getText().isEmpty()|| jDateChooser1.getDate() == null ||jDateChooser2.getDate() == null) {
+            if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||
+        combobox_MDUT_TaoCV.getSelectedItem() == null || textarea_MoTa_TaoCV.getText().isEmpty() ||
+        jDateChooser1.getDate() == null || jDateChooser2.getDate() == null || tf_NguoiPT_TaoCV.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin cần thiết");
     } else {
-        // Create an instance of NhomDAO and attempt to add the group
-        CongViecDAO Themcv = new CongViecDAO();
-        CongViecDTO cv = Themcv.ThemCV(tf_TenCV_TaoCV.getText(), TaoNhom.pMaNhom, tf_LinhVuc_TaoCV.getText(), textarea_MoTa_TaoCV.getText(), (String) combobox_MDUT_TaoCV.getSelectedItem(), jDateChooser1.getDateFormatString(), jDateChooser2.getDateFormatString());
+        // Chuyển đổi ngày từ JDateChooser sang String
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayBD = sdf.format(jDateChooser1.getDate());
+        String ngayKT = sdf.format(jDateChooser2.getDate());
         
-        // Check the result and update the UI accordingly
+        // Tạo một instance của CongViecDAO và thử thêm công việc
+        CongViecDAO themcv = new CongViecDAO();
+        CongViecDTO cv = themcv.ThemCV(
+            tf_TenCV_TaoCV.getText(),
+            Homepage.mn,
+            tf_LinhVuc_TaoCV.getText(),
+            textarea_MoTa_TaoCV.getText(),
+            (String) combobox_MDUT_TaoCV.getSelectedItem(),
+            ngayBD,
+            ngayKT
+        );
+        
+        // Kiểm tra kết quả và cập nhật UI tương ứng
         if (cv != null) {
             JOptionPane.showMessageDialog(this, "Công việc đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-            // Open TaoCongViec window and close the current window
+            // Mở cửa sổ TaoCongViec và đóng cửa sổ hiện tại
             TaoCongViec tcv = new TaoCongViec();
             tcv.setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Tạo công viêc thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tạo công việc thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
     }//GEN-LAST:event_btn_HoanThanh_TaoCVActionPerformed
-private void addTableClick1Listener() {
-        table_NguoiPT.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) { // Kiểm tra xem có phải click một lần không
-                    int row = table_NguoiPT.getSelectedRow();
-                    if (row >= 0) {
-                        String ten = (String) table_NguoiPT.getValueAt(row, 0);
-                        tf_NguoiPT_TaoCV.setText(ten);
-                          }
-                }
-            }
-        });
-}
+
+
+public void ViewTable(){
+        DefaultTableModel model = (DefaultTableModel) this.table_NguoiPT.getModel();
+        
+    }
     /**
      * @param args the command line arguments
      */

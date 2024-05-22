@@ -275,9 +275,6 @@ public class TaoNhom extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Thành viên đã được thêm vào nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         
         // Mở cửa sổ TaoCongViec và đóng cửa sổ hiện tại
-        TaoCongViec tcv = new TaoCongViec();
-        tcv.setVisible(true);
-        dispose();
     } else {
         JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Tên nhóm đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }

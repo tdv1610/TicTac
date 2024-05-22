@@ -12,13 +12,13 @@ import java.util.Date;
  */
 public class CongViecDTO {
     private String maCV, maNhom, tenCV, linhVuc, moTa;
-    private String muc_uutien;
-    private String ngayBD, ngayKT;
+    private int muc_uutien;
+    private Date ngayBD, ngayKT;
 
     public CongViecDTO() {
     }
 
-    public CongViecDTO(String maCV, String maNhom, String tenCV, String linhVuc, String moTa, String muc_uutien, String ngayBD, String ngayKT) {
+    public CongViecDTO(String maCV, String maNhom, String tenCV, String linhVuc, String moTa, int muc_uutien, Date ngayBD, Date ngayKT) {
         this.maCV = maCV;
         this.maNhom = maNhom;
         this.tenCV = tenCV;
@@ -74,27 +74,27 @@ public class CongViecDTO {
         this.moTa = moTa;
     }
 
-    public String getMuc_uutien() {
+    public int getMuc_uutien() {
         return muc_uutien;
     }
 
-    public void setMuc_uutien(String muc_uutien) {
+    public void setMuc_uutien(int muc_uutien) {
         this.muc_uutien = muc_uutien;
     }
 
-    public String getNgayBD() {
+    public Date getNgayBD() {
         return ngayBD;
     }
 
-    public void setNgayBD(String ngayBD) {
+    public void setNgayBD(Date ngayBD) {
         this.ngayBD = ngayBD;
     }
 
-    public String getNgayKT() {
+    public Date getNgayKT() {
         return ngayKT;
     }
 
-    public void setNgayKT(String ngayKT) {
+    public void setNgayKT(Date ngayKT) {
         this.ngayKT = ngayKT;
     }
 }
