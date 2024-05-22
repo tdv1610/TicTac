@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class Homepage extends javax.swing.JFrame {
 
     private String manhom;
+    public static String tennhom;
     /**
      * Creates new form Homepage
      */
@@ -55,7 +56,7 @@ public class Homepage extends javax.swing.JFrame {
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_ThongTinNhom_NCT.getSelectedRow();
             if (row >= 0) {
-                String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);                
                 ChiTietNhom Chitiet = new ChiTietNhom();
                 Chitiet.show();
                 dispose();
@@ -73,10 +74,10 @@ public class Homepage extends javax.swing.JFrame {
                 if (e.getClickCount() == 1) { // Kiểm tra xem có phải click một lần không
                     int row = table_ThongTinNhom_NCT.getSelectedRow();
                     if (row >= 0) {
-                        String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
-                        tf_tennhom_homepage.setText(tennhom);
+                        String tennh = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                        tf_tennhom_homepage.setText(tennh);
                         NhomDAO nhom = new NhomDAO();
-                        manhom = nhom.laymanhom(tennhom);
+                        manhom = nhom.laymanhom(tennh);
 
                     }
                 }
