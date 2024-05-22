@@ -34,7 +34,7 @@ public class AdminHomepage extends javax.swing.JFrame {
         loadUserData();
         addTableClickListener();
          TF_getEmailAD.setText(DangNhap.pEmail);
-        TF_getTenAD.setText(getTenAdmin(DangNhap.pEmail));
+         TF_getTenAD.setText(getTenAdmin(DangNhap.pEmail));
     }
     private String getTenAdmin(String adminEmail) {
         String tenAdmin = "";
@@ -621,7 +621,7 @@ public class AdminHomepage extends javax.swing.JFrame {
             CallableStatement cstmt = connection.prepareCall(sql);
             cstmt.setString(1, email);
 
-            // Thực thi procedure
+            // Thực thi procedure 
             cstmt.execute();
 
             JOptionPane.showMessageDialog(this, "Xóa người dùng thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
