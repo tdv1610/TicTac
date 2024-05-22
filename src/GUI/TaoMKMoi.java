@@ -7,7 +7,7 @@ package GUI;
 import DAO.NguoiDungDAO;
 import DTO.NguoiDungDTO;
 import javax.swing.JOptionPane;
-
+import GUI.NhapEmail;
 /**
  *
  * @author ASUS
@@ -156,16 +156,15 @@ public class TaoMKMoi extends javax.swing.JFrame {
        String newPassword = new String(pwf_PassMoi_TMKM.getPassword());
                 String confirmPassword = new String(pwf_XacNhanPass_XNMK.getPassword());
                 NguoiDungDAO nd = new NguoiDungDAO();
-               
+               NguoiDungDTO user=nd.updatePassword(NhapEmail.pEmail);
                 if(newPassword.equals("")||confirmPassword.equals(""))
                 {
                     JOptionPane.showMessageDialog(null, "Bạn chưa nhập mật khẩu hoặc xác nhận mật khẩu.");
                 }
-        if (!newPassword.equals(confirmPassword)) {
+                else if (!newPassword.equals(confirmPassword)) {
                     JOptionPane.showMessageDialog(null, "Mật khẩu xác nhận không khớp.");
                 } else {
-                    NguoiDungDAO userDAO = new NguoiDungDAO();
-                    userDAO.updatePassword( newPassword);
+                    nd.updatePassword(NhapEmail.pEmail );
                     JOptionPane.showMessageDialog(null, "Mật khẩu đã được thay đổi thành công.");
                     dispose();
     }//GEN-LAST:event_btn_Xong_TaoMKMActionPerformed

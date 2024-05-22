@@ -149,6 +149,11 @@ public class Homepage extends javax.swing.JFrame {
                 btn_DX_TicTacMouseClicked(evt);
             }
         });
+        btn_DX_TicTac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DX_TicTacActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TicTacLayout = new javax.swing.GroupLayout(TicTac);
         TicTac.setLayout(TicTacLayout);
@@ -962,16 +967,19 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void btn_XoaTK_TKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTK_TKActionPerformed
- NguoiDungDAO nd = new NguoiDungDAO();
-        NguoiDungDTO nd1=nd.xoataikhoan(tf_TenNgDung_TK.getText(),tf_Email_TK.getText());
+
+        NguoiDungDAO nd = new NguoiDungDAO();
+        NguoiDungDTO nd1=nd.getUserByEmail(tf_Email_TK.getText());
+       
          if (nd1==null)
         {
             JOptionPane.showMessageDialog(null, "tai khoan khong ton tai");
 
         }
         else {
-             
+             nd.xoataikhoan(tf_TenNgDung_TK.getText(), tf_Email_TK.getText());
             JOptionPane.showMessageDialog(null, " ban da xoa tai khoan tren thanh cong");
+            
             DangNhap show = new DangNhap();
             show.setVisible(true);
             dispose();
@@ -982,6 +990,10 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
      
     }//GEN-LAST:event_tf_TenNgDung_TKMouseClicked
+
+    private void btn_DX_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DX_TicTacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_DX_TicTacActionPerformed
 
     /**
      * @param args the command line arguments

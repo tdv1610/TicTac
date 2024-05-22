@@ -75,7 +75,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         label_TenNgDung_DangNhap.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         label_TenNgDung_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
-        label_TenNgDung_DangNhap.setText("Tên người dùng");
+        label_TenNgDung_DangNhap.setText("Email");
 
         label_MatKhau_DangNhap.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         label_MatKhau_DangNhap.setForeground(new java.awt.Color(255, 255, 255));

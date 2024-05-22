@@ -19,6 +19,9 @@ import utils.mailsender;
  */
 public class NhapEmail extends javax.swing.JFrame {
 private String OTP;
+     public static String pEmail;
+    public static String pTen;
+    public static String pmatkhau;
     
     /**
      * Creates new form NhapEmail
@@ -161,7 +164,7 @@ private String OTP;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_NhanEmail_OTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhanEmail_OTPActionPerformed
-        
+        pEmail=tf_Email_OTP.getText();
                 String EMAIL = tf_Email_OTP.getText();
                 NguoiDungDAO userDAO = new NguoiDungDAO();
                 NguoiDungDTO user = userDAO.getUserByEmail(EMAIL);
@@ -188,6 +191,7 @@ private String OTP;
 
     private void btn_Xong_OTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_OTPActionPerformed
          String enteredOtp = tf_OTP_OTP.getText();
+         
         String otp= mailsender.getOTP();
             if (!enteredOtp.equals(otp)) 
                     JOptionPane.showMessageDialog(null, "OTP không đúng.");
