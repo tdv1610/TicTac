@@ -35,7 +35,7 @@ public class DangNhap extends javax.swing.JFrame {
     
     public static String Email;
     public static String HoTen;
-    public static String Matkhau;
+   // public static String Matkhau;
     /**
      * Creates new form DN_DK
      */
