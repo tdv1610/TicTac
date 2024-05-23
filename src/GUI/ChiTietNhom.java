@@ -68,6 +68,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
         table_DanhSachPhanCong = new javax.swing.JTable();
         btn_ThongKe = new javax.swing.JButton();
         jlable_tennhom = new javax.swing.JLabel();
+        btn_BackNCTHomePage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,9 +138,18 @@ public class ChiTietNhom extends javax.swing.JFrame {
         });
 
         jlable_tennhom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlable_tennhom.setForeground(new java.awt.Color(255, 255, 153));
+        jlable_tennhom.setForeground(new java.awt.Color(255, 255, 255));
         jlable_tennhom.setText("jlabel");
         jlable_tennhom.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        btn_BackNCTHomePage.setBackground(new java.awt.Color(0, 51, 51));
+        btn_BackNCTHomePage.setForeground(new java.awt.Color(255, 255, 255));
+        btn_BackNCTHomePage.setText("Quay lại");
+        btn_BackNCTHomePage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_BackNCTHomePageMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,21 +164,30 @@ public class ChiTietNhom extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(50, 50, 50)
-                                .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addComponent(btn_BackNCTHomePage))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn_ThongKe)
                             .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(btn_BackNCTHomePage)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -204,6 +223,13 @@ public class ChiTietNhom extends javax.swing.JFrame {
         tk.show();
         dispose();
     }//GEN-LAST:event_btn_ThongKeMouseClicked
+
+    private void btn_BackNCTHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_BackNCTHomePageMouseClicked
+        // TODO add your handling code here:
+        Homepage hp= new Homepage();
+        hp.show();
+        dispose();
+    }//GEN-LAST:event_btn_BackNCTHomePageMouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,6 +267,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_BackNCTHomePage;
     private javax.swing.JButton btn_ThongKe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

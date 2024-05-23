@@ -116,6 +116,7 @@ public class ThongKe extends javax.swing.JFrame {
         LB_TongSLCVCanLam = new javax.swing.JLabel();
         LB_TongSLCV_DangLam = new javax.swing.JLabel();
         LB_TongSLCVDaLam = new javax.swing.JLabel();
+        btn_backCTNhom = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         Canlam = new javax.swing.JPanel();
@@ -161,6 +162,13 @@ public class ThongKe extends javax.swing.JFrame {
         LB_TongSLCVDaLam.setForeground(new java.awt.Color(255, 255, 255));
         LB_TongSLCVDaLam.setText("__");
 
+        btn_backCTNhom.setText("Quay lại");
+        btn_backCTNhom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_backCTNhomMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -185,7 +193,10 @@ public class ThongKe extends javax.swing.JFrame {
                         .addComponent(LB_TongSLCV_DangLam))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(LB_TongSLCVCanLam)))
+                        .addComponent(LB_TongSLCVCanLam))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btn_backCTNhom)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -205,7 +216,9 @@ public class ThongKe extends javax.swing.JFrame {
                 .addComponent(LB_SLCV_DaLam)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LB_TongSLCVDaLam)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_backCTNhom)
+                .addGap(22, 22, 22))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
@@ -444,6 +457,13 @@ public class ThongKe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_backCTNhomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backCTNhomMouseClicked
+        // TODO add your handling code here:
+        ChiTietNhom ctn = new ChiTietNhom();
+        ctn.show();
+        dispose();
+    }//GEN-LAST:event_btn_backCTNhomMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -495,6 +515,7 @@ public class ThongKe extends javax.swing.JFrame {
     private javax.swing.JTable Table_CanLam;
     private javax.swing.JTable Table_Dalam;
     private javax.swing.JTable Table_DangLam;
+    private javax.swing.JButton btn_backCTNhom;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
