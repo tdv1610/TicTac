@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class NhomDAO extends connection {
     SQLConnectUnit connect;
     
-    public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
+    public static SQLConnection connection = new SQLConnection("c##TICTAC", "123", "orcl");
 
     public List<NhomDTO> layDanhSachNhomTheoEmail(String EMAIL_TRUONGNHOM) {
         List<NhomDTO> danhSachNhom = new ArrayList<>();
