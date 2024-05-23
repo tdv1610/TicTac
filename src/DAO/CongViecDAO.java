@@ -16,6 +16,7 @@ import java.sql.Types;
 import java.sql.CallableStatement; 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 public class CongViecDAO extends connection{
@@ -23,8 +24,8 @@ public class CongViecDAO extends connection{
     
     public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
     
-    public CongViecDTO TimCV(String TENCV) throws ParseException{
-        CongViecDTO cv = null;
+    public CongViecDTO TimCV(String MACV) throws ParseException {
+        CongViecDTO cv = new CongViecDTO();
         Connection con = null;
         PreparedStatement pre = null;
         ResultSet rs = null;
@@ -34,37 +35,28 @@ public class CongViecDAO extends connection{
             con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
 
-            String sql = "SELECT * FROM CONGVIEC WHERE TENCV = ?";
+            String sql = "SELECT * FROM CONGVIEC WHERE MACV = ?";
             pre = con.prepareStatement(sql);
-            pre.setString(1, TENCV);
+            pre.setString(1, MACV);
             System.out.println("Executing query: " + sql);
 
             rs = pre.executeQuery();
             
             if(rs.next()){
-                cv = new CongViecDTO();
-                cv.setMaCV(rs.getString("MACV"));
-                cv.setTenCV(TENCV);
+                cv.setMaCV(MACV);
                 cv.setMaNhom(rs.getString("MANHOM"));
+                cv.setTenCV(rs.getString("TENCV"));
                 cv.setLinhVuc(rs.getString("LINHVUC"));
                 cv.setMoTa(rs.getString("MOTACV"));
                 cv.setMuc_uutien(rs.getInt("MUC_UUTIEN"));
-                cv.setNgayBD(sdf.parse("NGAYBD"));
-                cv.setNgayKT(sdf.parse("NGAYKT"));
+                cv.setNgayBD(rs.getDate("NGAYBD"));
+                cv.setNgayKT(rs.getDate("NGAYKT"));
                 
-                System.out.println("User found: " + cv.toString());
-            }
-            else {
-                System.out.println("No group found with the provided credentials.");
             }
                
-        }
-        
-        catch(SQLException ex){
+        }catch (SQLException ex) {
             ex.printStackTrace();
-            
-        }
-        finally {
+        } finally {
             try {
                 if (rs != null) rs.close();
                 if (pre != null) pre.close();
@@ -76,45 +68,96 @@ public class CongViecDAO extends connection{
         return cv;
     }
     
-public CongViecDTO ThemCV(String TENCV, String MANHOM, String LINHVUC, String MOTACV, String MUC_UUTIEN, String NGAYBD, String NGAYKT) {
-    CongViecDTO cviec = null;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    try (Connection con = getConnection();
-         CallableStatement cstmt = con.prepareCall("{CALL THEM_CONGVIEC(?, ?, ?, ?, ?, ?, ?, ?)}")) {
+    public CongViecDTO ThemCV(String MANHOM, String TENCV, String LINHVUC, String MOTACV, String MUC_UUTIEN, String NGAYBD, String NGAYKT) {
+        CongViecDTO cviec = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try (Connection con = getConnection();
+            CallableStatement cstmt = con.prepareCall("{CALL THEM_CONGVIEC(?, ?, ?, ?, ?, ?, ?, ?)}")) {
 
-        cstmt.setString(1, TENCV);
-        cstmt.setString(2, MANHOM);
-        cstmt.setString(3, LINHVUC);
-        cstmt.setString(4, MOTACV);
-        cstmt.setInt(5, Integer.parseInt(MUC_UUTIEN));
-        cstmt.setDate(6, new java.sql.Date(sdf.parse(NGAYBD).getTime()));
-        cstmt.setDate(7, new java.sql.Date(sdf.parse(NGAYKT).getTime()));
-        cstmt.registerOutParameter(8, java.sql.Types.VARCHAR);
+        // Tách phần số từ chuỗi MUC_UUTIEN
+            int mucUuTien;
+            try {
+                String[] parts = MUC_UUTIEN.split("\\.");
+                mucUuTien = Integer.parseInt(parts[0].trim());
+            } 
+            catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                System.err.println("Mức ưu tiên không hợp lệ: " + MUC_UUTIEN);
+                return null;
+            }
 
-        cstmt.execute();
+            cstmt.setString(1, MANHOM);
+            cstmt.setString(2, TENCV);
+            cstmt.setString(3, LINHVUC);
+            cstmt.setString(4, MOTACV);
+            cstmt.setInt(5, mucUuTien);
+            cstmt.setDate(6, new java.sql.Date(sdf.parse(NGAYBD).getTime()));
+            cstmt.setDate(7, new java.sql.Date(sdf.parse(NGAYKT).getTime()));
+            cstmt.registerOutParameter(8, java.sql.Types.VARCHAR);
 
-        String result = cstmt.getString(8); // Corrected the index to match the output parameter
-        if ("Thêm công việc thành công.".equals(result)) {
-            cviec = new CongViecDTO();
-            cviec.setTenCV(TENCV);
-            cviec.setMaNhom(MANHOM);
-            cviec.setLinhVuc(LINHVUC);
-            cviec.setMoTa(MOTACV);
-            cviec.setMuc_uutien(Integer.parseInt(MUC_UUTIEN));
-            cviec.setNgayBD(sdf.parse(NGAYBD));
-            cviec.setNgayKT(sdf.parse(NGAYKT));
-        } else {
-            System.err.println(result);
+            cstmt.execute();
+
+            String result = cstmt.getString(8);
+            if ("Them cong viec thanh cong.".equals(result)) {
+                cviec = new CongViecDTO();
+                cviec.setMaNhom(MANHOM);
+                cviec.setTenCV(TENCV);
+                cviec.setLinhVuc(LINHVUC);
+                cviec.setMoTa(MOTACV);
+                cviec.setMuc_uutien(mucUuTien);
+                cviec.setNgayBD(sdf.parse(NGAYBD));
+                cviec.setNgayKT(sdf.parse(NGAYKT));
+            } 
+            else {
+                System.err.println("Stored Procedure Response: " + result);
+            }
+
         }
-
-    } catch (SQLException ex) {
-        System.err.println("Error while executing stored procedure THEM_CONGVIEC: " + ex.getMessage());
-        ex.printStackTrace();
-    } catch (ParseException ex) {
-        System.err.println("Error while parsing date: " + ex.getMessage());
-        ex.printStackTrace();
+        catch (SQLException ex) {
+            System.err.println("Error while executing stored procedure THEM_CONGVIEC: " + ex.getMessage());
+            ex.printStackTrace();
+        } 
+        catch (ParseException ex) {
+            System.err.println("Error while parsing date: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return cviec;
     }
-    return cviec;
-}
-    
+
+    public String laymacv(String MANHOM, String TENCV){
+        String macv = null; // Khai báo biến để lưu mã nhóm
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();  // Lấy kết nối tới cơ sở dữ liệu
+            System.out.println("KẾT NỐI THÀNH CÔNG.");
+
+            String sql = "SELECT MACV FROM CONGVIEC WHERE MANHOM = ? AND TENCV = ? "; // Chỉ lấy cột MANHOM
+            pre = con.prepareStatement(sql);
+            pre.setString(1, MANHOM);
+            pre.setString(2, TENCV);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                macv = rs.getString("MACV"); 
+                System.out.println("MÃ CÔNG VIỆC ĐƯỢC PHÂN : " + macv);
+            } else {
+                System.out.println("CÔNG VIỆC KHÔNG TỒN TẠI");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return macv;
+    }
 }

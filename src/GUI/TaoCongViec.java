@@ -9,8 +9,10 @@ import DTO.NhomDTO;
 import DAO.CongViecDAO;
 import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
+import DAO.ThucHienDAO;
 import DTO.CongViecDTO;
 import DTO.NguoiDung_NhomDTO;
+import DTO.ThucHienDTO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -25,7 +27,8 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class TaoCongViec extends javax.swing.JFrame {
-
+    public static String emailtv;
+    
 
     /**
      * Creates new form TaoCongViec
@@ -54,6 +57,7 @@ public class TaoCongViec extends javax.swing.JFrame {
                 if (row >= 0) {
                     String email = (String) table_NguoiPT.getValueAt(row, 0);
                     tf_NguoiPT_TaoCV.setText(email);
+                    emailtv = email;
                 }
             }
         });
@@ -315,7 +319,7 @@ public class TaoCongViec extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_TenCV_TaoCVActionPerformed
 
     private void btn_HoanThanh_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_TaoCVActionPerformed
-            if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||
+        if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||
         combobox_MDUT_TaoCV.getSelectedItem() == null || textarea_MoTa_TaoCV.getText().isEmpty() ||
         jDateChooser1.getDate() == null || jDateChooser2.getDate() == null || tf_NguoiPT_TaoCV.getText().isEmpty()) {
         JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin cần thiết");
@@ -324,27 +328,33 @@ public class TaoCongViec extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngayBD = sdf.format(jDateChooser1.getDate());
         String ngayKT = sdf.format(jDateChooser2.getDate());
+        String manh = Homepage.laymanhom;
         
         // Tạo một instance của CongViecDAO và thử thêm công việc
         CongViecDAO themcv = new CongViecDAO();
+        ThucHienDAO themthcv = new ThucHienDAO();
         CongViecDTO cv = themcv.ThemCV(
+            Homepage.laymanhom,
             tf_TenCV_TaoCV.getText(),
-            Homepage.mn,
             tf_LinhVuc_TaoCV.getText(),
             textarea_MoTa_TaoCV.getText(),
             (String) combobox_MDUT_TaoCV.getSelectedItem(),
             ngayBD,
             ngayKT
         );
+        String macv = themcv.laymacv(manh, tf_TenCV_TaoCV.getText());
         
         // Kiểm tra kết quả và cập nhật UI tương ứng
         if (cv != null) {
             JOptionPane.showMessageDialog(this, "Công việc đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-            // Mở cửa sổ TaoCongViec và đóng cửa sổ hiện tại
-            TaoCongViec tcv = new TaoCongViec();
-            tcv.setVisible(true);
+            ThucHienDTO thhuchien = themthcv.themthuchien(emailtv, macv, manh, "Cần làm");
+            
+            // Mở cửa sổ Homepage và đóng cửa sổ hiện tại
+            Homepage home = new Homepage();
+            home.setVisible(true);
             dispose();
-        } else {
+        } 
+        else {
             JOptionPane.showMessageDialog(this, "Tạo công việc thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }

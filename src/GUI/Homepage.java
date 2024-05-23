@@ -4,21 +4,24 @@
  */
 package GUI;
 
+import DAO.CongViecDAO;
 import DAO.NguoiDungDAO;
 import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
 import DAO.ThucHienDAO;
-import DTO.NguoiDungDTO;
+import DTO.CongViecDTO;
 import DTO.NguoiDung_NhomDTO;
 import DTO.NhomDTO;
 import DTO.ThucHienDTO;
 import GUI.DangNhap;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -30,16 +33,113 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Homepage extends javax.swing.JFrame {
 
-public static String mn;
+    public static String mn;
+    public static String tennhom;
+    public static String laymanhom;
+    public static String tencvcl;
+    public static String tencvdl;
+    public static String tencvdht;
+    
+    public static String macvcl;
+    public static String macvdl;
+    public static String  macvdht;
+        
     /**
      * Creates new form Homepage
      */
-    public Homepage() {
+    public Homepage(){
         initComponents();
         thongtinnhom();
         addTableClick2Listener();
         addTableClick1Listener();
+    try {
+        dsCVcanlam();
+        dsCVdahoanthanh();
+        dsCVdanglam();
+    } catch (ParseException ex) {
+        Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+    
+    private void dsCVcanlam() throws ParseException {
+        ThucHienDAO layma = new ThucHienDAO();
+        List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Cần làm");
+        CongViecDAO nhom = new CongViecDAO();
+        DefaultTableModel model = (DefaultTableModel) table_CanLam_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (ThucHienDTO dsmanhom : ma_nhom) {
+            CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
+            String manhomcl = dsmanhom.getMaNhom();
+            if (dscv != null) { // Kiểm tra null để tránh NullPointerException
+                String tencv = dscv.getTenCV();
+                String linhvuc = dscv.getLinhVuc();
+                String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
+                java.util.Date ngaybd = dscv.getNgayBD();
+                java.util.Date ngaykt = dscv.getNgayKT();
+                int muc_uutien = dscv.getMuc_uutien();
+                model.addRow(new Object[]{manhomcl, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+            }
+            else {
+                System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
+            }
+        }
+    }
+    
+    private void dsCVdahoanthanh() throws ParseException {
+        ThucHienDAO layma = new ThucHienDAO();
+        List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Đã hoàn thành");
+        CongViecDAO nhom = new CongViecDAO();
+        DefaultTableModel model = (DefaultTableModel) table_DaHoanThanh_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (ThucHienDTO dsmanhom : ma_nhom) {
+            CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
+            String manhomdht = dsmanhom.getMaNhom();
+            if (dscv != null) { // Kiểm tra null để tránh NullPointerException
+                String tencv = dscv.getTenCV();
+                String linhvuc = dscv.getLinhVuc();
+                String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
+                java.util.Date ngaybd = dscv.getNgayBD();
+                java.util.Date ngaykt = dscv.getNgayKT();
+                int muc_uutien = dscv.getMuc_uutien();
+                model.addRow(new Object[]{manhomdht, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+            }
+            else {
+                System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
+            }
+        }
+    }
+
+    
+    private void dsCVdanglam() throws ParseException {
+        ThucHienDAO layma = new ThucHienDAO();
+        List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Đang làm");
+        CongViecDAO nhom = new CongViecDAO();
+        DefaultTableModel model = (DefaultTableModel) table_DangLam_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (ThucHienDTO dsmanhom : ma_nhom) {
+            CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
+            String manhomdl = dsmanhom.getMaNhom();
+            if (dscv != null) { // Kiểm tra null để tránh NullPointerException
+                String tencv = dscv.getTenCV();
+                String linhvuc = dscv.getLinhVuc();
+                String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
+                java.util.Date ngaybd = dscv.getNgayBD();
+                java.util.Date ngaykt = dscv.getNgayKT();
+                int muc_uutien = dscv.getMuc_uutien();
+                model.addRow(new Object[]{manhomdl, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+            }
+            else {
+                System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
+            }
+        }
+    }
+
+
+    
+    
 
     private void thongtinnhom() {
         NhomDAO nhomDAO = new NhomDAO();
@@ -52,30 +152,14 @@ public static String mn;
             model.addRow(new Object[]{nhom.getTenNhom()});
         }
     }
-    private void dsCV() {
-        ThucHienDAO th = new ThucHienDAO();
-        List<Map<String, Object>> danhSachCV = th.layDanhSachCVTheoEmail(DangNhap.pEmail);
-
-        DefaultTableModel model = (DefaultTableModel) table_CanLam_BangCV_VCT.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
-
-        for (Map<String, Object> thien : danhSachCV) {
-        String tenCV = (String) thien.get("TENCV");
-        String linhVuc = (String) thien.get("LINHVUC");
-        String moTa = (String) thien.get("MOTACV");
-        int mucUuTien = (int) thien.get("MUC_UUTIEN");
-        Date ngayBD = (Date) thien.get("NGAYBD");
-        Date ngayKT = (Date) thien.get("NGAYKT");
-         model.addRow(new Object[]{tenCV, linhVuc, moTa, mucUuTien, ngayBD, ngayKT, mucUuTien});
-        }
-    }
+    
     private void addTableClick2Listener() {
     table_ThongTinNhom_NCT.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_ThongTinNhom_NCT.getSelectedRow();
             if (row >= 0) {
-                String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
                 ChiTietNhom nhom = new ChiTietNhom();
                 nhom.show();
                 dispose();
@@ -89,7 +173,8 @@ public static String mn;
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_CanLam_BangCV_VCT.getSelectedRow();
             if (row >= 0) {
-                String tencvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
+                macvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
+                tencvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 1);
                 ChiTietCongViec ctcv = new ChiTietCongViec();
                 ctcv.show();
                 dispose();
@@ -104,7 +189,8 @@ public static String mn;
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_DangLam_BangCV_VCT.getSelectedRow();
             if (row >= 0) {
-                String tencvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 0);
+                macvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 0);
+                tencvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 1);
                 ChiTietCongViec ctcv = new ChiTietCongViec();
                 ctcv.show();
                 dispose();
@@ -119,7 +205,8 @@ public static String mn;
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_DaHoanThanh_BangCV_VCT.getSelectedRow();
             if (row >= 0) {
-                String tenncvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 0);
+                macvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 0);
+                tencvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 1);
                 ChiTietCongViec ctcv = new ChiTietCongViec();
                 ctcv.show();
                 dispose();
@@ -139,14 +226,14 @@ public static String mn;
                 if (e.getClickCount() == 1) { // Kiểm tra xem có phải click một lần không
                     int row = table_ThongTinNhom_NCT.getSelectedRow();
                     if (row >= 0) {
-                        String tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                        String lay_tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
                         tf_tennhom_homepage.setText(tennhom);
 
                         // Lấy mã nhóm dựa trên tên nhóm đã chọn
                         NhomDAO nhomDAO = new NhomDAO();
                         List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
                         for (NhomDTO nhom : danhSachNhom) {
-                            if (nhom.getTenNhom().equals(tennhom)) {
+                            if (nhom.getTenNhom().equals(lay_tennhom)) {
                                 mn = nhom.getMaNhom();
                                 break;
                             }
@@ -156,10 +243,7 @@ public static String mn;
             }
         });
     }
-
-
-
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -358,43 +442,43 @@ public static String mn;
         table_CanLam_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_CanLam_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Ma nhom", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -540,19 +624,24 @@ public static String mn;
                 return canEdit [columnIndex];
             }
         });
-        table_DaHoanThanh_BangCV_VCT.setGridColor(new java.awt.Color(255, 255, 255));
+        table_DaHoanThanh_BangCV_VCT.setFocusable(false);
+        table_DaHoanThanh_BangCV_VCT.setGridColor(new java.awt.Color(255, 255, 153));
+        table_DaHoanThanh_BangCV_VCT.setInheritsPopupMenu(true);
         table_DaHoanThanh_BangCV_VCT.setSelectionBackground(new java.awt.Color(204, 255, 204));
+        table_DaHoanThanh_BangCV_VCT.setShowGrid(false);
+        table_DaHoanThanh_BangCV_VCT.setShowHorizontalLines(true);
+        table_DaHoanThanh_BangCV_VCT.setUpdateSelectionOnSort(false);
         scrpane_DaHoanThanh_BangCV_VCT.setViewportView(table_DaHoanThanh_BangCV_VCT);
 
         javax.swing.GroupLayout panel_DaHoanThanh_BangCV_VCTLayout = new javax.swing.GroupLayout(panel_DaHoanThanh_BangCV_VCT);
         panel_DaHoanThanh_BangCV_VCT.setLayout(panel_DaHoanThanh_BangCV_VCTLayout);
         panel_DaHoanThanh_BangCV_VCTLayout.setHorizontalGroup(
             panel_DaHoanThanh_BangCV_VCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrpane_DaHoanThanh_BangCV_VCT, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(scrpane_DaHoanThanh_BangCV_VCT)
         );
         panel_DaHoanThanh_BangCV_VCTLayout.setVerticalGroup(
             panel_DaHoanThanh_BangCV_VCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrpane_DaHoanThanh_BangCV_VCT, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+            .addComponent(scrpane_DaHoanThanh_BangCV_VCT)
         );
 
         tabbedpane_BangCV_VCT.addTab("Đã hoàn thành", panel_DaHoanThanh_BangCV_VCT);
@@ -1202,16 +1291,16 @@ public static String mn;
 
     private void btn_themcongviec_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTActionPerformed
         String email = tf_thanhvien_homepage.getText();
-    NhomDAO nhomDAO = new NhomDAO();
-    mn = nhomDAO.laymanhom(tf_tennhom_homepage.getText());
-            TaoCongViec tcv = new TaoCongViec();
+        NhomDAO layma = new NhomDAO();
+        laymanhom = layma.laymanhom(tf_tennhom_homepage.getText());
+        TaoCongViec tcv = new TaoCongViec();
         tcv.show();
+        dispose();
     }//GEN-LAST:event_btn_themcongviec_NCTActionPerformed
 
-    public void ViewTable(){
-        DefaultTableModel model = (DefaultTableModel) this.table_ThongTinNhom_NCT.getModel();
-        
-    }
+
+    
+    
  
     /**
      * @param args the command line arguments
