@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -237,8 +238,8 @@ public class ChiTietCongViec extends javax.swing.JFrame {
                                     .addGroup(jpanel_ChitietcongviecLayout.createSequentialGroup()
                                         .addComponent(jlabel_mucuutien)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jlabel_mucuutien_ChiTietCongViec)
-                                        .addGap(348, 348, 348)))))
+                                        .addComponent(jlabel_mucuutien_ChiTietCongViec, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(319, 319, 319)))))
                         .addGap(71, 71, 71))))
         );
         jpanel_ChitietcongviecLayout.setVerticalGroup(
@@ -303,38 +304,33 @@ public class ChiTietCongViec extends javax.swing.JFrame {
         int x = fc.showDialog(this, "Chọn");
         if (x == JFileChooser.APPROVE_OPTION) {
             File[] selectedFiles = fc.getSelectedFiles();
+            DefaultListModel<String> model = new DefaultListModel<>();
             for (File file : selectedFiles) {
-                saveFileToDatabase(file, ma_cv);
-            }
+                if (saveFileToDatabase(file, ma_cv)&& GrantDatabase(file)) {
+                model.addElement(file.getAbsolutePath());
+                JOptionPane.showMessageDialog(this, "Thêm file thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                JOptionPane.showMessageDialog(this, "Thêm file thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
+                }
         }
+        list_file_ChitiecCV.setModel(model);
+        }
+
     }
     
-    private void saveFileToDatabase(File file, String maCongViec) {
-        if (file != null && file.isFile()) {
-            try (FileInputStream fis = new FileInputStream(file)) {
-                String fileName = file.getName();
-                FileAttachmentService fileService = new FileAttachmentService();
-                boolean saved = fileService.saveFileToDisk(fileName, fis);
-
-                if (saved) {
-                    String duongDan = file.getAbsolutePath();
-                    FileAttachmentDAO fileAttachmentDAO = new FileAttachmentDAO();
-                    boolean inserted = fileAttachmentDAO.insertFileAttachment(duongDan, maCongViec);
-                    if (inserted) {
-                        System.out.println("File đã được lưu vào cơ sở dữ liệu thành công.");
-                    } else {
-                        System.err.println("Lỗi: Không thể lưu file vào cơ sở dữ liệu.");
-                    }
-                } else {
-                    System.err.println("Lỗi: Không thể lưu file vào đĩa.");
-                }
-            } catch (IOException e) {
-                System.err.println("Lỗi: Không thể đọc file.");
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("Lỗi: File không tồn tại hoặc không phải là một file.");
-        }
+    private boolean saveFileToDatabase(File file, String ma_cv) {
+        FileAttachmentDAO fileAttachmentDAO = new FileAttachmentDAO();
+        String filePath = file.getAbsolutePath();
+        fileAttachmentDAO.Capquyen(filePath);
+        return fileAttachmentDAO.insertFileAttachment(filePath, ma_cv);
+    }
+    
+    private boolean GrantDatabase(File file) {
+        FileAttachmentDAO fileAttachmentDAO = new FileAttachmentDAO();
+        String filePath = file.getAbsolutePath();
+        return fileAttachmentDAO.Capquyen(filePath);
     }
 
 
@@ -360,6 +356,9 @@ public class ChiTietCongViec extends javax.swing.JFrame {
 
     private void btn_HoanThanh_ChiTiecCongViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_ChiTiecCongViecActionPerformed
         // TODO add your handling code here:
+        Homepage home = new Homepage();
+        home.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btn_HoanThanh_ChiTiecCongViecActionPerformed
 
     /**

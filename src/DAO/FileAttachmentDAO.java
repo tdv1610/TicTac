@@ -26,6 +26,22 @@ public class FileAttachmentDAO extends connection {
             return false;
         }
     }
+    
+    public boolean Capquyen(String DUONGDAN) {
+        try (Connection con = getConnection();
+             CallableStatement cstmt = con.prepareCall("{CALL GRANT_FILE_PERMISSION(?)}")) {
+
+            cstmt.setString(1, DUONGDAN);
+            int rowsAffected = cstmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException ex) {
+            System.err.println("Error while executing stored procedure INSERT_FILE_ATTACHMENT: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
 }
 
 
