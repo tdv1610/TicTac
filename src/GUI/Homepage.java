@@ -215,6 +215,16 @@ public class Homepage extends javax.swing.JFrame {
         tf_timcongviec_VCT.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         tf_timcongviec_VCT.setText("Nhập thông tin công việc");
         tf_timcongviec_VCT.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        tf_timcongviec_VCT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_timcongviec_VCTMouseClicked(evt);
+            }
+        });
+        tf_timcongviec_VCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_timcongviec_VCTActionPerformed(evt);
+            }
+        });
 
         btn_TimKiem_VCT.setBackground(new java.awt.Color(0, 102, 102));
         btn_TimKiem_VCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
@@ -468,6 +478,11 @@ public class Homepage extends javax.swing.JFrame {
         tf_TimNhom_NCT.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         tf_TimNhom_NCT.setText("Nhập thông tin nhóm");
         tf_TimNhom_NCT.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        tf_TimNhom_NCT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_TimNhom_NCTMouseClicked(evt);
+            }
+        });
         tf_TimNhom_NCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_TimNhom_NCTActionPerformed(evt);
@@ -555,7 +570,6 @@ public class Homepage extends javax.swing.JFrame {
 
         jTextField1.setBackground(new java.awt.Color(0, 153, 153));
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextField1.setText("jTextField1");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -563,7 +577,6 @@ public class Homepage extends javax.swing.JFrame {
 
         jTextField2.setBackground(new java.awt.Color(0, 153, 153));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextField2.setText("jTextField2");
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -767,12 +780,10 @@ public class Homepage extends javax.swing.JFrame {
 
         jlabel_tennd.setBackground(new java.awt.Color(255, 255, 204));
         jlabel_tennd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jlabel_tennd.setText("jLabel5");
         jlabel_tennd.setOpaque(true);
 
         jlable_emailnd.setBackground(new java.awt.Color(255, 255, 204));
         jlable_emailnd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jlable_emailnd.setText("jLabel5");
         jlable_emailnd.setOpaque(true);
 
         javax.swing.GroupLayout panel_TKLayout = new javax.swing.GroupLayout(panel_TK);
@@ -782,9 +793,7 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_TKLayout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_TKLayout.createSequentialGroup()
-                        .addComponent(label_MaNgDung_TK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(label_MaNgDung_TK)
                     .addGroup(panel_TKLayout.createSequentialGroup()
                         .addComponent(label_TenNgDung_TK)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -798,7 +807,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_DoiPass_TK)
                     .addComponent(btn_XoaTK_TK))
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_TKLayout.setVerticalGroup(
             panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -979,6 +988,22 @@ public class Homepage extends javax.swing.JFrame {
     private void btn_DX_TicTacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DX_TicTacActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_DX_TicTacActionPerformed
+
+    private void tf_timcongviec_VCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_timcongviec_VCTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_timcongviec_VCTActionPerformed
+
+    private void tf_TimNhom_NCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_TimNhom_NCTMouseClicked
+       if (tf_TimNhom_NCT.getText().equals("Nhập thông tin nhóm")) {
+                    tf_TimNhom_NCT.setText("");
+                }
+    }//GEN-LAST:event_tf_TimNhom_NCTMouseClicked
+
+    private void tf_timcongviec_VCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_timcongviec_VCTMouseClicked
+        if (tf_timcongviec_VCT.getText().equals("Nhập thông tin công việc")) {
+                    tf_timcongviec_VCT.setText("");
+                }
+    }//GEN-LAST:event_tf_timcongviec_VCTMouseClicked
 
     /**
      * @param args the command line arguments

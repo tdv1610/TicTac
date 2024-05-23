@@ -367,8 +367,10 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="jTextField2"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField3">
               <Properties>
@@ -378,7 +380,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="jTextField3"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton5">
@@ -504,7 +505,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="jTextField4"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
@@ -518,7 +518,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="jTextField5"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_DoiPass_TK">

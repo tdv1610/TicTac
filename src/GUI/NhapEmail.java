@@ -69,6 +69,11 @@ private String OTP;
         tf_Email_OTP.setForeground(new java.awt.Color(255, 255, 255));
         tf_Email_OTP.setText("Nhập email để nhận OTP");
         tf_Email_OTP.setToolTipText("");
+        tf_Email_OTP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_Email_OTPMouseClicked(evt);
+            }
+        });
 
         btn_NhanEmail_OTP.setBackground(new java.awt.Color(0, 102, 102));
         btn_NhanEmail_OTP.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,9 +206,15 @@ private String OTP;
                 new TaoMKMoi().setVisible(true);
                 this.dispose();
              
-            
+            }    
     }//GEN-LAST:event_btn_Xong_OTPActionPerformed
-    }
+
+    private void tf_Email_OTPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_Email_OTPMouseClicked
+        if (tf_Email_OTP.getText().equals("Nhập email để nhận OTP")) {
+                    tf_Email_OTP.setText("");
+                }
+    }//GEN-LAST:event_tf_Email_OTPMouseClicked
+    
     /**
      * @param args the command line arguments
      */

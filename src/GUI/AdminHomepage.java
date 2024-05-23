@@ -172,11 +172,14 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jTextField2.setBackground(new java.awt.Color(0, 153, 153));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setBackground(new java.awt.Color(0, 153, 153));
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField3.setText("jTextField3");
 
         jButton5.setBackground(new java.awt.Color(0, 51, 51));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -260,7 +263,6 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jTextField4.setBackground(new java.awt.Color(0, 153, 153));
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField4.setText("jTextField4");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -269,7 +271,6 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jTextField5.setBackground(new java.awt.Color(0, 153, 153));
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField5.setText("jTextField5");
 
         btn_DoiPass_TK.setBackground(new java.awt.Color(0, 51, 51));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -382,6 +383,10 @@ public class AdminHomepage extends javax.swing.JFrame {
         dn.show();
         dispose();
     }//GEN-LAST:event_btn_DX_TicTacMouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
