@@ -43,7 +43,7 @@ public class Homepage extends javax.swing.JFrame {
     
     public static String macvcl;
     public static String macvdl;
-    public static String  macvdht;
+    public static String macvdht;
         
     /**
      * Creates new form Homepage

@@ -4,9 +4,14 @@
  */
 package DAO;
 
+import DTO.FileAttachmentDTO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileAttachmentDAO extends connection {
 
@@ -41,6 +46,49 @@ public class FileAttachmentDAO extends connection {
             return false;
         }
     }
+    
+    public List<FileAttachmentDTO> layDanhSachFileTheoMacv(String MA_CV) {
+    List<FileAttachmentDTO> danhSachfile = new ArrayList<>();
+    Connection con = null;
+    PreparedStatement pre = null;
+    ResultSet rs = null;
+
+    try {
+        // Get the database connection
+        con = getConnection();
+        System.out.println("Connection established successfully.");
+
+        String sql = "SELECT * FROM FILE_ATTACHMENT WHERE MA_CV = ?";
+        pre = con.prepareStatement(sql);
+        pre.setString(1, MA_CV);
+        System.out.println("Executing query: " + sql);
+
+        rs = pre.executeQuery();
+
+        while (rs.next()) {
+            FileAttachmentDTO file = new FileAttachmentDTO();
+            file.setDuongDan(rs.getString("DUONGDAN")); // Sửa lại chỗ này
+            /*file.setTenFile(rs.getString("TENFILE"));
+            file.setMaFile(rs.getInt("MAFILE"));
+            file.setKichThuoc(rs.getLong("KICHTHUOC"));
+            file.setMaCongViec(MA_CV); */
+            danhSachfile.add(file);
+        }
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pre != null) pre.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return danhSachfile;
+}
+
     
 }
 

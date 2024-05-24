@@ -56,41 +56,41 @@ public class NguoiDung_NhomDAO extends connection{
 }
     public List<NguoiDung_NhomDTO> layDanhSachTVTheoMaNhom(String MANHOM) {
         List<NguoiDung_NhomDTO> danhSachTV = new ArrayList<>();
-Connection con = null;
-PreparedStatement pre = null;
-ResultSet rs = null;
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
 
-try {
-    // Get the database connection
-    con = getConnection();
-    System.out.println("Connection established successfully.");
+        try {
+            // Get the database connection
+            con = getConnection();
+            System.out.println("Connection established successfully.");
 
-    // Update SQL to select both EMAILND and MANHOM
-    String sql = "SELECT * FROM NGUOIDUNG_NHOM WHERE MANHOM = ?";
-    pre = con.prepareStatement(sql);
-    pre.setString(1, MANHOM);
-    System.out.println("Executing query: " + sql);
+            // Update SQL to select both EMAILND and MANHOM
+            String sql = "SELECT * FROM NGUOIDUNG_NHOM WHERE MANHOM = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, MANHOM);
+            System.out.println("Executing query: " + sql);
 
-    rs = pre.executeQuery();
+            rs = pre.executeQuery();
 
-    while (rs.next()) {
-        NguoiDung_NhomDTO tv = new NguoiDung_NhomDTO();
-        tv.setMaNhom(rs.getString("MANHOM"));  // Ensure "MANHOM" is retrieved from the result set
-        tv.setEmailND(rs.getString("EMAILND"));  // Ensure "EMAILND" is retrieved from the result set
-        danhSachTV.add(tv);
-    }
+            while (rs.next()) {
+                NguoiDung_NhomDTO tv = new NguoiDung_NhomDTO();
+                tv.setMaNhom(rs.getString("MANHOM"));  // Ensure "MANHOM" is retrieved from the result set
+                tv.setEmailND(rs.getString("EMAILND"));  // Ensure "EMAILND" is retrieved from the result set
+                danhSachTV.add(tv);
+            }
 
-} catch (SQLException ex) {
-    ex.printStackTrace();
-} finally {
-    try {
-        if (rs != null) rs.close();
-        if (pre != null) pre.close();
-        if (con != null) con.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
-return danhSachTV;
-}
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return danhSachTV;
+        }
 }

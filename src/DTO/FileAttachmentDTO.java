@@ -15,6 +15,10 @@ public class FileAttachmentDTO {
     private long kichThuoc;
     private String duongDan;
     private String maCongViec;
+    
+    public FileAttachmentDTO(){
+        
+    }
 
     // Constructor
     public FileAttachmentDTO(int maFile, String tenFile, String loaiFile, long kichThuoc, String duongDan, String maCongViec) {
