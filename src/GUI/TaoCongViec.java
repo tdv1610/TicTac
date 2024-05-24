@@ -4,22 +4,64 @@
  */
 package GUI;
 
+import static javax.swing.UIManager.getString;
 import DTO.NhomDTO;
 import DAO.CongViecDAO;
+import DAO.NguoiDung_NhomDAO;
+import DAO.NhomDAO;
+import DAO.ThucHienDAO;
+import DTO.CongViecDTO;
+import DTO.NguoiDung_NhomDTO;
+import DTO.ThucHienDTO;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.UIManager.get;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ASUS
  */
 public class TaoCongViec extends javax.swing.JFrame {
+    public static String emailtv;
+    
 
     /**
      * Creates new form TaoCongViec
      */
     public TaoCongViec() {
         initComponents();
-    }
+        thongtinNPT();
+        addTableClickListener();
 
+    }
+    private void thongtinNPT() {
+        NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
+        List<NguoiDung_NhomDTO> danhSachTV = tv.layDanhSachTVTheoMaNhom(Homepage.mn);
+        DefaultTableModel model = (DefaultTableModel) table_NguoiPT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (NguoiDung_NhomDTO tvien : danhSachTV) {
+            model.addRow(new Object[]{tvien.getEmailND()});
+        }
+    }
+    
+    private void addTableClickListener() {
+        table_NguoiPT.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = table_NguoiPT.getSelectedRow();
+                if (row >= 0) {
+                    String email = (String) table_NguoiPT.getValueAt(row, 0);
+                    tf_NguoiPT_TaoCV.setText(email);
+                    emailtv = email;
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,12 +85,12 @@ public class TaoCongViec extends javax.swing.JFrame {
         textarea_MoTa_TaoCV = new javax.swing.JTextArea();
         combobox_MDUT_TaoCV = new javax.swing.JComboBox<>();
         label_NguoiPT_TaoCV = new javax.swing.JLabel();
-        scrpane_NguoiPT_TaoCV = new javax.swing.JScrollPane();
-        list_NguoiPT_TaoCV = new javax.swing.JList<>();
         btn_HoanThanh_TaoCV = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        tf_NguoiPT_TaoCV = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_NguoiPT = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,20 +150,17 @@ public class TaoCongViec extends javax.swing.JFrame {
         label_NguoiPT_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_NguoiPT_TaoCV.setText("Chọn người phụ trách");
 
-        list_NguoiPT_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
-        list_NguoiPT_TaoCV.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        scrpane_NguoiPT_TaoCV.setViewportView(list_NguoiPT_TaoCV);
-
         btn_HoanThanh_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
         btn_HoanThanh_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_HoanThanh_TaoCV.setText("Hoàn thành");
         btn_HoanThanh_TaoCV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_HoanThanh_TaoCVMouseClicked(evt);
+            }
+        });
+        btn_HoanThanh_TaoCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HoanThanh_TaoCVActionPerformed(evt);
             }
         });
 
@@ -131,14 +170,37 @@ public class TaoCongViec extends javax.swing.JFrame {
         jDateChooser2.setBackground(new java.awt.Color(0, 153, 153));
         jDateChooser2.setDateFormatString("dd MMM yyyy");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Tạo thêm");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+        tf_NguoiPT_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+
+        table_NguoiPT.setBackground(new java.awt.Color(0, 153, 153));
+        table_NguoiPT.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Tên"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(table_NguoiPT);
 
         javax.swing.GroupLayout panel_TaoCVLayout = new javax.swing.GroupLayout(panel_TaoCV);
         panel_TaoCV.setLayout(panel_TaoCVLayout);
@@ -173,17 +235,19 @@ public class TaoCongViec extends javax.swing.JFrame {
                             .addGroup(panel_TaoCVLayout.createSequentialGroup()
                                 .addComponent(label_NguoiPT_TaoCV)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(scrpane_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tf_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel_TaoCVLayout.createSequentialGroup()
                                 .addComponent(label_MDUT_TaoCV)
                                 .addGap(40, 40, 40)
                                 .addComponent(combobox_MDUT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_TaoCVLayout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btn_HoanThanh_TaoCV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addGap(297, 297, 297)
+                        .addComponent(btn_HoanThanh_TaoCV)))
                 .addContainerGap(100, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_TaoCVLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182))
         );
         panel_TaoCVLayout.setVerticalGroup(
             panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,8 +267,8 @@ public class TaoCongViec extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_MoTa_TaoCV)
-                    .addComponent(scrpane_MoTa_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(scrpane_MoTa_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_MDUT_TaoCV)
                     .addComponent(combobox_MDUT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,13 +279,13 @@ public class TaoCongViec extends javax.swing.JFrame {
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_NguoiPT_TaoCV)
-                    .addComponent(scrpane_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_NguoiPT_TaoCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panel_TaoCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_HoanThanh_TaoCV)
-                    .addComponent(jButton1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(btn_HoanThanh_TaoCV)
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -238,6 +302,7 @@ public class TaoCongViec extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
 
     private void combobox_MDUT_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_MDUT_TaoCVActionPerformed
         // TODO add your handling code here:
@@ -253,15 +318,57 @@ public class TaoCongViec extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_TenCV_TaoCVActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        TaoCongViec tcv = new TaoCongViec();
-        tcv.show();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void btn_HoanThanh_TaoCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_TaoCVActionPerformed
+        if (tf_TenCV_TaoCV.getText().isEmpty() || tf_LinhVuc_TaoCV.getText().isEmpty() ||
+        combobox_MDUT_TaoCV.getSelectedItem() == null || textarea_MoTa_TaoCV.getText().isEmpty() ||
+        jDateChooser1.getDate() == null || jDateChooser2.getDate() == null || tf_NguoiPT_TaoCV.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin cần thiết");
+    } else {
+        // Chuyển đổi ngày từ JDateChooser sang String
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayBD = sdf.format(jDateChooser1.getDate());
+        String ngayKT = sdf.format(jDateChooser2.getDate());
+        String manh = Homepage.laymanhom;
+        
+        // Tạo một instance của CongViecDAO và thử thêm công việc
+        CongViecDAO themcv = new CongViecDAO();
+        ThucHienDAO themthcv = new ThucHienDAO();
+        CongViecDTO cv = themcv.ThemCV(
+            Homepage.laymanhom,
+            tf_TenCV_TaoCV.getText(),
+            tf_LinhVuc_TaoCV.getText(),
+            textarea_MoTa_TaoCV.getText(),
+            (String) combobox_MDUT_TaoCV.getSelectedItem(),
+            ngayBD,
+            ngayKT
+        );
+        String macv = themcv.laymacv(manh, tf_TenCV_TaoCV.getText());
+        
+        // Kiểm tra kết quả và cập nhật UI tương ứng
+        if (cv != null) {
+            JOptionPane.showMessageDialog(this, "Công việc đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            ThucHienDTO thhuchien = themthcv.themthuchien(emailtv, macv, manh, "Cần làm");
+            
+            // Mở cửa sổ Homepage và đóng cửa sổ hiện tại
+            Homepage home = new Homepage();
+            home.setVisible(true);
+            dispose();
+        } 
+        else {
+            JOptionPane.showMessageDialog(this, "Tạo công việc thất bại. Vui lòng kiểm tra lại thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btn_HoanThanh_TaoCVActionPerformed
 
+
+public void ViewTable(){
+        DefaultTableModel model = (DefaultTableModel) this.table_NguoiPT.getModel();
+        
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+      public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -296,9 +403,9 @@ public class TaoCongViec extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_HoanThanh_TaoCV;
     private javax.swing.JComboBox<String> combobox_MDUT_TaoCV;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_LinhVuc_TaCV;
     private javax.swing.JLabel label_MDUT_TaoCV;
     private javax.swing.JLabel label_MoTa_TaoCV;
@@ -307,12 +414,12 @@ public class TaoCongViec extends javax.swing.JFrame {
     private javax.swing.JLabel label_NguoiPT_TaoCV;
     private javax.swing.JLabel label_TaoCV;
     private javax.swing.JLabel label_TenCV_TaoCV;
-    private javax.swing.JList<String> list_NguoiPT_TaoCV;
     private javax.swing.JPanel panel_TaoCV;
     private javax.swing.JScrollPane scrpane_MoTa_TaoCV;
-    private javax.swing.JScrollPane scrpane_NguoiPT_TaoCV;
+    private javax.swing.JTable table_NguoiPT;
     private javax.swing.JTextArea textarea_MoTa_TaoCV;
     private javax.swing.JTextField tf_LinhVuc_TaoCV;
+    private javax.swing.JTextField tf_NguoiPT_TaoCV;
     private javax.swing.JTextField tf_TenCV_TaoCV;
     // End of variables declaration//GEN-END:variables
 }

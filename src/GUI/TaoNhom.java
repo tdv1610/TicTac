@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TaoNhom extends javax.swing.JFrame {
 
+    public static String pMaNhom;
     /**
      * Creates new form TaoNhom
      */
@@ -213,7 +214,7 @@ public class TaoNhom extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_TenNhom_TaoNhomActionPerformed
 
     private void btn_Xong_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomActionPerformed
-        // TODO add your handling code here:                                                                                       
+        // TODO add your handling code here:                
      if (tf_TenNhom_TaoNhom.getText().isEmpty()) {
     JOptionPane.showMessageDialog(null, "Chưa nhập tên nhóm");
 } else {
@@ -233,6 +234,7 @@ public class TaoNhom extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Nhóm đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         // Lấy mã nhóm của nhóm vừa được tạo
         String maNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
+        pMaNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
 
         // Thêm thành viên vào nhóm mới tạo
         NguoiDung_NhomDAO themtv = new NguoiDung_NhomDAO();
@@ -271,11 +273,6 @@ public class TaoNhom extends javax.swing.JFrame {
         
         // Nếu không có lỗi, hiển thị thông báo thành viên đã được thêm thành công
         JOptionPane.showMessageDialog(this, "Thành viên đã được thêm vào nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Mở cửa sổ TaoCongViec và đóng cửa sổ hiện tại
-        TaoCongViec tcv = new TaoCongViec();
-        tcv.setVisible(true);
-        dispose();
     } else {
         JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Tên nhóm đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
@@ -284,7 +281,6 @@ public class TaoNhom extends javax.swing.JFrame {
 
     
     private void btn_Xong_TaoNhomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomMouseClicked
-
     }//GEN-LAST:event_btn_Xong_TaoNhomMouseClicked
 
     private void btn_ThanhVien_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThanhVien_TaoNhomActionPerformed

@@ -9,6 +9,8 @@ import DAO.ThucHienDAO;
 import DTO.PhanCongDTO;
 import DTO.ThucHienDTO;
 import GUI.Homepage;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -20,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class ChiTietNhom extends javax.swing.JFrame {
-
+    public static String tencv;
+    public static String nguoiphutrach;
     
     /**
      * Creates new form ChiTietNhom
@@ -29,26 +32,44 @@ public class ChiTietNhom extends javax.swing.JFrame {
         initComponents();
         thongTinPhanCong();
         xemtennhom();
+        addTableClickListener();
     }
     
     private void thongTinPhanCong() {
-    jlable_tennhom.setText(Homepage.tennhom);
-    ThucHienDAO thuchien = new ThucHienDAO();
-    NhomDAO nhom = new NhomDAO();
-    String manhom = nhom.laymanhom(Homepage.tennhom);
-    List<PhanCongDTO> danhSachPhanCong = thuchien.layDanhSachPhanCongTrongNhom(manhom);
+        jlable_tennhom.setText(Homepage.tennhom);
+        ThucHienDAO thuchien = new ThucHienDAO();
+        NhomDAO nhom = new NhomDAO();
+        String manhom = nhom.laymanhom(Homepage.tennhom);
+        List<PhanCongDTO> danhSachPhanCong = thuchien.layDanhSachPhanCongTrongNhom(manhom);
 
-    DefaultTableModel model = (DefaultTableModel) table_DanhSachPhanCong.getModel();
-    model.setRowCount(0); // Clear all existing rows in the table
+        DefaultTableModel model = (DefaultTableModel) table_DanhSachPhanCong.getModel();
+        model.setRowCount(0); // Clear all existing rows in the table
 
-    for(PhanCongDTO phanCong : danhSachPhanCong) {
-        model.addRow(new Object[]{phanCong.getTenCV(), phanCong.getEmailThanhVien(), phanCong.getTrangThai()});
+        for(PhanCongDTO phanCong : danhSachPhanCong) {
+            model.addRow(new Object[]{phanCong.getTenCV(), phanCong.getEmailThanhVien(), phanCong.getTrangThai()});
+        }
     }
-}
     private void xemtennhom(){
-    Homepage homepage = new Homepage();
-    jlable_tennhom.setText(homepage.tennhom);
-}
+        Homepage homepage = new Homepage();
+        jlable_tennhom.setText(homepage.tennhom);
+    }
+    
+    private void addTableClickListener() {
+        table_DanhSachPhanCong.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+                    int row = table_DanhSachPhanCong.getSelectedRow();
+                    if (row >= 0) {
+                        tencv = jlable_tennhom.getText();
+                        nguoiphutrach = (String) table_DanhSachPhanCong.getValueAt(row, 1);
+                        XemTienDoCongViec chitiet = new XemTienDoCongViec();
+                        chitiet.show();
+                        dispose();
+                    }
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,7 +137,15 @@ public class ChiTietNhom extends javax.swing.JFrame {
             new String [] {
                 "Tên công việc", "Tên người phụ trách", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scrpane_ThanhVien_TaoNhom.setViewportView(table_DanhSachPhanCong);
 
         jButton1.setBackground(new java.awt.Color(0, 51, 51));

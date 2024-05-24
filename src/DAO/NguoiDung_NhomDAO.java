@@ -54,9 +54,8 @@ public class NguoiDung_NhomDAO extends connection{
     }
     return nd_nhom;
 }
-    
-    public List<NguoiDung_NhomDTO> layDanhSachNhomTheoEmail(String EMAILND) {
-        List<NguoiDung_NhomDTO> danhSachNhom = new ArrayList<>();
+    public List<NguoiDung_NhomDTO> layDanhSachTVTheoMaNhom(String MANHOM) {
+        List<NguoiDung_NhomDTO> danhSachTV = new ArrayList<>();
         Connection con = null;
         PreparedStatement pre = null;
         ResultSet rs = null;
@@ -66,18 +65,19 @@ public class NguoiDung_NhomDAO extends connection{
             con = getConnection();
             System.out.println("Connection established successfully.");
 
-            String sql = "SELECT * FROM NGUOIDUNG_NHOM WHERE EMAILND = ?";
+            // Update SQL to select both EMAILND and MANHOM
+            String sql = "SELECT * FROM NGUOIDUNG_NHOM WHERE MANHOM = ?";
             pre = con.prepareStatement(sql);
-            pre.setString(1, EMAILND);
+            pre.setString(1, MANHOM);
             System.out.println("Executing query: " + sql);
 
             rs = pre.executeQuery();
 
             while (rs.next()) {
-                NguoiDung_NhomDTO nhom = new NguoiDung_NhomDTO();
-                nhom.setMaNhom(rs.getString("MANHOM"));
-                nhom.setEmailND(rs.getString("EMAILND"));
-                danhSachNhom.add(nhom);
+                NguoiDung_NhomDTO tv = new NguoiDung_NhomDTO();
+                tv.setMaNhom(rs.getString("MANHOM"));  // Ensure "MANHOM" is retrieved from the result set
+                tv.setEmailND(rs.getString("EMAILND"));  // Ensure "EMAILND" is retrieved from the result set
+                danhSachTV.add(tv);
             }
 
         } catch (SQLException ex) {
@@ -91,9 +91,8 @@ public class NguoiDung_NhomDAO extends connection{
                 e.printStackTrace();
             }
         }
-        return danhSachNhom;
-    }
-
+        return danhSachTV;
+        }
     public boolean xoathanhvien(String EMAILND, String MANHOM) {
         try (Connection con = getConnection();
              CallableStatement cstmt = con.prepareCall("{CALL pc_xoatvvkhoinhom(?, ?, ?)}")) {

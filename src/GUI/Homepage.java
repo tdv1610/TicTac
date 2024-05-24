@@ -4,18 +4,28 @@
  */
 package GUI;
 
+import DAO.CongViecDAO;
 import DAO.NguoiDungDAO;
 import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
-import DTO.NguoiDungDTO;
+import DAO.ThucHienDAO;
+import DTO.CongViecDTO;
 import DTO.NguoiDung_NhomDTO;
 import DTO.NhomDTO;
+import DTO.ThucHienDTO;
 import GUI.DangNhap;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,48 +33,193 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class Homepage extends javax.swing.JFrame {
-
     private String manhom;
+    public static String mn;
     public static String tennhom;
+    public static String laymanhom;
+    public static String tencvcl;
+    public static String tencvdl;
+    public static String tencvdht;
+    
+    public static String macvcl;
+    public static String macvdl;
+    public static String macvdht;
+        
     /**
      * Creates new form Homepage
      */
-    public Homepage() {
+    public Homepage(){
         initComponents();
         thongtinnhom();
         addTableClick2Listener();
         addTableClick1Listener();
+    try {
+        dsCVcanlam();
+        dsCVdahoanthanh();
+        dsCVdanglam();
+    } catch (ParseException ex) {
+        Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
     
+    private void dsCVcanlam() throws ParseException {
+        ThucHienDAO layma = new ThucHienDAO();
+        List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Cần làm");
+        CongViecDAO nhom = new CongViecDAO();
+        DefaultTableModel model = (DefaultTableModel) table_CanLam_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        for (ThucHienDTO dsmanhom : ma_nhom) {
+            CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
+            String manhomcl = dsmanhom.getMaNhom();
+            if (dscv != null) { // Kiểm tra null để tránh NullPointerException
+                String tencv = dscv.getTenCV();
+                String linhvuc = dscv.getLinhVuc();
+                String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
+                java.util.Date ngaybd = dscv.getNgayBD();
+                java.util.Date ngaykt = dscv.getNgayKT();
+                int muc_uutien = dscv.getMuc_uutien();
+                model.addRow(new Object[]{manhomcl, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+            }
+            else {
+                System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
+            }
+        }
+    }
+    
+    private void dsCVdahoanthanh() throws ParseException {
+        ThucHienDAO layma = new ThucHienDAO();
+        List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Đã hoàn thành");
+        CongViecDAO nhom = new CongViecDAO();
+        DefaultTableModel model = (DefaultTableModel) table_DaHoanThanh_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        for (ThucHienDTO dsmanhom : ma_nhom) {
+            CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
+            String manhomdht = dsmanhom.getMaNhom();
+            if (dscv != null) { // Kiểm tra null để tránh NullPointerException
+                String tencv = dscv.getTenCV();
+                String linhvuc = dscv.getLinhVuc();
+                String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
+                java.util.Date ngaybd = dscv.getNgayBD();
+                java.util.Date ngaykt = dscv.getNgayKT();
+                int muc_uutien = dscv.getMuc_uutien();
+                model.addRow(new Object[]{manhomdht, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+            }
+            else {
+                System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
+            }
+        }
+    }
+
+    
+    private void dsCVdanglam() throws ParseException {
+        ThucHienDAO layma = new ThucHienDAO();
+        List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Đang làm");
+        CongViecDAO nhom = new CongViecDAO();
+        DefaultTableModel model = (DefaultTableModel) table_DangLam_BangCV_VCT.getModel();
+        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
+
+        for (ThucHienDTO dsmanhom : ma_nhom) {
+            CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
+            String manhomdl = dsmanhom.getMaNhom();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (dscv != null) { // Kiểm tra null để tránh NullPointerException
+                String tencv = dscv.getTenCV();
+                String linhvuc = dscv.getLinhVuc();
+                String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
+                java.util.Date ngaybd = dscv.getNgayBD();
+                java.util.Date ngaykt = dscv.getNgayKT();
+                int muc_uutien = dscv.getMuc_uutien();
+                model.addRow(new Object[]{manhomdl, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+            }
+            else {
+                System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
+            }
+        }
+    }
+
+
+    
+    
+
     private void thongtinnhom() {
-        NguoiDung_NhomDAO nhom = new NguoiDung_NhomDAO();
-        List<NguoiDung_NhomDTO> danhSachNhom = nhom.layDanhSachNhomTheoEmail(DangNhap.pEmail);
+        NhomDAO nhomDAO = new NhomDAO();
+        List<NhomDTO> danhSachNhom = nhomDAO.layDanhSachNhomTheoEmail(DangNhap.pEmail);
 
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
         model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
-        NhomDAO thongtin = new NhomDAO();
-        for (NguoiDung_NhomDTO dsnhom : danhSachNhom) {
-            String MaNhom = dsnhom.getMaNhom();
-            String tennh = thongtin.laytennhom(MaNhom);
-            String emailtruongnhom = thongtin.layemailtruongnhom(MaNhom);
-            model.addRow(new Object[]{tennh, emailtruongnhom});
+
+        for (NhomDTO nhom : danhSachNhom) {
+            model.addRow(new Object[]{nhom.getTenNhom()});
         }
     }
+    
     private void addTableClick2Listener() {
     table_ThongTinNhom_NCT.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_ThongTinNhom_NCT.getSelectedRow();
             if (row >= 0) {
-                tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);                
-                ChiTietNhom Chitiet = new ChiTietNhom();
-                Chitiet.show();
+                tennhom = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                ChiTietNhom nhom = new ChiTietNhom();
+                nhom.show();
                 dispose();
                 
             }
         }
         }
     });
+    table_CanLam_BangCV_VCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+            int row = table_CanLam_BangCV_VCT.getSelectedRow();
+            if (row >= 0) {
+                macvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
+                tencvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 1);
+                
+                ChiTietCongViec ctcv = new ChiTietCongViec();
+                ctcv.show();
+                dispose();
+                
+            }
+        }
+        }
+    }
+    );
+    table_DangLam_BangCV_VCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+            int row = table_DangLam_BangCV_VCT.getSelectedRow();
+            if (row >= 0) {
+                macvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 0);
+                tencvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 1);
+                ChiTietCongViec ctcv = new ChiTietCongViec();
+                ctcv.show();
+                dispose();
+                
+            }
+        }
+        }
+    }
+    );
+    table_DaHoanThanh_BangCV_VCT.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
+            int row = table_DaHoanThanh_BangCV_VCT.getSelectedRow();
+            if (row >= 0) {
+                macvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 0);
+                tencvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 1);
+                ChiTietCongViec ctcv = new ChiTietCongViec();
+                ctcv.show();
+                dispose();
+                
+            }
+        }
+        }
+    }
+    );
+    
 }
     
     private void addTableClick1Listener() {
@@ -74,20 +229,16 @@ public class Homepage extends javax.swing.JFrame {
                 if (e.getClickCount() == 1) { // Kiểm tra xem có phải click một lần không
                     int row = table_ThongTinNhom_NCT.getSelectedRow();
                     if (row >= 0) {
-                        String tennh = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                         String tennh = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
                         tf_tennhom_homepage.setText(tennh);
                         NhomDAO nhom = new NhomDAO();
-                        manhom = nhom.laymanhom(tennh);
-
+                        manhom = nhom.laymanhom(tennh);                               
                     }
                 }
             }
         });
     }
-
-
-
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,7 +284,7 @@ public class Homepage extends javax.swing.JFrame {
         scrpane_ThanhVien_TaoNhom = new javax.swing.JScrollPane();
         table_themtv = new javax.swing.JTable();
         btn_sua_NCT = new javax.swing.JButton();
-        btn_Xoanhom_NCT = new javax.swing.JButton();
+        btn_Xoathanhvien_NCT = new javax.swing.JButton();
         btn_hoantac_NCT = new javax.swing.JButton();
         btn_roinhom_NCT = new javax.swing.JButton();
         btn_themcongviec_NCT = new javax.swing.JButton();
@@ -318,11 +469,11 @@ public class Homepage extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tên nhóm", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Ma nhom", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -358,43 +509,43 @@ public class Homepage extends javax.swing.JFrame {
         table_DangLam_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_DangLam_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên nhóm", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -425,62 +576,67 @@ public class Homepage extends javax.swing.JFrame {
         table_DaHoanThanh_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_DaHoanThanh_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên nhóm", "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
+                "Tên công việc", "Lĩnh vực", "Mô tả", "Ngày bắt đầu", "Ngày kết thúc", "Mức độ ưu tiên"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        table_DaHoanThanh_BangCV_VCT.setGridColor(new java.awt.Color(255, 255, 255));
+        table_DaHoanThanh_BangCV_VCT.setFocusable(false);
+        table_DaHoanThanh_BangCV_VCT.setGridColor(new java.awt.Color(255, 255, 153));
+        table_DaHoanThanh_BangCV_VCT.setInheritsPopupMenu(true);
         table_DaHoanThanh_BangCV_VCT.setSelectionBackground(new java.awt.Color(204, 255, 204));
+        table_DaHoanThanh_BangCV_VCT.setShowGrid(false);
+        table_DaHoanThanh_BangCV_VCT.setShowHorizontalLines(true);
+        table_DaHoanThanh_BangCV_VCT.setUpdateSelectionOnSort(false);
         scrpane_DaHoanThanh_BangCV_VCT.setViewportView(table_DaHoanThanh_BangCV_VCT);
 
         javax.swing.GroupLayout panel_DaHoanThanh_BangCV_VCTLayout = new javax.swing.GroupLayout(panel_DaHoanThanh_BangCV_VCT);
         panel_DaHoanThanh_BangCV_VCT.setLayout(panel_DaHoanThanh_BangCV_VCTLayout);
         panel_DaHoanThanh_BangCV_VCTLayout.setHorizontalGroup(
             panel_DaHoanThanh_BangCV_VCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrpane_DaHoanThanh_BangCV_VCT, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(scrpane_DaHoanThanh_BangCV_VCT)
         );
         panel_DaHoanThanh_BangCV_VCTLayout.setVerticalGroup(
             panel_DaHoanThanh_BangCV_VCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrpane_DaHoanThanh_BangCV_VCT, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+            .addComponent(scrpane_DaHoanThanh_BangCV_VCT)
         );
 
         tabbedpane_BangCV_VCT.addTab("Đã hoàn thành", panel_DaHoanThanh_BangCV_VCT);
@@ -538,43 +694,43 @@ public class Homepage extends javax.swing.JFrame {
         table_ThongTinNhom_NCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_ThongTinNhom_NCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Tên nhóm", "Email trưởng nhóm"
+                "Tên nhóm"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -684,14 +840,9 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_Xoanhom_NCT.setBackground(new java.awt.Color(0, 0, 0));
-        btn_Xoanhom_NCT.setForeground(new java.awt.Color(255, 255, 255));
-        btn_Xoanhom_NCT.setText("Xóa");
-        btn_Xoanhom_NCT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Xoanhom_NCTActionPerformed(evt);
-            }
-        });
+        btn_Xoathanhvien_NCT.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Xoathanhvien_NCT.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Xoathanhvien_NCT.setText("Xóa");
 
         btn_hoantac_NCT.setBackground(new java.awt.Color(0, 0, 0));
         btn_hoantac_NCT.setForeground(new java.awt.Color(255, 255, 255));
@@ -717,6 +868,11 @@ public class Homepage extends javax.swing.JFrame {
         btn_themcongviec_NCT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_themcongviec_NCTMouseClicked(evt);
+            }
+        });
+        btn_themcongviec_NCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themcongviec_NCTActionPerformed(evt);
             }
         });
 
@@ -755,7 +911,7 @@ public class Homepage extends javax.swing.JFrame {
                                         .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btn_roinhom_NCT)
                                             .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(btn_Xoanhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btn_Xoathanhvien_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(btn_sua_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(btn_hoantac_NCT)))
                                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -792,7 +948,7 @@ public class Homepage extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addComponent(btn_sua_NCT)
                         .addGap(9, 9, 9)
-                        .addComponent(btn_Xoanhom_NCT)
+                        .addComponent(btn_Xoathanhvien_NCT)
                         .addGap(3, 3, 3)))
                 .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1123,8 +1279,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_roinhom_NCTActionPerformed
 
     private void btn_themcongviec_NCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTMouseClicked
-        TaoCongViec tcv = new TaoCongViec();
-        tcv.show();
+       
+
     }//GEN-LAST:event_btn_themcongviec_NCTMouseClicked
 
     private void tf_tennhom_homepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tennhom_homepageActionPerformed
@@ -1135,8 +1291,8 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) table_themtv.getModel();
     String email = tf_thanhvien_homepage.getText();
-    NhomDAO laymanh = new NhomDAO();
-    String ma = laymanh.laymanhom(tf_tennhom_homepage.getText());
+    NhomDAO nhomDAO = new NhomDAO();
+    String manhom = nhomDAO.laymanhom(tf_tennhom_homepage.getText());
     model.setRowCount(0);
 
     if (email.isEmpty()) {
@@ -1149,7 +1305,7 @@ public class Homepage extends javax.swing.JFrame {
             return;
         }
 
-        NguoiDung_NhomDTO themtv = tv.themthanhvien(email, ma);
+        NguoiDung_NhomDTO themtv = tv.themthanhvien(email, manhom);
 
         if (themtv != null) {
             // Kiểm tra xem thành viên đã tồn tại trong bảng chưa
@@ -1177,42 +1333,18 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_thanhvien_homepageActionPerformed
 
-    private void btn_Xoanhom_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoanhom_NCTActionPerformed
-      // TODO add your handling code here:
-        int selectedRow = table_ThongTinNhom_NCT.getSelectedRow();
+    private void btn_themcongviec_NCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themcongviec_NCTActionPerformed
+        String email = tf_thanhvien_homepage.getText();
+        NhomDAO layma = new NhomDAO();
+        laymanhom = layma.laymanhom(tf_tennhom_homepage.getText());
+        TaoCongViec tcv = new TaoCongViec();
+        tcv.show();
+        dispose();
+    }//GEN-LAST:event_btn_themcongviec_NCTActionPerformed
 
-        // Kiểm tra nếu không có dòng nào được chọn
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một người dùng để xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
-        // Lấy email từ dòng được chọn
-        DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-        String ten = (String) model.getValueAt(selectedRow, 0);
-        String emailtv = (String) model.getValueAt(selectedRow, 1);
-        if (emailtv != null && emailtv.equals(DangNhap.pEmail)) {
-            NhomDAO xoa = new NhomDAO();
-            String MA = xoa.laymanhom(ten);
-            boolean success = xoa.xoanhom(MA); // Thử xóa nhóm
-
-            if (success) {
-                model.removeRow(selectedRow);
-                JOptionPane.showMessageDialog(this, "Xóa nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-            }   
-            else {
-                JOptionPane.showMessageDialog(this, "Không thể xóa nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Không thể xóa. Bạn không phải trưởng nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } 
-    }//GEN-LAST:event_btn_Xoanhom_NCTActionPerformed
-
-    public void ViewTable(){
-        DefaultTableModel model = (DefaultTableModel) this.table_ThongTinNhom_NCT.getModel();
-        
-    }
+    
+    
  
     /**
      * @param args the command line arguments
@@ -1260,7 +1392,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton btn_TimNhom_NCt;
     private javax.swing.JButton btn_VCT_TicTac;
     private javax.swing.JButton btn_XoaTK_TK;
-    private javax.swing.JButton btn_Xoanhom_NCT;
+    private javax.swing.JButton btn_Xoathanhvien_NCT;
     private javax.swing.JButton btn_hoantac_NCT;
     private javax.swing.JButton btn_roinhom_NCT;
     private javax.swing.JButton btn_sua_NCT;
