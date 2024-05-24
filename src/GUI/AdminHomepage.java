@@ -33,8 +33,34 @@ public class AdminHomepage extends javax.swing.JFrame {
         connectToDatabase();
         loadUserData();
         addTableClickListener();
+         TF_getEmailAD.setText(DangNhap.pEmail);
+         TF_getTenAD.setText(getTenAdmin(DangNhap.pEmail));
     }
-    
+    private String getTenAdmin(String adminEmail) {
+        String tenAdmin = "";
+        if (connection != null) {
+            try {
+                String sql = "SELECT TENAD FROM AD WHERE EMAILAD = ?";
+                PreparedStatement pstmt = connection.prepareStatement(sql);
+                pstmt.setString(1, adminEmail);
+
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    tenAdmin = rs.getString("TENAD");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return tenAdmin;
+    }
+
     private void connectToDatabase(){
          // Kết nối đến cơ sở dữ liệu
             try{
@@ -111,8 +137,8 @@ public class AdminHomepage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        TF_getTenAD = new javax.swing.JTextField();
+        TF_getEmailAD = new javax.swing.JTextField();
         btn_DoiPass_TK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -232,7 +258,15 @@ public class AdminHomepage extends javax.swing.JFrame {
             new String [] {
                 "Email", "Tên người dùng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(table_dsND);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -336,18 +370,20 @@ public class AdminHomepage extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Email admin");
 
-        jTextField4.setBackground(new java.awt.Color(0, 153, 153));
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField4.setText("jTextField4");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        TF_getTenAD.setBackground(new java.awt.Color(0, 153, 153));
+        TF_getTenAD.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        TF_getTenAD.setForeground(new java.awt.Color(255, 255, 255));
+        TF_getTenAD.setText("ten admin");
+        TF_getTenAD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                TF_getTenADActionPerformed(evt);
             }
         });
 
-        jTextField5.setBackground(new java.awt.Color(0, 153, 153));
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField5.setText("jTextField5");
+        TF_getEmailAD.setBackground(new java.awt.Color(0, 153, 153));
+        TF_getEmailAD.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        TF_getEmailAD.setForeground(new java.awt.Color(255, 255, 255));
+        TF_getEmailAD.setText("email admin");
 
         btn_DoiPass_TK.setBackground(new java.awt.Color(0, 51, 51));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -370,8 +406,8 @@ public class AdminHomepage extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(jTextField4))
+                    .addComponent(TF_getEmailAD, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(TF_getTenAD))
                 .addGap(193, 193, 193))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
@@ -385,12 +421,12 @@ public class AdminHomepage extends javax.swing.JFrame {
                 .addGap(89, 89, 89)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TF_getTenAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(457, Short.MAX_VALUE))
+                    .addComponent(TF_getEmailAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(456, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(307, 307, 307)
@@ -445,9 +481,9 @@ public class AdminHomepage extends javax.swing.JFrame {
         jPanel4.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void TF_getTenADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_getTenADActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_TF_getTenADActionPerformed
 
     private void btn_DoiPass_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiPass_TKMouseClicked
         NhapEmail ne = new NhapEmail();
@@ -593,7 +629,7 @@ public class AdminHomepage extends javax.swing.JFrame {
             CallableStatement cstmt = connection.prepareCall(sql);
             cstmt.setString(1, email);
 
-            // Thực thi procedure
+            // Thực thi procedure 
             cstmt.execute();
 
             JOptionPane.showMessageDialog(this, "Xóa người dùng thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
@@ -656,6 +692,8 @@ public class AdminHomepage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TF_emailND;
+    private javax.swing.JTextField TF_getEmailAD;
+    private javax.swing.JTextField TF_getTenAD;
     private javax.swing.JTextField TF_tenND;
     private javax.swing.JButton btn_DX_TicTac;
     private javax.swing.JButton btn_DoiPass_TK;
@@ -675,8 +713,6 @@ public class AdminHomepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable table_dsND;
     private javax.swing.JTextField tf_nhaptenNDcantim;
     // End of variables declaration//GEN-END:variables

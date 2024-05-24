@@ -11,6 +11,8 @@ package DTO;
 public class ThucHienDTO {
     private String emailThanhVien, maCV_PhanCong, maNhom, trangThai;
 
+
+
     public ThucHienDTO() {
     }
 
