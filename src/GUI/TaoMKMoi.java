@@ -4,17 +4,27 @@
  */
 package GUI;
 
+import DAO.NguoiDungDAO;
+import DTO.NguoiDungDTO;
+import GUI.DangNhap;
+import GUI.NhapEmail;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ASUS
  */
 public class TaoMKMoi extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form TaoMKMoi
      */
     public TaoMKMoi() {
         initComponents();
+    }
+
+    TaoMKMoi(String email, String generatedOtp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -57,6 +67,11 @@ public class TaoMKMoi extends javax.swing.JFrame {
         pwf_PassMoi_TMKM.setBackground(new java.awt.Color(0, 102, 102));
 
         pwf_XacNhanPass_XNMK.setBackground(new java.awt.Color(0, 102, 102));
+        pwf_XacNhanPass_XNMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwf_XacNhanPass_XNMKActionPerformed(evt);
+            }
+        });
 
         btn_Xong_TaoMKM.setBackground(new java.awt.Color(0, 102, 102));
         btn_Xong_TaoMKM.setForeground(new java.awt.Color(255, 255, 255));
@@ -64,6 +79,11 @@ public class TaoMKMoi extends javax.swing.JFrame {
         btn_Xong_TaoMKM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_Xong_TaoMKMMouseClicked(evt);
+            }
+        });
+        btn_Xong_TaoMKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Xong_TaoMKMActionPerformed(evt);
             }
         });
 
@@ -86,13 +106,13 @@ public class TaoMKMoi extends javax.swing.JFrame {
                                 .addGap(60, 60, 60)
                                 .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
-                                        .addComponent(label_PassMoi_TMKM)
-                                        .addGap(66, 66, 66)
-                                        .addComponent(pwf_PassMoi_TMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
                                         .addComponent(label_XacNhanPw_TMKM)
                                         .addGap(18, 18, 18)
-                                        .addComponent(pwf_XacNhanPass_XNMK))))
+                                        .addComponent(pwf_XacNhanPass_XNMK))
+                                    .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
+                                        .addComponent(label_PassMoi_TMKM)
+                                        .addGap(63, 63, 63)
+                                        .addComponent(pwf_PassMoi_TMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
                                 .addGap(185, 185, 185)
                                 .addComponent(btn_Xong_TaoMKM)))
@@ -106,8 +126,8 @@ public class TaoMKMoi extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_PassMoi_TMKM)
                     .addComponent(pwf_PassMoi_TMKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -138,6 +158,30 @@ public class TaoMKMoi extends javax.swing.JFrame {
         dn.show();
         dispose();
     }//GEN-LAST:event_btn_Xong_TaoMKMMouseClicked
+
+    private void btn_Xong_TaoMKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoMKMActionPerformed
+       String newPassword = new String(pwf_PassMoi_TMKM.getPassword());
+                String confirmPassword = new String(pwf_XacNhanPass_XNMK.getPassword());
+                String emailnd = NhapEmail.pEmail;
+                String matkhaumoi = pwf_PassMoi_TMKM.getText();
+                NguoiDungDAO nd = new NguoiDungDAO();
+                if(newPassword.equals("")||confirmPassword.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập mật khẩu hoặc xác nhận mật khẩu.");
+                }
+                else if (!newPassword.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(null, "Mật khẩu xác nhận không khớp.");
+                } else {
+                    NguoiDungDTO user = nd.updatePassword(emailnd, matkhaumoi);
+                    JOptionPane.showMessageDialog(null, "Mật khẩu đã được thay đổi thành công.");
+                    dispose();
+}
+
+    }//GEN-LAST:event_btn_Xong_TaoMKMActionPerformed
+
+    private void pwf_XacNhanPass_XNMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwf_XacNhanPass_XNMKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwf_XacNhanPass_XNMKActionPerformed
 
     /**
      * @param args the command line arguments

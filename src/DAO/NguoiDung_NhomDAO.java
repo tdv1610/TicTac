@@ -25,6 +25,44 @@ public class NguoiDung_NhomDAO extends connection{
     
     public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
     
+    public List<NguoiDung_NhomDTO> layDanhSachNhomTheoEmail(String EMAILND) {
+        List<NguoiDung_NhomDTO> danhSachNhom = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            // Get the database connection
+            con = getConnection();
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT * FROM NGUOIDUNG_NHOM WHERE EMAILND = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, EMAILND);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                NguoiDung_NhomDTO nhom = new NguoiDung_NhomDTO();
+                nhom.setMaNhom(rs.getString("MANHOM"));
+                nhom.setEmailND(rs.getString("EMAILND"));
+                danhSachNhom.add(nhom);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return danhSachNhom;
+    }
     
     public NguoiDung_NhomDTO themthanhvien(String EMAILND, String MaNhom) {
     NguoiDung_NhomDTO nd_nhom = null;

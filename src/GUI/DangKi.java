@@ -6,13 +6,21 @@ package GUI;
 
 import DAO.NguoiDungDAO;
 import DTO.NguoiDungDTO;
+import GUI.DangNhap;
+import com.sun.jdi.connect.spi.Connection;
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
 
 /**
  *
  * @author ASUS
  */
 public class DangKi extends javax.swing.JFrame {
+ Connection conn = null;
+    PreparedStatement ps = null, ps1 = null, ps2 = null;
+    ResultSet rs = null, rs1 = null, rs2 = null;
 
     /**
      * Creates new form DangKi

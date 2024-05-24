@@ -3,6 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import DAO.ADMINDAO;
+import DAO.connection;
+import DAO.NguoiDungDAO;
+import DTO.ADMINDTO;
+import DTO.NguoiDungDTO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.*;
 
 import DAO.ADMINDAO;
 import DAO.connection;
@@ -35,7 +50,7 @@ public class DangNhap extends javax.swing.JFrame {
     
     public static String Email;
     public static String HoTen;
-   // public static String Matkhau;
+    public static String Matkhau;
     /**
      * Creates new form DN_DK
      */
@@ -77,7 +92,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         label_TenNgDung_DangNhap.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         label_TenNgDung_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
-        label_TenNgDung_DangNhap.setText("Tên người dùng");
+        label_TenNgDung_DangNhap.setText("Email");
 
         label_MatKhau_DangNhap.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         label_MatKhau_DangNhap.setForeground(new java.awt.Color(255, 255, 255));

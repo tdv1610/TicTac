@@ -61,14 +61,14 @@
                                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="label_PassMoi_TMKM" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                                          <Component id="pwf_PassMoi_TMKM" min="-2" pref="172" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="label_XacNhanPw_TMKM" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="pwf_XacNhanPass_XNMK" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="label_PassMoi_TMKM" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                          <Component id="pwf_PassMoi_TMKM" min="-2" pref="172" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -91,10 +91,10 @@
                   <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label_PassMoi_TMKM" min="-2" max="-2" attributes="0"/>
-                      <Component id="pwf_PassMoi_TMKM" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="label_PassMoi_TMKM" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pwf_PassMoi_TMKM" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -163,6 +163,9 @@
               <Color blue="66" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwf_XacNhanPass_XNMKActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Xong_TaoMKM">
           <Properties>
@@ -176,6 +179,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Xong_TaoMKMMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Xong_TaoMKMActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

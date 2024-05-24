@@ -19,47 +19,7 @@ import javax.swing.JOptionPane;
 public class NhomDAO extends connection {
     SQLConnectUnit connect;
     
-    public static SQLConnection connection = new SQLConnection("c##TICTAC", "123", "orcl");
-
-    public List<NhomDTO> layDanhSachNhomTheoEmail(String EMAIL_TRUONGNHOM) {
-        List<NhomDTO> danhSachNhom = new ArrayList<>();
-        Connection con = null;
-        PreparedStatement pre = null;
-        ResultSet rs = null;
-
-        try {
-            // Get the database connection
-            con = getConnection();
-            System.out.println("Connection established successfully.");
-
-            String sql = "SELECT * FROM NHOM WHERE EMAIL_TRUONGNHOM = ?";
-            pre = con.prepareStatement(sql);
-            pre.setString(1, EMAIL_TRUONGNHOM);
-            System.out.println("Executing query: " + sql);
-
-            rs = pre.executeQuery();
-
-            while (rs.next()) {
-                NhomDTO nhom = new NhomDTO();
-                nhom.setMaNhom(rs.getString("MANHOM"));
-                nhom.setTenNhom(rs.getString("TENNHOM"));
-                nhom.setEmailTruongNhom(rs.getString("EMAIL_TRUONGNHOM"));
-                danhSachNhom.add(nhom);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (pre != null) pre.close();
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return danhSachNhom;
-    }
+    public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
     
     public String laymanhom(String TENNHOM){
     String maNhom = null; // Khai báo biến để lưu mã nhóm
@@ -203,9 +163,9 @@ public class NhomDAO extends connection {
     
     public boolean xoanhom(String MANHOM) {
     try (Connection con = getConnection();
-         CallableStatement cstmt = con.prepareCall("{CALL XOANHOM(?, ?)}")) { // Sử dụng tên stored procedure đúng
-        cstmt.setString(1, MANHOM); // Giả sử tham số đầu tiên là tên nhóm
-        cstmt.registerOutParameter(2, java.sql.Types.VARCHAR); // Giả sử tham số thứ hai là thông báo kết quả
+         CallableStatement cstmt = con.prepareCall("{CALL XOANHOM(?, ?)}")) {
+        cstmt.setString(1, MANHOM); 
+        cstmt.registerOutParameter(2, java.sql.Types.VARCHAR); 
 
         cstmt.execute();
 

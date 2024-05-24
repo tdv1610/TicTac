@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -100,7 +101,7 @@ public class AdminHomepage extends javax.swing.JFrame {
                 if (row >= 0) {
                     String email = (String) table_dsND.getValueAt(row, 0);
                     String tenND = (String) table_dsND.getValueAt(row, 1);
-                    TF_emailND.setText(email);
+                    jTextField2.setText(email);
                     TF_tenND.setText(tenND);
                 }
             }
@@ -129,8 +130,8 @@ public class AdminHomepage extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table_dsND = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TF_emailND = new javax.swing.JTextField();
         TF_tenND = new javax.swing.JTextField();
         btn_suaND = new javax.swing.JButton();
         btn_xoaND = new javax.swing.JButton();
@@ -273,17 +274,15 @@ public class AdminHomepage extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Email");
 
+        jTextField2.setBackground(new java.awt.Color(0, 153, 153));
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tên người dùng");
 
-        TF_emailND.setBackground(new java.awt.Color(0, 153, 153));
-        TF_emailND.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TF_emailND.setText("jTextField2");
-
         TF_tenND.setBackground(new java.awt.Color(0, 153, 153));
         TF_tenND.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TF_tenND.setText("jTextField3");
 
         btn_suaND.setBackground(new java.awt.Color(0, 51, 51));
         btn_suaND.setForeground(new java.awt.Color(255, 255, 255));
@@ -324,7 +323,7 @@ public class AdminHomepage extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TF_emailND, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(TF_tenND)
                                 .addGap(84, 84, 84)))
@@ -348,7 +347,7 @@ public class AdminHomepage extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(TF_emailND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_suaND)))
@@ -503,7 +502,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
     private void btn_suaNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaNDActionPerformed
         // TODO add your handling code here:
-        String email = TF_emailND.getText();
+        String email = jTextField2.getText();
         String tenND = TF_tenND.getText();
 
     // Kiểm tra nếu các JTextField không rỗng
@@ -691,7 +690,6 @@ public class AdminHomepage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TF_emailND;
     private javax.swing.JTextField TF_getEmailAD;
     private javax.swing.JTextField TF_getTenAD;
     private javax.swing.JTextField TF_tenND;
@@ -713,6 +711,7 @@ public class AdminHomepage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable table_dsND;
     private javax.swing.JTextField tf_nhaptenNDcantim;
     // End of variables declaration//GEN-END:variables

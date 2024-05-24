@@ -37,6 +37,8 @@ public class ChiTietCongViec extends javax.swing.JFrame {
         initComponents();
         try {
             XemCVCanlam();
+            XemCVDangLam();
+            XemCVDaHoanThanh();
         } catch (ParseException ex) {
         }
     }
@@ -55,6 +57,62 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             jlabel_ngaybd_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayBD()));
             jlabel_ngaykt_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayKT()));
             ma_cv = congvieccanlam.getMaCV();
+        }
+        else {
+            // Xử lý khi công việc không tồn tại
+            jlabel_tencv_ChiTietCongViec.setText("Công việc không tồn tại");
+            tf_Mota_Chitietcongviec.setText("");
+            jlabel_linhvuc_ChiTietCongViec.setText("");
+            jlabel_mucuutien_ChiTietCongViec.setText("");
+            jlabel_ngaybd_ChiTietCongViec.setText("");
+            jlabel_ngaykt_ChiTietCongViec.setText("");
+        }
+        
+    }
+    
+    private void XemCVDangLam() throws ParseException{
+        String tencv = Homepage.tencvdl;
+        String macv_dl = Homepage.macvdl;
+        CongViecDAO congviec = new CongViecDAO();
+        String laymacv = congviec.laymacv(macv_dl, tencv);
+        CongViecDTO congviecdanglam = congviec.TimCV(laymacv);
+        if (congviecdanglam != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            jlabel_tencv_ChiTietCongViec.setText(congviecdanglam.getTenCV());
+            tf_Mota_Chitietcongviec.setText(congviecdanglam.getMoTa());
+            jlabel_linhvuc_ChiTietCongViec.setText(congviecdanglam.getLinhVuc());
+            jlabel_mucuutien_ChiTietCongViec.setText(String.valueOf(congviecdanglam.getMuc_uutien()));
+            jlabel_ngaybd_ChiTietCongViec.setText(dateFormat.format(congviecdanglam.getNgayBD()));
+            jlabel_ngaykt_ChiTietCongViec.setText(dateFormat.format(congviecdanglam.getNgayKT()));
+            ma_cv = congviecdanglam.getMaCV();
+        }
+        else {
+            // Xử lý khi công việc không tồn tại
+            jlabel_tencv_ChiTietCongViec.setText("Công việc không tồn tại");
+            tf_Mota_Chitietcongviec.setText("");
+            jlabel_linhvuc_ChiTietCongViec.setText("");
+            jlabel_mucuutien_ChiTietCongViec.setText("");
+            jlabel_ngaybd_ChiTietCongViec.setText("");
+            jlabel_ngaykt_ChiTietCongViec.setText("");
+        }
+        
+    }
+    
+    private void XemCVDaHoanThanh() throws ParseException{
+        String tencv = Homepage.tencvdht;
+        String macv_dht = Homepage.macvdht;
+        CongViecDAO congviec = new CongViecDAO();
+        String laymacv = congviec.laymacv(macv_dht, tencv);
+        CongViecDTO congviecdht = congviec.TimCV(laymacv);
+        if (congviecdht != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            jlabel_tencv_ChiTietCongViec.setText(congviecdht.getTenCV());
+            tf_Mota_Chitietcongviec.setText(congviecdht.getMoTa());
+            jlabel_linhvuc_ChiTietCongViec.setText(congviecdht.getLinhVuc());
+            jlabel_mucuutien_ChiTietCongViec.setText(String.valueOf(congviecdht.getMuc_uutien()));
+            jlabel_ngaybd_ChiTietCongViec.setText(dateFormat.format(congviecdht.getNgayBD()));
+            jlabel_ngaykt_ChiTietCongViec.setText(dateFormat.format(congviecdht.getNgayKT()));
+            ma_cv = congviecdht.getMaCV();
         }
         else {
             // Xử lý khi công việc không tồn tại
