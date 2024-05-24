@@ -133,7 +133,7 @@ public class CongViecDAO extends connection{
             con = getConnection();  // Lấy kết nối tới cơ sở dữ liệu
             System.out.println("KẾT NỐI THÀNH CÔNG.");
 
-            String sql = "SELECT MACV FROM CONGVIEC WHERE MANHOM = ? AND TENCV = ? "; // Chỉ lấy cột MANHOM
+            String sql = "SELECT MACV FROM CONGVIEC WHERE MANHOM = ? AND TENCV = ? "; 
             pre = con.prepareStatement(sql);
             pre.setString(1, MANHOM);
             pre.setString(2, TENCV);

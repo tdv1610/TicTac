@@ -38,7 +38,6 @@ public class ChiTietCongViec extends javax.swing.JFrame {
         try {
             XemCVCanlam();
         } catch (ParseException ex) {
-            Logger.getLogger(ChiTietCongViec.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void XemCVCanlam() throws ParseException{
@@ -68,6 +67,8 @@ public class ChiTietCongViec extends javax.swing.JFrame {
         }
         
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -17,6 +17,7 @@ import GUI.DangNhap;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +68,7 @@ public class Homepage extends javax.swing.JFrame {
         CongViecDAO nhom = new CongViecDAO();
         DefaultTableModel model = (DefaultTableModel) table_CanLam_BangCV_VCT.getModel();
         model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         for (ThucHienDTO dsmanhom : ma_nhom) {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
             String manhomcl = dsmanhom.getMaNhom();
@@ -92,7 +93,7 @@ public class Homepage extends javax.swing.JFrame {
         CongViecDAO nhom = new CongViecDAO();
         DefaultTableModel model = (DefaultTableModel) table_DaHoanThanh_BangCV_VCT.getModel();
         model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         for (ThucHienDTO dsmanhom : ma_nhom) {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
             String manhomdht = dsmanhom.getMaNhom();
@@ -122,6 +123,7 @@ public class Homepage extends javax.swing.JFrame {
         for (ThucHienDTO dsmanhom : ma_nhom) {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
             String manhomdl = dsmanhom.getMaNhom();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if (dscv != null) { // Kiểm tra null để tránh NullPointerException
                 String tencv = dscv.getTenCV();
                 String linhvuc = dscv.getLinhVuc();
@@ -175,6 +177,7 @@ public class Homepage extends javax.swing.JFrame {
             if (row >= 0) {
                 macvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
                 tencvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 1);
+                
                 ChiTietCongViec ctcv = new ChiTietCongViec();
                 ctcv.show();
                 dispose();
