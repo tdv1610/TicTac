@@ -93,17 +93,15 @@ public class ChiTietNhom extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(109, 129, 245));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tên nhóm");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Danh sách phân công");
 
-        table_DanhSachPhanCong.setBackground(new java.awt.Color(0, 153, 153));
+        table_DanhSachPhanCong.setBackground(new java.awt.Color(182, 231, 245));
         table_DanhSachPhanCong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -151,9 +149,8 @@ public class ChiTietNhom extends javax.swing.JFrame {
         });
         scrpane_ThanhVien_TaoNhom.setViewportView(table_DanhSachPhanCong);
 
-        btn_ThongKe.setBackground(new java.awt.Color(0, 51, 51));
+        btn_ThongKe.setBackground(new java.awt.Color(49, 141, 245));
         btn_ThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_ThongKe.setForeground(new java.awt.Color(255, 255, 255));
         btn_ThongKe.setText("Thống kê");
         btn_ThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -167,12 +164,10 @@ public class ChiTietNhom extends javax.swing.JFrame {
         });
 
         jlable_tennhom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlable_tennhom.setForeground(new java.awt.Color(255, 255, 255));
         jlable_tennhom.setText("jlabel");
         jlable_tennhom.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        btn_BackNCTHomePage.setBackground(new java.awt.Color(0, 51, 51));
-        btn_BackNCTHomePage.setForeground(new java.awt.Color(255, 255, 255));
+        btn_BackNCTHomePage.setBackground(new java.awt.Color(49, 141, 245));
         btn_BackNCTHomePage.setText("Quay lại");
         btn_BackNCTHomePage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -207,12 +202,10 @@ public class ChiTietNhom extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
                             .addComponent(jlable_tennhom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)

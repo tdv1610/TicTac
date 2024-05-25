@@ -113,71 +113,63 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(109, 129, 245));
 
         jlabel_tencongviec.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_tencongviec.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_tencongviec.setText("Tên công việc");
 
-        jlabel_tencv_ChiTietCongViec.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_tencv_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
         jlabel_tencv_ChiTietCongViec.setText("jLabel1");
         jlabel_tencv_ChiTietCongViec.setOpaque(true);
 
         jlabel_mota.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_mota.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_mota.setText("Mô tả");
 
-        tf_Mota_Chitietcongviec.setBackground(new java.awt.Color(255, 255, 204));
+        tf_Mota_Chitietcongviec.setBackground(new java.awt.Color(182, 231, 245));
         tf_Mota_Chitietcongviec.setColumns(20);
         tf_Mota_Chitietcongviec.setRows(5);
         tf_Mota_Chitietcongviec.setBorder(null);
         jScrollPane1.setViewportView(tf_Mota_Chitietcongviec);
 
         jlabel_linhvuc.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_linhvuc.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_linhvuc.setText("Lĩnh vực");
 
-        jlabel_linhvuc_ChiTietCongViec.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_linhvuc_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
         jlabel_linhvuc_ChiTietCongViec.setText("jLabel2");
         jlabel_linhvuc_ChiTietCongViec.setOpaque(true);
 
         jlabel_mucuutien.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_mucuutien.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_mucuutien.setText("Mức độ ưu tiên");
 
-        jlabel_mucuutien_ChiTietCongViec.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_mucuutien_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
         jlabel_mucuutien_ChiTietCongViec.setText("jLabel3");
         jlabel_mucuutien_ChiTietCongViec.setOpaque(true);
 
         jlabel_ngaybd.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_ngaybd.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_ngaybd.setText("Ngày bắt đầu");
 
-        jlabel_ngaybd_ChiTietCongViec.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_ngaybd_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
         jlabel_ngaybd_ChiTietCongViec.setText("jLabel4");
         jlabel_ngaybd_ChiTietCongViec.setOpaque(true);
 
         jlabel_ngaykt.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_ngaykt.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_ngaykt.setText("Ngày kết thúc");
 
-        jlabel_ngaykt_ChiTietCongViec.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_ngaykt_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
         jlabel_ngaykt_ChiTietCongViec.setText("jLabel5");
         jlabel_ngaykt_ChiTietCongViec.setOpaque(true);
 
-        list_file_TienDo.setBackground(new java.awt.Color(255, 255, 204));
+        list_file_TienDo.setBackground(new java.awt.Color(182, 231, 245));
         jScrollPane2.setViewportView(list_file_TienDo);
 
         jlabel_Trangthaicongviec.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jlabel_Trangthaicongviec.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_Trangthaicongviec.setText("Trạng thái công việc");
 
-        jcombobox_trangthai.setBackground(new java.awt.Color(0, 153, 153));
+        jcombobox_trangthai.setBackground(new java.awt.Color(182, 231, 245));
         jcombobox_trangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cần làm", "đang làm", "đã hoàn thành" }));
 
-        btn_HoanThanh_ChiTiecCongViec.setBackground(new java.awt.Color(0, 51, 51));
+        btn_HoanThanh_ChiTiecCongViec.setBackground(new java.awt.Color(49, 141, 245));
         btn_HoanThanh_ChiTiecCongViec.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        btn_HoanThanh_ChiTiecCongViec.setForeground(new java.awt.Color(255, 255, 255));
         btn_HoanThanh_ChiTiecCongViec.setText("Hoàn thành");
         btn_HoanThanh_ChiTiecCongViec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
