@@ -342,5 +342,44 @@ public class ThucHienDAO extends connection {
         }
         return macv;
     }
+    
+    public String layTrangThaiCV(String EMAIL_TV, String MANHOM){
+        String trangthai = null; // Khai báo biến để lưu mã nhóm
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();  // Lấy kết nối tới cơ sở dữ liệu
+            System.out.println("KẾT NỐI THÀNH CÔNG.");
+
+            String sql = "SELECT TRANGTHAI FROM THUCHIEN WHERE EMAIL_TV = ? AND MANHOM = ? "; 
+            pre = con.prepareStatement(sql);
+            pre.setString(1, EMAIL_TV);
+            pre.setString(2, MANHOM);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                trangthai = rs.getString("TRANGTHAI"); 
+                System.out.println("Trạng thái: " + trangthai);
+            } else {
+                System.out.println("CÔNG VIỆC KHÔNG TỒN TẠI");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return trangthai;
+    }
+
 
 }

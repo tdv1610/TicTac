@@ -55,12 +55,20 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
             jlabel_ngaybd_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayBD()));
             jlabel_ngaykt_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayKT()));
             FileAttachmentDAO file = new FileAttachmentDAO();
-            List<FileAttachmentDTO> dsfile = file.layDanhSachFileTheoMacv(tencv);
-            DefaultListModel<String> model = new DefaultListModel<>();
-            for(FileAttachmentDTO ds : dsfile){
-                model.addElement(ds.getDuongDan());
+            List<FileAttachmentDTO> danhSachfile = file.layDanhSachFileTheoMacv(laymacv);
+            if (danhSachfile != null && !danhSachfile.isEmpty()) {
+                DefaultListModel<String> model = new DefaultListModel<>();
+                for (FileAttachmentDTO ds : danhSachfile) {
+                    model.addElement(ds.getDuongDan());
+                }
+                list_file_TienDo.setModel(model);
+                } 
+            else {
+                // Xử lý khi không có file đính kèm
+                DefaultListModel<String> model = new DefaultListModel<>();
+                model.addElement("Không có file đính kèm");
+                list_file_TienDo.setModel(model);
             }
-            list_file_TienDo.setModel(model);
         }
         else {
             // Xử lý khi công việc không tồn tại

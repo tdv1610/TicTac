@@ -7,7 +7,9 @@ package GUI;
 import DAO.CongViecDAO;
 import DAO.FileAttachmentDAO;
 import DAO.FileAttachmentService;
+import DAO.ThucHienDAO;
 import DTO.CongViecDTO;
+import DTO.FileAttachmentDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -29,7 +32,9 @@ import javax.swing.JOptionPane;
  */
 public class ChiTietCongViec extends javax.swing.JFrame {
     public static String ma_cv;
-
+    String tencvhome = Homepage.tencv;
+    String manhomhome = Homepage.lay_manhom;
+    
     /**
      * Creates new form ChiTietCongViec
      */
@@ -40,13 +45,14 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             XemCVDangLam();
             XemCVDaHoanThanh();
         } catch (ParseException ex) {
+            Logger.getLogger(ChiTietCongViec.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void XemCVCanlam() throws ParseException{
-        String tencv = Homepage.tencvcl;
-        String macv_cl = Homepage.macvcl;
+        String tencv = tencvhome;
+        String manhom_cl = manhomhome;
         CongViecDAO congviec = new CongViecDAO();
-        String laymacv = congviec.laymacv(macv_cl, tencv);
+        String laymacv = congviec.laymacv(manhom_cl, tencv);
         CongViecDTO congvieccanlam = congviec.TimCV(laymacv);
         if (congvieccanlam != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -71,10 +77,10 @@ public class ChiTietCongViec extends javax.swing.JFrame {
     }
     
     private void XemCVDangLam() throws ParseException{
-        String tencv = Homepage.tencvdl;
-        String macv_dl = Homepage.macvdl;
+        String tencv = tencvhome;
+        String manhom_dl = manhomhome;
         CongViecDAO congviec = new CongViecDAO();
-        String laymacv = congviec.laymacv(macv_dl, tencv);
+        String laymacv = congviec.laymacv(manhom_dl, tencv);
         CongViecDTO congviecdanglam = congviec.TimCV(laymacv);
         if (congviecdanglam != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -99,10 +105,10 @@ public class ChiTietCongViec extends javax.swing.JFrame {
     }
     
     private void XemCVDaHoanThanh() throws ParseException{
-        String tencv = Homepage.tencvdht;
-        String macv_dht = Homepage.macvdht;
+        String tencv = tencvhome;
+        String manhom_dht = manhomhome;
         CongViecDAO congviec = new CongViecDAO();
-        String laymacv = congviec.laymacv(macv_dht, tencv);
+        String laymacv = congviec.laymacv(manhom_dht, tencv);
         CongViecDTO congviecdht = congviec.TimCV(laymacv);
         if (congviecdht != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -224,7 +230,12 @@ public class ChiTietCongViec extends javax.swing.JFrame {
         jlabel_Trangthaicongviec.setText("Trạng thái công việc");
 
         jcombobox_trangthai.setBackground(new java.awt.Color(0, 153, 153));
-        jcombobox_trangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cần làm", "đang làm", "đã hoàn thành" }));
+        jcombobox_trangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cần làm", "Đang làm", "Đã hoàn thành" }));
+        jcombobox_trangthai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcombobox_trangthaiActionPerformed(evt);
+            }
+        });
 
         jlabel_tencv_ChiTietCongViec.setBackground(new java.awt.Color(255, 255, 204));
         jlabel_tencv_ChiTietCongViec.setText("jLabel1");
@@ -366,17 +377,15 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             DefaultListModel<String> model = new DefaultListModel<>();
             for (File file : selectedFiles) {
                 if (saveFileToDatabase(file, ma_cv)&& GrantDatabase(file)) {
-                model.addElement(file.getAbsolutePath());
-                JOptionPane.showMessageDialog(this, "Thêm file thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                    model.addElement(file.getAbsolutePath());
+                    list_file_ChitiecCV.setModel(model);
+                    JOptionPane.showMessageDialog(this, "Thêm file thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
                 JOptionPane.showMessageDialog(this, "Thêm file thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-
                 }
+            }
         }
-        list_file_ChitiecCV.setModel(model);
-        }
-
     }
     
     private boolean saveFileToDatabase(File file, String ma_cv) {
@@ -415,10 +424,27 @@ public class ChiTietCongViec extends javax.swing.JFrame {
 
     private void btn_HoanThanh_ChiTiecCongViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoanThanh_ChiTiecCongViecActionPerformed
         // TODO add your handling code here:
+        ThucHienDAO thuchien = new ThucHienDAO();
+        CongViecDAO congviec = new CongViecDAO();
+        String trangthai = (String) jcombobox_trangthai.getSelectedItem();
+        String ma = congviec.laymacv(manhomhome, tencvhome);
+        
+        boolean kt = thuchien.capNhatTrangThaiCongViec(ma, trangthai);
+        if(kt){
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
+        }
         Homepage home = new Homepage();
         home.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_HoanThanh_ChiTiecCongViecActionPerformed
+
+    private void jcombobox_trangthaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombobox_trangthaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcombobox_trangthaiActionPerformed
 
     /**
      * @param args the command line arguments

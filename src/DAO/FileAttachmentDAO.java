@@ -68,10 +68,10 @@ public class FileAttachmentDAO extends connection {
         while (rs.next()) {
             FileAttachmentDTO file = new FileAttachmentDTO();
             file.setDuongDan(rs.getString("DUONGDAN")); // Sửa lại chỗ này
-            /*file.setTenFile(rs.getString("TENFILE"));
+            file.setTenFile(rs.getString("TENFILE"));
             file.setMaFile(rs.getInt("MAFILE"));
             file.setKichThuoc(rs.getLong("KICHTHUOC"));
-            file.setMaCongViec(MA_CV); */
+            file.setMaCongViec(MA_CV);
             danhSachfile.add(file);
         }
 

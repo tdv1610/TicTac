@@ -39,13 +39,8 @@ public class Homepage extends javax.swing.JFrame {
     public static String mn;
     public static String tennhom;
     public static String laymanhom;
-    public static String tencvcl;
-    public static String tencvdl;
-    public static String tencvdht;
-    
-    public static String macvcl;
-    public static String macvdl;
-    public static String macvdht;
+    public static String tencv;
+    public static String lay_manhom;
         
     /**
      * Creates new form Homepage
@@ -53,10 +48,12 @@ public class Homepage extends javax.swing.JFrame {
     public Homepage(){
         initComponents();
         try {
-            dsCVcanlam();
-        } catch (ParseException ex) {
-            Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dsCVcanlam();
+        dsCVdahoanthanh();
+        dsCVdanglam();
+    } catch (ParseException ex) {
+        Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
         xem();
     }
@@ -70,13 +67,7 @@ public class Homepage extends javax.swing.JFrame {
         thongtinnhom();
         addTableClick2Listener();
         addTableClick1Listener();
-    try {
-        dsCVcanlam();
-        dsCVdahoanthanh();
-        dsCVdanglam();
-    } catch (ParseException ex) {
-        Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    
     }
     
     private void dsCVcanlam() throws ParseException {
@@ -90,13 +81,13 @@ public class Homepage extends javax.swing.JFrame {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
             String manhomcl = dsmanhom.getMaNhom();
             if (dscv != null) { // Kiểm tra null để tránh NullPointerException
-                String tencv = dscv.getTenCV();
+                String ten_cv = dscv.getTenCV();
                 String linhvuc = dscv.getLinhVuc();
                 String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
                 java.util.Date ngaybd = dscv.getNgayBD();
                 java.util.Date ngaykt = dscv.getNgayKT();
                 int muc_uutien = dscv.getMuc_uutien();
-                model.addRow(new Object[]{manhomcl, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+                model.addRow(new Object[]{manhomcl, ten_cv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
             }
             else {
                 System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
@@ -142,13 +133,13 @@ public class Homepage extends javax.swing.JFrame {
             String manhomdl = dsmanhom.getMaNhom();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if (dscv != null) { // Kiểm tra null để tránh NullPointerException
-                String tencv = dscv.getTenCV();
+                String ten_cv = dscv.getTenCV();
                 String linhvuc = dscv.getLinhVuc();
                 String mota = dscv.getMoTa(); // Tên phương thức đã được sửa
                 java.util.Date ngaybd = dscv.getNgayBD();
                 java.util.Date ngaykt = dscv.getNgayKT();
                 int muc_uutien = dscv.getMuc_uutien();
-                model.addRow(new Object[]{manhomdl, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+                model.addRow(new Object[]{manhomdl, ten_cv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
             }
             else {
                 System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
@@ -194,9 +185,8 @@ public class Homepage extends javax.swing.JFrame {
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
                 int row = table_CanLam_BangCV_VCT.getSelectedRow();
                 if (row >= 0) {
-                    macvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
-                    tencvcl = (String) table_CanLam_BangCV_VCT.getValueAt(row, 1);
-
+                    lay_manhom = (String) table_CanLam_BangCV_VCT.getValueAt(row, 0);
+                    tencv = (String) table_CanLam_BangCV_VCT.getValueAt(row, 1);
                     ChiTietCongViec ctcv = new ChiTietCongViec();
                     ctcv.show();
                     dispose();
@@ -212,8 +202,8 @@ public class Homepage extends javax.swing.JFrame {
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_DangLam_BangCV_VCT.getSelectedRow();
             if (row >= 0) {
-                macvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 0);
-                tencvdl = (String) table_DangLam_BangCV_VCT.getValueAt(row, 1);
+                lay_manhom = (String) table_DangLam_BangCV_VCT.getValueAt(row, 0);
+                tencv = (String) table_DangLam_BangCV_VCT.getValueAt(row, 1);
                 ChiTietCongViec ctcv = new ChiTietCongViec();
                 ctcv.show();
                 dispose();
@@ -229,8 +219,8 @@ public class Homepage extends javax.swing.JFrame {
             if (e.getClickCount() == 2) { // Kiểm tra xem có phải double-click không
             int row = table_DaHoanThanh_BangCV_VCT.getSelectedRow();
             if (row >= 0) {
-                macvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 0);
-                tencvdht = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 1);
+                lay_manhom = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 0);
+                tencv = (String) table_DaHoanThanh_BangCV_VCT.getValueAt(row, 1);
                 ChiTietCongViec ctcv = new ChiTietCongViec();
                 ctcv.show();
                 dispose();
