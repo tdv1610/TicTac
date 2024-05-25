@@ -5,18 +5,33 @@
 package GUI;
 
 import DAO.ADMINDAO;
+import DAO.TinNhanDAO;
 import DTO.ADMINDTO;
+import DTO.TinNhanDTO;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
 
 /**
  *
  * @author Oracle
  */
 public class ChatWindow extends javax.swing.JFrame {
-
+    
+    
+    
     /**
      * Creates new form ChatWindow
      */
@@ -30,10 +45,9 @@ public class ChatWindow extends javax.swing.JFrame {
         ADMINDAO admin = new ADMINDAO();
         List<ADMINDTO> danhSachNhom = admin.layDanhSachAd();
         DefaultTableModel model = (DefaultTableModel) table_Admin.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
 
         for (ADMINDTO dsAdmin : danhSachNhom) {
-            model.addRow(new Object[]{dsAdmin.getTenAd(), dsAdmin.getEmailAd()});
+            model.insertRow(0, new Object[]{dsAdmin.getTenAd(), dsAdmin.getEmailAd()});
         }
     }
     
@@ -45,6 +59,7 @@ public class ChatWindow extends javax.swing.JFrame {
                     String tenad = (String) table_Admin.getValueAt(row, 0);
                     String emailad = (String) table_Admin.getValueAt(row, 1);
                     jlable_tenad.setText(tenad);
+                    displayMessages(DangNhap.pEmail, emailad); // Đặt email của admin hiện tại
                 }
             }
         });
@@ -59,15 +74,24 @@ public class ChatWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_Admin = new javax.swing.JTable();
         tf_timkiem = new javax.swing.JTextField();
+        btn_timkhiem = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        tf_tinnhan = new javax.swing.JTextField();
         btn_guitinnhan = new javax.swing.JButton();
         jlable_tenad = new javax.swing.JLabel();
+        tf_tinnhan = new javax.swing.JTextField();
+        scrollPane1 = new java.awt.ScrollPane();
+        jpanel_tinnhan = new javax.swing.JPanel();
+
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +104,16 @@ public class ChatWindow extends javax.swing.JFrame {
         table_Admin.setBackground(new java.awt.Color(204, 255, 255));
         table_Admin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null},
                 {null, null},
                 {null, null},
@@ -106,63 +140,79 @@ public class ChatWindow extends javax.swing.JFrame {
         table_Admin.setGridColor(new java.awt.Color(153, 255, 255));
         jScrollPane1.setViewportView(table_Admin);
 
-        tf_timkiem.setBackground(new java.awt.Color(153, 255, 255));
-        tf_timkiem.setText("jTextField1");
+        btn_timkhiem.setBackground(new java.awt.Color(204, 204, 255));
+        btn_timkhiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
+        btn_timkhiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkhiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(tf_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_timkhiem, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(tf_timkiem, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_timkiem)
+                    .addComponent(btn_timkhiem, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setOpaque(false);
 
-        tf_tinnhan.setText("jTextField2");
-
         btn_guitinnhan.setBackground(new java.awt.Color(204, 204, 255));
         btn_guitinnhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/send.png"))); // NOI18N
+        btn_guitinnhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guitinnhanActionPerformed(evt);
+            }
+        });
 
         jlable_tenad.setBackground(new java.awt.Color(204, 204, 255));
-        jlable_tenad.setText("jLabel1");
         jlable_tenad.setOpaque(true);
+
+        jpanel_tinnhan.setBackground(new java.awt.Color(204, 255, 255));
+        jpanel_tinnhan.setLayout(new java.awt.GridBagLayout());
+        scrollPane1.add(jpanel_tinnhan);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jlable_tenad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(tf_tinnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(btn_guitinnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(tf_tinnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btn_guitinnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlable_tenad, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlable_tenad, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jlable_tenad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_tinnhan)
-                    .addComponent(btn_guitinnhan, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btn_guitinnhan, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(tf_tinnhan))
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -194,6 +244,138 @@ public class ChatWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_timkhiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkhiemActionPerformed
+        // TODO add your handling code here:
+        String ad = tf_timkiem.getText();
+        // Kiểm tra nếu email không rỗng
+        if (ad.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên để tìm kiếm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) table_Admin.getModel();
+        
+        ADMINDAO tim = new ADMINDAO();
+        ADMINDTO tenAd = tim.TimAD(ad);
+        
+        if(tenAd != null){
+            model.setRowCount(0);
+            model.insertRow(0, new Object[]{ad, tenAd.getEmailAd()});
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }     
+      
+    }//GEN-LAST:event_btn_timkhiemActionPerformed
+
+    private void btn_guitinnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guitinnhanActionPerformed
+         // Lấy chỉ mục của hàng đã chọn trong bảng Admin
+        int row = table_Admin.getSelectedRow();
+
+        // Kiểm tra xem đã chọn hàng nào hay chưa
+        if (row >= 0) {
+            // Lấy email của người gửi tin nhắn
+            String senderEmail = DangNhap.pEmail;
+
+            // Lấy email của người nhận tin nhắn từ bảng Admin
+            String receiverEmail = (String) table_Admin.getValueAt(row, 1);
+
+            // Lấy nội dung tin nhắn từ text field
+            String tinnhan = tf_tinnhan.getText();
+
+            // Kiểm tra xem nội dung tin nhắn có rỗng hay không
+            if (!tinnhan.isEmpty()) {
+                // Gửi tin nhắn
+                TinNhanDAO tn = new TinNhanDAO();
+                tn.sendMessage(senderEmail, receiverEmail, tinnhan);
+
+                // Xóa nội dung tin nhắn từ text field sau khi đã gửi
+                tf_tinnhan.setText("");
+
+                // Hiển thị thông báo cho người dùng
+                JOptionPane.showMessageDialog(this, "Tin nhắn đã được gửi!");
+
+                // Cập nhật giao diện người dùng để hiển thị tin nhắn mới
+                displayMessages(senderEmail, receiverEmail);
+            } else {
+                // Hiển thị thông báo lỗi nếu nội dung tin nhắn rỗng
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tin nhắn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Hiển thị thông báo lỗi nếu không có hàng nào được chọn trong bảng Admin
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn admin để gửi tin nhắn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    
+    }//GEN-LAST:event_btn_guitinnhanActionPerformed
+
+    private JPanel createSentMessagePanel(String messageText) {
+        JLabel messageLabel = new JLabel(messageText);
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(Color.BLUE);
+        messageLabel.setForeground(Color.WHITE);
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panel.add(messageLabel);
+
+        return panel;
+    }
+
+    private JPanel createReceivedMessagePanel(String messageText) {
+        JLabel messageLabel = new JLabel(messageText);
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(Color.LIGHT_GRAY);
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panel.add(messageLabel);
+
+        return panel;
+    }
+
+ 
+
+    private void displayMessages(String senderEmail, String receiverEmail) {
+        TinNhanDAO tinnhanDAO = new TinNhanDAO();
+        List<TinNhanDTO> tin_nhan = tinnhanDAO.getMessages(senderEmail, receiverEmail);
+
+        // Đặt layout manager cho jpanel_tinnhan
+        jpanel_tinnhan.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.weightx = 1.0;
+        gbc.gridx = 0;
+        gbc.gridy = 0; // Bắt đầu từ dòng đầu tiên
+
+        // Xóa các tin nhắn hiện tại trên giao diện
+        jpanel_tinnhan.removeAll();
+
+        for (TinNhanDTO tn : tin_nhan) {
+            JPanel messagePanel;
+            if (tn.getSender().equals(senderEmail)) {
+                // Tin nhắn của bạn: hiển thị bên phải
+                messagePanel = createSentMessagePanel(tn.getText());
+                gbc.anchor = GridBagConstraints.LINE_END; // Căn phải
+            } else {
+                // Tin nhắn của người nhận: hiển thị bên trái
+                messagePanel = createReceivedMessagePanel(tn.getText());
+                gbc.anchor = GridBagConstraints.LINE_START; // Căn trái
+            }
+            jpanel_tinnhan.add(messagePanel, gbc);
+            gbc.gridy++; // Chuyển sang dòng tiếp theo
+        }
+
+        // Cập nhật giao diện người dùng
+        jpanel_tinnhan.revalidate();
+        jpanel_tinnhan.repaint();
+    }
+
+
+    
     /**
      * @param args the command line arguments
      */
@@ -231,11 +413,16 @@ public class ChatWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guitinnhan;
+    private javax.swing.JButton btn_timkhiem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlable_tenad;
+    private javax.swing.JPanel jpanel_tinnhan;
+    private java.awt.ScrollPane scrollPane1;
     private javax.swing.JTable table_Admin;
     private javax.swing.JTextField tf_timkiem;
     private javax.swing.JTextField tf_tinnhan;

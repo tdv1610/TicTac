@@ -43,10 +43,9 @@ public class TaoCongViec extends javax.swing.JFrame {
         NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
         List<NguoiDung_NhomDTO> danhSachTV = tv.layDanhSachTVTheoMaNhom(Homepage.mn);
         DefaultTableModel model = (DefaultTableModel) table_NguoiPT.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
 
         for (NguoiDung_NhomDTO tvien : danhSachTV) {
-            model.addRow(new Object[]{tvien.getEmailND()});
+            model.insertRow(0, new Object[]{tvien.getEmailND()});
         }
     }
     

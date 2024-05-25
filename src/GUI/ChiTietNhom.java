@@ -45,10 +45,9 @@ public class ChiTietNhom extends javax.swing.JFrame {
     List<PhanCongDTO> danhSachPhanCong = thuchien.layDanhSachPhanCongTrongNhom(manhom);
 
         DefaultTableModel model = (DefaultTableModel) table_DanhSachPhanCong.getModel();
-        model.setRowCount(0); // Clear all existing rows in the table
 
         for(PhanCongDTO phanCong : danhSachPhanCong) {
-            model.addRow(new Object[]{phanCong.getTenCV(), phanCong.getEmailThanhVien(), phanCong.getTrangThai()});
+            model.insertRow(0, new Object[]{phanCong.getTenCV(), phanCong.getEmailThanhVien(), phanCong.getTrangThai()});
         }
     }
     private void xemtennhom(){

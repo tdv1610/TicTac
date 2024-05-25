@@ -7,15 +7,10 @@ package DAO;
 import DTO.ADMINDTO;
 import java.util.ArrayList;
 import DAO.connection;
-import DTO.CongViecDTO;
-import DTO.NguoiDung_NhomDTO;
-import GUI.AdminHomepage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -25,16 +20,16 @@ import java.util.List;
 public class ADMINDAO extends connection{
       SQLConnectUnit connect;
       public static SQLConnection connection = new SQLConnection("c##tictac", "tictac", "orcl");
-    ;
+    
     
     public ADMINDTO dangnhap(String EmailAD, String MATKHAUAD) {
         ADMINDTO ad = null;
         Connection con = null;
         PreparedStatement p = null;
         ResultSet rs = null;
- try {
-              // Kết nối đến cơ sở dữ liệu
-             con = getConnection();  // Get the database connection
+        try {
+            // Kết nối đến cơ sở dữ liệu
+            con = getConnection();  // Get the database connection
             System.out.println("Connection established successfully.");
 
             // Kiểm tra trong bảng admin
@@ -54,7 +49,7 @@ public class ADMINDAO extends connection{
             } else {
                 System.out.println("No user found with the provided credentials.");
             }
- }
+        }
 
          
             catch (Exception ex) {
@@ -143,6 +138,7 @@ public class ADMINDAO extends connection{
         }
         return ad;
     }
+    
     
 }
 

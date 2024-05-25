@@ -75,7 +75,6 @@ public class Homepage extends javax.swing.JFrame {
         List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Cần làm");
         CongViecDAO nhom = new CongViecDAO();
         DefaultTableModel model = (DefaultTableModel) table_CanLam_BangCV_VCT.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         for (ThucHienDTO dsmanhom : ma_nhom) {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
@@ -87,7 +86,7 @@ public class Homepage extends javax.swing.JFrame {
                 java.util.Date ngaybd = dscv.getNgayBD();
                 java.util.Date ngaykt = dscv.getNgayKT();
                 int muc_uutien = dscv.getMuc_uutien();
-                model.addRow(new Object[]{manhomcl, ten_cv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+                model.insertRow(0, new Object[]{manhomcl, ten_cv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
             }
             else {
                 System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
@@ -100,7 +99,6 @@ public class Homepage extends javax.swing.JFrame {
         List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Đã hoàn thành");
         CongViecDAO nhom = new CongViecDAO();
         DefaultTableModel model = (DefaultTableModel) table_DaHoanThanh_BangCV_VCT.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         for (ThucHienDTO dsmanhom : ma_nhom) {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
@@ -112,7 +110,7 @@ public class Homepage extends javax.swing.JFrame {
                 java.util.Date ngaybd = dscv.getNgayBD();
                 java.util.Date ngaykt = dscv.getNgayKT();
                 int muc_uutien = dscv.getMuc_uutien();
-                model.addRow(new Object[]{manhomdht, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+                model.insertRow(0, new Object[]{manhomdht, tencv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
             }
             else {
                 System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
@@ -126,7 +124,6 @@ public class Homepage extends javax.swing.JFrame {
         List<ThucHienDTO> ma_nhom = layma.DSCongViec(DangNhap.pEmail, "Đang làm");
         CongViecDAO nhom = new CongViecDAO();
         DefaultTableModel model = (DefaultTableModel) table_DangLam_BangCV_VCT.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
 
         for (ThucHienDTO dsmanhom : ma_nhom) {
             CongViecDTO dscv = nhom.TimCV(dsmanhom.getMaCV_PhanCong());
@@ -139,7 +136,7 @@ public class Homepage extends javax.swing.JFrame {
                 java.util.Date ngaybd = dscv.getNgayBD();
                 java.util.Date ngaykt = dscv.getNgayKT();
                 int muc_uutien = dscv.getMuc_uutien();
-                model.addRow(new Object[]{manhomdl, ten_cv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
+                model.insertRow(0, new Object[]{manhomdl, ten_cv, linhvuc, mota, ngaybd, ngaykt, muc_uutien});
             }
             else {
                 System.out.println("Một trong các công việc là null."); // Xử lý trường hợp null nếu cần thiết
@@ -156,11 +153,10 @@ public class Homepage extends javax.swing.JFrame {
         List<NguoiDung_NhomDTO> danhSachNhom = nd_nhom.layDanhSachNhomTheoEmail(DangNhap.pEmail);
         NhomDAO nhom = new NhomDAO();
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-        model.setRowCount(0); // Xóa tất cả các hàng hiện có trong bảng
 
         for (NguoiDung_NhomDTO laynhom : danhSachNhom) {
             String ma_nhom = laynhom.getMaNhom();
-            model.addRow(new Object[]{nhom.laytennhom(ma_nhom), nhom.layemailtruongnhom(ma_nhom)});
+            model.insertRow(0, new Object[]{nhom.laytennhom(ma_nhom), nhom.layemailtruongnhom(ma_nhom)});
         }
     }
     

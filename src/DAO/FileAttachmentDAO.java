@@ -48,46 +48,46 @@ public class FileAttachmentDAO extends connection {
     }
     
     public List<FileAttachmentDTO> layDanhSachFileTheoMacv(String MA_CV) {
-    List<FileAttachmentDTO> danhSachfile = new ArrayList<>();
-    Connection con = null;
-    PreparedStatement pre = null;
-    ResultSet rs = null;
+        List<FileAttachmentDTO> danhSachfile = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
 
-    try {
-        // Get the database connection
-        con = getConnection();
-        System.out.println("Connection established successfully.");
-
-        String sql = "SELECT * FROM FILE_ATTACHMENT WHERE MA_CV = ?";
-        pre = con.prepareStatement(sql);
-        pre.setString(1, MA_CV);
-        System.out.println("Executing query: " + sql);
-
-        rs = pre.executeQuery();
-
-        while (rs.next()) {
-            FileAttachmentDTO file = new FileAttachmentDTO();
-            file.setDuongDan(rs.getString("DUONGDAN")); // Sửa lại chỗ này
-            file.setTenFile(rs.getString("TENFILE"));
-            file.setMaFile(rs.getInt("MAFILE"));
-            file.setKichThuoc(rs.getLong("KICHTHUOC"));
-            file.setMaCongViec(MA_CV);
-            danhSachfile.add(file);
-        }
-
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    } finally {
         try {
-            if (rs != null) rs.close();
-            if (pre != null) pre.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // Get the database connection
+            con = getConnection();
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT * FROM FILE_ATTACHMENT WHERE MA_CV = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, MA_CV);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                FileAttachmentDTO file = new FileAttachmentDTO();
+                file.setDuongDan(rs.getString("DUONGDAN")); // Sửa lại chỗ này
+                file.setTenFile(rs.getString("TENFILE"));
+                file.setMaFile(rs.getInt("MAFILE"));
+                file.setKichThuoc(rs.getLong("KICHTHUOC"));
+                file.setMaCongViec(MA_CV);
+                danhSachfile.add(file);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return danhSachfile;
     }
-    return danhSachfile;
-}
 
     
 }
