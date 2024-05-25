@@ -7,11 +7,16 @@ package DAO;
 import DTO.ADMINDTO;
 import java.util.ArrayList;
 import DAO.connection;
+import DTO.CongViecDTO;
+import DTO.NguoiDung_NhomDTO;
 import GUI.AdminHomepage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
@@ -66,5 +71,78 @@ public class ADMINDAO extends connection{
     }
     return ad;
     }
+    
+    public List<ADMINDTO> layDanhSachAd() {
+        List<ADMINDTO> danhsachAd = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            // Get the database connection
+            con = getConnection();
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT * FROM AD";
+            pre = con.prepareStatement(sql);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                ADMINDTO admin = new ADMINDTO();
+                admin.setTenAd(rs.getString("TENAD"));
+                admin.setEmailAd(rs.getString("EMAILAD"));
+                danhsachAd.add(admin);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return danhsachAd;
+    }
+    
+    public ADMINDTO TimAD(String EMAILAD) {
+        ADMINDTO ad = new ADMINDTO();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;        
+        try{
+            con = getConnection();  
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT * FROM AD WHERE EMAILAD = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, EMAILAD);
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+            
+            if(rs.next()){
+                
+            }
+               
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ad;
+    }
+    
 }
 
