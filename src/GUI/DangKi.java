@@ -54,7 +54,7 @@ public class DangKi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_DangKi.setBackground(new java.awt.Color(0, 102, 102));
+        panel_DangKi.setBackground(new java.awt.Color(53, 94, 219));
 
         label_Welcome_DangKi.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         label_Welcome_DangKi.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,7 +75,13 @@ public class DangKi extends javax.swing.JFrame {
         label_MatKhau_DangKi.setForeground(new java.awt.Color(255, 255, 255));
         label_MatKhau_DangKi.setText("Mật khẩu");
 
-        btn_DangKi_DangKI.setBackground(new java.awt.Color(0, 102, 102));
+        tf_Email_DangKi.setBackground(new java.awt.Color(182, 231, 245));
+
+        tf_TenNgDung_Dangki.setBackground(new java.awt.Color(182, 231, 245));
+
+        pwf_MatKhau_DangKi.setBackground(new java.awt.Color(182, 231, 245));
+
+        btn_DangKi_DangKI.setBackground(new java.awt.Color(44, 65, 230));
         btn_DangKi_DangKI.setForeground(new java.awt.Color(255, 255, 255));
         btn_DangKi_DangKI.setText("Đăng kí");
         btn_DangKi_DangKI.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -94,51 +94,44 @@ public class TaoCongViec extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_TaoCV.setBackground(new java.awt.Color(0, 102, 102));
+        panel_TaoCV.setBackground(new java.awt.Color(109, 129, 245));
 
         label_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        label_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_TaoCV.setText("Tạo công việc mới");
 
         label_TenCV_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_TenCV_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_TenCV_TaoCV.setText("Tên công việc");
 
         label_LinhVuc_TaCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_LinhVuc_TaCV.setForeground(new java.awt.Color(255, 255, 255));
         label_LinhVuc_TaCV.setText("Lĩnh vực");
 
         label_MoTa_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_MoTa_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_MoTa_TaoCV.setText("Mô tả");
 
         label_MDUT_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_MDUT_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_MDUT_TaoCV.setText("Mức độ ưu tiên");
 
         label_NgayBD_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_NgayBD_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_NgayBD_TaoCV.setText("Ngày bắt đầu");
 
         label_NgayKT_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_NgayKT_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_NgayKT_TaoCV.setText("Ngày kết thúc");
 
-        tf_TenCV_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+        tf_TenCV_TaoCV.setBackground(new java.awt.Color(182, 231, 245));
         tf_TenCV_TaoCV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_TenCV_TaoCVActionPerformed(evt);
             }
         });
 
-        tf_LinhVuc_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+        tf_LinhVuc_TaoCV.setBackground(new java.awt.Color(182, 231, 245));
 
-        textarea_MoTa_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+        textarea_MoTa_TaoCV.setBackground(new java.awt.Color(182, 231, 245));
         textarea_MoTa_TaoCV.setColumns(20);
         textarea_MoTa_TaoCV.setRows(5);
         scrpane_MoTa_TaoCV.setViewportView(textarea_MoTa_TaoCV);
 
-        combobox_MDUT_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+        combobox_MDUT_TaoCV.setBackground(new java.awt.Color(182, 231, 245));
         combobox_MDUT_TaoCV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1. Cần gấp", "2. Quan trọng", "3. Thường" }));
         combobox_MDUT_TaoCV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,10 +140,9 @@ public class TaoCongViec extends javax.swing.JFrame {
         });
 
         label_NguoiPT_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        label_NguoiPT_TaoCV.setForeground(new java.awt.Color(255, 255, 255));
         label_NguoiPT_TaoCV.setText("Chọn người phụ trách");
 
-        btn_HoanThanh_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+        btn_HoanThanh_TaoCV.setBackground(new java.awt.Color(49, 141, 245));
         btn_HoanThanh_TaoCV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_HoanThanh_TaoCV.setText("Hoàn thành");
         btn_HoanThanh_TaoCV.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,15 +156,15 @@ public class TaoCongViec extends javax.swing.JFrame {
             }
         });
 
-        jDateChooser1.setBackground(new java.awt.Color(0, 153, 153));
+        jDateChooser1.setBackground(new java.awt.Color(182, 231, 245));
         jDateChooser1.setDateFormatString("dd MMM yyyy");
 
-        jDateChooser2.setBackground(new java.awt.Color(0, 153, 153));
+        jDateChooser2.setBackground(new java.awt.Color(182, 231, 245));
         jDateChooser2.setDateFormatString("dd MMM yyyy");
 
-        tf_NguoiPT_TaoCV.setBackground(new java.awt.Color(0, 153, 153));
+        tf_NguoiPT_TaoCV.setBackground(new java.awt.Color(182, 231, 245));
 
-        table_NguoiPT.setBackground(new java.awt.Color(0, 153, 153));
+        table_NguoiPT.setBackground(new java.awt.Color(182, 231, 245));
         table_NguoiPT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},

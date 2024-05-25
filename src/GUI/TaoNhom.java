@@ -56,7 +56,7 @@ public class TaoNhom extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_TaoNhom.setBackground(new java.awt.Color(0, 102, 102));
+        panel_TaoNhom.setBackground(new java.awt.Color(53, 94, 219));
 
         label_TaoNhom_TaoNhom.setBackground(new java.awt.Color(255, 255, 255));
         label_TaoNhom_TaoNhom.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -73,16 +73,16 @@ public class TaoNhom extends javax.swing.JFrame {
         label_ThanhVien_taoNhom.setForeground(new java.awt.Color(255, 255, 255));
         label_ThanhVien_taoNhom.setText("Thành viên");
 
-        tf_TenNhom_TaoNhom.setBackground(new java.awt.Color(0, 153, 153));
+        tf_TenNhom_TaoNhom.setBackground(new java.awt.Color(182, 231, 245));
         tf_TenNhom_TaoNhom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_TenNhom_TaoNhomActionPerformed(evt);
             }
         });
 
-        tf_ThanhVien_TaoNhom.setBackground(new java.awt.Color(0, 153, 153));
+        tf_ThanhVien_TaoNhom.setBackground(new java.awt.Color(182, 231, 245));
 
-        btn_ThanhVien_TaoNhom.setBackground(new java.awt.Color(0, 102, 102));
+        btn_ThanhVien_TaoNhom.setBackground(new java.awt.Color(44, 65, 230));
         btn_ThanhVien_TaoNhom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/plus_4315609 (1).png"))); // NOI18N
         btn_ThanhVien_TaoNhom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +90,7 @@ public class TaoNhom extends javax.swing.JFrame {
             }
         });
 
-        table_dsTV.setBackground(new java.awt.Color(0, 153, 153));
+        table_dsTV.setBackground(new java.awt.Color(182, 231, 245));
         table_dsTV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -130,7 +130,7 @@ public class TaoNhom extends javax.swing.JFrame {
         ));
         scrpane_ThanhVien_TaoNhom.setViewportView(table_dsTV);
 
-        btn_Xong_TaoNhom.setBackground(new java.awt.Color(0, 153, 153));
+        btn_Xong_TaoNhom.setBackground(new java.awt.Color(44, 65, 230));
         btn_Xong_TaoNhom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_Xong_TaoNhom.setText("Xong");
         btn_Xong_TaoNhom.addMouseListener(new java.awt.event.MouseAdapter() {

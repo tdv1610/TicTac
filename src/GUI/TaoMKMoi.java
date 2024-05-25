@@ -47,7 +47,7 @@ public class TaoMKMoi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_TaoMKMoi.setBackground(new java.awt.Color(0, 102, 102));
+        panel_TaoMKMoi.setBackground(new java.awt.Color(53, 94, 219));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
@@ -64,16 +64,16 @@ public class TaoMKMoi extends javax.swing.JFrame {
         label_XacNhanPw_TMKM.setForeground(new java.awt.Color(255, 255, 255));
         label_XacNhanPw_TMKM.setText("Xác nhận mật khẩu");
 
-        pwf_PassMoi_TMKM.setBackground(new java.awt.Color(0, 102, 102));
+        pwf_PassMoi_TMKM.setBackground(new java.awt.Color(182, 231, 245));
 
-        pwf_XacNhanPass_XNMK.setBackground(new java.awt.Color(0, 102, 102));
+        pwf_XacNhanPass_XNMK.setBackground(new java.awt.Color(182, 231, 245));
         pwf_XacNhanPass_XNMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pwf_XacNhanPass_XNMKActionPerformed(evt);
             }
         });
 
-        btn_Xong_TaoMKM.setBackground(new java.awt.Color(0, 102, 102));
+        btn_Xong_TaoMKM.setBackground(new java.awt.Color(44, 65, 230));
         btn_Xong_TaoMKM.setForeground(new java.awt.Color(255, 255, 255));
         btn_Xong_TaoMKM.setText("Xong");
         btn_Xong_TaoMKM.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,23 +101,22 @@ public class TaoMKMoi extends javax.swing.JFrame {
                                 .addGap(182, 182, 182)
                                 .addComponent(jLabel2))))
                     .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
-                        .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(71, 71, 71)
+                        .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
-                                        .addComponent(label_XacNhanPw_TMKM)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(pwf_XacNhanPass_XNMK))
-                                    .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
-                                        .addComponent(label_PassMoi_TMKM)
-                                        .addGap(63, 63, 63)
-                                        .addComponent(pwf_PassMoi_TMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(label_XacNhanPw_TMKM)
+                                .addGap(18, 18, 18)
+                                .addComponent(pwf_XacNhanPass_XNMK))
                             .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
-                                .addGap(185, 185, 185)
-                                .addComponent(btn_Xong_TaoMKM)))
+                                .addComponent(label_PassMoi_TMKM)
+                                .addGap(63, 63, 63)
+                                .addComponent(pwf_PassMoi_TMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(panel_TaoMKMoiLayout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(btn_Xong_TaoMKM)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_TaoMKMoiLayout.setVerticalGroup(
             panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +125,7 @@ public class TaoMKMoi extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(panel_TaoMKMoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_PassMoi_TMKM)
                     .addComponent(pwf_PassMoi_TMKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,7 +135,7 @@ public class TaoMKMoi extends javax.swing.JFrame {
                     .addComponent(pwf_XacNhanPass_XNMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_Xong_TaoMKM)
-                .addGap(14, 14, 14))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

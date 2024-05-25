@@ -131,7 +131,7 @@ public class ThongKe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(53, 94, 219));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
@@ -162,6 +162,8 @@ public class ThongKe extends javax.swing.JFrame {
         LB_TongSLCVDaLam.setForeground(new java.awt.Color(255, 255, 255));
         LB_TongSLCVDaLam.setText("__");
 
+        btn_backCTNhom.setBackground(new java.awt.Color(44, 65, 230));
+        btn_backCTNhom.setForeground(new java.awt.Color(255, 255, 255));
         btn_backCTNhom.setText("Quay lại");
         btn_backCTNhom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -221,12 +223,12 @@ public class ThongKe extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(49, 137, 245));
 
-        jTabbedPane1.setBackground(new java.awt.Color(0, 153, 153));
-        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setBackground(new java.awt.Color(231, 218, 245));
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        Table_CanLam.setBackground(new java.awt.Color(182, 231, 245));
         Table_CanLam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -293,6 +295,7 @@ public class ThongKe extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cần làm", Canlam);
 
+        Table_DangLam.setBackground(new java.awt.Color(182, 231, 245));
         Table_DangLam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -357,6 +360,7 @@ public class ThongKe extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Đang làm", Danglam);
 
+        Table_Dalam.setBackground(new java.awt.Color(182, 231, 245));
         Table_Dalam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -445,7 +449,7 @@ public class ThongKe extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
