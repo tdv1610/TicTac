@@ -9,8 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class ThucHienDAO extends connection {
 
         try {
             con = getConnection();
-            String sql = "SELECT CV.TENCV, TH.EMAIL_TV, TH.TRANGTHAI " +
+            String sql = "SELECT CV.TENCV, TH.EMAIL_TV, TH.TRANGTHAI, CV.NGAYBD, CV.NGAYKT " +
                          "FROM CONGVIEC CV INNER JOIN THUCHIEN TH ON CV.MACV = TH.MACV_PC " +
                          "WHERE CV.MANHOM = ?";
             pre = con.prepareStatement(sql);
@@ -40,6 +42,8 @@ public class ThucHienDAO extends connection {
                 phanCong.setTenCV(rs.getString("TENCV"));
                 phanCong.setEmailThanhVien(rs.getString("EMAIL_TV"));
                 phanCong.setTrangThai(rs.getString("TRANGTHAI"));
+                phanCong.setNgayBD(rs.getDate("NGAYBD"));
+                phanCong.setNgayBD(rs.getDate("NGAYKT"));
                 danhSachPhanCong.add(phanCong);
             }
         } catch (SQLException ex) {
@@ -50,6 +54,67 @@ public class ThucHienDAO extends connection {
         return danhSachPhanCong;
     }
     
+    public List<PhanCongDTO> layDanhSachCongViecKT(String Ngay, String Email) throws ParseException {
+        List<PhanCongDTO> danhSachPhanCong = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String sql = "SELECT CV.TENCV, TH.TRANGTHAI " +
+                         "FROM THUCHIEN TH INNER JOIN CONGVIEC CV ON TH.MACV_PC = CV.MACV " +
+                         "WHERE CV.NGAYKT = ? AND TH.EMAIL_TV = ?";
+            pre = con.prepareStatement(sql);
+            pre.setDate(1, new java.sql.Date(sdf.parse(Ngay).getTime()));
+            pre.setString(2, Email);
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                PhanCongDTO phanCong = new PhanCongDTO();
+                phanCong.setTenCV(rs.getString("TENCV"));
+                phanCong.setTrangThai(rs.getString("TRANGTHAI"));
+                danhSachPhanCong.add(phanCong);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close resources
+        }
+        return danhSachPhanCong;
+    }
+    
+    public List<PhanCongDTO> layDanhCongViecBD(String Ngay, String Email) throws ParseException {
+        List<PhanCongDTO> danhSachPhanCong = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String sql = "SELECT CV.TENCV, TH.TRANGTHAI " +
+                         "FROM THUCHIEN TH INNER JOIN CONGVIEC CV ON TH.MACV_PC = CV.MACV " +
+                         "WHERE CV.NGAYBD = ? AND TH.EMAIL_TV = ?";
+            pre = con.prepareStatement(sql);
+            pre.setDate(1, new java.sql.Date(sdf.parse(Ngay).getTime()));
+            pre.setString(2, Email);
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                PhanCongDTO phanCong = new PhanCongDTO();
+                phanCong.setTenCV(rs.getString("TENCV"));
+                phanCong.setTrangThai(rs.getString("TRANGTHAI"));
+                danhSachPhanCong.add(phanCong);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close resources
+        }
+        return danhSachPhanCong;
+    }
      public List<PhanCongDTO> layDanhSachTrangThaiCVTrongNhom(String maNhom,String trangthai) {
         List<PhanCongDTO> danhSachCv = new ArrayList<>();
         Connection con = null;
@@ -113,55 +178,55 @@ public class ThucHienDAO extends connection {
     return SLCV;
 }
     public List<Map<String, Object>> layDanhSachCVTheoEmail(String emailThanhVien) {
-    List<Map<String, Object>> danhSachCV = new ArrayList<>();
-    Connection con = null;
-    PreparedStatement pre = null;
-    ResultSet rs = null;
+        List<Map<String, Object>> danhSachCV = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
 
-    try {
-        con = getConnection();
-        String sql = "SELECT CV.TENCV, CV.LINHVUC, CV.MOTACV, CV.MUC_UUTIEN, CV.NGAYBD, CV.NGAYKT, TH.MACV_PC " +
-                     "FROM CONGVIEC CV INNER JOIN THUCHIEN TH ON CV.MACV = TH.MACV_PC " +
-                     "WHERE TH.EMAIL_TV = ?";
-        pre = con.prepareStatement(sql);
-        pre.setString(1, emailThanhVien);
-        rs = pre.executeQuery();
+        try {
+            con = getConnection();
+            String sql = "SELECT CV.TENCV, CV.LINHVUC, CV.MOTACV, CV.MUC_UUTIEN, CV.NGAYBD, CV.NGAYKT, TH.MACV_PC " +
+                         "FROM CONGVIEC CV INNER JOIN THUCHIEN TH ON CV.MACV = TH.MACV_PC " +
+                         "WHERE TH.EMAIL_TV = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, emailThanhVien);
+            rs = pre.executeQuery();
 
-        while (rs.next()) {
-            Map<String, Object> cv = new HashMap<>();
-            cv.put("TENCV", rs.getString("TENCV"));
-            cv.put("LINHVUC", rs.getString("LINHVUC"));
-            cv.put("MOTACV", rs.getString("MOTACV"));
-            cv.put("MUC_UUTIEN", rs.getInt("MUC_UUTIEN"));
-            cv.put("NGAYBD", rs.getDate("NGAYBD"));
-            cv.put("NGAYKT", rs.getDate("NGAYKT"));
-            cv.put("TRANGTHAI", "Cần làm"); // Đặt trạng thái công việc thành "cần làm"
+            while (rs.next()) {
+                Map<String, Object> cv = new HashMap<>();
+                cv.put("TENCV", rs.getString("TENCV"));
+                cv.put("LINHVUC", rs.getString("LINHVUC"));
+                cv.put("MOTACV", rs.getString("MOTACV"));
+                cv.put("MUC_UUTIEN", rs.getInt("MUC_UUTIEN"));
+                cv.put("NGAYBD", rs.getDate("NGAYBD"));
+                cv.put("NGAYKT", rs.getDate("NGAYKT"));
+                cv.put("TRANGTHAI", "Cần làm"); // Đặt trạng thái công việc thành "cần làm"
 
-            danhSachCV.add(cv);
+                danhSachCV.add(cv);
 
-            // Cập nhật trạng thái công việc trong cơ sở dữ liệu
-            String updateSql = "UPDATE THUCHIEN SET TRANGTHAI = ? WHERE MACV_PC = ?";
-            try (PreparedStatement updatePre = con.prepareStatement(updateSql)) {
-                updatePre.setString(1, "Cần làm");
-                updatePre.setString(2, rs.getString("MACV_PC"));
-                updatePre.executeUpdate();
+                // Cập nhật trạng thái công việc trong cơ sở dữ liệu
+                String updateSql = "UPDATE THUCHIEN SET TRANGTHAI = ? WHERE MACV_PC = ?";
+                try (PreparedStatement updatePre = con.prepareStatement(updateSql)) {
+                    updatePre.setString(1, "Cần làm");
+                    updatePre.setString(2, rs.getString("MACV_PC"));
+                    updatePre.executeUpdate();
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try { rs.close(); } catch (SQLException ex) { ex.printStackTrace(); }
+            }
+            if (pre != null) {
+                try { pre.close(); } catch (SQLException ex) { ex.printStackTrace(); }
+            }
+            if (con != null) {
+                try { con.close(); } catch (SQLException ex) { ex.printStackTrace(); }
             }
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    } finally {
-        if (rs != null) {
-            try { rs.close(); } catch (SQLException ex) { ex.printStackTrace(); }
-        }
-        if (pre != null) {
-            try { pre.close(); } catch (SQLException ex) { ex.printStackTrace(); }
-        }
-        if (con != null) {
-            try { con.close(); } catch (SQLException ex) { ex.printStackTrace(); }
-        }
+        return danhSachCV;
     }
-    return danhSachCV;
-}
     public ThucHienDTO themthuchien(String EMAIL_TV, String MACV_PC, String MANHOM, String TRANGTHAI){
     ThucHienDTO them = null;
     Connection con = null;
@@ -381,5 +446,62 @@ public class ThucHienDAO extends connection {
         return trangthai;
     }
 
+    public List<PhanCongDTO> layDanhSachNgayBD(String Email) {
+        List<PhanCongDTO> danhSach = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String sql = "SELECT CV.NGAYBD " +
+                         "FROM CONGVIEC CV INNER JOIN THUCHIEN TH ON CV.MACV = TH.MACV_PC " +
+                         "WHERE TH.EMAIL_TV = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, Email);
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                PhanCongDTO pc = new PhanCongDTO();
+                pc.setNgayBD(rs.getDate("NGAYBD"));
+                danhSach.add(pc);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Đóng kết nối và các tài nguyên
+        }
+        return danhSach;
+    }
+    
+    public List<PhanCongDTO> layDanhSachNgayKT(String Email) {
+        List<PhanCongDTO> danhSach = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            String sql = "SELECT CV.NGAYKT " +
+                         "FROM CONGVIEC CV INNER JOIN THUCHIEN TH ON CV.MACV = TH.MACV_PC " +
+                         "WHERE TH.EMAIL_TV = ?";
+            pre = con.prepareStatement(sql);
+            pre.setString(1, Email);
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                PhanCongDTO pc = new PhanCongDTO();
+                pc.setNgayKT(rs.getDate("NGAYKT"));
+                danhSach.add(pc);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Đóng kết nối và các tài nguyên
+        }
+        return danhSach;
+    }
+    
+    
 
 }

@@ -262,6 +262,7 @@ public class Homepage extends javax.swing.JFrame {
         btn_NCT_TicTac = new javax.swing.JButton();
         btn_TK_TicTac = new javax.swing.JButton();
         btn_DX_TicTac = new javax.swing.JButton();
+        btn_lich = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         panel_VCT = new javax.swing.JPanel();
@@ -295,6 +296,7 @@ public class Homepage extends javax.swing.JFrame {
         btn_hoantac_NCT = new javax.swing.JButton();
         btn_roinhom_NCT = new javax.swing.JButton();
         btn_themcongviec_NCT = new javax.swing.JButton();
+        btn_tinnhan = new javax.swing.JButton();
         panel_TK = new javax.swing.JPanel();
         label_TenNgDung_TK = new javax.swing.JLabel();
         label_MaNgDung_TK = new javax.swing.JLabel();
@@ -379,6 +381,14 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        btn_lich.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/calendar.png"))); // NOI18N
+        btn_lich.setContentAreaFilled(false);
+        btn_lich.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_lichActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TicTacLayout = new javax.swing.GroupLayout(TicTac);
         TicTac.setLayout(TicTacLayout);
         TicTacLayout.setHorizontalGroup(
@@ -397,8 +407,13 @@ public class Homepage extends javax.swing.JFrame {
                         .addComponent(btn_DX_TicTac)
                         .addGap(37, 37, 37))))
             .addGroup(TicTacLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
+                .addGroup(TicTacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TicTacLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2))
+                    .addGroup(TicTacLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(btn_lich)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         TicTacLayout.setVerticalGroup(
@@ -414,7 +429,9 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(btn_NCT_TicTac, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_TK_TicTac, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_lich)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_DX_TicTac)
                 .addGap(17, 17, 17))
         );
@@ -916,6 +933,14 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        btn_tinnhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/chat.png"))); // NOI18N
+        btn_tinnhan.setContentAreaFilled(false);
+        btn_tinnhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tinnhanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_NCTLayout = new javax.swing.GroupLayout(panel_NCT);
         panel_NCT.setLayout(panel_NCTLayout);
         panel_NCTLayout.setHorizontalGroup(
@@ -925,6 +950,8 @@ public class Homepage extends javax.swing.JFrame {
                     .addGroup(panel_NCTLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(btn_TaoNhom_NCT)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_tinnhan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tf_TimNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel_NCTLayout.createSequentialGroup()
@@ -967,7 +994,8 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_TimNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_TimNhom_NCt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_TaoNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_TaoNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_tinnhan, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addComponent(scrpane_DanhSachNhom_NCT, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panel_NCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1049,7 +1077,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_MaNgDung_TK)
                     .addComponent(label_TenNgDung_TK))
-                .addGap(31, 31, Short.MAX_VALUE)
+                .addGap(31, 32, Short.MAX_VALUE)
                 .addGroup(panel_TKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlable_emailnd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlabel_tennd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1331,7 +1359,6 @@ public class Homepage extends javax.swing.JFrame {
         String email = tf_thanhvien_homepage.getText();
         NhomDAO nhomDAO = new NhomDAO();
         String ma_nhom = nhomDAO.laymanhom(tf_tennhom_homepage.getText());
-        model.setRowCount(0);
 
         if (email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Chưa nhập tên thành viên nhóm");
@@ -1448,8 +1475,25 @@ public class Homepage extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(this, "Chỉ trưởng nhóm được xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_btn_xoanhom_HomepageActionPerformed
+
+    private void btn_tinnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tinnhanActionPerformed
+        // TODO add your handling code here:
+        ChatWindow dn = new ChatWindow();
+        dn.show();
+        dispose();
+    }//GEN-LAST:event_btn_tinnhanActionPerformed
+
+    private void btn_lichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lichActionPerformed
+        // TODO add your handling code here:
+        LichSuKien lich = new LichSuKien();
+        if (lich.isVisible()) {
+            lich.setVisible(false);
+        } else {
+            lich.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_lichActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -1498,10 +1542,12 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton btn_VCT_TicTac;
     private javax.swing.JButton btn_XoaTK_TK;
     private javax.swing.JButton btn_hoantac_NCT;
+    private javax.swing.JButton btn_lich;
     private javax.swing.JButton btn_roinhom_NCT;
     private javax.swing.JButton btn_sua_NCT;
     private javax.swing.JButton btn_themcongviec_NCT;
     private javax.swing.JButton btn_themthanhvien_NCT;
+    private javax.swing.JButton btn_tinnhan;
     private javax.swing.JButton btn_xoanhom_Homepage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

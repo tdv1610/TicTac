@@ -144,7 +144,7 @@ public class ChatWindow extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Tên Admin", "Email"
+                "Tên", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
