@@ -5,8 +5,13 @@
 package GUI;
 
 import DAO.ADMINDAO;
+import DAO.NguoiDungDAO;
+import DAO.NguoiDung_NhomDAO;
+import DAO.NhomDAO;
 import DAO.TinNhanDAO;
 import DTO.ADMINDTO;
+import DTO.NguoiDungDTO;
+import DTO.NguoiDung_NhomDTO;
 import DTO.TinNhanDTO;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -42,22 +47,35 @@ public class ChatWindow extends javax.swing.JFrame {
     }
     
     private void thongtinAd() {
-        ADMINDAO admin = new ADMINDAO();
-        List<ADMINDTO> danhSachNhom = admin.layDanhSachAd();
-        DefaultTableModel model = (DefaultTableModel) table_Admin.getModel();
+        NguoiDung_NhomDAO nguoidung = new NguoiDung_NhomDAO();
+        NhomDAO nhom = new NhomDAO();
+        NguoiDungDAO nd = new NguoiDungDAO();
+        String nd1 = nd.getTenNguoiDungByEmail(DangNhap.pEmail);
+        DefaultTableModel model = (DefaultTableModel) table_danhsach.getModel();
 
-        for (ADMINDTO dsAdmin : danhSachNhom) {
-            model.insertRow(0, new Object[]{dsAdmin.getTenAd(), dsAdmin.getEmailAd()});
+        if(nd1 != null){
+            String manhom = nhom.laymanhom(Homepage.tennhom);
+            List<NguoiDung_NhomDTO> danhsachnd = nguoidung.layDanhSachTVTheoMaNhom(manhom);
+            for(NguoiDung_NhomDTO nd_nhom : danhsachnd){
+                model.insertRow(0, new Object[]{nd.getTenNguoiDungByEmail(nd_nhom.getEmailND()), nd_nhom.getEmailND()});
+            }
+        }
+        else{
+            ADMINDAO admin = new ADMINDAO();
+            List<ADMINDTO> danhsachAd = admin.layDanhSachAd();
+            for (ADMINDTO dsAdmin : danhsachAd) {
+                model.insertRow(0, new Object[]{dsAdmin.getTenAd(), dsAdmin.getEmailAd()});
+            }
         }
     }
     
     private void addTableClickListener() {
-        table_Admin.addMouseListener(new MouseAdapter() {
+        table_danhsach.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int row = table_Admin.getSelectedRow();
+                int row = table_danhsach.getSelectedRow();
                 if (row >= 0) {
-                    String tenad = (String) table_Admin.getValueAt(row, 0);
-                    String emailad = (String) table_Admin.getValueAt(row, 1);
+                    String tenad = (String) table_danhsach.getValueAt(row, 0);
+                    String emailad = (String) table_danhsach.getValueAt(row, 1);
                     jlable_tenad.setText(tenad);
                     displayMessages(DangNhap.pEmail, emailad); // Đặt email của admin hiện tại
                 }
@@ -79,7 +97,7 @@ public class ChatWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_Admin = new javax.swing.JTable();
+        table_danhsach = new javax.swing.JTable();
         tf_timkiem = new javax.swing.JTextField();
         btn_timkhiem = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -101,8 +119,8 @@ public class ChatWindow extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(204, 255, 255));
 
-        table_Admin.setBackground(new java.awt.Color(204, 255, 255));
-        table_Admin.setModel(new javax.swing.table.DefaultTableModel(
+        table_danhsach.setBackground(new java.awt.Color(204, 255, 255));
+        table_danhsach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -137,8 +155,8 @@ public class ChatWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        table_Admin.setGridColor(new java.awt.Color(153, 255, 255));
-        jScrollPane1.setViewportView(table_Admin);
+        table_danhsach.setGridColor(new java.awt.Color(153, 255, 255));
+        jScrollPane1.setViewportView(table_danhsach);
 
         btn_timkhiem.setBackground(new java.awt.Color(204, 204, 255));
         btn_timkhiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
@@ -253,7 +271,7 @@ public class ChatWindow extends javax.swing.JFrame {
             return;
         }
         
-        DefaultTableModel model = (DefaultTableModel) table_Admin.getModel();
+        DefaultTableModel model = (DefaultTableModel) table_danhsach.getModel();
         
         ADMINDAO tim = new ADMINDAO();
         ADMINDTO tenAd = tim.TimAD(ad);
@@ -271,7 +289,7 @@ public class ChatWindow extends javax.swing.JFrame {
 
     private void btn_guitinnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guitinnhanActionPerformed
          // Lấy chỉ mục của hàng đã chọn trong bảng Admin
-        int row = table_Admin.getSelectedRow();
+        int row = table_danhsach.getSelectedRow();
 
         // Kiểm tra xem đã chọn hàng nào hay chưa
         if (row >= 0) {
@@ -279,7 +297,7 @@ public class ChatWindow extends javax.swing.JFrame {
             String senderEmail = DangNhap.pEmail;
 
             // Lấy email của người nhận tin nhắn từ bảng Admin
-            String receiverEmail = (String) table_Admin.getValueAt(row, 1);
+            String receiverEmail = (String) table_danhsach.getValueAt(row, 1);
 
             // Lấy nội dung tin nhắn từ text field
             String tinnhan = tf_tinnhan.getText();
@@ -423,7 +441,7 @@ public class ChatWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jlable_tenad;
     private javax.swing.JPanel jpanel_tinnhan;
     private java.awt.ScrollPane scrollPane1;
-    private javax.swing.JTable table_Admin;
+    private javax.swing.JTable table_danhsach;
     private javax.swing.JTextField tf_timkiem;
     private javax.swing.JTextField tf_tinnhan;
     // End of variables declaration//GEN-END:variables

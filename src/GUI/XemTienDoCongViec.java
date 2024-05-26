@@ -37,49 +37,55 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         }
     }
     
-    private void Xemthongtin() throws ParseException{
-        String tencv = ChiTietNhom.tencv;
-        String nguoiphutrach = ChiTietNhom.nguoiphutrach;
-        ThucHienDAO thuchien = new ThucHienDAO();
-        NhomDAO nhom = new NhomDAO();
-        String ma_nhom = nhom.laymanhom(tencv);
-        String laymacv = thuchien.laymacvtheonguoiphutrach(nguoiphutrach, ma_nhom);
-        CongViecDAO congviec = new CongViecDAO();
-        CongViecDTO congvieccanlam = congviec.TimCV(laymacv);
-        if (congvieccanlam != null) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            jlabel_tencv_ChiTietCongViec.setText(congvieccanlam.getTenCV());
-            tf_Mota_Chitietcongviec.setText(congvieccanlam.getMoTa());
-            jlabel_linhvuc_ChiTietCongViec.setText(congvieccanlam.getLinhVuc());
-            jlabel_mucuutien_ChiTietCongViec.setText(String.valueOf(congvieccanlam.getMuc_uutien()));
-            jlabel_ngaybd_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayBD()));
-            jlabel_ngaykt_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayKT()));
-            FileAttachmentDAO file = new FileAttachmentDAO();
-            List<FileAttachmentDTO> danhSachfile = file.layDanhSachFileTheoMacv(laymacv);
-            if (danhSachfile != null && !danhSachfile.isEmpty()) {
-                DefaultListModel<String> model = new DefaultListModel<>();
-                for (FileAttachmentDTO ds : danhSachfile) {
-                    model.addElement(ds.getDuongDan());
-                }
-                list_file_TienDo.setModel(model);
-                } 
-            else {
-                // Xử lý khi không có file đính kèm
-                DefaultListModel<String> model = new DefaultListModel<>();
-                model.addElement("Không có file đính kèm");
-                list_file_TienDo.setModel(model);
+    private void Xemthongtin() throws ParseException {
+    String tennhom = ChiTietNhom.ten_nhom;
+    String tencv = ChiTietNhom.tencv;
+    String nguoiphutrach = ChiTietNhom.nguoiphutrach;
+    ThucHienDAO thuchien = new ThucHienDAO();
+    NhomDAO nhom = new NhomDAO();
+    CongViecDAO congviec = new CongViecDAO();
+    String ma_nhom = nhom.laymanhom(tennhom);
+    String laymacv = congviec.laymacv(ma_nhom, tencv);
+    CongViecDTO congvieccanlam = congviec.TimCV(laymacv);
+    if (congvieccanlam != null) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        jlabel_tencv_ChiTietCongViec.setText(congvieccanlam.getTenCV());
+        tf_Mota_Chitietcongviec.setText(congvieccanlam.getMoTa());
+        jlabel_linhvuc_ChiTietCongViec.setText(congvieccanlam.getLinhVuc());
+        jlabel_mucuutien_ChiTietCongViec.setText(String.valueOf(congvieccanlam.getMuc_uutien()));
+        jlabel_ngaybd_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayBD()));
+        jlabel_ngaykt_ChiTietCongViec.setText(dateFormat.format(congvieccanlam.getNgayKT()));
+        label_trangthaicongviec.setText(ChiTietNhom.trangthai);
+        
+        // Kiểm tra danh sách file đính kèm
+        FileAttachmentDAO file = new FileAttachmentDAO();
+        List<FileAttachmentDTO> danhSachfile = file.layDanhSachFileTheoMacv(laymacv);
+        if (danhSachfile != null && !danhSachfile.isEmpty()) {
+            DefaultListModel<String> model = new DefaultListModel<>();
+            for (FileAttachmentDTO ds : danhSachfile) {
+                boolean capquyen = file.Capquyen(ds.getDuongDan());
+                model.addElement(ds.getDuongDan());
+                // Thêm dòng log để kiểm tra từng file được thêm vào model
+                System.out.println("Adding file to model: " + ds.getDuongDan());
             }
+            list_file_TienDo.setModel(model);
+        } else {
+            // Xử lý khi không có file đính kèm
+            DefaultListModel<String> model = new DefaultListModel<>();
+            model.addElement("Không có file đính kèm");
+            list_file_TienDo.setModel(model);
         }
-        else {
-            // Xử lý khi công việc không tồn tại
-            jlabel_tencv_ChiTietCongViec.setText("Công việc không tồn tại");
-            tf_Mota_Chitietcongviec.setText("");
-            jlabel_linhvuc_ChiTietCongViec.setText("");
-            jlabel_mucuutien_ChiTietCongViec.setText("");
-            jlabel_ngaybd_ChiTietCongViec.setText("");
-            jlabel_ngaykt_ChiTietCongViec.setText("");
-        }
+    } else {
+        // Xử lý khi công việc không tồn tại
+        jlabel_tencv_ChiTietCongViec.setText("Công việc không tồn tại");
+        tf_Mota_Chitietcongviec.setText("");
+        jlabel_linhvuc_ChiTietCongViec.setText("");
+        jlabel_mucuutien_ChiTietCongViec.setText("");
+        jlabel_ngaybd_ChiTietCongViec.setText("");
+        jlabel_ngaykt_ChiTietCongViec.setText("");
     }
+}
+
     
 
     /**
@@ -108,8 +114,9 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         list_file_TienDo = new javax.swing.JList<>();
         jlabel_Trangthaicongviec = new javax.swing.JLabel();
-        jcombobox_trangthai = new javax.swing.JComboBox<>();
         btn_HoanThanh_ChiTiecCongViec = new javax.swing.JButton();
+        label1 = new java.awt.Label();
+        label_trangthaicongviec = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,6 +126,7 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         jlabel_tencongviec.setText("Tên công việc");
 
         jlabel_tencv_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_tencv_ChiTietCongViec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_tencv_ChiTietCongViec.setText("jLabel1");
         jlabel_tencv_ChiTietCongViec.setOpaque(true);
 
@@ -135,6 +143,7 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         jlabel_linhvuc.setText("Lĩnh vực");
 
         jlabel_linhvuc_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_linhvuc_ChiTietCongViec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_linhvuc_ChiTietCongViec.setText("jLabel2");
         jlabel_linhvuc_ChiTietCongViec.setOpaque(true);
 
@@ -142,6 +151,7 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         jlabel_mucuutien.setText("Mức độ ưu tiên");
 
         jlabel_mucuutien_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_mucuutien_ChiTietCongViec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_mucuutien_ChiTietCongViec.setText("jLabel3");
         jlabel_mucuutien_ChiTietCongViec.setOpaque(true);
 
@@ -149,6 +159,7 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         jlabel_ngaybd.setText("Ngày bắt đầu");
 
         jlabel_ngaybd_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_ngaybd_ChiTietCongViec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_ngaybd_ChiTietCongViec.setText("jLabel4");
         jlabel_ngaybd_ChiTietCongViec.setOpaque(true);
 
@@ -156,6 +167,7 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
         jlabel_ngaykt.setText("Ngày kết thúc");
 
         jlabel_ngaykt_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_ngaykt_ChiTietCongViec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_ngaykt_ChiTietCongViec.setText("jLabel5");
         jlabel_ngaykt_ChiTietCongViec.setOpaque(true);
 
@@ -164,9 +176,6 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
 
         jlabel_Trangthaicongviec.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jlabel_Trangthaicongviec.setText("Trạng thái công việc");
-
-        jcombobox_trangthai.setBackground(new java.awt.Color(182, 231, 245));
-        jcombobox_trangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cần làm", "đang làm", "đã hoàn thành" }));
 
         btn_HoanThanh_ChiTiecCongViec.setBackground(new java.awt.Color(49, 141, 245));
         btn_HoanThanh_ChiTiecCongViec.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -177,22 +186,20 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
             }
         });
 
+        label1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label1.setText("file đính kèm");
+
+        label_trangthaicongviec.setAlignment(java.awt.Label.CENTER);
+        label_trangthaicongviec.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label_trangthaicongviec.setText("label2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(236, 236, 236)
-                .addComponent(btn_HoanThanh_ChiTiecCongViec)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlabel_Trangthaicongviec)
-                        .addGap(44, 44, 44)
-                        .addComponent(jcombobox_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -200,7 +207,8 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
+                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,9 +235,16 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jlabel_mucuutien)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jlabel_mucuutien_ChiTietCongViec, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(319, 319, 319)))))
-                        .addGap(71, 71, 71))))
+                                        .addComponent(jlabel_mucuutien_ChiTietCongViec, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(337, 337, 337)))))
+                        .addGap(71, 71, 71))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jlabel_Trangthaicongviec)
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_HoanThanh_ChiTiecCongViec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label_trangthaicongviec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,15 +271,18 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
                     .addComponent(jlabel_ngaykt)
                     .addComponent(jlabel_ngaybd_ChiTietCongViec)
                     .addComponent(jlabel_ngaykt_ChiTietCongViec))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlabel_Trangthaicongviec)
+                            .addComponent(label_trangthaicongviec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabel_Trangthaicongviec)
-                    .addComponent(jcombobox_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
                 .addComponent(btn_HoanThanh_ChiTiecCongViec)
-                .addGap(19, 19, 19))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,7 +346,6 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox<String> jcombobox_trangthai;
     private javax.swing.JLabel jlabel_Trangthaicongviec;
     private javax.swing.JLabel jlabel_linhvuc;
     private javax.swing.JLabel jlabel_linhvuc_ChiTietCongViec;
@@ -341,6 +358,8 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
     private javax.swing.JLabel jlabel_ngaykt_ChiTietCongViec;
     private javax.swing.JLabel jlabel_tencongviec;
     private javax.swing.JLabel jlabel_tencv_ChiTietCongViec;
+    private java.awt.Label label1;
+    private java.awt.Label label_trangthaicongviec;
     private javax.swing.JList<String> list_file_TienDo;
     private javax.swing.JTextArea tf_Mota_Chitietcongviec;
     // End of variables declaration//GEN-END:variables
