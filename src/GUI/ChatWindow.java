@@ -8,14 +8,13 @@ import DAO.ADMINDAO;
 import DAO.NguoiDungDAO;
 import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
+import DAO.ThongBaoTinNhanDAO;
 import DAO.TinNhanDAO;
 import DTO.ADMINDTO;
-import DTO.NguoiDungDTO;
 import DTO.NguoiDung_NhomDTO;
+import DTO.ThongBaoTinNhanDTO;
 import DTO.TinNhanDTO;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,14 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.*;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
-import javax.swing.table.TableColumnModel;
 
 
 /**
@@ -41,6 +35,7 @@ import javax.swing.table.TableColumnModel;
 public class ChatWindow extends javax.swing.JFrame {
     
     public static String email;
+    public static String thongbao;
     
     /**
      * Creates new form ChatWindow
@@ -72,6 +67,7 @@ public class ChatWindow extends javax.swing.JFrame {
                 model.insertRow(0, new Object[]{dsAdmin.getTenAd(), dsAdmin.getEmailAd()});
             }
         }
+        displayNotifications(DangNhap.pEmail);
     }
     
     private void addTableClickListener() {
@@ -83,6 +79,9 @@ public class ChatWindow extends javax.swing.JFrame {
                     email = (String) table_danhsach.getValueAt(row, 1);
                     jlable_tenad.setText(ten);
                     displayMessages(DangNhap.pEmail, email);
+
+                    // So sánh với các hàng trong bảng thông báo và xóa nếu trùng khớp
+                    compareAndDeleteNotifications(email);
                 }
             }
         });
@@ -97,14 +96,14 @@ public class ChatWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         tf_timkiem = new javax.swing.JTextField();
         btn_timkhiem = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
+        table_thongbao = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
         table_danhsach = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btn_guitinnhan = new javax.swing.JButton();
@@ -113,15 +112,17 @@ public class ChatWindow extends javax.swing.JFrame {
         scrollPane1 = new java.awt.ScrollPane();
         jpanel_tinnhan = new javax.swing.JPanel();
 
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setText("jLabel2");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+
+        tf_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_timkiemActionPerformed(evt);
+            }
+        });
 
         btn_timkhiem.setBackground(new java.awt.Color(204, 204, 255));
         btn_timkhiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
@@ -132,6 +133,34 @@ public class ChatWindow extends javax.swing.JFrame {
         });
 
         jScrollPane1.setBackground(new java.awt.Color(204, 255, 255));
+
+        table_thongbao.setBackground(new java.awt.Color(204, 255, 255));
+        table_thongbao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Thông báo", "Email"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        table_thongbao.setGridColor(new java.awt.Color(153, 255, 255));
+        table_thongbao.setSelectionBackground(new java.awt.Color(204, 255, 255));
+        jScrollPane1.setViewportView(table_thongbao);
+
+        jScrollPane2.setViewportView(jScrollPane1);
 
         table_danhsach.setBackground(new java.awt.Color(204, 255, 255));
         table_danhsach.setModel(new javax.swing.table.DefaultTableModel(
@@ -169,20 +198,21 @@ public class ChatWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        table_danhsach.setGridColor(new java.awt.Color(153, 255, 255));
-        jScrollPane1.setViewportView(table_danhsach);
-
-        jScrollPane2.setViewportView(jScrollPane1);
+        table_danhsach.setMinimumSize(new java.awt.Dimension(30, 400));
+        table_danhsach.setShowGrid(false);
+        jScrollPane4.setViewportView(table_danhsach);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(tf_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_timkhiem, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btn_timkhiem, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 31, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,9 +220,10 @@ public class ChatWindow extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_timkiem)
                     .addComponent(btn_timkhiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setOpaque(false);
@@ -238,7 +269,7 @@ public class ChatWindow extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_guitinnhan, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(tf_tinnhan))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -247,7 +278,7 @@ public class ChatWindow extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -279,7 +310,7 @@ public class ChatWindow extends javax.swing.JFrame {
             return;
         }
         
-        DefaultTableModel model = (DefaultTableModel) table_danhsach.getModel();
+        DefaultTableModel model = (DefaultTableModel) table_thongbao.getModel();
         
         ADMINDAO tim = new ADMINDAO();
         ADMINDTO tenAd = tim.TimAD(ad);
@@ -303,7 +334,7 @@ public class ChatWindow extends javax.swing.JFrame {
             // Lấy email của người gửi tin nhắn
             String senderEmail = DangNhap.pEmail;
 
-            // Lấy email của người nhận tin nhắn từ bảng Admin
+            // Lấy email của người nhận tin nhắn từ bảng
             String receiverEmail = (String) table_danhsach.getValueAt(row, 1);
 
             // Lấy nội dung tin nhắn từ text field
@@ -313,11 +344,11 @@ public class ChatWindow extends javax.swing.JFrame {
             if (!tinnhan.isEmpty()) {
                 // Gửi tin nhắn
                 TinNhanDAO tn = new TinNhanDAO();
+                ThongBaoTinNhanDAO tbtn = new ThongBaoTinNhanDAO();
                 tn.sendMessage(senderEmail, receiverEmail, tinnhan);
-                CustomTableCellRenderer renderer = new CustomTableCellRenderer(DangNhap.pEmail);
-                table_danhsach.getColumnModel().getColumn(1).setCellRenderer(renderer);
                 
-
+                tbtn.thongbaonguoigui(senderEmail, receiverEmail, "Có tin nhắn từ " + senderEmail);
+                
                 // Xóa nội dung tin nhắn từ text field sau khi đã gửi
                 tf_tinnhan.setText("");
 
@@ -329,10 +360,14 @@ public class ChatWindow extends javax.swing.JFrame {
             }
         } else {
             // Hiển thị thông báo lỗi nếu không có hàng nào được chọn trong bảng Admin
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn admin để gửi tin nhắn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn người để gửi tin nhắn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     
     }//GEN-LAST:event_btn_guitinnhanActionPerformed
+
+    private void tf_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_timkiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_timkiemActionPerformed
 
     private JPanel createSentMessagePanel(String messageText) {
         JLabel messageLabel = new JLabel(messageText);
@@ -397,7 +432,31 @@ public class ChatWindow extends javax.swing.JFrame {
         jpanel_tinnhan.revalidate();
         jpanel_tinnhan.repaint();
     }
+    
 
+    private void displayNotifications(String receiverEmail) {
+        ThongBaoTinNhanDAO ThongBaoDAO = new ThongBaoTinNhanDAO();
+        List<ThongBaoTinNhanDTO> dsthongbao = ThongBaoDAO.layThongBao(receiverEmail);
+        DefaultTableModel model = (DefaultTableModel) table_thongbao.getModel();
+        model.setRowCount(0); // Xóa các dòng hiện tại
+        for (ThongBaoTinNhanDTO tb : dsthongbao) {
+            model.addRow(new Object[]{tb.getMessage(), tb.getSenderEmail()});
+        }
+    }
+
+    private void compareAndDeleteNotifications(String selectedEmail) {
+        ThongBaoTinNhanDAO tbtn = new ThongBaoTinNhanDAO();
+    for (int i = 0; i < table_thongbao.getRowCount(); i++) {
+        String thongbaoEmail = (String) table_thongbao.getValueAt(i, 1); 
+        if (selectedEmail.equals(thongbaoEmail)) {
+            // Xóa thông báo từ cơ sở dữ liệu nếu email trùng khớp
+            tbtn.xoaThongBao(thongbaoEmail);
+            // Xóa hàng khỏi table_thongbao
+            ((DefaultTableModel) table_thongbao.getModel()).removeRow(i);
+            i--; // Điều chỉnh lại chỉ số do một hàng đã bị xóa
+        }
+    }
+}
 
     
     /**
@@ -438,17 +497,17 @@ public class ChatWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guitinnhan;
     private javax.swing.JButton btn_timkhiem;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel jlable_tenad;
     private javax.swing.JPanel jpanel_tinnhan;
     private java.awt.ScrollPane scrollPane1;
     private javax.swing.JTable table_danhsach;
+    private javax.swing.JTable table_thongbao;
     private javax.swing.JTextField tf_timkiem;
     private javax.swing.JTextField tf_tinnhan;
     // End of variables declaration//GEN-END:variables

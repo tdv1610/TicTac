@@ -8,13 +8,19 @@ import DAO.CongViecDAO;
 import DAO.NguoiDungDAO;
 import DAO.NguoiDung_NhomDAO;
 import DAO.NhomDAO;
+import DAO.ThongBaoDAO;
 import DAO.ThucHienDAO;
 import DTO.CongViecDTO;
 import DTO.NguoiDungDTO;
 import DTO.NguoiDung_NhomDTO;
 import DTO.NhomDTO;
+import DTO.ThongBaoDTO;
 import DTO.ThucHienDTO;
 import GUI.DangNhap;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
@@ -24,7 +30,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -64,6 +73,7 @@ public class Homepage extends javax.swing.JFrame {
         NguoiDungDTO nd1= nd.getUserByEmail(dangnhap.pEmail);
         jlable_emailnd.setText(dangnhap.pEmail);
         jlabel_tennd.setText(nd.getTenNguoiDungByEmail(dangnhap.pEmail));
+        jlabel_thongbao.setText(AdminHomepage.ghichu);
         thongtinnhom();
         addTableClick2Listener();
         addTableClick1Listener();
@@ -263,6 +273,8 @@ public class Homepage extends javax.swing.JFrame {
         btn_TK_TicTac = new javax.swing.JButton();
         btn_DX_TicTac = new javax.swing.JButton();
         btn_lich = new javax.swing.JButton();
+        jlabel_thongbao = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         panel_VCT = new javax.swing.JPanel();
@@ -388,6 +400,21 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        jlabel_thongbao.setBackground(new java.awt.Color(204, 255, 255));
+        jlabel_thongbao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlabel_thongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlabel_thongbao.setOpaque(true);
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 255));
+        jButton1.setForeground(new java.awt.Color(153, 153, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/bell.png"))); // NOI18N
+        jButton1.setOpaque(true);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TicTacLayout = new javax.swing.GroupLayout(TicTac);
         TicTac.setLayout(TicTacLayout);
         TicTacLayout.setHorizontalGroup(
@@ -402,7 +429,7 @@ public class Homepage extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TicTacLayout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_DX_TicTac)
                         .addGap(37, 37, 37))))
             .addGroup(TicTacLayout.createSequentialGroup()
@@ -412,8 +439,13 @@ public class Homepage extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(TicTacLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(btn_lich)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btn_lich))
+                    .addGroup(TicTacLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlabel_thongbao, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
         TicTacLayout.setVerticalGroup(
             TicTacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,6 +462,10 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(btn_TK_TicTac, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_lich)
+                .addGap(18, 18, 18)
+                .addGroup(TicTacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jlabel_thongbao, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_DX_TicTac)
                 .addGap(17, 17, 17))
@@ -1474,6 +1510,17 @@ public class Homepage extends javax.swing.JFrame {
             lich.setVisible(true);
         }
     }//GEN-LAST:event_btn_lichActionPerformed
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        jlabel_thongbao.setText("");
+        ThongBao thongbao = new ThongBao();
+        if (thongbao.isVisible()) {
+            thongbao.setVisible(false);
+        } else {
+            thongbao.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     /**
@@ -1529,11 +1576,13 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton btn_themcongviec_NCT;
     private javax.swing.JButton btn_themthanhvien_NCT;
     private javax.swing.JButton btn_xoanhom_Homepage;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel jlabel_tennd;
+    private javax.swing.JLabel jlabel_thongbao;
     private javax.swing.JLabel jlable_emailnd;
     private javax.swing.JLabel label_MaNgDung_TK;
     private javax.swing.JLabel label_TenNgDung_TK;

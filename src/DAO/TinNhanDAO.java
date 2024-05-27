@@ -42,16 +42,18 @@ public class TinNhanDAO extends connection {
 
             int rowsAffected = pre.executeUpdate(); // Thực thi câu lệnh INSERT và lấy số hàng ảnh hưởng
             if (rowsAffected > 0) {
-            tn = new TinNhanDTO();
-            tn.setReceiver(receiverEmail);
-            tn.setSender(senderEmail);
-            tn.setText(messageText);
-            System.out.println("Thêm tin nhắn thành công: " + tn.toString());
-        } else {
+                tn = new TinNhanDTO();
+                tn.setReceiver(receiverEmail);
+                tn.setSender(senderEmail);
+                tn.setText(messageText);
+                System.out.println("Thêm tin nhắn thành công: " + tn.toString());
+            } 
+            else {
             System.out.println("LỖI!.");
-        }
+            }
             
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -104,7 +106,4 @@ public class TinNhanDAO extends connection {
         return dstinnhan;
 
     }
-    
-    
-    
 }
