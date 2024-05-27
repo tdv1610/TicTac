@@ -94,6 +94,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
         btn_ThongKe = new javax.swing.JButton();
         jlable_tennhom = new javax.swing.JLabel();
         btn_BackNCTHomePage = new javax.swing.JButton();
+        btn_tinnhan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +180,14 @@ public class ChiTietNhom extends javax.swing.JFrame {
             }
         });
 
+        btn_tinnhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/chat.png"))); // NOI18N
+        btn_tinnhan.setContentAreaFilled(false);
+        btn_tinnhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tinnhanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,7 +197,11 @@ public class ChiTietNhom extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_tinnhan)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(50, 50, 50)
@@ -216,11 +229,15 @@ public class ChiTietNhom extends javax.swing.JFrame {
                         .addComponent(btn_BackNCTHomePage)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(btn_ThongKe))
+                    .addComponent(btn_ThongKe)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_tinnhan)
+                            .addComponent(jLabel2))))
                 .addGap(18, 18, 18)
                 .addComponent(scrpane_ThanhVien_TaoNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,6 +273,13 @@ public class ChiTietNhom extends javax.swing.JFrame {
         hp.show();
         dispose();
     }//GEN-LAST:event_btn_BackNCTHomePageMouseClicked
+
+    private void btn_tinnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tinnhanActionPerformed
+        // TODO add your handling code here:
+        ChatWindow chat = new ChatWindow();
+        chat.show();
+        dispose();
+    }//GEN-LAST:event_btn_tinnhanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +319,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_BackNCTHomePage;
     private javax.swing.JButton btn_ThongKe;
+    private javax.swing.JButton btn_tinnhan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

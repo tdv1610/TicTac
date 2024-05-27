@@ -24,10 +24,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
+import javax.swing.table.TableColumnModel;
+
 
 /**
  *
@@ -35,18 +40,18 @@ import javax.swing.BorderFactory;
  */
 public class ChatWindow extends javax.swing.JFrame {
     
-    
+    public static String email;
     
     /**
      * Creates new form ChatWindow
      */
     public ChatWindow() {
         initComponents();
-        thongtinAd();
+        thongtin();
         addTableClickListener();
     }
     
-    private void thongtinAd() {
+    private void thongtin() {
         NguoiDung_NhomDAO nguoidung = new NguoiDung_NhomDAO();
         NhomDAO nhom = new NhomDAO();
         NguoiDungDAO nd = new NguoiDungDAO();
@@ -74,10 +79,10 @@ public class ChatWindow extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 int row = table_danhsach.getSelectedRow();
                 if (row >= 0) {
-                    String tenad = (String) table_danhsach.getValueAt(row, 0);
-                    String emailad = (String) table_danhsach.getValueAt(row, 1);
-                    jlable_tenad.setText(tenad);
-                    displayMessages(DangNhap.pEmail, emailad); // Đặt email của admin hiện tại
+                    String ten = (String) table_danhsach.getValueAt(row, 0);
+                    email = (String) table_danhsach.getValueAt(row, 1);
+                    jlable_tenad.setText(ten);
+                    displayMessages(DangNhap.pEmail, email);
                 }
             }
         });
@@ -96,10 +101,11 @@ public class ChatWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table_danhsach = new javax.swing.JTable();
         tf_timkiem = new javax.swing.JTextField();
         btn_timkhiem = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_danhsach = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btn_guitinnhan = new javax.swing.JButton();
         jlable_tenad = new javax.swing.JLabel();
@@ -116,6 +122,14 @@ public class ChatWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+
+        btn_timkhiem.setBackground(new java.awt.Color(204, 204, 255));
+        btn_timkhiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
+        btn_timkhiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkhiemActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -158,13 +172,7 @@ public class ChatWindow extends javax.swing.JFrame {
         table_danhsach.setGridColor(new java.awt.Color(153, 255, 255));
         jScrollPane1.setViewportView(table_danhsach);
 
-        btn_timkhiem.setBackground(new java.awt.Color(204, 204, 255));
-        btn_timkhiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
-        btn_timkhiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_timkhiemActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jScrollPane1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -173,18 +181,18 @@ public class ChatWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(tf_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_timkhiem, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btn_timkhiem, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_timkiem)
-                    .addComponent(btn_timkhiem, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                    .addComponent(btn_timkhiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.setOpaque(false);
@@ -209,7 +217,7 @@ public class ChatWindow extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 33, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -230,7 +238,7 @@ public class ChatWindow extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_guitinnhan, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(tf_tinnhan))
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -239,13 +247,13 @@ public class ChatWindow extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,7 +298,6 @@ public class ChatWindow extends javax.swing.JFrame {
     private void btn_guitinnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guitinnhanActionPerformed
          // Lấy chỉ mục của hàng đã chọn trong bảng Admin
         int row = table_danhsach.getSelectedRow();
-
         // Kiểm tra xem đã chọn hàng nào hay chưa
         if (row >= 0) {
             // Lấy email của người gửi tin nhắn
@@ -307,12 +314,12 @@ public class ChatWindow extends javax.swing.JFrame {
                 // Gửi tin nhắn
                 TinNhanDAO tn = new TinNhanDAO();
                 tn.sendMessage(senderEmail, receiverEmail, tinnhan);
+                CustomTableCellRenderer renderer = new CustomTableCellRenderer(DangNhap.pEmail);
+                table_danhsach.getColumnModel().getColumn(1).setCellRenderer(renderer);
+                
 
                 // Xóa nội dung tin nhắn từ text field sau khi đã gửi
                 tf_tinnhan.setText("");
-
-                // Hiển thị thông báo cho người dùng
-                JOptionPane.showMessageDialog(this, "Tin nhắn đã được gửi!");
 
                 // Cập nhật giao diện người dùng để hiển thị tin nhắn mới
                 displayMessages(senderEmail, receiverEmail);
@@ -354,11 +361,10 @@ public class ChatWindow extends javax.swing.JFrame {
         return panel;
     }
 
- 
-
     private void displayMessages(String senderEmail, String receiverEmail) {
         TinNhanDAO tinnhanDAO = new TinNhanDAO();
         List<TinNhanDTO> tin_nhan = tinnhanDAO.getMessages(senderEmail, receiverEmail);
+        int row = table_danhsach.getSelectedRow();
 
         // Đặt layout manager cho jpanel_tinnhan
         jpanel_tinnhan.setLayout(new GridBagLayout());
@@ -438,6 +444,7 @@ public class ChatWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jlable_tenad;
     private javax.swing.JPanel jpanel_tinnhan;
     private java.awt.ScrollPane scrollPane1;

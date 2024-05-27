@@ -717,8 +717,6 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="btn_TaoNhom_NCT" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btn_tinnhan" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="tf_TimNhom_NCT" min="-2" pref="250" max="-2" attributes="0"/>
                               </Group>
@@ -777,7 +775,6 @@
                               <Component id="tf_TimNhom_NCT" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="btn_TimNhom_NCt" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="btn_TaoNhom_NCT" min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="btn_tinnhan" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="scrpane_DanhSachNhom_NCT" min="-2" pref="306" max="-2" attributes="0"/>
@@ -1093,17 +1090,6 @@
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_themcongviec_NCTMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themcongviec_NCTActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btn_tinnhan">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/image/chat.png"/>
-                    </Property>
-                    <Property name="contentAreaFilled" type="boolean" value="false"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_tinnhanActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
