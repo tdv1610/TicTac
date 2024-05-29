@@ -47,7 +47,7 @@ public class TaoMKMoi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_TaoMKMoi.setBackground(new java.awt.Color(53, 94, 219));
+        panel_TaoMKMoi.setBackground(new java.awt.Color(0, 0, 102));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
@@ -64,17 +64,15 @@ public class TaoMKMoi extends javax.swing.JFrame {
         label_XacNhanPw_TMKM.setForeground(new java.awt.Color(255, 255, 255));
         label_XacNhanPw_TMKM.setText("Xác nhận mật khẩu");
 
-        pwf_PassMoi_TMKM.setBackground(new java.awt.Color(182, 231, 245));
+        pwf_PassMoi_TMKM.setBackground(new java.awt.Color(253, 253, 223));
 
-        pwf_XacNhanPass_XNMK.setBackground(new java.awt.Color(182, 231, 245));
+        pwf_XacNhanPass_XNMK.setBackground(new java.awt.Color(253, 253, 223));
         pwf_XacNhanPass_XNMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pwf_XacNhanPass_XNMKActionPerformed(evt);
             }
         });
 
-        btn_Xong_TaoMKM.setBackground(new java.awt.Color(44, 65, 230));
-        btn_Xong_TaoMKM.setForeground(new java.awt.Color(255, 255, 255));
         btn_Xong_TaoMKM.setText("Xong");
         btn_Xong_TaoMKM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

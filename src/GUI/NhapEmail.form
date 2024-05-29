@@ -36,7 +36,7 @@
     <Container class="javax.swing.JPanel" name="panel_OTP">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="db" green="5e" red="35" type="rgb"/>
+          <Color blue="66" green="0" red="0" type="rgb"/>
         </Property>
       </Properties>
 
@@ -135,10 +135,7 @@
         <Component class="javax.swing.JTextField" name="tf_Email_OTP">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f5" green="e7" red="b6" type="rgb"/>
-            </Property>
-            <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="default"/>
+              <Color blue="df" green="fd" red="fd" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="2"/>
@@ -152,12 +149,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_NhanEmail_OTP">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Nh&#x1ead;n"/>
           </Properties>
           <Events>
@@ -178,10 +169,7 @@
         <Component class="javax.swing.JTextField" name="tf_OTP_OTP">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f5" green="e7" red="b6" type="rgb"/>
-            </Property>
-            <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="default"/>
+              <Color blue="df" green="fd" red="fd" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="2"/>
@@ -190,12 +178,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_Xong_OTP">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Xong"/>
           </Properties>
           <Events>

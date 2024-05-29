@@ -166,33 +166,39 @@ public class ChiTietCongViec extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jpanel_Chitietcongviec.setBackground(new java.awt.Color(109, 129, 245));
+        jpanel_Chitietcongviec.setBackground(new java.awt.Color(0, 0, 102));
 
         jlabel_tencongviec.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_tencongviec.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_tencongviec.setText("Tên công việc");
 
         jlabel_mota.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_mota.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_mota.setText("Mô tả");
 
         jlabel_linhvuc.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_linhvuc.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_linhvuc.setText("Lĩnh vực");
 
         jlabel_mucuutien.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_mucuutien.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_mucuutien.setText("Mức độ ưu tiên");
 
         jlabel_ngaybd.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_ngaybd.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_ngaybd.setText("Ngày bắt đầu");
 
+        jlabel_ngaykt.setBackground(new java.awt.Color(255, 255, 255));
         jlabel_ngaykt.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_ngaykt.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_ngaykt.setText("Ngày kết thúc");
 
-        tf_Mota_Chitietcongviec.setBackground(new java.awt.Color(182, 231, 245));
+        tf_Mota_Chitietcongviec.setBackground(new java.awt.Color(253, 253, 223));
         tf_Mota_Chitietcongviec.setColumns(20);
         tf_Mota_Chitietcongviec.setRows(5);
         tf_Mota_Chitietcongviec.setBorder(null);
         jScrollPane1.setViewportView(tf_Mota_Chitietcongviec);
 
-        btn__filledinhkem_chitietCV.setBackground(new java.awt.Color(49, 141, 245));
         btn__filledinhkem_chitietCV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/attached.png"))); // NOI18N
         btn__filledinhkem_chitietCV.setText("Đính kèm");
         btn__filledinhkem_chitietCV.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,10 +212,9 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             }
         });
 
-        list_file_ChitiecCV.setBackground(new java.awt.Color(182, 231, 245));
+        list_file_ChitiecCV.setBackground(new java.awt.Color(253, 253, 223));
         jScrollPane2.setViewportView(list_file_ChitiecCV);
 
-        btn_HoanThanh_ChiTiecCongViec.setBackground(new java.awt.Color(49, 141, 245));
         btn_HoanThanh_ChiTiecCongViec.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btn_HoanThanh_ChiTiecCongViec.setText("Hoàn thành");
         btn_HoanThanh_ChiTiecCongViec.addActionListener(new java.awt.event.ActionListener() {
@@ -218,10 +223,12 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             }
         });
 
+        jlabel_Trangthaicongviec.setBackground(new java.awt.Color(255, 255, 255));
         jlabel_Trangthaicongviec.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jlabel_Trangthaicongviec.setForeground(new java.awt.Color(255, 255, 255));
         jlabel_Trangthaicongviec.setText("Trạng thái công việc");
 
-        jcombobox_trangthai.setBackground(new java.awt.Color(182, 231, 245));
+        jcombobox_trangthai.setBackground(new java.awt.Color(253, 253, 223));
         jcombobox_trangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cần làm", "Đang làm", "Đã hoàn thành" }));
         jcombobox_trangthai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,23 +236,23 @@ public class ChiTietCongViec extends javax.swing.JFrame {
             }
         });
 
-        jlabel_tencv_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_tencv_ChiTietCongViec.setBackground(new java.awt.Color(253, 253, 223));
         jlabel_tencv_ChiTietCongViec.setText("jLabel1");
         jlabel_tencv_ChiTietCongViec.setOpaque(true);
 
-        jlabel_linhvuc_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_linhvuc_ChiTietCongViec.setBackground(new java.awt.Color(253, 253, 223));
         jlabel_linhvuc_ChiTietCongViec.setText("jLabel2");
         jlabel_linhvuc_ChiTietCongViec.setOpaque(true);
 
-        jlabel_mucuutien_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_mucuutien_ChiTietCongViec.setBackground(new java.awt.Color(253, 253, 223));
         jlabel_mucuutien_ChiTietCongViec.setText("jLabel3");
         jlabel_mucuutien_ChiTietCongViec.setOpaque(true);
 
-        jlabel_ngaybd_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_ngaybd_ChiTietCongViec.setBackground(new java.awt.Color(253, 253, 223));
         jlabel_ngaybd_ChiTietCongViec.setText("jLabel4");
         jlabel_ngaybd_ChiTietCongViec.setOpaque(true);
 
-        jlabel_ngaykt_ChiTietCongViec.setBackground(new java.awt.Color(182, 231, 245));
+        jlabel_ngaykt_ChiTietCongViec.setBackground(new java.awt.Color(253, 253, 223));
         jlabel_ngaykt_ChiTietCongViec.setText("jLabel5");
         jlabel_ngaykt_ChiTietCongViec.setOpaque(true);
 

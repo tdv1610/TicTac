@@ -41,7 +41,7 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="db" green="5e" red="35" type="rgb"/>
+          <Color blue="66" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -192,12 +192,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_backCTNhom">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Quay l&#x1ea1;i"/>
           </Properties>
           <Events>
@@ -209,7 +203,7 @@
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f5" green="89" red="31" type="rgb"/>
+          <Color blue="df" green="fd" red="fd" type="rgb"/>
         </Property>
       </Properties>
 
@@ -237,7 +231,7 @@
         <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f5" green="da" red="e7" type="rgb"/>
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -277,9 +271,6 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="Table_CanLam">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f5" green="e7" red="b6" type="rgb"/>
-                        </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="29">
                             <Column editable="false" title="Email" type="java.lang.String"/>

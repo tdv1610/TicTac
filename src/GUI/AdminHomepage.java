@@ -167,7 +167,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(53, 94, 219));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,7 +175,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(44, 65, 230));
+        jButton1.setBackground(new java.awt.Color(30, 136, 229));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Quản lí người dùng");
@@ -191,7 +191,7 @@ public class AdminHomepage extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(44, 65, 230));
+        jButton2.setBackground(new java.awt.Color(30, 136, 229));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Tài khoản");
@@ -207,13 +207,12 @@ public class AdminHomepage extends javax.swing.JFrame {
             }
         });
 
-        btn_DX_TicTac.setBackground(new java.awt.Color(44, 65, 230));
         btn_DX_TicTac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_DX_TicTac.setForeground(new java.awt.Color(255, 255, 255));
         btn_DX_TicTac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/log-out.png"))); // NOI18N
         btn_DX_TicTac.setText("Đăng xuất");
         btn_DX_TicTac.setToolTipText("");
         btn_DX_TicTac.setActionCommand("");
+        btn_DX_TicTac.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_DX_TicTac.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_DX_TicTacMouseClicked(evt);
@@ -229,7 +228,7 @@ public class AdminHomepage extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(44, 65, 230));
+        jButton3.setBackground(new java.awt.Color(30, 136, 229));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Tạo thông báo");
@@ -265,16 +264,16 @@ public class AdminHomepage extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btn_DX_TicTac))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(jButton4)))
-                .addContainerGap(45, Short.MAX_VALUE))
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btn_DX_TicTac)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +297,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
-        panel_quanlitaikhoan.setBackground(new java.awt.Color(49, 137, 245));
+        panel_quanlitaikhoan.setBackground(new java.awt.Color(253, 253, 223));
 
         tf_nhaptenNDcantim.setBackground(new java.awt.Color(182, 231, 245));
 
@@ -421,19 +420,15 @@ public class AdminHomepage extends javax.swing.JFrame {
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
-        panel_TK.setBackground(new java.awt.Color(0, 102, 102));
+        panel_TK.setBackground(new java.awt.Color(253, 253, 223));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Tên admin");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Email admin");
 
-        TF_getTenAD.setBackground(new java.awt.Color(0, 153, 153));
         TF_getTenAD.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        TF_getTenAD.setForeground(new java.awt.Color(255, 255, 255));
         TF_getTenAD.setText("ten admin");
         TF_getTenAD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -441,14 +436,10 @@ public class AdminHomepage extends javax.swing.JFrame {
             }
         });
 
-        TF_getEmailAD.setBackground(new java.awt.Color(0, 153, 153));
         TF_getEmailAD.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        TF_getEmailAD.setForeground(new java.awt.Color(255, 255, 255));
         TF_getEmailAD.setText("email admin");
 
-        btn_DoiPass_TK.setBackground(new java.awt.Color(0, 51, 51));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_DoiPass_TK.setForeground(new java.awt.Color(255, 255, 255));
         btn_DoiPass_TK.setText("Đổi mật khẩu");
         btn_DoiPass_TK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -495,13 +486,12 @@ public class AdminHomepage extends javax.swing.JFrame {
                     .addContainerGap(308, Short.MAX_VALUE)))
         );
 
-        jpanel_ThongBao.setBackground(new java.awt.Color(0, 102, 102));
+        jpanel_ThongBao.setBackground(new java.awt.Color(253, 253, 223));
 
         txtA_thongbao.setColumns(20);
         txtA_thongbao.setRows(5);
         jScrollPane2.setViewportView(txtA_thongbao);
 
-        btn_Taothongbao.setBackground(new java.awt.Color(204, 255, 255));
         btn_Taothongbao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_Taothongbao.setText("Tạo");
         btn_Taothongbao.addActionListener(new java.awt.event.ActionListener() {
@@ -512,6 +502,7 @@ public class AdminHomepage extends javax.swing.JFrame {
 
         jScrollPane3.setBackground(new java.awt.Color(204, 255, 255));
 
+        panel_thongbao.setBackground(new java.awt.Color(204, 255, 255));
         panel_thongbao.setLayout(new java.awt.GridBagLayout());
         jScrollPane3.setViewportView(panel_thongbao);
 

@@ -41,7 +41,7 @@
     <Container class="javax.swing.JPanel" name="TicTac">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="db" green="5e" red="35" type="rgb"/>
+          <Color blue="66" green="0" red="0" type="rgb"/>
         </Property>
       </Properties>
 
@@ -135,7 +135,7 @@
         <Component class="javax.swing.JButton" name="btn_VCT_TicTac">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
+              <Color blue="e5" green="88" red="1e" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
@@ -156,7 +156,7 @@
         <Component class="javax.swing.JButton" name="btn_NCT_TicTac">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
+              <Color blue="e5" green="88" red="1e" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
@@ -177,7 +177,7 @@
         <Component class="javax.swing.JButton" name="btn_TK_TicTac">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
+              <Color blue="e5" green="88" red="1e" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
@@ -220,6 +220,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_lich">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e5" green="88" red="1e" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/image/calendar.png"/>
             </Property>
@@ -232,7 +235,7 @@
         <Component class="javax.swing.JLabel" name="jlabel_thongbao">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+              <Color blue="e5" green="88" red="1e" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
@@ -244,7 +247,7 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="cc" type="rgb"/>
+              <Color blue="df" green="fd" red="fd" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="99" type="rgb"/>
@@ -315,7 +318,7 @@
             <Container class="javax.swing.JPanel" name="panel_VCT">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f5" green="89" red="31" type="rgb"/>
+                  <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -355,7 +358,7 @@
                 <Component class="javax.swing.JTextField" name="tf_timcongviec_VCT">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                      <Color blue="df" green="fd" red="fd" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="2"/>
@@ -374,9 +377,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_TimKiem_VCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/image/find.png"/>
                     </Property>
@@ -391,7 +391,7 @@
                 <Container class="javax.swing.JTabbedPane" name="tabbedpane_BangCV_VCT">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f5" green="da" red="e7" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -438,7 +438,7 @@
                               <Properties>
                                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                                  <Color blue="df" green="fd" red="fd" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Segoe UI" size="14" style="0"/>
@@ -549,7 +549,7 @@
                               <Properties>
                                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                                  <Color blue="df" green="fd" red="fd" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Segoe UI" size="14" style="0"/>
@@ -657,7 +657,7 @@
                               <Properties>
                                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                                  <Color blue="df" green="fd" red="fd" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Segoe UI" size="14" style="0"/>
@@ -739,7 +739,7 @@
             <Container class="javax.swing.JPanel" name="panel_NCT">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f5" green="89" red="31" type="rgb"/>
+                  <Color blue="66" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -862,7 +862,7 @@
                 <Component class="javax.swing.JTextField" name="tf_TimNhom_NCT">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                      <Color blue="df" green="fd" red="fd" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="2"/>
@@ -881,12 +881,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_TimNhom_NCt">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/image/find.png"/>
                     </Property>
@@ -906,7 +900,7 @@
                       <Properties>
                         <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                          <Color blue="df" green="fd" red="fd" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="14" style="0"/>
@@ -942,14 +936,8 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="btn_TaoNhom_NCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/image/create.png"/>
@@ -969,13 +957,16 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="1"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xf3;m"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="tf_tennhom_homepage">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                      <Color blue="df" green="fd" red="fd" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="0"/>
@@ -990,13 +981,16 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="1"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xe0;nh vi&#xea;n"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="tf_thanhvien_homepage">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                      <Color blue="df" green="fd" red="fd" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="0"/>
@@ -1008,12 +1002,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_themthanhvien_NCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/image/plus_4315609 (1).png"/>
                     </Property>
@@ -1032,7 +1020,7 @@
                     <Component class="javax.swing.JTable" name="table_themtv">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f5" green="e7" red="b6" type="rgb"/>
+                          <Color blue="df" green="fd" red="fd" type="rgb"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="30">
@@ -1063,12 +1051,6 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="btn_sua_NCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                   </Properties>
                   <Events>
@@ -1077,12 +1059,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_xoanhom_Homepage">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                   </Properties>
                   <Events>
@@ -1091,12 +1067,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_hoantac_NCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Ho&#xe0;n t&#xe1;c"/>
                   </Properties>
                   <Events>
@@ -1105,12 +1075,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_roinhom_NCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="R&#x1edd;i nh&#xf3;m"/>
                   </Properties>
                   <Events>
@@ -1119,12 +1083,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_themcongviec_NCT">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e6" green="41" red="2c" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m c&#xf4;ng vi&#x1ec7;c"/>
                   </Properties>
                   <Events>
@@ -1137,7 +1095,7 @@
             <Container class="javax.swing.JPanel" name="panel_TK">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f5" green="89" red="31" type="rgb"/>
+                  <Color blue="df" green="fd" red="fd" type="rgb"/>
                 </Property>
                 <Property name="inheritsPopupMenu" type="boolean" value="true"/>
               </Properties>
@@ -1209,9 +1167,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_DoiPass_TK">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="0" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="1"/>
                     </Property>
@@ -1223,9 +1178,6 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_XoaTK_TK">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="0" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="1"/>
                     </Property>
@@ -1239,7 +1191,7 @@
                 <Component class="javax.swing.JLabel" name="jlabel_tennd">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="ff" red="ff" type="rgb"/>
+                      <Color blue="df" green="fd" red="fd" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -1250,7 +1202,7 @@
                 <Component class="javax.swing.JLabel" name="jlable_emailnd">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="ff" red="ff" type="rgb"/>
+                      <Color blue="df" green="fd" red="fd" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>

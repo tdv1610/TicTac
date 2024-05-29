@@ -51,7 +51,7 @@ private String OTP;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_OTP.setBackground(new java.awt.Color(53, 94, 219));
+        panel_OTP.setBackground(new java.awt.Color(0, 0, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -64,7 +64,7 @@ private String OTP;
         label_Email_OTP.setForeground(new java.awt.Color(255, 255, 255));
         label_Email_OTP.setText("Email");
 
-        tf_Email_OTP.setBackground(new java.awt.Color(182, 231, 245));
+        tf_Email_OTP.setBackground(new java.awt.Color(253, 253, 223));
         tf_Email_OTP.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         tf_Email_OTP.setText("Nhập email để nhận OTP");
         tf_Email_OTP.setToolTipText("");
@@ -74,8 +74,6 @@ private String OTP;
             }
         });
 
-        btn_NhanEmail_OTP.setBackground(new java.awt.Color(44, 65, 230));
-        btn_NhanEmail_OTP.setForeground(new java.awt.Color(255, 255, 255));
         btn_NhanEmail_OTP.setText("Nhận");
         btn_NhanEmail_OTP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,11 +85,9 @@ private String OTP;
         label_OTP_OTP.setForeground(new java.awt.Color(255, 255, 255));
         label_OTP_OTP.setText("OTP");
 
-        tf_OTP_OTP.setBackground(new java.awt.Color(182, 231, 245));
+        tf_OTP_OTP.setBackground(new java.awt.Color(253, 253, 223));
         tf_OTP_OTP.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
 
-        btn_Xong_OTP.setBackground(new java.awt.Color(44, 65, 230));
-        btn_Xong_OTP.setForeground(new java.awt.Color(255, 255, 255));
         btn_Xong_OTP.setText("Xong");
         btn_Xong_OTP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

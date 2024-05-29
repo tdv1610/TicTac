@@ -45,7 +45,7 @@
     <Container class="javax.swing.JPanel" name="panel_DangKi">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="db" green="5e" red="35" type="rgb"/>
+          <Color blue="66" green="0" red="0" type="rgb"/>
         </Property>
       </Properties>
 
@@ -81,10 +81,10 @@
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
                   <Component id="btn_DangKi_DangKI" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,9 +110,9 @@
                       <Component id="label_MatKhau_DangKi" min="-2" max="-2" attributes="0"/>
                       <Component id="pwf_MatKhau_DangKi" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btn_DangKi_DangKI" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -173,32 +173,26 @@
         <Component class="javax.swing.JTextField" name="tf_Email_DangKi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f5" green="e7" red="b6" type="rgb"/>
+              <Color blue="df" green="fd" red="fd" type="rgb"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tf_TenNgDung_Dangki">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f5" green="e7" red="b6" type="rgb"/>
+              <Color blue="df" green="fd" red="fd" type="rgb"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pwf_MatKhau_DangKi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f5" green="e7" red="b6" type="rgb"/>
+              <Color blue="df" green="fd" red="fd" type="rgb"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_DangKi_DangKI">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="41" red="2c" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng k&#xed;"/>
           </Properties>
           <Events>

@@ -56,6 +56,13 @@ public class DangNhap extends javax.swing.JFrame {
      */
     public DangNhap() {
     initComponents();
+    panel_DangNhap.setBackground(new java.awt.Color(0, 0, 102));
+    btn_DangNhap_DangNhap.setBackground(new java.awt.Color(255,255,255));
+    btn_QuenMatKhau_DangNhap.setBackground(new java.awt.Color(255,255,255));
+    tf_TenNgDung_DangNhap.setBackground(new java.awt.Color(253,253,223));
+    pwf_MatKhau_DangNhap.setBackground(new java.awt.Color(253,253,223));
+    btn_DangNhap_DangNhap.setForeground(new java.awt.Color(0,0,0));
+    btn_QuenMatKhau_DangNhap.setForeground(new java.awt.Color(0,0,0));
 }
 
     /**
@@ -241,20 +248,7 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DangKi_DangNhapMouseClicked
 
     private void btn_DangNhap_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapMouseClicked
-        Homepage hp = new Homepage();
-        hp.show();
-        dispose();
-    }//GEN-LAST:event_btn_DangNhap_DangNhapMouseClicked
-
-    private void btn_QuenMatKhau_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapMouseClicked
-        NhapEmail ne = new NhapEmail();
-        ne.show();
-        dispose();
-    }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
-
-    private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
-    
-        pEmail = tf_TenNgDung_DangNhap.getText();
+         pEmail = tf_TenNgDung_DangNhap.getText();
         NguoiDungDAO nd = new NguoiDungDAO();
         NguoiDungDTO nd1 = nd.dangnhap(tf_TenNgDung_DangNhap.getText(),pwf_MatKhau_DangNhap.getText());
         ADMINDAO ad = new ADMINDAO();
@@ -267,9 +261,9 @@ public class DangNhap extends javax.swing.JFrame {
         else if(nd1!=null&&ad1==null)
         {
             JOptionPane.showMessageDialog(null, "Chào người dùng, bạn đã đăng nhập thành công.");
-            Homepage show = new Homepage();
-            show.setVisible(true);
-            dispose();
+            new Homepage().setVisible(true);
+                dispose();
+                
         }
         else if(nd1==null&&ad1!=null)
         {
@@ -278,7 +272,18 @@ public class DangNhap extends javax.swing.JFrame {
              new AdminHomepage().setVisible(true);
                 dispose();
                 return;
-        }                                                  
+        } 
+    }//GEN-LAST:event_btn_DangNhap_DangNhapMouseClicked
+
+    private void btn_QuenMatKhau_DangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QuenMatKhau_DangNhapMouseClicked
+        NhapEmail ne = new NhapEmail();
+        ne.show();
+        dispose();
+    }//GEN-LAST:event_btn_QuenMatKhau_DangNhapMouseClicked
+
+    private void btn_DangNhap_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhap_DangNhapActionPerformed
+    
+                                                        
     }//GEN-LAST:event_btn_DangNhap_DangNhapActionPerformed
 
     

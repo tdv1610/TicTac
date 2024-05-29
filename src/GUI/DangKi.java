@@ -54,7 +54,7 @@ public class DangKi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_DangKi.setBackground(new java.awt.Color(53, 94, 219));
+        panel_DangKi.setBackground(new java.awt.Color(0, 0, 102));
 
         label_Welcome_DangKi.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         label_Welcome_DangKi.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,14 +75,12 @@ public class DangKi extends javax.swing.JFrame {
         label_MatKhau_DangKi.setForeground(new java.awt.Color(255, 255, 255));
         label_MatKhau_DangKi.setText("Mật khẩu");
 
-        tf_Email_DangKi.setBackground(new java.awt.Color(182, 231, 245));
+        tf_Email_DangKi.setBackground(new java.awt.Color(253, 253, 223));
 
-        tf_TenNgDung_Dangki.setBackground(new java.awt.Color(182, 231, 245));
+        tf_TenNgDung_Dangki.setBackground(new java.awt.Color(253, 253, 223));
 
-        pwf_MatKhau_DangKi.setBackground(new java.awt.Color(182, 231, 245));
+        pwf_MatKhau_DangKi.setBackground(new java.awt.Color(253, 253, 223));
 
-        btn_DangKi_DangKI.setBackground(new java.awt.Color(44, 65, 230));
-        btn_DangKi_DangKI.setForeground(new java.awt.Color(255, 255, 255));
         btn_DangKi_DangKI.setText("Đăng kí");
         btn_DangKi_DangKI.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -121,10 +119,10 @@ public class DangKi extends javax.swing.JFrame {
                     .addComponent(pwf_MatKhau_DangKi, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_Email_DangKi, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(54, 54, 54))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_DangKiLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panel_DangKiLayout.createSequentialGroup()
+                .addGap(214, 214, 214)
                 .addComponent(btn_DangKi_DangKI)
-                .addGap(142, 142, 142))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_DangKiLayout.setVerticalGroup(
             panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +143,9 @@ public class DangKi extends javax.swing.JFrame {
                 .addGroup(panel_DangKiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_MatKhau_DangKi)
                     .addComponent(pwf_MatKhau_DangKi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btn_DangKi_DangKI)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -220,7 +220,45 @@ public class NguoiDungDAO extends connection{
         return nd;
     }
     
+    public NguoiDungDTO LayNDTheoTen(String TenND) {
+        
+        NguoiDungDTO nd = null;
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
 
+        try {
+            con = getConnection();  // Get the database connection
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT * from NGUOIDUNG where TENND = ?";
+            pre = con.prepareStatement(sql);
+          
+            pre.setString(1, TenND);
+            
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            if (rs.next()) {
+                nd = new NguoiDungDTO();
+                nd.setEMAILND(rs.getString("EMAILND"));
+                nd.setTENND(rs.getString("TENND"));
+                nd.setMATKHAU(rs.getString("MATKHAU"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return nd;
+    }
 
 
     public String getTenNguoiDungByEmail(String email) {

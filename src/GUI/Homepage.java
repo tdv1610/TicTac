@@ -318,7 +318,7 @@ public class Homepage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TicTac.setBackground(new java.awt.Color(53, 94, 219));
+        TicTac.setBackground(new java.awt.Color(0, 0, 102));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,7 +326,7 @@ public class Homepage extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teamwork (2).png"))); // NOI18N
 
-        btn_VCT_TicTac.setBackground(new java.awt.Color(44, 65, 230));
+        btn_VCT_TicTac.setBackground(new java.awt.Color(30, 136, 229));
         btn_VCT_TicTac.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_VCT_TicTac.setForeground(new java.awt.Color(255, 255, 255));
         btn_VCT_TicTac.setText("Việc của tôi");
@@ -342,7 +342,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_NCT_TicTac.setBackground(new java.awt.Color(44, 65, 230));
+        btn_NCT_TicTac.setBackground(new java.awt.Color(30, 136, 229));
         btn_NCT_TicTac.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_NCT_TicTac.setForeground(new java.awt.Color(255, 255, 255));
         btn_NCT_TicTac.setText("Nhóm của tôi");
@@ -358,7 +358,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_TK_TicTac.setBackground(new java.awt.Color(44, 65, 230));
+        btn_TK_TicTac.setBackground(new java.awt.Color(30, 136, 229));
         btn_TK_TicTac.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_TK_TicTac.setForeground(new java.awt.Color(255, 255, 255));
         btn_TK_TicTac.setText("Tài khoản");
@@ -392,6 +392,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        btn_lich.setBackground(new java.awt.Color(30, 136, 229));
         btn_lich.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/calendar.png"))); // NOI18N
         btn_lich.setContentAreaFilled(false);
         btn_lich.addActionListener(new java.awt.event.ActionListener() {
@@ -400,12 +401,12 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        jlabel_thongbao.setBackground(new java.awt.Color(204, 255, 255));
+        jlabel_thongbao.setBackground(new java.awt.Color(30, 136, 229));
         jlabel_thongbao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlabel_thongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_thongbao.setOpaque(true);
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 255));
+        jButton1.setBackground(new java.awt.Color(253, 253, 223));
         jButton1.setForeground(new java.awt.Color(153, 153, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/bell.png"))); // NOI18N
         jButton1.setOpaque(true);
@@ -475,9 +476,9 @@ public class Homepage extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
-        panel_VCT.setBackground(new java.awt.Color(49, 137, 245));
+        panel_VCT.setBackground(new java.awt.Color(0, 0, 102));
 
-        tf_timcongviec_VCT.setBackground(new java.awt.Color(182, 231, 245));
+        tf_timcongviec_VCT.setBackground(new java.awt.Color(253, 253, 223));
         tf_timcongviec_VCT.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         tf_timcongviec_VCT.setText("Nhập thông tin công việc");
         tf_timcongviec_VCT.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -492,7 +493,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_TimKiem_VCT.setBackground(new java.awt.Color(44, 65, 230));
         btn_TimKiem_VCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
         btn_TimKiem_VCT.setBorder(null);
         btn_TimKiem_VCT.addActionListener(new java.awt.event.ActionListener() {
@@ -501,13 +501,13 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        tabbedpane_BangCV_VCT.setBackground(new java.awt.Color(231, 218, 245));
+        tabbedpane_BangCV_VCT.setBackground(new java.awt.Color(255, 255, 255));
         tabbedpane_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         panel_CanLam_BangCV_VCT.setBackground(new java.awt.Color(204, 255, 204));
 
         table_CanLam_BangCV_VCT.setAutoCreateRowSorter(true);
-        table_CanLam_BangCV_VCT.setBackground(new java.awt.Color(182, 231, 245));
+        table_CanLam_BangCV_VCT.setBackground(new java.awt.Color(253, 253, 223));
         table_CanLam_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_CanLam_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -579,7 +579,7 @@ public class Homepage extends javax.swing.JFrame {
         panel_DangLam_BangCV_VCT.setBackground(new java.awt.Color(204, 255, 204));
 
         table_DangLam_BangCV_VCT.setAutoCreateRowSorter(true);
-        table_DangLam_BangCV_VCT.setBackground(new java.awt.Color(182, 231, 245));
+        table_DangLam_BangCV_VCT.setBackground(new java.awt.Color(253, 253, 223));
         table_DangLam_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_DangLam_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -646,7 +646,7 @@ public class Homepage extends javax.swing.JFrame {
         panel_DaHoanThanh_BangCV_VCT.setBackground(new java.awt.Color(204, 255, 204));
 
         table_DaHoanThanh_BangCV_VCT.setAutoCreateRowSorter(true);
-        table_DaHoanThanh_BangCV_VCT.setBackground(new java.awt.Color(182, 231, 245));
+        table_DaHoanThanh_BangCV_VCT.setBackground(new java.awt.Color(253, 253, 223));
         table_DaHoanThanh_BangCV_VCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_DaHoanThanh_BangCV_VCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -742,10 +742,10 @@ public class Homepage extends javax.swing.JFrame {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        panel_NCT.setBackground(new java.awt.Color(49, 137, 245));
+        panel_NCT.setBackground(new java.awt.Color(0, 0, 102));
         panel_NCT.setForeground(new java.awt.Color(255, 255, 255));
 
-        tf_TimNhom_NCT.setBackground(new java.awt.Color(182, 231, 245));
+        tf_TimNhom_NCT.setBackground(new java.awt.Color(253, 253, 223));
         tf_TimNhom_NCT.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         tf_TimNhom_NCT.setText("Nhập thông tin nhóm");
         tf_TimNhom_NCT.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -760,8 +760,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_TimNhom_NCt.setBackground(new java.awt.Color(44, 65, 230));
-        btn_TimNhom_NCt.setForeground(new java.awt.Color(255, 255, 255));
         btn_TimNhom_NCt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/find.png"))); // NOI18N
         btn_TimNhom_NCt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -770,7 +768,7 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         table_ThongTinNhom_NCT.setAutoCreateRowSorter(true);
-        table_ThongTinNhom_NCT.setBackground(new java.awt.Color(182, 231, 245));
+        table_ThongTinNhom_NCT.setBackground(new java.awt.Color(253, 253, 223));
         table_ThongTinNhom_NCT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         table_ThongTinNhom_NCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -822,9 +820,7 @@ public class Homepage extends javax.swing.JFrame {
         scrpane_DanhSachNhom_NCT.setViewportView(table_ThongTinNhom_NCT);
         table_ThongTinNhom_NCT.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        btn_TaoNhom_NCT.setBackground(new java.awt.Color(44, 65, 230));
         btn_TaoNhom_NCT.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_TaoNhom_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_TaoNhom_NCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/create.png"))); // NOI18N
         btn_TaoNhom_NCT.setText("Tạo nhóm");
         btn_TaoNhom_NCT.setBorder(null);
@@ -840,9 +836,10 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         label_tennhom.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label_tennhom.setForeground(new java.awt.Color(255, 255, 255));
         label_tennhom.setText("Tên nhóm");
 
-        tf_tennhom_homepage.setBackground(new java.awt.Color(182, 231, 245));
+        tf_tennhom_homepage.setBackground(new java.awt.Color(253, 253, 223));
         tf_tennhom_homepage.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tf_tennhom_homepage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -851,9 +848,10 @@ public class Homepage extends javax.swing.JFrame {
         });
 
         label_thanhvien_homepage.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label_thanhvien_homepage.setForeground(new java.awt.Color(255, 255, 255));
         label_thanhvien_homepage.setText("Thành viên");
 
-        tf_thanhvien_homepage.setBackground(new java.awt.Color(182, 231, 245));
+        tf_thanhvien_homepage.setBackground(new java.awt.Color(253, 253, 223));
         tf_thanhvien_homepage.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tf_thanhvien_homepage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -861,8 +859,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_themthanhvien_NCT.setBackground(new java.awt.Color(44, 65, 230));
-        btn_themthanhvien_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_themthanhvien_NCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/plus_4315609 (1).png"))); // NOI18N
         btn_themthanhvien_NCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -870,7 +866,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        table_themtv.setBackground(new java.awt.Color(182, 231, 245));
+        table_themtv.setBackground(new java.awt.Color(253, 253, 223));
         table_themtv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -918,8 +914,6 @@ public class Homepage extends javax.swing.JFrame {
         });
         scrpane_ThanhVien_TaoNhom.setViewportView(table_themtv);
 
-        btn_sua_NCT.setBackground(new java.awt.Color(44, 65, 230));
-        btn_sua_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua_NCT.setText("Sửa");
         btn_sua_NCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -927,8 +921,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_xoanhom_Homepage.setBackground(new java.awt.Color(44, 65, 230));
-        btn_xoanhom_Homepage.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoanhom_Homepage.setText("Xóa");
         btn_xoanhom_Homepage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -936,8 +928,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_hoantac_NCT.setBackground(new java.awt.Color(44, 65, 230));
-        btn_hoantac_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_hoantac_NCT.setText("Hoàn tác");
         btn_hoantac_NCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -945,8 +935,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_roinhom_NCT.setBackground(new java.awt.Color(44, 65, 230));
-        btn_roinhom_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_roinhom_NCT.setText("Rời nhóm");
         btn_roinhom_NCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -954,8 +942,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_themcongviec_NCT.setBackground(new java.awt.Color(44, 65, 230));
-        btn_themcongviec_NCT.setForeground(new java.awt.Color(255, 255, 255));
         btn_themcongviec_NCT.setText("Thêm công việc");
         btn_themcongviec_NCT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1052,7 +1038,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        panel_TK.setBackground(new java.awt.Color(49, 137, 245));
+        panel_TK.setBackground(new java.awt.Color(253, 253, 223));
         panel_TK.setInheritsPopupMenu(true);
 
         label_TenNgDung_TK.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1061,7 +1047,6 @@ public class Homepage extends javax.swing.JFrame {
         label_MaNgDung_TK.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         label_MaNgDung_TK.setText("Email");
 
-        btn_DoiPass_TK.setBackground(new java.awt.Color(0, 102, 102));
         btn_DoiPass_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_DoiPass_TK.setText("Đổi mật khẩu");
         btn_DoiPass_TK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1070,7 +1055,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btn_XoaTK_TK.setBackground(new java.awt.Color(0, 102, 102));
         btn_XoaTK_TK.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_XoaTK_TK.setText("Xóa tài khoản");
         btn_XoaTK_TK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1084,11 +1068,11 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        jlabel_tennd.setBackground(new java.awt.Color(255, 255, 204));
+        jlabel_tennd.setBackground(new java.awt.Color(253, 253, 223));
         jlabel_tennd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlabel_tennd.setOpaque(true);
 
-        jlable_emailnd.setBackground(new java.awt.Color(255, 255, 204));
+        jlable_emailnd.setBackground(new java.awt.Color(253, 253, 223));
         jlable_emailnd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jlable_emailnd.setOpaque(true);
 

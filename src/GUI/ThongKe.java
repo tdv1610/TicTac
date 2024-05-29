@@ -131,7 +131,7 @@ public class ThongKe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(53, 94, 219));
+        jPanel3.setBackground(new java.awt.Color(0, 0, 102));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
@@ -162,8 +162,6 @@ public class ThongKe extends javax.swing.JFrame {
         LB_TongSLCVDaLam.setForeground(new java.awt.Color(255, 255, 255));
         LB_TongSLCVDaLam.setText("__");
 
-        btn_backCTNhom.setBackground(new java.awt.Color(44, 65, 230));
-        btn_backCTNhom.setForeground(new java.awt.Color(255, 255, 255));
         btn_backCTNhom.setText("Quay lại");
         btn_backCTNhom.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -223,12 +221,11 @@ public class ThongKe extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jPanel2.setBackground(new java.awt.Color(49, 137, 245));
+        jPanel2.setBackground(new java.awt.Color(253, 253, 223));
 
-        jTabbedPane1.setBackground(new java.awt.Color(231, 218, 245));
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        Table_CanLam.setBackground(new java.awt.Color(182, 231, 245));
         Table_CanLam.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

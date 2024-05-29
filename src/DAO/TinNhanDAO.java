@@ -106,4 +106,48 @@ public class TinNhanDAO extends connection {
         return dstinnhan;
 
     }
+    
+    public List<TinNhanDTO> getListMessages() {
+        List<TinNhanDTO> dstinnhan = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+
+        try {
+            // Get the database connection
+            con = getConnection();
+            System.out.println("Connection established successfully.");
+
+            String sql = "SELECT SENDER_EMAIL, RECEIVER_EMAIL, MESSAGE_TEXT, TIMESTAMP FROM MESSAGES ORDER BY TIMESTAMP";
+            pre = con.prepareStatement(sql);
+            
+
+            
+            System.out.println("Executing query: " + sql);
+
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                String sender = rs.getString("SENDER_EMAIL");
+                String receiver = rs.getString("RECEIVER_EMAIL");
+                String text = rs.getString("MESSAGE_TEXT");
+                Timestamp timestamp = rs.getTimestamp("TIMESTAMP");
+                dstinnhan.add(new TinNhanDTO(sender, receiver, text, timestamp));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pre != null) pre.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dstinnhan;
+
+    }
 }

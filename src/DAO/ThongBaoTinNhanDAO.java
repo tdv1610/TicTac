@@ -33,9 +33,9 @@ public class ThongBaoTinNhanDAO extends connection {
 
                 int rowsAffected = pre.executeUpdate();
                 if (rowsAffected > 0) {
-                    System.out.println("Thêm tin nhắn thành công.");
+                    System.out.println("Thêm thông báo thành công.");
                 } else {
-                    System.out.println("Không thêm được tin nhắn.");
+                    System.out.println("Không thêm được thông báo.");
                 }
             } else {
                 System.out.println("Không thể kết nối cơ sở dữ liệu.");
@@ -57,7 +57,7 @@ public class ThongBaoTinNhanDAO extends connection {
         }
     }
 
-    public List<ThongBaoTinNhanDTO> layThongBao(String receiverEmail) {
+    public List<ThongBaoTinNhanDTO> layThongBao(String EmaiNguoiNhan) {
         List<ThongBaoTinNhanDTO> dstb = new ArrayList<>();
         Connection con = null;
         PreparedStatement pre = null;
@@ -67,16 +67,15 @@ public class ThongBaoTinNhanDAO extends connection {
             con = getConnection();
             if (con != null) {
                 System.out.println("Kết nối thành công.");
-                String query = "SELECT MESSAGE, SENDEREMAIL FROM THONGBAOTINNHAN WHERE receiverEmail = ? AND isRead = 0";  // Sử dụng 0 thay cho FALSE
+                String query = "SELECT MESSAGE, SENDEREMAIL FROM THONGBAOTINNHAN WHERE receiverEmail = ? AND isRead = 0"; 
                 pre = con.prepareStatement(query);
-                pre.setString(1, receiverEmail);
+                pre.setString(1, EmaiNguoiNhan);
                 rs = pre.executeQuery();
                 while (rs.next()) {
                     ThongBaoTinNhanDTO tb = new ThongBaoTinNhanDTO();
                     tb.setMessage(rs.getString("MESSAGE"));
                     tb.setSenderEmail(rs.getString("SENDEREMAIL"));
                     dstb.add(tb);
-                    
                 }
             } else {
                 System.out.println("Không thể kết nối cơ sở dữ liệu.");
