@@ -162,22 +162,27 @@ public class NhomDAO extends connection {
    }
     
     public boolean xoanhom(String MANHOM) {
-    try (Connection con = getConnection();
-         CallableStatement cstmt = con.prepareCall("{CALL XOANHOM(?, ?)}")) {
-        cstmt.setString(1, MANHOM); 
-        cstmt.registerOutParameter(2, java.sql.Types.VARCHAR); 
+        try (Connection con = getConnection();
+             CallableStatement cstmt = con.prepareCall("{CALL XOANHOM(?, ?)}")) {
+            
+            cstmt.setString(1, MANHOM);
+            
+            cstmt.registerOutParameter(2, java.sql.Types.VARCHAR);
+            
+            // Thực thi stored procedure
+            cstmt.execute();
 
-        cstmt.execute();
+            // Lấy kết quả từ tham số đầu ra
+            String result = cstmt.getString(2);
+            System.out.println("Executing query: " + result);
 
-        String result = cstmt.getString(2); // Lấy thông báo kết quả
-
-        return true; // Trả về true nếu xóa thành công, ngược lại trả về false
-    } catch (SQLException ex) {
-        // Log lỗi hoặc xử lý nếu cần thiết
-        ex.printStackTrace();
-        return false; // Trả về false nếu có lỗi xảy ra
+            // Kiểm tra kết quả và trả về
+            return "Xoa nhom thanh cong.".equals(result);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
-}
     
     
     public boolean suaNhom(String maNhom, String tenNhomMoi) {

@@ -46,7 +46,28 @@ public class ChatWindow extends javax.swing.JFrame {
         thongtin();
         addTableClickListener();
         HienThi();
-        HienThiThongBao();
+
+        // Tạo một luồng mới để cập nhật thông báo
+            Thread updateThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            // Cập nhật thông báo mỗi 5 giây
+                            Thread.sleep(5000);
+                            HienThiThongBao();
+                            HienThi();
+                        } catch (InterruptedException ex) {
+                            // Xử lý ngoại lệ nếu có
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            });
+            // Bắt đầu luồng cập nhật
+            updateThread.start();
+        
+        setLocationRelativeTo(null);
     }
     
     private void thongtin() {

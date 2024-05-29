@@ -45,6 +45,7 @@ public class AdminHomepage extends javax.swing.JFrame {
      */
     public AdminHomepage() {
         initComponents();
+        setLocationRelativeTo(null);
         connectToDatabase();
         loadUserData();
         addTableClickListener();
@@ -296,6 +297,7 @@ public class AdminHomepage extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setLayout(new java.awt.CardLayout());
 
         panel_quanlitaikhoan.setBackground(new java.awt.Color(253, 253, 223));
 
@@ -420,6 +422,8 @@ public class AdminHomepage extends javax.swing.JFrame {
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
+        jPanel2.add(panel_quanlitaikhoan, "card2");
+
         panel_TK.setBackground(new java.awt.Color(253, 253, 223));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -486,6 +490,8 @@ public class AdminHomepage extends javax.swing.JFrame {
                     .addContainerGap(308, Short.MAX_VALUE)))
         );
 
+        jPanel2.add(panel_TK, "card3");
+
         jpanel_ThongBao.setBackground(new java.awt.Color(253, 253, 223));
 
         txtA_thongbao.setColumns(20);
@@ -518,7 +524,7 @@ public class AdminHomepage extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(btn_Taothongbao)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         jpanel_ThongBaoLayout.setVerticalGroup(
             jpanel_ThongBaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,33 +538,10 @@ public class AdminHomepage extends javax.swing.JFrame {
                         .addComponent(btn_Taothongbao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_quanlitaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(7, 7, 7)
-                    .addComponent(jpanel_ThongBao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(7, 7, 7)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_quanlitaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(6, 6, 6)
-                    .addComponent(jpanel_ThongBao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(6, 6, 6)))
-        );
+        jPanel2.add(jpanel_ThongBao, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -27,6 +27,7 @@ public class ThongBao extends javax.swing.JFrame {
     public ThongBao() {
         initComponents();
         displayMessages();
+        setLocationRelativeTo(null);
     }
 
     /**

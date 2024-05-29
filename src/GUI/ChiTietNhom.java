@@ -34,6 +34,7 @@ public class ChiTietNhom extends javax.swing.JFrame {
     public static String laytennhomCTN;
     public ChiTietNhom() {
         initComponents();
+        setLocationRelativeTo(null);
         thongTinPhanCong();
         xemtennhom();
         addTableClickListener();

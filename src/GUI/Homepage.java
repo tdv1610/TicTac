@@ -50,12 +50,15 @@ public class Homepage extends javax.swing.JFrame {
     public static String laymanhom;
     public static String tencv;
     public static String lay_manhom;
+    private LichSuKien lich;
+    private ThongBao thongbao;
         
     /**
      * Creates new form Homepage
      */
     public Homepage(){
         initComponents();
+        setLocationRelativeTo(null);
         try {
         dsCVcanlam();
         dsCVdahoanthanh();
@@ -246,7 +249,7 @@ public class Homepage extends javax.swing.JFrame {
                 if (e.getClickCount() == 1) { // Kiểm tra xem có phải click một lần không
                     int row = table_ThongTinNhom_NCT.getSelectedRow();
                     if (row >= 0) {
-                         String tennh = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
+                        String tennh = (String) table_ThongTinNhom_NCT.getValueAt(row, 0);
                         tf_tennhom_homepage.setText(tennh);
                         NhomDAO nhom = new NhomDAO();
                         manhom = nhom.laymanhom(tennh);                               
@@ -274,7 +277,7 @@ public class Homepage extends javax.swing.JFrame {
         btn_DX_TicTac = new javax.swing.JButton();
         btn_lich = new javax.swing.JButton();
         jlabel_thongbao = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_thongbao = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         panel_VCT = new javax.swing.JPanel();
@@ -406,13 +409,13 @@ public class Homepage extends javax.swing.JFrame {
         jlabel_thongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabel_thongbao.setOpaque(true);
 
-        jButton1.setBackground(new java.awt.Color(253, 253, 223));
-        jButton1.setForeground(new java.awt.Color(153, 153, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/bell.png"))); // NOI18N
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_thongbao.setBackground(new java.awt.Color(253, 253, 223));
+        btn_thongbao.setForeground(new java.awt.Color(153, 153, 255));
+        btn_thongbao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/bell.png"))); // NOI18N
+        btn_thongbao.setOpaque(true);
+        btn_thongbao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_thongbaoActionPerformed(evt);
             }
         });
 
@@ -445,7 +448,7 @@ public class Homepage extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jlabel_thongbao, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_thongbao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
         TicTacLayout.setVerticalGroup(
@@ -465,7 +468,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(btn_lich)
                 .addGap(18, 18, 18)
                 .addGroup(TicTacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btn_thongbao, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jlabel_thongbao, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_DX_TicTac)
@@ -475,6 +478,7 @@ public class Homepage extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(204, 255, 204));
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel3.setLayout(new java.awt.CardLayout());
 
         panel_VCT.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -741,6 +745,8 @@ public class Homepage extends javax.swing.JFrame {
                 .addComponent(tabbedpane_BangCV_VCT, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
+
+        jPanel3.add(panel_VCT, "card2");
 
         panel_NCT.setBackground(new java.awt.Color(0, 0, 102));
         panel_NCT.setForeground(new java.awt.Color(255, 255, 255));
@@ -1038,6 +1044,8 @@ public class Homepage extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        jPanel3.add(panel_NCT, "card3");
+
         panel_TK.setBackground(new java.awt.Color(253, 253, 223));
         panel_TK.setInheritsPopupMenu(true);
 
@@ -1115,24 +1123,7 @@ public class Homepage extends javax.swing.JFrame {
                 .addContainerGap(311, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_VCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_NCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_VCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_NCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_TK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel3.add(panel_TK, "card4");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1226,6 +1217,7 @@ public class Homepage extends javax.swing.JFrame {
     private void btn_TaoNhom_NCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TaoNhom_NCTMouseClicked
        TaoNhom tn = new TaoNhom();
        tn.show();
+       dispose();
     }//GEN-LAST:event_btn_TaoNhom_NCTMouseClicked
 
     private void btn_DoiPass_TKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DoiPass_TKMouseClicked
@@ -1330,7 +1322,7 @@ public class Homepage extends javax.swing.JFrame {
 
         // Lấy email từ dòng được chọn
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
-        String ten = (String) model.getValueAt(selectedRow, 0);
+        String ten_nhom = (String) model.getValueAt(selectedRow, 0);
         String emailtv = (String) model.getValueAt(selectedRow, 1);
 
         if (emailtv.equals(DangNhap.pEmail)) {
@@ -1339,7 +1331,7 @@ public class Homepage extends javax.swing.JFrame {
         }
 
         NhomDAO xoaTV = new NhomDAO();
-        String MA = xoaTV.timnhom(ten); // Giả sử phương thức này trả về mã nhóm theo tên nhóm
+        String MA = xoaTV.timnhom(ten_nhom); // Giả sử phương thức này trả về mã nhóm theo tên nhóm
         NguoiDung_NhomDAO nd = new NguoiDung_NhomDAO();
         boolean dung = nd.xoathanhvien(emailtv, MA);
 
@@ -1461,50 +1453,91 @@ public class Homepage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         // Lấy email từ dòng được chọn
         DefaultTableModel model = (DefaultTableModel) table_ThongTinNhom_NCT.getModel();
+        String ten_nhom = (String) model.getValueAt(selectedRow, 0);
         String emailtn = (String) model.getValueAt(selectedRow, 1);
 
         if (emailtn.equals(DangNhap.pEmail)) {
-            NhomDAO nhom = new NhomDAO();
-            String MA = nhom.timnhom(ten); // Giả sử phương thức này trả về mã nhóm theo tên nhóm
-            NhomDAO nd = new NhomDAO();
-            boolean dung = nd.xoanhom(MA);
+         
+            NhomDAO xoa = new NhomDAO();
+            String MA = xoa.laymanhom(ten_nhom); 
+            
+            boolean dung = xoa.xoanhom(MA);
 
             if (dung) {
                 model.removeRow(selectedRow);
-                JOptionPane.showMessageDialog(this, "Xóa nhóm thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-            } 
-            else {
-            JOptionPane.showMessageDialog(this, "Không thể xóa nhóm. Vui lòng thử lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            model.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(this, "Xóa nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, MA, "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Chỉ trưởng nhóm được xóa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        else{
+            JOptionPane.showMessageDialog(this, "Bạn không phải trưởng nhóm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_btn_xoanhom_HomepageActionPerformed
-
-    private void btn_lichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lichActionPerformed
-        // TODO add your handling code here:
-        LichSuKien lich = new LichSuKien();
-        if (lich.isVisible()) {
-            lich.setVisible(false);
-        } else {
+   
+    private void openLich() {
+        if (lich == null || !lich.isDisplayable()) {
+            lich = new LichSuKien();
+            lich.setSize(400, 400);
+            lich.setLocationRelativeTo(null); // Đặt vị trí cửa sổ
             lich.setVisible(true);
         }
+    }
+
+    private void closeLich() {
+        if (lich != null && lich.isDisplayable()) {
+            lich.dispose();
+        }
+    }
+    
+    private void btn_lichActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lichActionPerformed
+        btn_lich.addMouseListener(new MouseAdapter() {
+        @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (e.getClickCount() == 1) {
+                    closeLich();
+                } else if (e.getClickCount() == 2) {
+                    openLich();
+                }
+            }
+        });
     }//GEN-LAST:event_btn_lichActionPerformed
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        jlabel_thongbao.setText("");
-        ThongBao thongbao = new ThongBao();
-        if (thongbao.isVisible()) {
-            thongbao.setVisible(false);
-        } else {
+    private void openThongBao() {
+        if (thongbao == null || !thongbao.isDisplayable()) {
+            thongbao = new ThongBao();
+            thongbao.setSize(400, 500);
+            thongbao.setLocationRelativeTo(null); // Đặt vị trí cửa sổ
             thongbao.setVisible(true);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
+
+    private void closeThongBao() {
+        if (thongbao != null && thongbao.isDisplayable()) {
+            thongbao.dispose();
+        }
+    }
+    
+    private void btn_thongbaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thongbaoActionPerformed
+        // TODO add your handling code here:
+        jlabel_thongbao.setText("");
+        btn_thongbao.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (e.getClickCount() == 1) {
+                    closeThongBao();
+                } else if (e.getClickCount() == 2) {
+                    openThongBao();
+                }
+            }
+        });
+    }//GEN-LAST:event_btn_thongbaoActionPerformed
 
 
     /**
@@ -1559,8 +1592,8 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JButton btn_sua_NCT;
     private javax.swing.JButton btn_themcongviec_NCT;
     private javax.swing.JButton btn_themthanhvien_NCT;
+    private javax.swing.JButton btn_thongbao;
     private javax.swing.JButton btn_xoanhom_Homepage;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;

@@ -27,6 +27,7 @@ public class DangKi extends javax.swing.JFrame {
      */
     public DangKi() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

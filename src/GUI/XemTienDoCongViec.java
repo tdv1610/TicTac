@@ -30,6 +30,7 @@ public class XemTienDoCongViec extends javax.swing.JFrame {
      */
     public XemTienDoCongViec() {
         initComponents();
+        setLocationRelativeTo(null);
         try {
             Xemthongtin();
         } catch (ParseException ex) {

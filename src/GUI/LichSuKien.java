@@ -37,6 +37,7 @@ public class LichSuKien extends JFrame {
         setTitle("Sự Kiện");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 400);
+        setLocationRelativeTo(null);
 
         // Panel chứa lịch
         calendarPanel = new JPanel(new GridLayout(0, 7, 2, 2));
@@ -141,7 +142,7 @@ public class LichSuKien extends JFrame {
     private boolean hasEvent(LocalDate date) {
         List<Date> eventDates = NgaySuKien();
         for (Date eventDate : eventDates) {
-            LocalDate localDate = eventDate.toLocalDate(); // Sử dụng phương thức toLocalDate() thay cho toInstant()
+            LocalDate localDate = eventDate.toLocalDate();
             if (localDate.equals(date)) {
                 return true;
             }

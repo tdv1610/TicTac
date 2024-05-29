@@ -21,6 +21,7 @@ public class TaoMKMoi extends javax.swing.JFrame {
      */
     public TaoMKMoi() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     TaoMKMoi(String email, String generatedOtp) {

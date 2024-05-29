@@ -63,6 +63,7 @@ public class DangNhap extends javax.swing.JFrame {
     pwf_MatKhau_DangNhap.setBackground(new java.awt.Color(253,253,223));
     btn_DangNhap_DangNhap.setForeground(new java.awt.Color(0,0,0));
     btn_QuenMatKhau_DangNhap.setForeground(new java.awt.Color(0,0,0));
+    setLocationRelativeTo(null);
 }
 
     /**

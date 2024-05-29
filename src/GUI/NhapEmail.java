@@ -28,6 +28,7 @@ private String OTP;
      */
     public NhapEmail() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

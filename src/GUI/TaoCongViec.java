@@ -35,13 +35,14 @@ public class TaoCongViec extends javax.swing.JFrame {
      */
     public TaoCongViec() {
         initComponents();
+        setLocationRelativeTo(null);
         thongtinNPT();
         addTableClickListener();
 
     }
     private void thongtinNPT() {
         NguoiDung_NhomDAO tv = new NguoiDung_NhomDAO();
-        List<NguoiDung_NhomDTO> danhSachTV = tv.layDanhSachTVTheoMaNhom(Homepage.mn);
+        List<NguoiDung_NhomDTO> danhSachTV = tv.layDanhSachTVTheoMaNhom(Homepage.laymanhom);
         DefaultTableModel model = (DefaultTableModel) table_NguoiPT.getModel();
 
         for (NguoiDung_NhomDTO tvien : danhSachTV) {

@@ -40,6 +40,7 @@ public class ChiTietCongViec extends javax.swing.JFrame {
      */
     public ChiTietCongViec() {
         initComponents();
+        setLocationRelativeTo(null);
         try {
             XemCVCanlam();
             XemCVDangLam();

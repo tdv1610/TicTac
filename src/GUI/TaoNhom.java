@@ -31,6 +31,7 @@ public class TaoNhom extends javax.swing.JFrame {
      */
     public TaoNhom() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     
@@ -213,68 +214,71 @@ public class TaoNhom extends javax.swing.JFrame {
 
     private void btn_Xong_TaoNhomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xong_TaoNhomActionPerformed
         // TODO add your handling code here:                
-     if (tf_TenNhom_TaoNhom.getText().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Chưa nhập tên nhóm");
-} else {
-    // Tạo một phiên bản của NhomDAO và cố gắng thêm nhóm
-    NhomDAO nhomthem = new NhomDAO();
-    NhomDTO nhom = null;
-    try {
-        nhom = nhomthem.themnhom(tf_TenNhom_TaoNhom.getText(), DangNhap.pEmail);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi khi tạo nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-        return;
-    }
-
-    // Kiểm tra kết quả và cập nhật UI tương ứng
-    if (nhom != null) {
-        JOptionPane.showMessageDialog(this, "Nhóm đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-        // Lấy mã nhóm của nhóm vừa được tạo
-        String maNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
-        pMaNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
-
-        // Thêm thành viên vào nhóm mới tạo
-        NguoiDung_NhomDAO themtv = new NguoiDung_NhomDAO();
-        NguoiDung_NhomDTO ndNhom = null;
-
-        // Thêm chủ nhóm trước
-        try {
-            ndNhom = themtv.themthanhvien(DangNhap.pEmail, maNhom);
-            if (ndNhom == null) {
-                JOptionPane.showMessageDialog(this, "Lỗi khi thêm chủ nhóm vào nhóm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (tf_TenNhom_TaoNhom.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Chưa nhập tên nhóm");
+        } else {
+            // Tạo một phiên bản của NhomDAO và cố gắng thêm nhóm
+            NhomDAO nhomthem = new NhomDAO();
+            NhomDTO nhom = null;
+            try {
+                nhom = nhomthem.themnhom(tf_TenNhom_TaoNhom.getText(), DangNhap.pEmail);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi tạo nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi khi thêm chủ nhóm vào nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-            return;
-        }
 
-        DefaultTableModel model = (DefaultTableModel) table_dsTV.getModel();
-        for (int i = 0; i < model.getRowCount(); i++) {
-            Object value = model.getValueAt(i, 0);
-            if (value != null) {
-                String email = value.toString();
+            // Kiểm tra kết quả và cập nhật UI tương ứng
+            if (nhom != null) {
+                JOptionPane.showMessageDialog(this, "Nhóm đã được tạo thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                // Lấy mã nhóm của nhóm vừa được tạo
+                String maNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
+                pMaNhom = nhomthem.laymanhom(tf_TenNhom_TaoNhom.getText());
+
+                // Thêm thành viên vào nhóm mới tạo
+                NguoiDung_NhomDAO themtv = new NguoiDung_NhomDAO();
+                NguoiDung_NhomDTO ndNhom = null;
+
+                // Thêm chủ nhóm trước
                 try {
-                    ndNhom = themtv.themthanhvien(email, maNhom);
+                    ndNhom = themtv.themthanhvien(DangNhap.pEmail, maNhom);
                     if (ndNhom == null) {
-                        JOptionPane.showMessageDialog(this, "Lỗi khi thêm thành viên " + email + " vào nhóm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                        return;
+                        JOptionPane.showMessageDialog(this, "Lỗi khi thêm chủ nhóm vào nhóm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Lỗi khi thêm thành viên " + email + " vào nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Lỗi khi thêm chủ nhóm vào nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                     return;
                 }
+
+                DefaultTableModel model = (DefaultTableModel) table_dsTV.getModel();
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    Object value = model.getValueAt(i, 0);
+                    if (value != null) {
+                        String email = value.toString();
+                        try {
+                            ndNhom = themtv.themthanhvien(email, maNhom);
+                            if (ndNhom == null) {
+                                JOptionPane.showMessageDialog(this, "Lỗi khi thêm thành viên " + email + " vào nhóm.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(this, "Lỗi khi thêm thành viên " + email + " vào nhóm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            e.printStackTrace();
+                            return;
+                        }
+                    }
+                }
+
+                // Nếu không có lỗi, hiển thị thông báo thành viên đã được thêm thành công
+                JOptionPane.showMessageDialog(this, "Thành viên đã được thêm vào nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Tên nhóm đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+        Homepage home = new Homepage();
+        home.show();
+        dispose();
         }
-        
-        // Nếu không có lỗi, hiển thị thông báo thành viên đã được thêm thành công
-        JOptionPane.showMessageDialog(this, "Thành viên đã được thêm vào nhóm thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this, "Tạo nhóm thất bại. Tên nhóm đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
-     }
     }//GEN-LAST:event_btn_Xong_TaoNhomActionPerformed
 
     

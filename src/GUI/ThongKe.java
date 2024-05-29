@@ -23,6 +23,7 @@ public class ThongKe extends javax.swing.JFrame {
      */
     public ThongKe() {
         initComponents();
+        setLocationRelativeTo(null);
         thongTinPhanCongCanLam();
         thongTinPhanCongDangLam();
         thongTinPhanCongDaLam();

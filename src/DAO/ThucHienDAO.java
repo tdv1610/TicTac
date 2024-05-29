@@ -366,7 +366,7 @@ public class ThucHienDAO extends connection {
         catch (SQLException ex) {
             // Log lỗi hoặc xử lý nếu cần thiết
             ex.printStackTrace();
-            return false; // Trả về false nếu có lỗi xảy ra
+            return false; 
         }
     }
     
