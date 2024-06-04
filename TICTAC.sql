@@ -462,7 +462,7 @@ BEGIN
     WHERE MACV = P_MACV;
     
     IF L_MACV IS NULL THEN
-        DBMS_OUTPUT.PUT_LINE('MACV không t?n t?i');
+        DBMS_OUTPUT.PUT_LINE('MACV không tồn tại');
     ELSE
         UPDATE CONGVIEC
         SET TENCV = p_TENCV,
@@ -508,7 +508,7 @@ BEGIN
 END;
 /
 set serveroutput on;
-execute CAPNHAT_TRANGTHAI_CONGVIEC(1, 'Đã làm')
+execute CAPNHAT_TRANGTHAI_CONGVIEC(1, 'Đã hoàn thành')
 
 ------------------------------------------------------------------------------------------------------
 -- XEM CONG VIEC CO TRANG THAI DA LAM
@@ -519,28 +519,28 @@ BEGIN
                         FROM CONGVIEC cv
                         JOIN NHOM nh ON cv.MANHOM = nh.MANHOM
                         JOIN THUCHIEN th ON cv.MACV = th.MACV_PC AND cv.MANHOM = th.MANHOM
-                        WHERE th.TRANGTHAI = '?ã làm') 
+                        WHERE th.TRANGTHAI = 'Đã hoàn thành') 
     LOOP
         -- Xu ly in ra muc do uu tiên
         DECLARE 
             muc_uutien_str VARCHAR2(20);
         BEGIN
             IF cv_danglam.MUC_UUTIEN = 1 THEN
-                muc_uutien_str := 'C?n g?p';
+                muc_uutien_str := 'Cần gấp';
             ELSIF cv_danglam.MUC_UUTIEN = 2 THEN
-                muc_uutien_str := 'Quan tr?ng';
+                muc_uutien_str := 'Quan trọng';
             ELSE
-                muc_uutien_str := 'Th??ng';
+                muc_uutien_str := 'Thường';
             END IF;
             
             -- In ra thong tin cv 
             DBMS_OUTPUT.PUT_LINE('Tên nhóm: ' || cv_danglam.TENNHOM);
-            DBMS_OUTPUT.PUT_LINE('Tên công vi?c: ' || cv_danglam.TENCV);
-            DBMS_OUTPUT.PUT_LINE('L?nh v?c: ' || cv_danglam.LINHVUC);
-            DBMS_OUTPUT.PUT_LINE('Mô t?: ' || cv_danglam.MOTACV);
-            DBMS_OUTPUT.PUT_LINE('Ngày b?t ??u: ' || TO_CHAR(cv_danglam.NGAYBD, 'DD-MON-YY'));
-            DBMS_OUTPUT.PUT_LINE('Ngày k?t thúc: ' || TO_CHAR(cv_danglam.NGAYKT, 'DD-MON-YY'));
-            DBMS_OUTPUT.PUT_LINE('M?c ?? ?u tiên: ' || muc_uutien_str);
+            DBMS_OUTPUT.PUT_LINE('Tên công việc: ' || cv_danglam.TENCV);
+            DBMS_OUTPUT.PUT_LINE('Lĩnh vực: ' || cv_danglam.LINHVUC);
+            DBMS_OUTPUT.PUT_LINE('Mô tả: ' || cv_danglam.MOTACV);
+            DBMS_OUTPUT.PUT_LINE('Ngày bắt đầu: ' || TO_CHAR(cv_danglam.NGAYBD, 'DD-MON-YY'));
+            DBMS_OUTPUT.PUT_LINE('Ngày kết thúc: ' || TO_CHAR(cv_danglam.NGAYKT, 'DD-MON-YY'));
+            DBMS_OUTPUT.PUT_LINE('Mức độ ưu tiên: ' || muc_uutien_str);
             DBMS_OUTPUT.PUT_LINE('-------------------------');
         END;
     END LOOP;
@@ -573,8 +573,8 @@ BEGIN
             
             -- In ra thong tin cv 
             DBMS_OUTPUT.PUT_LINE('Tên nhóm: ' || cv_danglam.TENNHOM);
-            DBMS_OUTPUT.PUT_LINE('Tên công vi?c: ' || cv_danglam.TENCV);
-            DBMS_OUTPUT.PUT_LINE('L?nh v?c: ' || cv_danglam.LINHVUC);
+            DBMS_OUTPUT.PUT_LINE('Tên công việc: ' || cv_danglam.TENCV);
+            DBMS_OUTPUT.PUT_LINE('Lĩnh vực: ' || cv_danglam.LINHVUC);
             DBMS_OUTPUT.PUT_LINE('Mô tả ' || cv_danglam.MOTACV);
             DBMS_OUTPUT.PUT_LINE('Ngày bắt đầu: ' || TO_CHAR(cv_danglam.NGAYBD, 'DD-MON-YY'));
             DBMS_OUTPUT.PUT_LINE('Ngày kết thúc: ' || TO_CHAR(cv_danglam.NGAYKT, 'DD-MON-YY'));
@@ -597,7 +597,7 @@ BEGIN
                         JOIN THUCHIEN th ON cv.MACV = th.MACV_PC AND cv.MANHOM = th.MANHOM
                         WHERE th.TRANGTHAI = 'Cần làm') 
     LOOP
-        -- X? lý in ra m?c ?? ?u tiên
+        -- Xử lý in ra mức độ ưu tiên
         DECLARE muc_uutien_str VARCHAR2(20);
         BEGIN
             IF cv_selam.MUC_UUTIEN = 1 THEN
@@ -773,7 +773,7 @@ BEGIN
     WHERE MANHOM = P_MANHOM;
 
     IF v_count = 0 THEN
-        p_message := 'NHOM KHONG TON T?I.';
+        p_message := 'NHOM KHONG TON TAI.';
     ELSE
          -- Xoa thanh vien khoi nhom
         DELETE FROM NGUOIDUNG_NHOM
